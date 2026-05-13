@@ -292,11 +292,11 @@
 .badge-reserva  { background: var(--background-subtle); color: var(--text-color-secondary); }
 
 /* Patrones visuales por país (para leyenda y lista) */
-.patron-china { background: repeating-linear-gradient(45deg, #b91c1c, #b91c1c 2px, transparent 2px, transparent 6px); background-color: rgba(185, 28, 28, 0.2); }
-.patron-canada { background: repeating-linear-gradient(45deg, #b45309, #b45309 2px, transparent 2px, transparent 6px), repeating-linear-gradient(-45deg, #b45309, #b45309 2px, transparent 2px, transparent 6px); background-color: rgba(180, 83, 9, 0.2); }
-.patron-colombia { background: radial-gradient(circle, #6d28d9 2px, transparent 2.5px); background-size: 8px 8px; background-color: rgba(109, 40, 217, 0.2); }
-.patron-nacional { background: repeating-linear-gradient(90deg, #0f5fa6, #0f5fa6 2px, transparent 2px, transparent 6px); background-color: rgba(15, 95, 166, 0.2); }
-.patron-reserva { background: rgba(75, 85, 99, 0.25); }
+.patron-china { background: repeating-linear-gradient(45deg, var(--concesion-pais-china), var(--concesion-pais-china) 2px, transparent 2px, transparent 6px); background-color: color-mix(in srgb, var(--concesion-pais-china) 20%, transparent); }
+.patron-canada { background: repeating-linear-gradient(45deg, var(--concesion-pais-canada), var(--concesion-pais-canada) 2px, transparent 2px, transparent 6px), repeating-linear-gradient(-45deg, var(--concesion-pais-canada), var(--concesion-pais-canada) 2px, transparent 2px, transparent 6px); background-color: color-mix(in srgb, var(--concesion-pais-canada) 20%, transparent); }
+.patron-colombia { background: radial-gradient(circle, var(--concesion-pais-colombia) 2px, transparent 2.5px); background-size: 8px 8px; background-color: color-mix(in srgb, var(--concesion-pais-colombia) 20%, transparent); }
+.patron-nacional { background: repeating-linear-gradient(90deg, var(--concesion-pais-nacional), var(--concesion-pais-nacional) 2px, transparent 2px, transparent 6px); background-color: color-mix(in srgb, var(--concesion-pais-nacional) 20%, transparent); }
+.patron-reserva { background: color-mix(in srgb, var(--concesion-tipo-reserva) 25%, transparent); }
 
 /* ─── Narrativa / contexto ─────────────────────────────────────────────────── */
 

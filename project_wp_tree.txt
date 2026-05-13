@@ -61,6 +61,7 @@
 │   └── 04_Wangki_Twi-Tasba_Raya.json
 ├── project_wp_tree.txt
 └── templates
+    ├──  diptico-base.html
     └── diptico-base.html
 
-16 directories, 48 files
+16 directories, 49 files

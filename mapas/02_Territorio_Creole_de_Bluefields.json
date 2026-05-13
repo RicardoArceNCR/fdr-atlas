@@ -1,0 +1,78 @@
+{
+  "mapa": {
+    "titulo": "Concesión Minera en Territorio Creole de Bluefields",
+    "archivo_fuente": "02_Territorio_Creole_de_Bluefields.jpeg",
+    "proyeccion": {
+      "tipo": "UTM",
+      "datum": "NAD 27",
+      "zona": "16 N"
+    },
+    "escala": "1:500,000",
+    "fecha": "Abril 2026",
+    "extension_geografica": {
+      "x_min": 800000,
+      "x_max": 875000,
+      "y_min": 1270000,
+      "y_max": 1355000,
+      "unidad": "metros"
+    },
+    "territorio": {
+      "nombre": "Territorio Creole de Bluefields",
+      "tipo_limite": "Polígono con borde negro grueso",
+      "forma": "irregular, con extensión diagonal hacia el noroeste",
+      "paises_colindantes": ["N/A - territorio costero sobre el Caribe"]
+    },
+    "poblados": [
+      { "nombre": "El Bluff", "simbolo": "triángulo negro" }
+    ],
+    "rios": {
+      "presentes": true,
+      "color": "azul",
+      "descripcion": "Varios ríos visibles en la porción occidental del territorio"
+    },
+    "concesiones_mineras": [
+      {
+        "nombre": "Victoria",
+        "color_patron": "verde con tramado diagonal",
+        "ubicacion_aproximada": "sector sureste del territorio, mostrado en recuadro de detalle ampliado",
+        "marcador_adicional": "cuadro rojo pequeño en leyenda",
+        "nota": "La concesión aparece con un recuadro de zoom para mayor detalle"
+      }
+    ],
+    "elementos_especiales": {
+      "recuadro_detalle": {
+        "presente": true,
+        "descripcion": "Zoom al área de la concesión Victoria en el extremo sureste del territorio",
+        "extension": {
+          "x_min": 848000,
+          "x_max": 875000,
+          "y_min": 1275000,
+          "y_max": 1305000,
+          "unidad": "metros"
+        }
+      }
+    },
+    "leyenda": {
+      "simbolos": [
+        { "tipo": "Pobladoo", "simbolo": "triángulo negro sólido", "nota": "error tipográfico en el mapa original" },
+        { "tipo": "Territorio Creole de Bluefields", "simbolo": "polígono con borde negro grueso" },
+        { "tipo": "Ríos", "simbolo": "línea azul" }
+      ],
+      "concesiones": [
+        { "nombre": "Victoria", "patron": "tramado diagonal verde", "cuadro": "rojo" }
+      ]
+    },
+    "ubicacion_referencia": {
+      "descripcion": "Mapa de referencia regional de Nicaragua",
+      "area_resaltada": "costa caribe central de Nicaragua"
+    },
+    "fuentes": [
+      "La Gaceta",
+      "Fundación del Río",
+      "URACCAN",
+      "© OpenStreetMap contributors",
+      "ESRI shaded relief"
+    ],
+    "organizacion_productora": "Fundación para la Conservación y el Desarrollo del Sureste de Nicaragua (Fundación del Río)"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "concesion": {
+    "pais": {
+      "china": {
+        "$type": "color",
+        "$value": "#b91c1c"
+      },
+      "canada": {
+        "$type": "color",
+        "$value": "#b45309"
+      },
+      "colombia": {
+        "$type": "color",
+        "$value": "#6d28d9"
+      },
+      "nacional": {
+        "$type": "color",
+        "$value": "#0f5fa6"
+      }
+    },
+    "tipo": {
+      "reserva": {
+        "$type": "color",
+        "$value": "#4b5563"
+      }
+    },
+    "patron": {
+      "china": {
+        "$type": "float",
+        "$value": 45
+      },
+      "colombia": {
+        "$type": "float",
+        "$value": 35
+      },
+      "canada": {
+        "$type": "float",
+        "$value": 25
+      },
+      "nacional": {
+        "$type": "float",
+        "$value": 10
+      }
+    }
+  }
+}

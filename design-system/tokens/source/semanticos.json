@@ -1,0 +1,452 @@
+{
+  "brand": {
+    "main": {
+      "$type": "color",
+      "$value": "{color.brand.green.700}"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "{color.brand.blue.50}"
+    },
+    "strong": {
+      "$type": "color",
+      "$value": "{color.brand.green.600}"
+    },
+    "contrast": {
+      "$type": "color",
+      "$value": "{color.brand.green.950}"
+    },
+    "stronger": {
+      "$type": "color",
+      "$value": "{color.brand.green.800}"
+    },
+    "navy": {
+      "$type": "color",
+      "$value": "{color.brand.blue.800}"
+    }
+  },
+  "text": {
+    "color": {
+      "primary": {
+        "$type": "color",
+        "$value": "{color.brand.green.950}"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.neutral.600}"
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{color.neutral.500}"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.neutral.400}"
+      }
+    },
+    "hero": {
+      "xl": {
+        "$type": "float",
+        "$value": 104
+      }
+    }
+  },
+  "background": {
+    "page": {
+      "$type": "color",
+      "$value": "#ffffff"
+    },
+    "base": {
+      "$type": "color",
+      "$value": "#f6f4ef"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "#eeeae3"
+    },
+    "strong": {
+      "$type": "color",
+      "$value": "#e1ddd5"
+    },
+    "none": {
+      "$type": "string",
+      "$value": "rgba(255, 255, 255, 0)"
+    }
+  },
+  "border": {
+    "default": {
+      "$type": "color",
+      "$value": "#afa89b"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "#cfc9be"
+    },
+    "strong": {
+      "$type": "color",
+      "$value": "#7d786f"
+    },
+    "brand": {
+      "$type": "color",
+      "$value": "#205736"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{background.page}"
+    },
+    "disabled": {
+      "$type": "color",
+      "$value": "#b8b8bc"
+    },
+    "none": {
+      "$type": "string",
+      "$value": "rgba(0, 0, 0, 0)"
+    }
+  },
+  "feedback": {
+    "success": {
+      "bg": {
+        "$type": "color",
+        "$value": "#f3faf5"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#99d3a9"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{brand.contrast}"
+      },
+      "solid": {
+        "$type": "color",
+        "$value": "{brand.strong}"
+      }
+    },
+    "warning": {
+      "bg": {
+        "$type": "color",
+        "$value": "#fff9e8"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#ffe28a"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#4f2a16"
+      },
+      "solid": {
+        "$type": "color",
+        "$value": "{color.brand.orange.600}"
+      }
+    },
+    "error": {
+      "bg": {
+        "$type": "color",
+        "$value": "#f8eef0"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#dab9c1"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.brand.red.700}"
+      },
+      "solid": {
+        "$type": "color",
+        "$value": "#5c2830"
+      }
+    },
+    "info": {
+      "bg": {
+        "$type": "color",
+        "$value": "#eef7f7"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#b1d7db"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{brand.navy}"
+      },
+      "solid": {
+        "$type": "color",
+        "$value": "#117685"
+      }
+    }
+  },
+  "surface": {
+    "raised": {
+      "$type": "color",
+      "$value": "#ffffff"
+    },
+    "container": {
+      "$type": "color",
+      "$value": "{background.subtle}"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "#eeeae3"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{background.page}"
+    },
+    "base": {
+      "$type": "color",
+      "$value": "#f6f4ef"
+    },
+    "disabled": {
+      "$type": "color",
+      "$value": "#e4e4e6"
+    }
+  },
+  "focus": {
+    "ring-color": {
+      "$type": "color",
+      "$value": "#205736"
+    },
+    "soft": {
+      "$type": "color",
+      "$value": "#ffe28a"
+    },
+    "contrast": {
+      "$type": "color",
+      "$value": "#000000"
+    },
+    "ring-width": {
+      "$type": "float",
+      "$value": 2
+    },
+    "offset": {
+      "$type": "float",
+      "$value": 2
+    },
+    "ring": {
+      "focus-ring-offset": {
+        "$type": "float",
+        "$value": 2
+      },
+      "focus-ring-width": {
+        "$type": "float",
+        "$value": 2
+      },
+      "focus-ring-offset-color": {
+        "$type": "color",
+        "$value": "{background.base}"
+      }
+    },
+    "ring-offset": {
+      "$type": "color",
+      "$value": "{background.base}"
+    },
+    "outline-offset": {
+      "$type": "float",
+      "$value": 2
+    },
+    "ring-offset-color": {
+      "$type": "color",
+      "$value": "{background.base}"
+    }
+  },
+  "interaction": {
+    "link": {
+      "default": {
+        "$type": "color",
+        "$value": "#205736"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "#287e45"
+      },
+      "visited": {
+        "$type": "color",
+        "$value": "#0b4052"
+      }
+    },
+    "overlay": {
+      "hover-overlay": {
+        "$type": "string",
+        "$value": "rgba(0, 0, 0, 0.0008)"
+      },
+      "active-overlay": {
+        "$type": "string",
+        "$value": "rgba(0, 0, 0, 0.0012)"
+      }
+    },
+    "hover": {
+      "subtle": {
+        "$type": "string",
+        "$value": "rgba(0, 0, 0, 0.0004)"
+      },
+      "medium": {
+        "$type": "string",
+        "$value": "rgba(0, 0, 0, 0.0007)"
+      },
+      "strong": {
+        "$type": "string",
+        "$value": "rgba(0, 0, 0, 0.001)"
+      }
+    },
+    "press": {
+      "subtle": {
+        "$type": "string",
+        "$value": "rgba(0, 0, 0, 0.0007)"
+      },
+      "medium": {
+        "$type": "string",
+        "$value": "rgba(0, 0, 0, 0.0012)"
+      }
+    },
+    "focus": {
+      "ring": {
+        "$type": "color",
+        "$value": "#205736"
+      }
+    }
+  },
+  "divider": {
+    "default": {
+      "$type": "color",
+      "$value": "{border.subtle}"
+    },
+    "strong": {
+      "$type": "color",
+      "$value": "{border.default}"
+    }
+  },
+  "overlay": {
+    "hero": {
+      "$type": "float",
+      "$value": 0.7200000286102295
+    },
+    "card": {
+      "$type": "float",
+      "$value": 0.6000000238418579
+    },
+    "modal": {
+      "$type": "float",
+      "$value": 0.800000011920929
+    },
+    "scrim": {
+      "$type": "string",
+      "$value": "rgba(0, 0, 0, 0.72)"
+    },
+    "strong": {
+      "$type": "string",
+      "$value": "rgba(0, 0, 0, 0.008)"
+    },
+    "soft": {
+      "$type": "string",
+      "$value": "rgba(0, 0, 0, 0.0042)"
+    },
+    "hover": {
+      "$type": "string",
+      "$value": "rgba(0, 0, 0, 0.0008)"
+    },
+    "active": {
+      "$type": "string",
+      "$value": "rgba(0, 0, 0, 0.0012)"
+    },
+    "medium": {
+      "$type": "string",
+      "$value": "rgba(0, 0, 0, 0.006)"
+    }
+  },
+  "icon": {
+    "subtle": {
+      "$type": "color",
+      "$value": "{text.color.secondary}"
+    },
+    "primary": {
+      "$type": "color",
+      "$value": "{text.color.primary}"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{brand.strong}"
+    }
+  },
+  "layout": {
+    "header": {
+      "padding-x": {
+        "$type": "float",
+        "$value": 24
+      },
+      "padding-y": {
+        "$type": "float",
+        "$value": 16
+      },
+      "navbar": {
+        "padding-x": {
+          "$type": "float",
+          "$value": 24
+        },
+        "gap-x": {
+          "$type": "float",
+          "$value": 16
+        }
+      }
+    },
+    "container": {
+      "padding-y": {
+        "$type": "float",
+        "$value": 32
+      },
+      "padding-x": {
+        "$type": "float",
+        "$value": 24
+      }
+    }
+  },
+  "mapa": {
+    "container": {
+      "padding-y": {
+        "$type": "float",
+        "$value": 32
+      },
+      "padding-x": {
+        "$type": "float",
+        "$value": 24
+      }
+    },
+    "agua": {
+      "rio": {
+        "$type": "color",
+        "$value": "{color.brand.blue.300}"
+      },
+      "mar": {
+        "$type": "color",
+        "$value": "{color.brand.blue.900}"
+      }
+    },
+    "tierra": {
+      "exterior": {
+        "$type": "color",
+        "$value": "{color.neutral.100}"
+      }
+    },
+    "territorio": {
+      "borde": {
+        "$type": "color",
+        "$value": "{color.neutral.900}"
+      }
+    },
+    "label": {
+      "poblado": {
+        "$type": "float",
+        "$value": "{typography.size.2xs}"
+      },
+      "ciudad": {
+        "$type": "float",
+        "$value": "{typography.size.sm}"
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+.
+├── CLAUDE.md
+├── README.md
+├── atlas
+│   └── index.html
+├── css
+│   └── diptico.css
+├── design-system
+│   └── tokens
+│       ├── build
+│       │   ├── tokens.css
+│       │   └── tokens.js
+│       ├── figma-to-sd.py
+│       ├── package-lock.json
+│       ├── package.json
+│       ├── source
+│       │   ├── atlas.json
+│       │   ├── componentes.json
+│       │   ├── numbers.json
+│       │   ├── primitivos.json
+│       │   ├── raw
+│       │   │   ├── atlas.json
+│       │   │   ├── componentes.json
+│       │   │   ├── numbers.json
+│       │   │   ├── primitivos.json
+│       │   │   └── semanticos.json
+│       │   └── semanticos.json
+│       └── style-dictionary.config.js
+├── img
+│   ├── CIDH-191-8-1.jpeg
+│   ├── Comunidades-ind¡genas-nicaragua-1080x675-1.jpeg
+│   ├── Desos-39-1-1536x1024.jpg
+│   ├── Educacion-ambiental-1-2048x1152.jpg
+│   ├── IndioMaiz0718_0596-1-scaled.jpg
+│   ├── Logo-del-sitio-768x768.png
+│   ├── Sin-titulo-2-03.png
+│   ├── Sin-titulo-2_Mesa-de-trabajo-1.png
+│   └── Voces-del-bosque-1.png
+├── js
+│   └── data-territorios.js
+├── mapas
+│   ├── 01_Territorio_Rama_y_Kriol.json
+│   ├── 02_Territorio_Creole_de_Bluefields.json
+│   ├── 03_Waupasa_Twi.json
+│   └── 04_Wangki_Twi-Tasba_Raya.json
+├── project_wp_tree.txt
+└── templates
+    └──  diptico-base.html
+
+12 directories, 36 files

@@ -1,0 +1,79 @@
+{
+  "mapa": {
+    "titulo": "Concesiones Mineras en Territorio Rama y Kriol",
+    "archivo_fuente": "01-Territorio_Rama_y_Kriol.jpeg",
+    "proyeccion": {
+      "tipo": "UTM",
+      "datum": "NAD 27",
+      "zona": "16 N"
+    },
+    "escala": "1:640,000",
+    "fecha": "Abril 2026",
+    "extension_geografica": {
+      "x_min": 800000,
+      "x_max": 900000,
+      "y_min": 1220000,
+      "y_max": 1350000,
+      "unidad": "metros"
+    },
+    "territorio": {
+      "nombre": "Territorio Rama y Kriol",
+      "tipo_limite": "Polígono con borde negro grueso",
+      "paises_colindantes": ["Costa Rica"]
+    },
+    "poblados": [
+      { "nombre": "Buena Vista", "simbolo": "triángulo negro" },
+      { "nombre": "Rama Cay", "simbolo": "triángulo negro" },
+      { "nombre": "Monkey Point", "simbolo": "triángulo negro" }
+    ],
+    "rios": {
+      "presentes": true,
+      "color": "azul",
+      "descripcion": "Red hídrica densa que atraviesa el territorio"
+    },
+    "concesiones_mineras": [
+      {
+        "nombre": "El Castillo",
+        "color_patron": "naranja/amarillo con tramado diagonal",
+        "ubicacion_aproximada": "sector suroeste del territorio",
+        "marcador_adicional": "cuadro rojo pequeño en leyenda"
+      },
+      {
+        "nombre": "La Guinea",
+        "color_patron": "rosa/rojo con tramado diagonal",
+        "ubicacion_aproximada": "sector suroeste del territorio, superpuesta con El Castillo",
+        "marcador_adicional": "cuadro rojo pequeño en leyenda"
+      },
+      {
+        "nombre": "Victoria",
+        "color_patron": "verde con tramado diagonal",
+        "ubicacion_aproximada": "sector norte del territorio, cerca de Buena Vista y Rama Cay",
+        "marcador_adicional": "cuadro rojo pequeño en leyenda"
+      }
+    ],
+    "leyenda": {
+      "simbolos": [
+        { "tipo": "Poblados", "simbolo": "triángulo negro sólido" },
+        { "tipo": "Ríos", "simbolo": "línea azul" },
+        { "tipo": "Territorio Rama y Kriol", "simbolo": "polígono con borde negro grueso" }
+      ],
+      "concesiones": [
+        { "nombre": "El Castillo", "patron": "tramado diagonal naranja", "cuadro": "rojo" },
+        { "nombre": "La Guinea", "patron": "tramado diagonal rosa/rojo", "cuadro": "rojo" },
+        { "nombre": "Victoria", "patron": "tramado diagonal verde", "cuadro": "rojo" }
+      ]
+    },
+    "ubicacion_referencia": {
+      "descripcion": "Mapa de referencia regional de Nicaragua",
+      "area_resaltada": "sur-este del país, cerca de Costa Rica"
+    },
+    "fuentes": [
+      "La Gaceta",
+      "Fundación del Río",
+      "URACCAN",
+      "OpenStreetMap contributors",
+      "ESRI Standard/Shaded Relief"
+    ],
+    "organizacion_productora": "Fundación para la Conservación y el Desarrollo del Sureste de Nicaragua (Fundación del Río)"
+  }
+}

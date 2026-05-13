@@ -1,0 +1,422 @@
+{
+  "button": {
+    "primary": {
+      "bg-hover": {
+        "$type": "color",
+        "$value": "#287e45"
+      },
+      "bg": {
+        "$type": "color",
+        "$value": "#205736"
+      },
+      "bg-active": {
+        "$type": "color",
+        "$value": "#17402a"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#205736"
+      },
+      "focus-ring": {
+        "$type": "color",
+        "$value": "#205736"
+      },
+      "border-hover": {
+        "$type": "color",
+        "$value": "#205736"
+      },
+      "border-active": {
+        "$type": "color",
+        "$value": "#205736"
+      },
+      "text-hover": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "text-active": {
+        "$type": "color",
+        "$value": "#ffffff"
+      }
+    },
+    "secondary": {
+      "bg": {
+        "$type": "string",
+        "$value": "rgba(255, 255, 255, 0)"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#1f2521"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#afa89b"
+      },
+      "bg-hover": {
+        "$type": "color",
+        "$value": "#f6f4ef"
+      },
+      "bg-active": {
+        "$type": "color",
+        "$value": "#eeeae3"
+      },
+      "focus-ring": {
+        "$type": "color",
+        "$value": "#205736"
+      },
+      "border-hover": {
+        "$type": "color",
+        "$value": "#205736"
+      },
+      "border-active": {
+        "$type": "color",
+        "$value": "#17402a"
+      },
+      "text-hover": {
+        "$type": "color",
+        "$value": "#205736"
+      },
+      "text-active": {
+        "$type": "color",
+        "$value": "#17402a"
+      }
+    },
+    "ghost": {
+      "text": {
+        "$type": "color",
+        "$value": "#484e49"
+      },
+      "bg-hover": {
+        "$type": "color",
+        "$value": "#eeeae3"
+      },
+      "bg": {
+        "$type": "string",
+        "$value": "rgba(255, 255, 255, 0)"
+      },
+      "bg-active": {
+        "$type": "color",
+        "$value": "#eeeae3"
+      }
+    },
+    "base": {
+      "gap": {
+        "$type": "float",
+        "$value": 8
+      },
+      "radius": {
+        "$type": "float",
+        "$value": 9999
+      },
+      "font-weight": {
+        "$type": "float",
+        "$value": 500
+      },
+      "letter-spacing": {
+        "$type": "float",
+        "$value": 0.009999999776482582
+      },
+      "line-height": {
+        "$type": "float",
+        "$value": 1.2000000476837158
+      },
+      "border": {
+        "width": {
+          "sm": {
+            "$type": "float",
+            "$value": 1
+          },
+          "md": {
+            "$type": "float",
+            "$value": 2
+          }
+        }
+      },
+      "transition": {
+        "$type": "string",
+        "$value": "motion/fast"
+      },
+      "cursor": {
+        "$type": "string",
+        "$value": "motion/fast"
+      },
+      "transitions": {
+        "$type": "string",
+        "$value": "  background 150ms ease   border 150ms ease   transform 100ms ease"
+      }
+    },
+    "text-size": {
+      "sm": {
+        "$type": "float",
+        "$value": 14
+      },
+      "md": {
+        "$type": "float",
+        "$value": 16
+      },
+      "lg": {
+        "$type": "float",
+        "$value": 18
+      }
+    },
+    "size": {
+      "xl": {
+        "padding-x": {
+          "$type": "float",
+          "$value": 28
+        },
+        "padding-y": {
+          "$type": "float",
+          "$value": 20
+        },
+        "text-size": {
+          "$type": "float",
+          "$value": "{button.text-size.md}"
+        }
+      },
+      "sm": {
+        "padding-x": {
+          "$type": "float",
+          "$value": 12
+        },
+        "padding-y": {
+          "$type": "float",
+          "$value": 8
+        },
+        "text-size": {
+          "$type": "float",
+          "$value": "{button.text-size.md}"
+        }
+      },
+      "md": {
+        "padding-x": {
+          "$type": "float",
+          "$value": 16
+        },
+        "padding-y": {
+          "$type": "float",
+          "$value": 12
+        },
+        "text-size": {
+          "$type": "float",
+          "$value": "{button.text-size.md}"
+        }
+      }
+    },
+    "disabled": {
+      "bg": {
+        "$type": "color",
+        "$value": "#e4e4e6"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#afa89b"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#cfc9be"
+      },
+      "opacity": {
+        "$type": "float",
+        "$value": 0.4000000059604645
+      }
+    }
+  },
+  "card": {
+    "bg": {
+      "$type": "color",
+      "$value": "#f6f4ef"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "#cfc9be"
+    },
+    "shadow": {
+      "$type": "string",
+      "$value": "rgba(14, 27, 42, 0.0007)"
+    },
+    "radius": {
+      "$type": "float",
+      "$value": 12
+    },
+    "padding": {
+      "$type": "float",
+      "$value": 20
+    }
+  },
+  "input": {
+    "placeholder": {
+      "$type": "color",
+      "$value": "#7d786f"
+    },
+    "bg": {
+      "$type": "color",
+      "$value": "#eeeae3"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "#cfc9be"
+    },
+    "text": {
+      "$type": "color",
+      "$value": "#0b4052"
+    },
+    "radius": {
+      "$type": "float",
+      "$value": 8
+    },
+    "padding-x": {
+      "$type": "float",
+      "$value": 16
+    },
+    "padding-y": {
+      "$type": "float",
+      "$value": 12
+    },
+    "bg-focus": {
+      "$type": "color",
+      "$value": "#f6f4ef"
+    },
+    "border-focus": {
+      "$type": "color",
+      "$value": "#205736"
+    },
+    "border-error": {
+      "$type": "color",
+      "$value": "#5c2830"
+    }
+  },
+  "nav": {
+    "bg": {
+      "$type": "color",
+      "$value": "#ffffff"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "#cfc9be"
+    },
+    "shadow": {
+      "$type": "string",
+      "$value": "rgba(14, 27, 42, 0.0004)"
+    },
+    "item": {
+      "color": {
+        "$type": "color",
+        "$value": "#484e49"
+      },
+      "color-active": {
+        "$type": "color",
+        "$value": "#205736"
+      }
+    }
+  },
+  "hero": {
+    "text": {
+      "Color": {
+        "$type": "color",
+        "$value": "#1f2521"
+      }
+    }
+  },
+  "modal": {
+    "bg": {
+      "$type": "color",
+      "$value": "#f6f4ef"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "#afa89b"
+    },
+    "text": {
+      "$type": "color",
+      "$value": "#ffffff"
+    },
+    "placeholder": {
+      "$type": "color",
+      "$value": "#7d786f"
+    },
+    "shadow": {
+      "$type": "string",
+      "$value": "rgba(14, 27, 42, 0.0014)"
+    }
+  },
+  "pill": {
+    "base": {
+      "bg": {
+        "$type": "color",
+        "$value": "#eeeae3"
+      },
+      "radius": {
+        "$type": "float",
+        "$value": 12
+      },
+      "border-width": {
+        "$type": "float",
+        "$value": 1
+      },
+      "padding-x": {
+        "$type": "float",
+        "$value": 12
+      },
+      "padding-y": {
+        "$type": "float",
+        "$value": 4
+      },
+      "gap": {
+        "$type": "float",
+        "$value": 8
+      },
+      "font-size": {
+        "$type": "float",
+        "$value": 14
+      },
+      "font-weight": {
+        "$type": "float",
+        "$value": 600
+      }
+    },
+    "text": {
+      "bg": {
+        "$type": "color",
+        "$value": "#eeeae3"
+      },
+      "size": {
+        "$type": "float",
+        "$value": 12
+      },
+      "line-height": {
+        "$type": "float",
+        "$value": 12
+      },
+      "weight": {
+        "$type": "float",
+        "$value": 700
+      },
+      "letter-spacing": {
+        "$type": "float",
+        "$value": 3
+      }
+    },
+    "informative": {
+      "bg": {
+        "$type": "color",
+        "$value": "#eeeae3"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#afa89b"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#484e49"
+      }
+    },
+    "sm": {
+      "$type": "float",
+      "$value": 0
+    }
+  }
+}

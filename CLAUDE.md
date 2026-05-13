@@ -36,10 +36,10 @@ El atlas es un **producto editorial cartográfico**, no solo un conjunto de mapa
 --mapa-container-padding-x: 24;
 ```
 
-### Tokens de atlas — PROBLEMA CONOCIDO
-Los tokens de `concesion/*` están en Figma (colección `atlas`, 9 variables) y en `source/raw/atlas.json`, pero **NO llegaron al CSS final** porque `figma-to-sd.py` no incluye `atlas` en su lista `COLLECTIONS`.
+### Tokens de atlas — ✅ funcionales en build/tokens.css
+Los tokens de `concesion/*` están en Figma (colección `atlas`, 9 variables) y en `source/raw/atlas.json`, y ya llegan al CSS final.
 
-Valores reales de los tokens (para usar como fallback hasta resolver el build):
+Valores reales de los tokens:
 ```css
 --concesion-pais-china:    #b91c1c;  /* diagonal 45° */
 --concesion-pais-canada:   #b45309;  /* crosshatch 25° */
@@ -173,4 +173,4 @@ Nota: la concesión **Waspan** aparece en territorios 04 y 05 — decisión edit
 
 ## Próximo paso inmediato
 
-Registrar `atlas` en `COLLECTIONS` dentro de `figma-to-sd.py` y correr el build para que `--concesion-*` lleguen a `tokens.css`. Luego construir el primer díptico HTML con Rama y Kriol.
+Construir el primer díptico HTML con Rama y Kriol (los tokens `--concesion-*` ya están en el CSS).

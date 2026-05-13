@@ -79,35 +79,6 @@ El output es `build/tokens.css`. Importarlo en cualquier página del proyecto:
 
 ---
 
-## Fix pendiente — tokens de concesión no llegan al CSS
-
-El archivo `source/raw/atlas.json` existe pero `figma-to-sd.py` no lo procesa porque `atlas` no está en la lista `COLLECTIONS`.
-
-**Solución:** agregar `'atlas'` a la lista en `figma-to-sd.py`:
-
-```python
-# línea ~20 en figma-to-sd.py
-COLLECTIONS = ['numbers', 'primitivos', 'semanticos', 'componentes', 'atlas']
-```
-
-También agregar la transformación en el dict `TRANSFORMS` si es necesario, y asegurarse de que `style-dictionary.config.js` incluya `source/atlas.json` como fuente.
-
-Luego correr `python3 figma-to-sd.py && npm run build`.
-
-Resultado esperado en `tokens.css`:
-```css
---concesion-pais-china:    #b91c1c;
---concesion-pais-canada:   #b45309;
---concesion-pais-colombia: #6d28d9;
---concesion-pais-nacional: #0f5fa6;
---concesion-tipo-reserva:  #4b5563;
---concesion-patron-china:    45;
---concesion-patron-colombia: 35;
---concesion-patron-canada:   25;
---concesion-patron-nacional: 10;
-```
-
----
 
 ## Sistema de concesiones
 

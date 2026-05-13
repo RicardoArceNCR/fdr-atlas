@@ -2,6 +2,14 @@
 ├── CLAUDE.md
 ├── README.md
 ├── atlas
+│   ├── 01-rama-kriol
+│   │   └── index.html
+│   ├── 02-creole-bluefields
+│   │   └── index.html
+│   ├── 03-waupasa-twi
+│   │   └── index.html
+│   ├── 04-wangki-twi-tasba-raya
+│   │   └── index.html
 │   └── index.html
 ├── css
 │   └── diptico.css
@@ -27,6 +35,13 @@
 │       │   └── semanticos.json
 │       └── style-dictionary.config.js
 ├── img
+│   ├── 01-Territorio Rama y Kriol - limpio.png
+│   ├── 01-Territorio Rama y Kriol.jpeg
+│   ├── 02_Territorio Creole de Bluefields - limpio.png
+│   ├── 02_Territorio Creole de Bluefields.jpeg
+│   ├── 03_Waupasa Twi - limpio.png
+│   ├── 03_Waupasa Twi.jpeg
+│   ├── 04_Wangki Twi-Tasba Raya.jpeg
 │   ├── CIDH-191-8-1.jpeg
 │   ├── Comunidades-ind¡genas-nicaragua-1080x675-1.jpeg
 │   ├── Desos-39-1-1536x1024.jpg
@@ -37,7 +52,8 @@
 │   ├── Sin-titulo-2_Mesa-de-trabajo-1.png
 │   └── Voces-del-bosque-1.png
 ├── js
-│   └── data-territorios.js
+│   ├── data-territorios.js
+│   └── render-diptico.js
 ├── mapas
 │   ├── 01_Territorio_Rama_y_Kriol.json
 │   ├── 02_Territorio_Creole_de_Bluefields.json
@@ -45,6 +61,6 @@
 │   └── 04_Wangki_Twi-Tasba_Raya.json
 ├── project_wp_tree.txt
 └── templates
-    └──  diptico-base.html
+    └── diptico-base.html
 
-12 directories, 36 files
+16 directories, 48 files

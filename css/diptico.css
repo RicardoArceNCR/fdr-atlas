@@ -22,12 +22,25 @@
 
 .diptico {
   display: grid;
-  grid-template-columns: 55fr 45fr;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
   font-family: 'Source Serif 4', serif;
   background: var(--background-page);
   color: var(--text-color-primary);
+}
+
+/* ─── Layouts ─────────────────────────────────────────────────────────────── */
+
+.diptico[data-layout="A"] {
+  grid-template-columns: 55fr 45fr;
+}
+
+.diptico[data-layout="B"] {
+  grid-template-columns: 65fr 35fr;
+}
+
+.diptico[data-layout="C"] {
+  grid-template-columns: 50fr 50fr;
 }
 
 /* ─── Panel izquierdo — mapa ───────────────────────────────────────────────── */
@@ -108,6 +121,33 @@
   color: var(--text-color-primary);
   opacity: 0.75;
 }
+/* Insets (recuadros de detalle) */
+.inset-detalle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(4px);
+  border: 0.5px solid var(--border-subtle);
+  padding: 0.75rem;
+  border-radius: var(--radius-md, 8px);
+  font-family: 'Sora', sans-serif;
+  color: var(--text-color-primary);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.inset-detalle__titulo {
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.inset-detalle__escala {
+  font-size: 10px;
+  color: var(--text-color-secondary);
+}
+
+#detalle_norte { top: 1.5rem; left: 1.5rem; }
+#detalle_sur { bottom: 5rem; left: 1.5rem; }
+#detalle_concesion { top: 1.5rem; left: 1.5rem; }
 
 /* ─── Panel derecho — editorial ────────────────────────────────────────────── */
 
@@ -250,6 +290,13 @@
 .badge-colombia { background: #f5f3ff; color: #4c1d95; }
 .badge-nacional { background: #eff6ff; color: #1e40af; }
 .badge-reserva  { background: var(--background-subtle); color: var(--text-color-secondary); }
+
+/* Patrones visuales por país (para leyenda y lista) */
+.patron-china { background: repeating-linear-gradient(45deg, #b91c1c, #b91c1c 2px, transparent 2px, transparent 6px); background-color: rgba(185, 28, 28, 0.2); }
+.patron-canada { background: repeating-linear-gradient(45deg, #b45309, #b45309 2px, transparent 2px, transparent 6px), repeating-linear-gradient(-45deg, #b45309, #b45309 2px, transparent 2px, transparent 6px); background-color: rgba(180, 83, 9, 0.2); }
+.patron-colombia { background: radial-gradient(circle, #6d28d9 2px, transparent 2.5px); background-size: 8px 8px; background-color: rgba(109, 40, 217, 0.2); }
+.patron-nacional { background: repeating-linear-gradient(90deg, #0f5fa6, #0f5fa6 2px, transparent 2px, transparent 6px); background-color: rgba(15, 95, 166, 0.2); }
+.patron-reserva { background: rgba(75, 85, 99, 0.25); }
 
 /* ─── Narrativa / contexto ─────────────────────────────────────────────────── */
 

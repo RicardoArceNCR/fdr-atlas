@@ -18,11 +18,20 @@ const TERRITORIOS = [
     id: '01-rama-kriol',
     numero: '01',
     nombre: 'Rama y Kriol',
-    archivo_mapa: '../../mapas/01-rama-kriol/mapa-limpio.png',
+    archivo_mapa: '../../img/01-Territorio Rama y Kriol - limpio.png',
     layout: 'A',
     pueblos: ['Pueblo Rama', 'Comunidad Kriol'],
     region: 'Región Autónoma de la Costa Caribe Sur (RACCS)',
     descripcion: 'El territorio Rama y Kriol abarca la zona costera sur del Caribe nicaragüense. Tres concesiones mineras se superponen a este territorio, afectando áreas de importancia ecológica y cultural para el pueblo Rama y las comunidades Kriol.', // ⚠️ pendiente revisión
+    escala: '—',
+    proyeccion: 'UTM',
+    datum: 'NAD 27',
+    zona: '16 N',
+    elementos_cartograficos: {
+      poblados: true,
+      rios: true,
+      ubicacion_referencia: true
+    },
     stats: {
       hectareas_territorio: '404,000', // ⚠️ pendiente
       concesiones: 3,
@@ -65,11 +74,29 @@ const TERRITORIOS = [
     id: '02-creole-bluefields',
     numero: '02',
     nombre: 'Creole de Bluefields',
-    archivo_mapa: '../../mapas/02-creole-bluefields/mapa-limpio.png',
+    archivo_mapa: '../../img/02_Territorio Creole de Bluefields - limpio.png',
     layout: 'B',
     pueblos: ['Comunidad Creole'],
     region: 'Región Autónoma de la Costa Caribe Sur (RACCS)',
     descripcion: 'El territorio Creole de Bluefields tiene una única concesión minera activa que afecta la zona costera sur del territorio. La concesión Victoria representa una amenaza directa para los medios de vida pesqueros y la identidad cultural de la comunidad.', // ⚠️ pendiente
+    escala: '—',
+    proyeccion: 'UTM',
+    datum: 'NAD 27',
+    zona: '16 N',
+    elementos_cartograficos: {
+      poblados: true,
+      rios: true,
+      ubicacion_referencia: true
+    },
+    elementos_especiales: {
+      recuadros_detalle: [
+        {
+          id: "detalle_concesion",
+          titulo: "Detalle — Concesión Victoria",
+          escala: "—"
+        }
+      ]
+    },
     stats: {
       hectareas_territorio: '—', // ⚠️ pendiente
       concesiones: 1,
@@ -94,11 +121,20 @@ const TERRITORIOS = [
     id: '03-waupasa-twi',
     numero: '03',
     nombre: 'Waupasa Twi',
-    archivo_mapa: '../../mapas/03-waupasa-twi/mapa-limpio.png',
+    archivo_mapa: '../../img/03_Waupasa Twi - limpio.png',
     layout: 'A',
     pueblos: ['Pueblo Miskitu'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
     descripcion: 'El territorio Waupasa Twi es el caso de mayor presión territorial del atlas. Nueve concesiones de capital de cuatro países distintos se superponen al territorio, cubriendo gran parte de su extensión y generando conflictos documentados con las comunidades miskitu.', // ⚠️ pendiente
+    escala: '—',
+    proyeccion: 'UTM',
+    datum: 'NAD 27',
+    zona: '16 N',
+    elementos_cartograficos: {
+      poblados: true,
+      rios: true,
+      ubicacion_referencia: true
+    },
     stats: {
       hectareas_territorio: '—', // ⚠️ pendiente
       concesiones: 9,
@@ -123,11 +159,34 @@ const TERRITORIOS = [
     id: '04-wangki-twi-tasba-raya',
     numero: '04',
     nombre: 'Wangki Twi-Tasba Raya',
-    archivo_mapa: '../../mapas/04-wangki-twi-tasba-raya/mapa-limpio.png', // ⚠️ PNG pendiente
+    archivo_mapa: '../../img/04_Wangki Twi-Tasba Raya.jpeg', // ⚠️ PNG pendiente
     layout: 'C',
     pueblos: ['Pueblo Miskitu'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
     descripcion: '—', // ⚠️ pendiente
+    escala: 'Varias',
+    proyeccion: 'UTM',
+    datum: 'NAD 27',
+    zona: '16 N',
+    elementos_cartograficos: {
+      poblados: true,
+      rios: true,
+      ubicacion_referencia: true
+    },
+    elementos_especiales: {
+      recuadros_detalle: [
+        {
+          id: "detalle_norte",
+          titulo: "Detalle norte — Waspan",
+          escala: "1:116,000"
+        },
+        {
+          id: "detalle_sur",
+          titulo: "Detalle sur",
+          escala: "1:70,000"
+        }
+      ]
+    },
     stats: {
       hectareas_territorio: '—',
       concesiones: 2,
@@ -150,6 +209,15 @@ const TERRITORIOS = [
     pueblos: ['Pueblo Miskitu'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
     descripcion: '—', // ⚠️ pendiente
+    escala: '—',
+    proyeccion: 'UTM',
+    datum: 'NAD 27',
+    zona: '16 N',
+    elementos_cartograficos: {
+      poblados: true,
+      rios: true,
+      ubicacion_referencia: true
+    },
     stats: {
       hectareas_territorio: '—',
       concesiones: 2,
@@ -172,6 +240,15 @@ const TERRITORIOS = [
     pueblos: ['Pueblo Mayangna Tuahka'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
     descripcion: '—', // ⚠️ pendiente
+    escala: '—',
+    proyeccion: 'UTM',
+    datum: 'NAD 27',
+    zona: '16 N',
+    elementos_cartograficos: {
+      poblados: true,
+      rios: true,
+      ubicacion_referencia: true
+    },
     stats: {
       hectareas_territorio: '—',
       concesiones: 12, // ⚠️ confirmar número exacto

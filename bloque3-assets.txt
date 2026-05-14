@@ -12,17 +12,18 @@ total 4008
 ========================================
 DIRECTORIO: mapas-svg/03-waupasa-twi/
 ========================================
-total 232
--rw-r--r--@ 1 ricardo  staff    22K May 13 21:59 desktop-03-Waupasa-Twi.svg
--rw-r--r--@ 1 ricardo  staff    64K May 13 21:59 mobile-03-Waupasa-Twi.svg
--rw-r--r--@ 1 ricardo  staff    22K May 13 21:59 tablet-03-Waupasa-Twi.svg
+total 192
+-rw-r--r--@ 1 ricardo  staff    21K May 13 23:43 desktop-03-Waupasa-Twi.svg
+-rw-r--r--@ 1 ricardo  staff    21K May 13 23:47 mobile-03-Waupasa-Twi.svg
+-rw-r--r--  1 ricardo  staff    21K May 13 23:06 mobile_03_Waupasa Twi.svg
+-rw-r--r--@ 1 ricardo  staff    21K May 13 23:49 tablet-03-Waupasa-Twi.svg
 
 ========================================
 SVG — primeras 40 líneas
 ========================================
 Archivo: mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 927 979.5">
+<svg id="MAPA_x5F_MASTER_x5F_DESKTOP" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 927 979.5">
   <!-- Generator: Adobe Illustrator 30.3.0, SVG Export Plug-In . SVG Version: 2.1.3 Build 182)  -->
   <defs>
     <style>

@@ -93,48 +93,16 @@ function renderHeader(t) {
 
 function getMapAssets(t) {
   const bp = getBreakpoint();
-
-  if (t.assets && t.assets[bp]) {
-    return t.assets[bp];
-  }
-
-  return {
-    raster: t.archivo_mapa_base || t.archivo_mapa || "",
-    svg: t.archivo_svg_concesiones || "",
-  };
+  return (t.assets && t.assets[bp]) || {};
 }
 
 function renderMapa(t) {
   const assets = getMapAssets(t);
-
-  const base = document.getElementById("mapa-base");
-  if (base) {
-    base.src = `${assets.raster}?v=${Date.now()}`;
-    base.alt = `Mapa base de ${t.nombre || "Territorio"}`;
-    base.style.display = assets.raster ? "block" : "none";
+  const obj = document.getElementById("mapa-editorial-obj");
+  if (obj && assets.svg) {
+    obj.setAttribute("data", assets.svg);
   }
-
-  if (assets.svg) {
-    cargarSVG(assets.svg);
-  } else {
-    const container = document.getElementById("svg-overlay-container");
-    if (container) container.innerHTML = "";
-  }
-
   renderLeyenda(t);
-}
-
-async function cargarSVG(url) {
-  const container = document.getElementById("svg-overlay-container");
-  if (!container) return;
-  try {
-    const res = await fetch(`${url}?v=${Date.now()}`);
-    if (!res.ok) throw new Error("SVG no encontrado");
-    const svg = await res.text();
-    container.innerHTML = svg;
-  } catch (err) {
-    console.error("Error cargando SVG concesiones:", err);
-  }
 }
 
 function renderLeyenda(t) {
@@ -403,23 +371,11 @@ const TERRITORIOS = [
     id: '03-waupasa-twi',
     numero: '03',
     nombre: 'Waupasa Twi',
-    archivo_mapa_base: '../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp',
-    archivo_svg_concesiones: '../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg',
     assets: {
-      desktop: {
-        raster: "../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp",
-        svg: "../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg"
-      },
-      tablet: {
-        raster: "../../mapas-raster/03-waupasa-twi/tablet-03-Waupasa-Twi.webp",
-        svg: "../../mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg"
-      },
-      mobile: {
-        raster: "../../mapas-raster/03-waupasa-twi/mobile-03-Waupasa-Twi.webp",
-        svg: "../../mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg"
-      }
+      desktop: { svg: "../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg" },
+      tablet:  { svg: "../../mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg" },
+      mobile:  { svg: "../../mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg" },
     },
-    archivo_mapa_referencia: '../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp',
     layout: 'A',
     pueblos: ['Pueblo Miskitu'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
@@ -619,9 +575,7 @@ FILE: templates/diptico-base.html
 <div class="diptico" id="diptico-container">
   <div class="diptico__mapa">
     <div class="mapa-editorial">
-      <img id="mapa-base" class="mapa-base" src="" alt="Mapa base">
-
-      <div id="svg-overlay-container" class="mapa-svg-layer"></div>
+      <object id="mapa-editorial-obj" data="" type="image/svg+xml"></object>
     </div>
     <div id="insets-container"></div>
     <div id="escala-text" class="diptico__escala"></div>

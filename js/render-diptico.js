@@ -90,48 +90,16 @@ function renderHeader(t) {
 
 function getMapAssets(t) {
   const bp = getBreakpoint();
-
-  if (t.assets && t.assets[bp]) {
-    return t.assets[bp];
-  }
-
-  return {
-    raster: t.archivo_mapa_base || t.archivo_mapa || "",
-    svg: t.archivo_svg_concesiones || "",
-  };
+  return (t.assets && t.assets[bp]) || {};
 }
 
 function renderMapa(t) {
   const assets = getMapAssets(t);
-
-  const base = document.getElementById("mapa-base");
-  if (base) {
-    base.src = `${assets.raster}?v=${Date.now()}`;
-    base.alt = `Mapa base de ${t.nombre || "Territorio"}`;
-    base.style.display = assets.raster ? "block" : "none";
+  const obj = document.getElementById("mapa-editorial-obj");
+  if (obj && assets.svg) {
+    obj.setAttribute("data", assets.svg);
   }
-
-  if (assets.svg) {
-    cargarSVG(assets.svg);
-  } else {
-    const container = document.getElementById("svg-overlay-container");
-    if (container) container.innerHTML = "";
-  }
-
   renderLeyenda(t);
-}
-
-async function cargarSVG(url) {
-  const container = document.getElementById("svg-overlay-container");
-  if (!container) return;
-  try {
-    const res = await fetch(`${url}?v=${Date.now()}`);
-    if (!res.ok) throw new Error("SVG no encontrado");
-    const svg = await res.text();
-    container.innerHTML = svg;
-  } catch (err) {
-    console.error("Error cargando SVG concesiones:", err);
-  }
 }
 
 function renderLeyenda(t) {

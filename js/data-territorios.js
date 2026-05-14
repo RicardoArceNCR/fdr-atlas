@@ -121,23 +121,11 @@ const TERRITORIOS = [
     id: '03-waupasa-twi',
     numero: '03',
     nombre: 'Waupasa Twi',
-    archivo_mapa_base: '../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp',
-    archivo_svg_concesiones: '../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg',
     assets: {
-      desktop: {
-        raster: "../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp",
-        svg: "../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg"
-      },
-      tablet: {
-        raster: "../../mapas-raster/03-waupasa-twi/tablet-03-Waupasa-Twi.webp",
-        svg: "../../mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg"
-      },
-      mobile: {
-        raster: "../../mapas-raster/03-waupasa-twi/mobile-03-Waupasa-Twi.webp",
-        svg: "../../mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg"
-      }
+      desktop: { svg: "../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg" },
+      tablet:  { svg: "../../mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg" },
+      mobile:  { svg: "../../mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg" },
     },
-    archivo_mapa_referencia: '../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp',
     layout: 'A',
     pueblos: ['Pueblo Miskitu'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',

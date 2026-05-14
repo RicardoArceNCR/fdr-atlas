@@ -51,49 +51,20 @@
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: auto;
   background: var(--mapa-tierra-exterior);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.diptico__mapa img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
+  padding: 2rem;
 }
 
 .mapa-editorial {
-  position: relative;
+  width: min(100%, 920px);
+  margin-inline: auto;
+}
+
+.mapa-editorial svg,
+.mapa-editorial object {
   width: 100%;
-  max-width: 100%;
-  aspect-ratio: 927 / 979.5;
   height: auto;
-  margin: auto;
-}
-
-.mapa-base,
-.mapa-svg-layer {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.mapa-base {
-  object-fit: contain;
-}
-
-.mapa-svg-layer {
-  pointer-events: auto;
-}
-
-.mapa-svg-layer svg {
-  width: 100%;
-  height: 100%;
   display: block;
 }
 
@@ -375,20 +346,22 @@
 /* ─── Responsive ───────────────────────────────────────────────────────────── */
 
 /* Tablet landscape: conservar díptico */
-@media (min-width: 900px) and (max-width: 1199px) {
+@media (min-width: 768px) and (max-width: 1199px) {
   .diptico[data-layout="A"] {
     grid-template-columns: 58fr 42fr;
   }
 
   .diptico__mapa {
+    height: auto;
     position: relative;
-    height: 100vh;
+    padding: clamp(1rem, 3vw, 2rem);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
   }
 
   .mapa-editorial {
-    aspect-ratio: 927 / 979.5;
-    width: 100%;
-    height: 100%;
+    width: min(100%, 760px);
   }
 
   .diptico__info {
@@ -400,8 +373,8 @@
   }
 }
 
-/* Tablet portrait + mobile: stack */
-@media (max-width: 899px) {
+/* Mobile: stack */
+@media (max-width: 767px) {
   .diptico {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
@@ -413,15 +386,11 @@
     grid-row: 1;
     position: relative;
     height: auto;
-    min-height: unset;
-    max-height: unset;
-    overflow: hidden;
+    padding: 1rem;
   }
 
   .mapa-editorial {
-    aspect-ratio: 503.5 / 634.7;
     width: 100%;
-    height: auto;
   }
 
   .diptico__info {

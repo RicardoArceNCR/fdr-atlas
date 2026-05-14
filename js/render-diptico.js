@@ -4,6 +4,30 @@ import {
   getLabelPais,
 } from "./data-territorios.js";
 
+function getBreakpoint() {
+  const width = window.innerWidth;
+  if (width <= 767) return "mobile";
+  if (width <= 1199) return "tablet";
+  return "desktop";
+}
+
+let lastBreakpoint = null;
+
+window.addEventListener("resize", () => {
+  const current = getBreakpoint();
+
+  if (current !== lastBreakpoint) {
+    lastBreakpoint = current;
+
+    const id = document.body.dataset.territorio;
+    const territorio = getTerritorio(id);
+
+    if (territorio) {
+      renderMapa(territorio);
+    }
+  }
+});
+
 async function init() {
   const id = document.body.dataset.territorio;
   if (!id) return;
@@ -13,6 +37,8 @@ async function init() {
     console.error(`Territorio no encontrado: ${id}`);
     return;
   }
+
+  lastBreakpoint = getBreakpoint();
 
   try {
     const res = await fetch("../../templates/diptico-base.html");
@@ -62,18 +88,34 @@ function renderHeader(t) {
   }
 }
 
-function renderMapa(t) {
-  const base = document.getElementById("mapa-base");
-  if (base) {
-    base.src = t.archivo_mapa_base || t.archivo_mapa || "";
-    base.alt = `Mapa base de ${t.nombre || "Territorio"}`;
-    if (!t.archivo_mapa_base && !t.archivo_mapa) {
-      base.style.display = "none";
-    }
+function getMapAssets(t) {
+  const bp = getBreakpoint();
+
+  if (t.assets && t.assets[bp]) {
+    return t.assets[bp];
   }
 
-  if (t.archivo_svg_concesiones) {
-    cargarSVG(t.archivo_svg_concesiones);
+  return {
+    raster: t.archivo_mapa_base || t.archivo_mapa || "",
+    svg: t.archivo_svg_concesiones || "",
+  };
+}
+
+function renderMapa(t) {
+  const assets = getMapAssets(t);
+
+  const base = document.getElementById("mapa-base");
+  if (base) {
+    base.src = assets.raster;
+    base.alt = `Mapa base de ${t.nombre || "Territorio"}`;
+    base.style.display = assets.raster ? "block" : "none";
+  }
+
+  if (assets.svg) {
+    cargarSVG(assets.svg);
+  } else {
+    const container = document.getElementById("svg-overlay-container");
+    if (container) container.innerHTML = "";
   }
 
   renderLeyenda(t);

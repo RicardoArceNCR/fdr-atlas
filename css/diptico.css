@@ -53,6 +53,9 @@
   height: 100vh;
   overflow: hidden;
   background: var(--mapa-tierra-exterior);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .diptico__mapa img {
@@ -66,23 +69,25 @@
 .mapa-editorial {
   position: relative;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  max-width: 100%;
+  aspect-ratio: 927 / 832;
+  height: auto;
+  margin: auto;
 }
 
-.mapa-base {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
+.mapa-base,
 .mapa-svg-layer {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+}
+
+.mapa-base {
+  object-fit: contain;
+}
+
+.mapa-svg-layer {
   pointer-events: auto;
 }
 

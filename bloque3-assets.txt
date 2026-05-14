@@ -1,0 +1,60 @@
+========================================
+DIRECTORIO: mapas-raster/03-waupasa-twi/
+========================================
+total 376
+-rw-r--r--@ 1 ricardo  staff    65K May 13 20:04 desktop-03-Waupasa-Twi.webp
+-rw-r--r--@ 1 ricardo  staff    40K May 13 20:04 mobile-03-Waupasa-Twi.webp
+-rw-r--r--@ 1 ricardo  staff    79K May 13 20:04 tablet-03-Waupasa-Twi.webp
+
+========================================
+DIRECTORIO: mapas-svg/03-waupasa-twi/
+========================================
+total 232
+-rw-r--r--@ 1 ricardo  staff    22K May 13 20:44 desktop-03-Waupasa-Twi.svg
+-rw-r--r--@ 1 ricardo  staff    65K May 13 20:44 mobile-03-Waupasa-Twi.svg
+-rw-r--r--@ 1 ricardo  staff    22K May 13 20:44 tablet-03-Waupasa-Twi.svg
+
+========================================
+SVG — primeras 40 líneas
+========================================
+Archivo: mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 927 832" preserveAspectRatio="xMidYMid meet">
+  <!-- Generator: Adobe Illustrator 30.3.0, SVG Export Plug-In . SVG Version: 2.1.3 Build 182)  -->
+  <defs>
+    <style>
+      .st0, .st1, .st2, .st3, .st4, .st5, .st6, .st7 {
+        fill: none;
+      }
+
+      .st1 {
+        stroke: #4c79af;
+      }
+
+      .st1, .st2, .st3, .st8, .st4, .st5, .st6, .st9, .st7 {
+        stroke-miterlimit: 10;
+      }
+
+      .st1, .st3, .st5, .st6 {
+        stroke-width: 6px;
+      }
+
+      .st2 {
+        stroke: #e21f26;
+        stroke-width: 3px;
+      }
+
+      .st10 {
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+        font-size: 16.6px;
+      }
+
+      .st3 {
+        stroke: #f266b6;
+      }
+
+      .st8 {
+        fill: #a47057;
+        stroke: #231006;
+      }
+

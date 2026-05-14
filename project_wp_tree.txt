@@ -67,19 +67,16 @@
 │   └── 04_Wangki_Twi-Tasba_Raya.json
 ├── mapas-raster
 │   └── 03-waupasa-twi
-│       ├── desktop_03_Waupasa-Twi.png
-│       ├── desktop_03_Waupasa-Twi.webp
-│       ├── mobile_03_Waupasa-Twi.png
-│       ├── mobile_03_Waupasa-Twi.webp
-│       ├── tablet_03_Waupasa-Twi.png
-│       └── tablet_03_Waupasa-Twi.webp
+│       ├── desktop-03-Waupasa-Twi.webp
+│       ├── mobile-03-Waupasa-Twi.webp
+│       └── tablet-03-Waupasa-Twi.webp
 ├── mapas-svg
 │   └── 03-waupasa-twi
-│       ├── desktop_03_Waupasa-Twi.svg
-│       ├── mobile_03_Waupasa Twi.svg
-│       └── tablet_03_Waupasa-Twi.svg
+│       ├── desktop-03-Waupasa-Twi.svg
+│       ├── mobile-03-Waupasa-Twi.svg
+│       └── tablet-03-Waupasa-Twi.svg
 ├── project_wp_tree.txt
 └── templates
     └── diptico-base.html
 
-23 directories, 60 files
+23 directories, 57 files

@@ -1,311 +1,322 @@
 # Atlas de Concesiones Mineras en Territorios Indígenas
 
-Producto editorial cartográfico web producido por **Fundación del Río**. Documenta concesiones mineras otorgadas en territorios indígenas y afrodescendientes de Nicaragua.
+Producto editorial cartográfico web producido para **Fundación del Río (FDR)**. Documenta concesiones mineras en territorios indígenas y afrodescendientes de Nicaragua mediante dípticos web embebibles.
 
-El proyecto no es solo una galería de mapas: es un sistema editorial cartográfico compuesto por **dípticos web embebibles**, con mapa a la izquierda e información narrativa a la derecha.
+El proyecto no es una galería de mapas ni un dashboard. Es un sistema editorial cartográfico: mapa a la izquierda, narrativa y datos a la derecha.
 
 ---
 
-## Estado del proyecto
+## Estado actual
 
 | Componente | Estado |
 |---|---|
-| Design system (`tokens.css`) | ✅ Funcional |
-| Colección `atlas` en Figma | ✅ Creada y activa |
-| Tokens `mapa/*` en CSS | ✅ Llegan al build |
-| Tokens `concesion/*` en CSS | ✅ Funcionales en `build/tokens.css` |
+| Design system FDR / tokens | ✅ Funcional |
 | Pipeline Figma → Style Dictionary | ✅ Funcional |
-| Díptico HTML base | ✅ Iniciado |
-| Renderer JS por territorio | ✅ Iniciado |
-| Primeros 4 territorios HTML | ✅ Iniciados |
-| Sistema híbrido raster + SVG | ✅ En desarrollo con Waupasa Twi |
-| Página índice del atlas | ⏳ Pendiente |
-| PDF responsive/print | ⏳ Pendiente |
+| `tokens.css` / `tokens.js` | ✅ Generados |
+| CSS base de díptico | ✅ Funcional |
+| Template HTML reutilizable | ✅ Funcional |
+| Renderer JS por territorio | ✅ Funcional |
+| Data estructurada de territorios | ✅ Iniciada |
+| 03 Waupasa Twi | ✅ Primer mapa funcional |
+| SVG responsive por breakpoint | ✅ Confirmado para Waupasa Twi |
+| PDF / print final | ⏳ Pendiente |
+| Índice general del atlas | ⏳ Pendiente |
+| Resto de mapas | ⏳ Pendientes de producción final |
 
 ---
 
-## Enfoque técnico actual
+## Decisión técnica principal
 
-El atlas usa una arquitectura híbrida:
+La arquitectura actual usa **SVG completo por breakpoint** para el mapa.
+
+Para cada territorio complejo, especialmente Waupasa Twi, se recomienda exportar:
 
 ```txt
-Mapa base raster
-+
-Overlays SVG de concesiones/áreas
-+
-Patrones definidos con tokens
-+
-Panel derecho en HTML/CSS/JS
+mapas-svg/{territorio}/desktop-{Nombre}.svg
+mapas-svg/{territorio}/tablet-{Nombre}.svg
+mapas-svg/{territorio}/mobile-{Nombre}.svg
 ```
 
-### Qué vive en raster
+Cada SVG debe ser **autocontenido** e incluir:
 
-El mapa base puede mantenerse como imagen (`.png`, `.jpg` o preferiblemente `.webp`) e incluir:
-
-- relieve
-- ríos
-- grilla
-- límites territoriales base
-- nombres de poblados si conviene mantenerlos en la cartografía
-- escala y norte si se decide tratarlos como parte del mapa editorial
-
-### Qué vive en SVG
-
-Los elementos editoriales que deben poder editarse, estilizarse o conectarse con datos viven como SVG:
-
-- concesiones mineras
+- mapa base / raster embebido o correctamente enlazado
+- concesiones
 - reserva minera
-- highlights
-- símbolos editoriales específicos
-- overlays narrativos
+- labels cartográficos necesarios
+- norte
+- escala
+- leyenda cartográfica si forma parte del mapa
 
-### Qué vive en HTML
-
-El panel derecho y la estructura editorial viven en HTML/CSS/JS:
-
-- título
-- región
-- pueblos
-- estadísticas
-- descripción editorial
-- lista de concesiones
-- badges por país
-- fuentes
-- leyenda complementaria
-
----
-
-## Decisión sobre ai2html
-
-`ai2html` **no es el sistema central del atlas**.
-
-El sistema principal será:
+Esto reemplaza el enfoque anterior de:
 
 ```txt
-Illustrator / QGIS → mapa base raster + overlays SVG
-Código → layout, datos, tokens, responsive y panel editorial
+raster base separado + SVG overlay separado
 ```
 
-`ai2html` puede mantenerse solo como herramienta experimental o puntual para:
-
-- prototipos rápidos desde Illustrator
-- pruebas de labels posicionados
-- exportaciones editoriales cerradas que no necesiten datos dinámicos
-- casos excepcionales donde convenga exportar una composición completa como HTML estático
-
-No debe usarse para generar el producto completo ni reemplazar el renderer propio del atlas.
+Ese enfoque era posible, pero generaba riesgo de desalineación entre imagen y SVG en desktop/tablet/mobile.
 
 ---
 
-## Estructura recomendada del repositorio
+## Estructura actual esperada
 
 ```txt
-web/
-├── atlas/
-│   ├── index.html
-│   ├── 01-rama-kriol/
-│   │   └── index.html
-│   ├── 02-creole-bluefields/
-│   │   └── index.html
-│   ├── 03-waupasa-twi/
-│   │   └── index.html
-│   └── 04-wangki-twi-tasba-raya/
-│       └── index.html
-│
-├── css/
-│   └── diptico.css
-│
-├── js/
-│   ├── data-territorios.js
-│   └── render-diptico.js
-│
-├── templates/
-│   └── diptico-base.html
-│
-├── img/
-│   ├── 03_Waupasa Twi - limpio.png
-│   └── 03_Waupasa Twi.jpeg
-│
-├── mapas-svg/
-│   └── 03-waupasa-twi/
-│       ├── desktop-concesiones.svg
-│       ├── tablet-concesiones.svg
-│       └── mobile-concesiones.svg
-│
-├── mapas-raster/
-│   └── 03-waupasa-twi/
-│       ├── desktop-base.webp
-│       ├── tablet-base.webp
-│       └── mobile-base.webp
-│
-└── design-system/
-    └── tokens/
-        ├── source/raw/
-        │   ├── primitivos.json
-        │   ├── semanticos.json
-        │   ├── componentes.json
-        │   ├── numbers.json
-        │   └── atlas.json
-        ├── source/
-        ├── build/
-        │   ├── tokens.css
-        │   └── tokens.js
-        ├── figma-to-sd.py
-        ├── style-dictionary.config.js
-        └── package.json
+atlas/
+├── index.html
+├── 01-rama-kriol/
+│   └── index.html
+├── 02-creole-bluefields/
+│   └── index.html
+├── 03-waupasa-twi/
+│   └── index.html
+└── 04-wangki-twi-tasba-raya/
+    └── index.html
+
+css/
+└── diptico.css
+
+js/
+├── data-territorios.js
+└── render-diptico.js
+
+templates/
+└── diptico-base.html
+
+mapas-svg/
+└── 03-waupasa-twi/
+    ├── desktop-03-Waupasa-Twi.svg
+    ├── tablet-03-Waupasa-Twi.svg
+    └── mobile-03-Waupasa-Twi.svg
+
+mapas-raster/
+└── 03-waupasa-twi/
+    ├── desktop-03-Waupasa-Twi.png
+    ├── desktop-03-Waupasa-Twi.webp
+    ├── tablet-03-Waupasa-Twi.png
+    ├── tablet-03-Waupasa-Twi.webp
+    ├── mobile-03-Waupasa-Twi.png
+    └── mobile-03-Waupasa-Twi.webp
+
+design-system/
+└── tokens/
+    ├── source/raw/
+    ├── source/
+    ├── build/
+    │   ├── tokens.css
+    │   └── tokens.js
+    ├── figma-to-sd.py
+    ├── style-dictionary.config.js
+    └── package.json
+```
+
+Nota: `mapas-raster/` puede conservarse como respaldo/export auxiliar, pero para Waupasa Twi el render web activo usa los SVG completos.
+
+---
+
+## Funcionamiento del renderer
+
+El HTML de cada territorio carga el renderer JS. El archivo `render-diptico.js`:
+
+1. Lee el `data-territorio` del `<body>`.
+2. Busca el territorio en `data-territorios.js`.
+3. Inserta `templates/diptico-base.html`.
+4. Renderiza header, mapa, estadísticas, concesiones, fuente e insets.
+5. Cambia el SVG según breakpoint.
+
+Breakpoints actuales:
+
+```js
+if (width <= 767) return "mobile";
+if (width <= 1199) return "tablet";
+return "desktop";
+```
+
+Para Waupasa Twi, los assets activos son:
+
+```js
+assets: {
+  desktop: { svg: "../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg" },
+  tablet:  { svg: "../../mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg" },
+  mobile:  { svg: "../../mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg" },
+}
 ```
 
 ---
 
-## Setup
+## Layout del díptico
+
+El layout base está en `css/diptico.css`.
+
+Layouts disponibles:
+
+| Layout | Uso |
+|---|---|
+| A | Mapa complejo, múltiples concesiones |
+| B | Mapa focal, una concesión principal |
+| C | Mapa fragmentado, insets o varios zooms |
+
+Desktop:
+
+```css
+.diptico[data-layout="A"] {
+  grid-template-columns: 55fr 45fr;
+}
+```
+
+Tablet:
+
+```css
+@media (min-width: 768px) and (max-width: 1199px) {
+  .diptico[data-layout="A"] {
+    grid-template-columns: 58fr 42fr;
+  }
+}
+```
+
+Mobile:
+
+```css
+@media (max-width: 767px) {
+  .diptico {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+}
+```
+
+---
+
+## Flujo correcto de Illustrator → Web
+
+Para evitar desfases entre lo que se ve en Illustrator y lo que aparece en web:
+
+### 1. Un archivo o artboard por breakpoint
+
+```txt
+desktop.ai / desktop artboard
+tablet.ai / tablet artboard
+mobile.ai / mobile artboard
+```
+
+Cada breakpoint puede tener composición distinta. No debe ser solo reducción automática.
+
+### 2. Un grupo maestro por composición
+
+Recomendado:
+
+```txt
+MAPA_MASTER_DESKTOP
+MAPA_MASTER_TABLET
+MAPA_MASTER_MOBILE
+```
+
+Dentro:
+
+```txt
+BASE_MAPA
+CONCESIONES
+RESERVA_MINERA
+LABELS_LUGARES
+LABELS_POBLADOS
+NORTE
+ESCALA
+LEYENDA_MAPA
+```
+
+### 3. Exportar SVG completo
+
+El SVG debe exportarse con:
+
+- `Use Artboards` activado
+- imagen base embebida o link funcional
+- `viewBox` coherente con el artboard
+- sin elementos importantes fuera del artboard
+- sin rutas rotas hacia carpetas viejas
+
+Validar con:
+
+```bash
+grep -R "ENTREGA_20ABRIL_26\|03_Waupasa Twi - limpio\|image href\|xlink:href" mapas-svg/03-waupasa-twi
+```
+
+Si el SVG referencia una imagen externa inexistente, el mapa base no cargará.
+
+---
+
+## Design system y tokens
+
+El sistema usa tokens generados desde Figma mediante Style Dictionary.
+
+Comandos:
 
 ```bash
 cd design-system/tokens
-npm install
-```
-
-### Actualizar tokens desde Figma
-
-1. Exportar variables desde Figma.
-2. Guardar los JSON en `design-system/tokens/source/raw/`.
-3. Transformar los JSON:
-
-```bash
 python3 figma-to-sd.py
-```
-
-4. Construir tokens:
-
-```bash
 npm run build
 ```
 
-5. Verificar salida:
+Verificación:
 
 ```bash
 grep -R "concesion-pais" build/tokens.css
 grep -R "mapa-" build/tokens.css
 ```
 
-El output principal es:
+Tokens relevantes:
 
-```txt
-design-system/tokens/build/tokens.css
-design-system/tokens/build/tokens.js
+```css
+--concesion-pais-china: #b91c1c;
+--concesion-pais-canada: #b45309;
+--concesion-pais-colombia: #6d28d9;
+--concesion-pais-nacional: #0f5fa6;
+--concesion-tipo-reserva: #4b5563;
+
+--mapa-tierra-exterior: var(--color-neutral-100);
+--mapa-territorio-borde: var(--color-neutral-900);
+--mapa-label-poblado: var(--typography-size-2xs);
+--mapa-label-ciudad: var(--typography-size-sm);
 ```
 
 ---
 
-## Sistema de concesiones
+## Territorios cargados en data
 
-El color y patrón identifican el **país de origen del capital**, no la empresa individual. Esto hace el sistema escalable a 15 mapas con decenas de concesiones.
-
-| País | Token | Color | Patrón sugerido |
-|---|---|---|---|
-| China | `--concesion-pais-china` | `#b91c1c` | diagonal 45° |
-| Canadá | `--concesion-pais-canada` | `#b45309` | crosshatch |
-| Colombia | `--concesion-pais-colombia` | `#6d28d9` | dots |
-| Nacional | `--concesion-pais-nacional` | `#0f5fa6` | líneas verticales |
-| Reserva | `--concesion-tipo-reserva` | `#4b5563` | fill sólido / semitransparente |
-
-Opacidad recomendada sobre mapa: **0.35** para no tapar relieve, ríos ni etiquetas.
+| # | Territorio | Layout | Concesiones | Estado |
+|---|---|---|---:|---|
+| 01 | Rama y Kriol | A | 3 | Datos base iniciados |
+| 02 | Creole de Bluefields | B | 1 | Datos base iniciados |
+| 03 | Waupasa Twi | A | 9 | Primer mapa funcional con SVG responsive |
+| 04 | Wangki Twi-Tasba Raya | C | 2 | Datos base iniciados |
+| 05 | Wangki Li Aubra Tasbaya | C | 2 | Pendiente |
+| 07 | Tuahka | A | 12+ | Pendiente |
+| 06, 08–15 | Pendientes | — | — | Pendientes |
 
 ---
 
-## Flujo cartográfico recomendado
+## Problemas conocidos / notas
 
-### 1. Preparar mapa base raster
-
-Por ahora se puede usar el mapa con relieve y ríos como imagen base. No es necesario vectorizar todo.
-
-Para exportar una base desde Illustrator:
-
-1. Abrir el archivo `.ai` del breakpoint correspondiente.
-2. Dejar visibles las capas del mapa base:
-   - relieve
-   - ríos
-   - territorio base
-   - grilla
-   - labels base si aplica
-   - escala/norte si se decide incluirlos en la imagen
-3. Ocultar las capas de concesiones, reserva y overlays narrativos.
-4. Exportar como imagen, idealmente `.webp` o `.png`.
-
-Ejemplo de salida:
-
-```txt
-mapas-raster/03-waupasa-twi/desktop-base.webp
-```
-
-### 2. Preparar SVG de concesiones
-
-1. En Illustrator, dejar visibles solo las capas de concesiones, reserva y overlays editoriales.
-2. Ocultar el raster base, relieve, ríos, grilla y elementos que ya van en la imagen.
-3. Exportar como SVG.
-4. Limpiar nombres de capas/IDs.
-
-Ejemplo:
-
-```txt
-mapas-svg/03-waupasa-twi/desktop-concesiones.svg
-```
-
-### 3. Integrar en HTML
-
-El HTML debe componer:
-
-```txt
-<picture> para mapa base raster responsive
-+
-contenedor SVG encima
-+
-panel editorial derecho
-```
+- `SES Removing unpermitted intrinsics` suele venir de extensiones del navegador o DevTools, no del proyecto.
+- `favicon.ico 404` no bloquea el atlas; se puede resolver agregando favicon después.
+- Si el mapa base desaparece dentro de un SVG, revisar links embebidos desde Illustrator.
+- Si un SVG se ve descentrado, abrir el SVG directo en navegador y revisar `viewBox`, artboard y elementos fuera de canvas.
+- La leyenda HTML puede duplicarse si la leyenda ya viene incluida dentro del SVG. Decidir por mapa si se conserva o se oculta.
 
 ---
 
-## Responsive editorial
+## Próximo hito
 
-Los breakpoints **no deben tratarse como simple resize**.
+Cerrar `03-waupasa-twi` como mapa estable:
 
-Cada viewport puede tener una composición propia:
-
-| Versión | Uso |
-|---|---|
-| Desktop | Mapa completo, mayor densidad de labels y concesiones |
-| Tablet | Composición intermedia, menos ruido, labels ajustados |
-| Mobile | Versión focal, menos labels, zoom narrativo y mejor legibilidad |
-
-Archivos sugeridos por territorio:
-
-```txt
-03-waupasa-twi/
-├── desktop-base.webp
-├── tablet-base.webp
-├── mobile-base.webp
-├── desktop-concesiones.svg
-├── tablet-concesiones.svg
-└── mobile-concesiones.svg
-```
-
----
-
-## Mapas disponibles
-
-| # | Territorio | Concesiones | Layout | Estado |
-|---|---|---:|---|---|
-| 01 | Rama y Kriol | 3 | A — complejo | Imagen base disponible |
-| 02 | Creole de Bluefields | 1 | B — focal | Imagen base disponible |
-| 03 | Waupasa Twi | 9 | A — complejo | Imagen base + overlay SVG en desarrollo |
-| 04 | Wangki Twi-Tasba Raya | 2 | C — fragmentado | Imagen fuente disponible |
-| 05 | Wangki Li Aubra Tasbaya | 2 | C — fragmentado | Pendiente |
-| 07 | Tuahka | 12+ | A — ultra complejo | Pendiente |
+1. Confirmar visualmente desktop, tablet y mobile.
+2. Limpiar duplicados no usados.
+3. Decidir si la leyenda vive dentro del SVG o en HTML.
+4. Guardar commit y tag estable.
+5. Replicar el pipeline a los demás mapas.
 
 ---
 
 ## Publicación
 
-Cada díptico es una página HTML autocontenida embebible:
+Cada territorio está pensado para embeberse vía iframe:
 
 ```html
 <iframe
@@ -316,40 +327,4 @@ Cada díptico es una página HTML autocontenida embebible:
 </iframe>
 ```
 
-Para PDF, el HTML debe usar `@media print`. El PDF será una derivación del HTML, no el producto primario.
-
----
-
-## Decisiones de diseño
-
-- El HTML es el master editorial.
-- El mapa base raster es válido y puede mantenerse como parte del sistema.
-- Las concesiones deben vivir como SVG cuando se necesite control visual, hover, conexión con cards o estilos por token.
-- La leyenda principal debe vivir en HTML/CSS cuando sea posible.
-- Los colores deben venir de tokens, no de valores hardcodeados.
-- ai2html queda como herramienta secundaria, no como arquitectura principal.
-- Se permite una composición distinta por breakpoint.
-
----
-
-## Próximo hito
-
-Validar el modelo híbrido con **03 Waupasa Twi**:
-
-```txt
-03_Waupasa Twi - limpio.png
-+
-desktop-concesiones.svg
-+
-panel derecho HTML
-+
-tokens de concesión
-```
-
-Cuando Waupasa funcione, escalar el patrón a Rama y Kriol, Creole de Bluefields y Wangki Twi-Tasba Raya.
-
----
-
-## Créditos y fuentes
-
-Cartografía: La Gaceta, Fundación del Río, URACCAN, OpenStreetMap contributors, ESRI Standard/Shaded Relief. Proyección UTM Datum NAD 27 Zona 16 N. Abril 2026.
+La exportación PDF debe salir del HTML con `@media print`; no debe ser el producto primario.

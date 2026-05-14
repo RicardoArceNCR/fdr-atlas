@@ -1,5 +1,12 @@
 .
+├── CAMBIOS_DETALLADOS.md
+├── CLAUDE.md
 ├── README.md
+├── RESUMEN_IMPLEMENTACION.md
+├── TESTING_VALIDATION.md
+├── VALIDACION_CHECKLIST.md
+├── VALIDACION_PILOTO_03.md
+├── VALIDACION_PILOTO_03_FINAL.md
 ├── atlas
 │   ├── 01-rama-kriol
 │   │   └── index.html
@@ -10,8 +17,15 @@
 │   ├── 04-wangki-twi-tasba-raya
 │   │   └── index.html
 │   └── index.html
+├── bloque1-render.txt
+├── bloque2-css.txt
+├── bloque3-assets.txt
 ├── css
 │   └── diptico.css
+├── data
+│   └── geojson
+│       ├── 03_waupasa_twi_concesiones.geojson
+│       └── 03_waupasa_twi_concesiones.qmd
 ├── design-system
 │   └── tokens
 │       ├── build
@@ -76,10 +90,9 @@
 │   └── 03-waupasa-twi
 │       ├── desktop-03-Waupasa-Twi.svg
 │       ├── mobile-03-Waupasa-Twi.svg
-│       ├── mobile_03_Waupasa Twi.svg
 │       └── tablet-03-Waupasa-Twi.svg
 ├── project_wp_tree.txt
 └── templates
     └── diptico-base.html
 
-23 directories, 60 files
+25 directories, 71 files

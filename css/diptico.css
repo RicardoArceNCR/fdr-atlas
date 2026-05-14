@@ -18,9 +18,20 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ─── Contenedor editorial global ──────────────────────────────────────────── */
+
+.atlas-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: var(--mapa-tierra-exterior);
+}
+
 /* ─── Root del díptico ─────────────────────────────────────────────────────── */
 
 .diptico {
+  width: 100%;
+  max-width: 1600px;
   display: grid;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
@@ -375,36 +386,64 @@
 
 /* Mobile: stack */
 @media (max-width: 767px) {
-  .diptico {
-    grid-template-columns: 1fr;
+  .atlas-page {
+    padding-inline: 0;
+    justify-content: center;
+  }
+
+  .diptico,
+  .diptico[data-layout="A"],
+  .diptico[data-layout="B"],
+  .diptico[data-layout="C"] {
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto auto;
     min-height: auto;
   }
 
-  .diptico__mapa {
+  .diptico__mapa,
+  .diptico__info {
     grid-column: 1;
-    grid-row: 1;
-    position: relative;
-    height: auto;
-    padding: 1rem;
-  }
-
-  .mapa-editorial {
     width: 100%;
   }
 
+  .diptico__mapa {
+    grid-row: 1;
+    position: relative;
+    height: auto;
+    padding: clamp(0.5rem, 2vw, 0.875rem);
+    overflow: hidden;
+  }
+
+  .mapa-editorial {
+    width: min(100%, 720px);
+    margin-inline: auto;
+  }
+
+  .mapa-editorial object {
+    width: 100%;
+    display: block;
+  }
+
   .diptico__info {
-    grid-column: 1;
     grid-row: 2;
     border-left: none;
     border-top: 0.5px solid var(--border-subtle);
-    padding: 1.5rem 1.25rem;
+    padding-block: 1.5rem;
+    padding-inline: clamp(1rem, 5vw, 1.5rem);
     overflow-y: visible;
   }
 
   .diptico__stats {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+/* Ocultar leyenda HTML para Waupasa Twi ya que está integrada en el SVG */
+body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
+  display: none;
 }
 
 @media (max-width: 480px) {
@@ -414,6 +453,14 @@
 
   .diptico__titulo {
     font-size: 18px;
+  }
+
+  .diptico__leyenda-mapa {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin-top: 0.75rem;
+    width: 100%;
   }
 }
 

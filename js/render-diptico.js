@@ -106,7 +106,7 @@ function renderMapa(t) {
 
   const base = document.getElementById("mapa-base");
   if (base) {
-    base.src = assets.raster;
+    base.src = `${assets.raster}?v=${Date.now()}`;
     base.alt = `Mapa base de ${t.nombre || "Territorio"}`;
     base.style.display = assets.raster ? "block" : "none";
   }
@@ -125,7 +125,7 @@ async function cargarSVG(url) {
   const container = document.getElementById("svg-overlay-container");
   if (!container) return;
   try {
-    const res = await fetch(url);
+    const res = await fetch(`${url}?v=${Date.now()}`);
     if (!res.ok) throw new Error("SVG no encontrado");
     const svg = await res.text();
     container.innerHTML = svg;

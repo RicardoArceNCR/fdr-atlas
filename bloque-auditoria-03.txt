@@ -409,7 +409,7 @@
   }
 
   .mapa-editorial {
-    aspect-ratio: 927 / 979.5;
+    aspect-ratio: 781.7 / 1306.8;
     width: 100%;
     height: auto;
   }
@@ -422,7 +422,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .diptico {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
@@ -433,9 +433,13 @@
     grid-column: 1;
     grid-row: 1;
     position: relative;
-    height: 60vw;
-    min-height: 280px;
-    max-height: 480px;
+    height: auto;
+    min-height: unset;
+    max-height: unset;
+  }
+
+  .mapa-editorial {
+    aspect-ratio: 503.5 / 634.7;
   }
 
   .diptico__info {
@@ -588,11 +592,9 @@
 ========================================
 5. grep rutas viejas
 ========================================
-./mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg:    <image id="image" width="2178" height="1952" xlink:href="../../../../ENTREGA_20ABRIL_26/ai/03_Waupasa Twi - limpio.png"/>
-./mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg:    <image width="2178" height="1952" transform="translate(-160.9 99) scale(.6)" xlink:href="../../../../ENTREGA_20ABRIL_26/ai/03_Waupasa Twi - limpio.png"/>
-./mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg:    <image width="2178" height="1952" transform="translate(.3 70.4) scale(.4)" xlink:href="../../../../ENTREGA_20ABRIL_26/ai/03_Waupasa Twi - limpio.png"/>
 ./README.md:│   ├── 03_Waupasa Twi - limpio.png
 ./README.md:03_Waupasa Twi - limpio.png
+./.git/COMMIT_EDITMSG:- Eliminate <image xlink:href="ENTREGA_20ABRIL_26/..."> from all three SVG overlays
 ./CLAUDE.md:│   ├── 03_Waupasa Twi - limpio.png
 ./CLAUDE.md:03_Waupasa Twi - limpio.png
 

@@ -11,6 +11,10 @@
 │   ├── 04-wangki-twi-tasba-raya
 │   │   └── index.html
 │   └── index.html
+├── bloque-auditoria-03.txt
+├── bloque1-render.txt
+├── bloque2-css.txt
+├── bloque3-assets.txt
 ├── css
 │   └── diptico.css
 ├── design-system
@@ -82,4 +86,4 @@
 └── templates
     └── diptico-base.html
 
-23 directories, 60 files
+23 directories, 64 files

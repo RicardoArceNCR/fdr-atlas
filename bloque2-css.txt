@@ -392,7 +392,7 @@ FILE: css/diptico.css
   }
 
   .mapa-editorial {
-    aspect-ratio: 927 / 979.5;
+    aspect-ratio: 781.7 / 1306.8;
     width: 100%;
     height: auto;
   }
@@ -404,13 +404,8 @@ FILE: css/diptico.css
   }
 }
 
-@media (max-width: 1024px) {
-  .diptico {
-    grid-template-columns: 1fr 1fr;
-  }
-}
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .diptico {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
@@ -421,9 +416,13 @@ FILE: css/diptico.css
     grid-column: 1;
     grid-row: 1;
     position: relative;
-    height: 60vw;
-    min-height: 280px;
-    max-height: 480px;
+    height: auto;
+    min-height: unset;
+    max-height: unset;
+  }
+
+  .mapa-editorial {
+    aspect-ratio: 503.5 / 634.7;
   }
 
   .diptico__info {

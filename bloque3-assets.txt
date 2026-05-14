@@ -13,9 +13,9 @@ total 4008
 DIRECTORIO: mapas-svg/03-waupasa-twi/
 ========================================
 total 232
--rw-r--r--@ 1 ricardo  staff    22K May 13 21:29 desktop-03-Waupasa-Twi.svg
--rw-r--r--@ 1 ricardo  staff    65K May 13 21:30 mobile-03-Waupasa-Twi.svg
--rw-r--r--@ 1 ricardo  staff    22K May 13 21:35 tablet-03-Waupasa-Twi.svg
+-rw-r--r--@ 1 ricardo  staff    22K May 13 21:59 desktop-03-Waupasa-Twi.svg
+-rw-r--r--@ 1 ricardo  staff    64K May 13 21:59 mobile-03-Waupasa-Twi.svg
+-rw-r--r--@ 1 ricardo  staff    22K May 13 21:59 tablet-03-Waupasa-Twi.svg
 
 ========================================
 SVG — primeras 40 líneas

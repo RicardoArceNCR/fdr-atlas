@@ -95,7 +95,13 @@ function getMapAssets(t) {
 
 function renderMapa(t) {
   const assets = getMapAssets(t);
+  const raster = document.getElementById("mapa-raster");
   const obj = document.getElementById("mapa-editorial-obj");
+
+  if (raster && assets.raster) {
+    raster.src = assets.raster;
+  }
+
   if (obj && assets.svg) {
     obj.setAttribute("data", assets.svg);
   }

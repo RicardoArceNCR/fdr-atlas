@@ -64,12 +64,34 @@
   height: 100vh;
   overflow-y: auto;
   background: var(--mapa-tierra-exterior);
-  padding: 2rem;
+    padding: none;
 }
 
 .mapa-editorial {
   width: min(100%, 920px);
   margin-inline: auto;
+}
+
+.mapa-stack {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 927 / 980;
+}
+
+.mapa-raster,
+.mapa-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mapa-raster {
+  object-fit: contain;
+}
+
+.mapa-overlay {
+  pointer-events: none;
 }
 
 .mapa-editorial svg,
@@ -365,7 +387,7 @@
   .diptico__mapa {
     height: auto;
     position: relative;
-    padding: clamp(1rem, 3vw, 2rem);
+    padding: none;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -413,7 +435,7 @@
     grid-row: 1;
     position: relative;
     height: auto;
-    padding: clamp(0.5rem, 2vw, 0.875rem);
+    padding: none;
     overflow: hidden;
   }
 

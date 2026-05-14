@@ -63,6 +63,45 @@
   display: block;
 }
 
+.mapa-editorial {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mapa-base {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mapa-svg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+.mapa-svg-layer svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.concesion-svg {
+  fill-opacity: 0.35;
+  stroke-width: 2;
+  cursor: pointer;
+}
+
+.concesion-svg:hover {
+  fill-opacity: 0.55;
+}
+
 /* Leyenda de concesiones superpuesta en el mapa */
 .diptico__leyenda-mapa {
   position: absolute;

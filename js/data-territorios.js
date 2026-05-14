@@ -18,7 +18,7 @@ const TERRITORIOS = [
     id: '01-rama-kriol',
     numero: '01',
     nombre: 'Rama y Kriol',
-    archivo_mapa: '../../img/01-Territorio Rama y Kriol - limpio.png',
+    archivo_mapa_base: '../../img/01-Territorio Rama y Kriol - limpio.png',
     layout: 'A',
     pueblos: ['Pueblo Rama', 'Comunidad Kriol'],
     region: 'Región Autónoma de la Costa Caribe Sur (RACCS)',
@@ -74,7 +74,7 @@ const TERRITORIOS = [
     id: '02-creole-bluefields',
     numero: '02',
     nombre: 'Creole de Bluefields',
-    archivo_mapa: '../../img/02_Territorio Creole de Bluefields - limpio.png',
+    archivo_mapa_base: '../../img/02_Territorio Creole de Bluefields - limpio.png',
     layout: 'B',
     pueblos: ['Comunidad Creole'],
     region: 'Región Autónoma de la Costa Caribe Sur (RACCS)',
@@ -121,7 +121,9 @@ const TERRITORIOS = [
     id: '03-waupasa-twi',
     numero: '03',
     nombre: 'Waupasa Twi',
-    archivo_mapa: '../../img/03_Waupasa Twi - limpio.png',
+    archivo_mapa_base: '../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp',
+    archivo_svg_concesiones: '../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg',
+    archivo_mapa_referencia: '../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp',
     layout: 'A',
     pueblos: ['Pueblo Miskitu'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
@@ -141,15 +143,15 @@ const TERRITORIOS = [
       hectareas_concesiones: '—',
     },
     concesiones: [
-      { nombre: 'Caribe',        empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Columbus I',    empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Encanto I',  empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Caribe', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Columbus I', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto I', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
       { nombre: 'El Encanto II', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
       { nombre: 'Yulu Awaskira', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Puerto Cabezas',empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ confirmar país
-      { nombre: 'Vanessa',       empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Walpa Tara',    empresa: '—', pais: 'canada',   hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ confirmar
-      { nombre: 'Reserva Minera',empresa: '—', pais: 'reserva',  hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Puerto Cabezas', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ confirmar país
+      { nombre: 'Vanessa', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Walpa Tara', empresa: '—', pais: 'canada', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ confirmar
+      { nombre: 'Reserva Minera', empresa: '—', pais: 'reserva', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
     fuente: 'La Gaceta, Diario Oficial de Nicaragua · Fundación del Río · URACCAN · OpenStreetMap contributors · ESRI Standard-Shaded Relief · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
@@ -159,7 +161,7 @@ const TERRITORIOS = [
     id: '04-wangki-twi-tasba-raya',
     numero: '04',
     nombre: 'Wangki Twi-Tasba Raya',
-    archivo_mapa: '../../img/04_Wangki Twi-Tasba Raya.jpeg', // ⚠️ PNG pendiente
+    archivo_mapa_base: '../../img/04_Wangki Twi-Tasba Raya.jpeg', // ⚠️ PNG pendiente
     layout: 'C',
     pueblos: ['Pueblo Miskitu'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
@@ -194,7 +196,7 @@ const TERRITORIOS = [
     },
     concesiones: [
       { nombre: 'El Encanto II', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Waspan',        empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ también en 05
+      { nombre: 'Waspan', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ también en 05
     ],
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
@@ -204,7 +206,7 @@ const TERRITORIOS = [
     id: '05-wangki-li',
     numero: '05',
     nombre: 'Wangki Li Aubra Tasbaya',
-    archivo_mapa: '../../mapas/05-wangki-li/mapa-limpio.png', // ⚠️ PNG pendiente
+    archivo_mapa_base: '../../mapas/05-wangki-li/mapa-limpio.png', // ⚠️ PNG pendiente
     layout: 'C',
     pueblos: ['Pueblo Miskitu'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
@@ -224,8 +226,8 @@ const TERRITORIOS = [
       hectareas_concesiones: '—',
     },
     concesiones: [
-      { nombre: 'Waspan',     empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ también en 04
-      { nombre: 'Matusalén', empresa: '—', pais: 'nacional',  hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ confirmar país
+      { nombre: 'Waspan', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ también en 04
+      { nombre: 'Matusalén', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ confirmar país
     ],
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
@@ -235,7 +237,7 @@ const TERRITORIOS = [
     id: '07-tuahka',
     numero: '07',
     nombre: 'Tuahka',
-    archivo_mapa: '../../mapas/07-tuahka/mapa-limpio.png', // ⚠️ PNG pendiente
+    archivo_mapa_base: '../../mapas/07-tuahka/mapa-limpio.png', // ⚠️ PNG pendiente
     layout: 'A',
     pueblos: ['Pueblo Mayangna Tuahka'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
@@ -255,17 +257,17 @@ const TERRITORIOS = [
       hectareas_concesiones: '—',
     },
     concesiones: [
-      { nombre: 'Rosita D',         empresa: '—', pais: 'china',    hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'San Leonardo',     empresa: '—', pais: 'china',    hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Salto',         empresa: '—', pais: 'china',    hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Begonia',          empresa: '—', pais: 'canada',   hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO - RB II',    empresa: 'HEMCO', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Rosita D', empresa: '—', pais: 'china', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'San Leonardo', empresa: '—', pais: 'china', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Salto', empresa: '—', pais: 'china', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Begonia', empresa: '—', pais: 'canada', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'HEMCO - RB II', empresa: 'HEMCO', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
       { nombre: 'HEMCO - Rosita V', empresa: 'HEMCO', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO - Rosita IV',empresa: 'HEMCO', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO - Rosita VI',empresa: 'HEMCO', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Marsella',         empresa: '—', pais: 'canada',   hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Nueva América H-I',empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Rosita H-2',       empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'HEMCO - Rosita IV', empresa: 'HEMCO', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'HEMCO - Rosita VI', empresa: 'HEMCO', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Marsella', empresa: '—', pais: 'canada', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Nueva América H-I', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Rosita H-2', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Shaded Relief · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
@@ -289,11 +291,11 @@ function getTerritorio(id) {
  */
 function getBadgeClass(pais) {
   const clases = {
-    china:    'badge-china',
-    canada:   'badge-canada',
+    china: 'badge-china',
+    canada: 'badge-canada',
     colombia: 'badge-colombia',
     nacional: 'badge-nacional',
-    reserva:  'badge-reserva',
+    reserva: 'badge-reserva',
   };
   return clases[pais] || 'badge-reserva';
 }
@@ -304,11 +306,11 @@ function getBadgeClass(pais) {
  */
 function getLabelPais(pais) {
   const labels = {
-    china:    'China',
-    canada:   'Canadá',
+    china: 'China',
+    canada: 'Canadá',
     colombia: 'Colombia',
     nacional: 'Nicaragua',
-    reserva:  'Reserva',
+    reserva: 'Reserva',
   };
   return labels[pais] || pais;
 }

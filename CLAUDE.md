@@ -6,171 +6,311 @@ Contexto completo del proyecto para Claude. Leer antes de cualquier tarea.
 
 ## Qué es este proyecto
 
-Un atlas web interactivo que documenta concesiones mineras en territorios indígenas y afrodescendientes de Nicaragua, producido por **Fundación del Río (FDR)**. El producto final es un conjunto de 15 dípticos web (mapa izquierda, información editorial derecha) publicables en sitios de terceros vía `<iframe>` y descargables como PDF.
+Un atlas web interactivo que documenta concesiones mineras en territorios indígenas y afrodescendientes de Nicaragua, producido por **Fundación del Río (FDR)**. El producto final es un conjunto de 15 dípticos web publicables en sitios de terceros vía `<iframe>` y descargables como PDF.
 
-El atlas es un **producto editorial cartográfico**, no solo un conjunto de mapas. Cada díptico combina:
-- Panel izquierdo: imagen cartográfica del territorio (PNG por ahora, SVG/ai2html cuando lleguen los archivos QGIS)
-- Panel derecho: narrativa, datos de concesiones, leyenda interactiva, fuentes
+El atlas es un **producto editorial cartográfico**, no una app de dashboard ni una galería de imágenes. Cada díptico combina:
+
+- Panel izquierdo: sistema cartográfico híbrido.
+- Panel derecho: narrativa, datos de concesiones, estadísticas, leyenda complementaria y fuentes.
+
+---
+
+## Enfoque actual confirmado
+
+La arquitectura cartográfica actual es:
+
+```txt
+Mapa base raster
++
+Overlays SVG de concesiones/áreas
++
+Patrones definidos con tokens
++
+Panel derecho en HTML/CSS/JS
+```
+
+Este enfoque reemplaza la idea anterior de depender de `ai2html` como sistema principal.
+
+---
+
+## Qué debe vivir en cada capa
+
+### Raster base
+
+El raster base puede ser `.png`, `.jpg` o preferiblemente `.webp`. Debe contener la cartografía base:
+
+- relieve
+- ríos
+- límites territoriales base
+- grilla
+- labels base cuando convenga
+- norte y escala si se decide integrarlos como parte de la composición cartográfica
+
+No es necesario vectorizar relieve, ríos o grilla para esta fase.
+
+### SVG overlay
+
+El SVG debe contener elementos que necesitan edición, control visual o conexión con datos:
+
+- concesiones mineras
+- reserva minera
+- highlights
+- símbolos narrativos
+- overlays editoriales
+
+Idealmente cada elemento SVG debe tener `id`, `class` y/o `data-*`.
+
+Ejemplo:
+
+```svg
+<path
+  id="concesion-caribe"
+  class="concesion-svg pais-colombia"
+  data-concesion="Caribe"
+  data-pais="colombia"
+  d="..." />
+```
+
+### HTML/CSS/JS
+
+El panel derecho y la estructura editorial deben vivir en código:
+
+- título
+- región
+- pueblos
+- estadísticas
+- descripción editorial
+- lista de concesiones
+- badges por país
+- leyenda complementaria
+- fuentes
+- interacciones futuras
 
 ---
 
 ## Estado actual del sistema (Mayo 2026)
 
-### Design system — COMPLETO y funcional
-- Pipeline: Figma Variables → `figma-to-sd.py` → Style Dictionary → `tokens.css`
-- Colecciones en Figma: `numbers` (23), `primitivos` (154), `semanticos` (97), `componentes` (93), `atlas` (9)
-- Build output: `design-system/tokens/build/tokens.css`
-- Tipografía: Sora (display), Source Serif 4 (body), JetBrains Mono (mono)
+### Design system — funcional
 
-### Tokens relevantes para el atlas (ya en tokens.css)
+- Pipeline: Figma Variables → `figma-to-sd.py` → Style Dictionary → `tokens.css` / `tokens.js`.
+- Colecciones en Figma: `numbers`, `primitivos`, `semanticos`, `componentes`, `atlas`.
+- La colección `atlas` ya está integrada al pipeline.
+- Output principal: `design-system/tokens/build/tokens.css`.
+- Tipografía: Sora (display), Source Serif 4 (body), JetBrains Mono (mono).
+
+### Tokens relevantes para el atlas
 
 ```css
-/* Mapa — elementos cartográficos base (en semanticos, sí llegaron al CSS) */
---mapa-agua-rio: var(--color-brand-blue-300);     /* #64c2cc */
---mapa-agua-mar: var(--color-brand-blue-900);     /* #072f3d */
---mapa-tierra-exterior: var(--color-neutral-100); /* #eeeae3 */
---mapa-territorio-borde: var(--color-neutral-900);/* #1f2521 */
---mapa-label-poblado: var(--typography-size-2xs); /* 10px */
---mapa-label-ciudad: var(--typography-size-sm);   /* 14px */
+--mapa-agua-rio: var(--color-brand-blue-300);
+--mapa-agua-mar: var(--color-brand-blue-900);
+--mapa-tierra-exterior: var(--color-neutral-100);
+--mapa-territorio-borde: var(--color-neutral-900);
+--mapa-label-poblado: var(--typography-size-2xs);
+--mapa-label-ciudad: var(--typography-size-sm);
 --mapa-container-padding-y: 32;
 --mapa-container-padding-x: 24;
 ```
 
-### Tokens de atlas — ✅ funcionales en build/tokens.css
-Los tokens de `concesion/*` están en Figma (colección `atlas`, 9 variables) y en `source/raw/atlas.json`, y ya llegan al CSS final.
+### Tokens de concesión
 
-Valores reales de los tokens:
 ```css
---concesion-pais-china:    #b91c1c;  /* diagonal 45° */
---concesion-pais-canada:   #b45309;  /* crosshatch 25° */
---concesion-pais-colombia: #6d28d9;  /* dots r=1.5px */
---concesion-pais-nacional: #0f5fa6;  /* vertical lines */
---concesion-tipo-reserva:  #4b5563;  /* solid fill 25% */
+--concesion-pais-china:    #b91c1c;
+--concesion-pais-canada:   #b45309;
+--concesion-pais-colombia: #6d28d9;
+--concesion-pais-nacional: #0f5fa6;
+--concesion-tipo-reserva:  #4b5563;
 
---concesion-patron-china:    45;  /* ángulo diagonal SVG */
+--concesion-patron-china:    45;
 --concesion-patron-colombia: 35;
 --concesion-patron-canada:   25;
 --concesion-patron-nacional: 10;
 ```
 
-### Archivos de mapa disponibles
-- `mapas/01-Territorio_Rama_y_Kriol_-_limpio.png` — Layout A (complejo, 3 concesiones)
-- `mapas/02_Territorio_Creole_de_Bluefields_-_limpio.png` — Layout B (focal, 1 concesión)
-- `mapas/03_Waupasa_Twi_-_limpio.png` — Layout A (complejo, 9 concesiones)
-- Mapas 04–15: pendientes en versión limpia (sin panel inferior)
-
-Los mapas "limpios" son PNG sin leyenda ni panel inferior — solo la cartografía. La leyenda se reconstruye en HTML.
+El color y patrón identifican el **país de origen del capital**, no la empresa individual.
 
 ---
 
-## Arquitectura del producto
+## Estado de archivos
 
-### Estructura de archivos objetivo
-```
+Estructura actual esperada:
+
+```txt
 web/
-├── design-system/tokens/
-│   ├── source/raw/
-│   │   ├── primitivos.json
-│   │   ├── semanticos.json
-│   │   ├── componentes.json
-│   │   ├── numbers.json
-│   │   └── atlas.json          ← nueva colección, pendiente de registrar en figma-to-sd.py
-│   ├── build/
-│   │   └── tokens.css
-│   ├── figma-to-sd.py
-│   └── style-dictionary.config.js
-├── mapas/
-│   ├── rama-kriol/
-│   │   ├── mapa-limpio.png
-│   │   └── diptico.html
-│   ├── creole-bluefields/
-│   └── ...
 ├── atlas/
-│   ├── index.html              ← índice de los 15 territorios
-│   └── diptico-base.html       ← componente base reutilizable
-└── IMG/
-```
-
-### Tres layouts de díptico
-- **Layout A — Complejo**: mapa grande, leyenda extensa, múltiples concesiones. Ejemplo: Rama y Kriol, Waupasa Twi, Tuahka
-- **Layout B — Focal**: una concesión principal, zoom editorial. Ejemplo: Creole de Bluefields
-- **Layout C — Fragmentado**: múltiples inset maps, zooms relacionados. Ejemplo: Wangki Twi-Tasba Raya, Wangki Li
-
-### Proporciones del díptico
-- Desktop: 55% mapa / 45% info (`grid-template-columns: 55fr 45fr`)
-- Tablet (≤768px): stack vertical, mapa arriba
-- Mobile: título → resumen → mapa → concesiones → leyenda → fuente
-
----
-
-## Sistema de concesiones
-
-### Lógica de identificación
-El color y patrón identifican el **país de origen del capital**, no la empresa individual. Esto hace el sistema escalable a 15 mapas con decenas de empresas.
-
-| País     | Color     | Patrón SVG        | CSS var                      |
-|----------|-----------|-------------------|------------------------------|
-| China    | #b91c1c   | diagonal 45°      | `--concesion-pais-china`     |
-| Canadá   | #b45309   | crosshatch 25°    | `--concesion-pais-canada`    |
-| Colombia | #6d28d9   | dots r=1.5px      | `--concesion-pais-colombia`  |
-| Nacional | #0f5fa6   | vertical 10°      | `--concesion-pais-nacional`  |
-| Reserva  | #4b5563   | solid fill 25%    | `--concesion-tipo-reserva`   |
-
-Opacidad estándar de concesiones sobre el mapa: **0.35** — nunca tapar el relieve.
-
-### Patrones SVG (definición reutilizable)
-```svg
-<!-- China: diagonal -->
-<pattern id="pat-china" width="8" height="8" patternUnits="userSpaceOnUse">
-  <line x1="0" y1="8" x2="8" y2="0" stroke="#b91c1c" stroke-width="1.5"/>
-</pattern>
-
-<!-- Canadá: crosshatch -->
-<pattern id="pat-canada" width="8" height="8" patternUnits="userSpaceOnUse">
-  <line x1="0" y1="8" x2="8" y2="0" stroke="#b45309" stroke-width="1.2"/>
-  <line x1="0" y1="0" x2="8" y2="8" stroke="#b45309" stroke-width="1.2"/>
-</pattern>
-
-<!-- Colombia: dots -->
-<pattern id="pat-colombia" width="8" height="8" patternUnits="userSpaceOnUse">
-  <circle cx="4" cy="4" r="1.5" fill="#6d28d9"/>
-</pattern>
-
-<!-- Nacional: vertical -->
-<pattern id="pat-nacional" width="8" height="8" patternUnits="userSpaceOnUse">
-  <line x1="4" y1="0" x2="4" y2="8" stroke="#0f5fa6" stroke-width="1.2"/>
-</pattern>
+│   ├── index.html
+│   ├── 01-rama-kriol/index.html
+│   ├── 02-creole-bluefields/index.html
+│   ├── 03-waupasa-twi/index.html
+│   └── 04-wangki-twi-tasba-raya/index.html
+│
+├── css/
+│   └── diptico.css
+│
+├── js/
+│   ├── data-territorios.js
+│   └── render-diptico.js
+│
+├── templates/
+│   └── diptico-base.html
+│
+├── img/
+│   ├── 01-Territorio Rama y Kriol - limpio.png
+│   ├── 02_Territorio Creole de Bluefields - limpio.png
+│   ├── 03_Waupasa Twi - limpio.png
+│   └── 03_Waupasa Twi.jpeg
+│
+├── mapas-svg/
+│   └── 03-waupasa-twi/
+│       └── concesiones.svg
+│
+└── design-system/tokens/
+    ├── source/raw/
+    ├── source/
+    ├── build/tokens.css
+    ├── build/tokens.js
+    ├── figma-to-sd.py
+    └── style-dictionary.config.js
 ```
 
 ---
 
-## Territorios del atlas (15 total)
+## Cómo exportar desde Illustrator
 
-| # | Territorio | Layout | Concesiones | Estado mapa limpio |
-|---|-----------|--------|-------------|-------------------|
-| 01 | Rama y Kriol | A | 3 (El Castillo, La Guinea, Victoria) | ✓ PNG listo |
-| 02 | Creole de Bluefields | B | 1 (Victoria) | ✓ PNG listo |
-| 03 | Waupasa Twi | A | 9 (Caribe, Columbus I, El Encanto I/II, Yulu Awaskira, Puerto Cabezas, Vanessa, Walpa Tara, Reserva) | ✓ PNG listo |
-| 04 | Wangki Twi-Tasba Raya | C | 2 (El Encanto II, Waspan) | pendiente |
-| 05 | Wangki Li Aubra Tasbaya | C | 2 (Waspan, Matusalén) | pendiente |
-| 07 | Tuahka | A+ | 12+ (Rosita D, San Leonardo, El Salto, Begonia, HEMCO x4, Marsella, Nueva América, Rosita H-2) | pendiente |
-| 06, 08–15 | Pendientes | — | — | pendientes |
+### Exportar mapa base raster
 
-Nota: la concesión **Waspan** aparece en territorios 04 y 05 — decisión editorial pendiente sobre cómo manejarlo.
+Para exportar una base como `desktop-base.webp` o `.png`:
+
+1. Abrir el archivo `.ai` del breakpoint correspondiente.
+2. Dejar visibles las capas base:
+   - relieve
+   - ríos
+   - territorio base
+   - grilla
+   - labels base
+   - escala/norte si aplica
+3. Ocultar las capas de concesiones, reservas y overlays editoriales.
+4. Exportar la mesa de trabajo como imagen.
+5. Guardar en una ruta tipo:
+
+```txt
+mapas-raster/03-waupasa-twi/desktop-base.webp
+```
+
+Nota: “ocultar” significa apagar el ícono del ojo en el panel de Layers de Illustrator para que esa capa no salga en la exportación.
+
+### Exportar SVG de concesiones
+
+1. En el mismo `.ai`, ocultar el raster base y las capas que ya van en la imagen.
+2. Dejar visibles solo concesiones, reserva minera y overlays editoriales.
+3. Exportar como SVG.
+4. Guardar en:
+
+```txt
+mapas-svg/03-waupasa-twi/desktop-concesiones.svg
+```
+
+---
+
+## Responsive editorial
+
+No tratar responsive como simple reducción de tamaño.
+
+Cada breakpoint puede tener una composición distinta:
+
+| Versión | Enfoque |
+|---|---|
+| Desktop | Mapa completo, mayor densidad, panel derecho al lado |
+| Tablet | Composición intermedia, menos ruido, labels ajustados |
+| Mobile | Zoom narrativo, menos labels, lectura vertical |
+
+Archivos sugeridos por territorio:
+
+```txt
+03-waupasa-twi/
+├── desktop-base.webp
+├── tablet-base.webp
+├── mobile-base.webp
+├── desktop-concesiones.svg
+├── tablet-concesiones.svg
+└── mobile-concesiones.svg
+```
+
+---
+
+## Sobre ai2html
+
+`ai2html` no debe usarse como sistema central del atlas.
+
+Puede conservarse como herramienta secundaria para:
+
+- prototipos rápidos desde Illustrator
+- pruebas de posicionamiento de labels
+- exportaciones editoriales cerradas
+- casos donde se necesite un HTML estático puntual
+
+No debe reemplazar:
+
+- `diptico-base.html`
+- `render-diptico.js`
+- `data-territorios.js`
+- `tokens.css`
+- el modelo raster + SVG overlay
+
+Si aparece un archivo `ai2html-output`, tratarlo como experimento o referencia, no como fuente de verdad.
+
+---
+
+## Tres layouts de díptico
+
+- **Layout A — Complejo**: mapa grande, múltiples concesiones. Ejemplos: Rama y Kriol, Waupasa Twi, Tuahka.
+- **Layout B — Focal**: una concesión principal, zoom editorial. Ejemplo: Creole de Bluefields.
+- **Layout C — Fragmentado**: múltiples inset maps o zooms. Ejemplos: Wangki Twi-Tasba Raya, Wangki Li.
+
+---
+
+## Territorios del atlas
+
+| # | Territorio | Layout | Concesiones | Estado |
+|---|---|---|---:|---|
+| 01 | Rama y Kriol | A | 3 | Imagen base disponible |
+| 02 | Creole de Bluefields | B | 1 | Imagen base disponible |
+| 03 | Waupasa Twi | A | 9 | Imagen base + overlay SVG en desarrollo |
+| 04 | Wangki Twi-Tasba Raya | C | 2 | Imagen fuente disponible |
+| 05 | Wangki Li Aubra Tasbaya | C | 2 | Pendiente |
+| 07 | Tuahka | A+ | 12+ | Pendiente |
+| 06, 08–15 | Pendientes | — | — | Pendiente |
+
+Nota: la concesión **Waspan** aparece en territorios 04 y 05. Decisión editorial pendiente sobre cómo manejarla.
 
 ---
 
 ## Lo que NO debe hacerse
 
-- No crear tokens fuera de Figma para el sistema base (primitivos, semanticos, componentes)
-- No hardcodear colores de concesión en HTML — siempre usar CSS vars
-- No meter layout editorial dentro de Illustrator/QGIS — solo cartografía
-- No crear 15 HTML diferentes desde cero — usar el componente base + data attributes
-- No usar el mismo panel inferior rígido para todos los mapas — la leyenda escala según número de concesiones
-- No usar `localStorage` en los artifacts del atlas
+- No depender de ai2html como arquitectura principal.
+- No reconstruir relieve, ríos y grilla como SVG si ya funcionan bien como raster.
+- No crear 15 HTML diferentes desde cero.
+- No hardcodear colores de concesiones en HTML.
+- No crear tokens base fuera de Figma.
+- No mezclar layout editorial completo dentro de Illustrator.
+- No convertir el atlas en una app tipo dashboard; debe mantener carácter editorial.
+- No usar `localStorage`.
 
 ---
 
 ## Próximo paso inmediato
 
-Construir el primer díptico HTML con Rama y Kriol (los tokens `--concesion-*` ya están en el CSS).
+Validar el modelo híbrido con **03 Waupasa Twi**:
+
+```txt
+03_Waupasa Twi - limpio.png
++
+mapas-svg/03-waupasa-twi/concesiones.svg
++
+diptico-base.html
++
+render-diptico.js
++
+tokens.css
+```
+
+Objetivo: que el SVG de concesiones calce encima del raster base y que la lista del panel derecho use la misma semántica de concesiones.

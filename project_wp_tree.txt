@@ -35,12 +35,15 @@
 │       │   └── semanticos.json
 │       └── style-dictionary.config.js
 ├── img
-│   ├── 01-Territorio Rama y Kriol - limpio.png
 │   ├── 01-Territorio Rama y Kriol.jpeg
-│   ├── 02_Territorio Creole de Bluefields - limpio.png
+│   ├── 01-Territorio Rama y Kriol.png
+│   ├── 01-Territorio Rama y Kriol.webp
 │   ├── 02_Territorio Creole de Bluefields.jpeg
-│   ├── 03_Waupasa Twi - limpio.png
+│   ├── 02_Territorio Creole de Bluefields.png
+│   ├── 02_Territorio Creole de Bluefields.webp
 │   ├── 03_Waupasa Twi.jpeg
+│   ├── 03_Waupasa Twi.png
+│   ├── 03_Waupasa Twi.webp
 │   ├── 04_Wangki Twi-Tasba Raya.jpeg
 │   ├── CIDH-191-8-1.jpeg
 │   ├── Comunidades-ind¡genas-nicaragua-1080x675-1.jpeg
@@ -50,7 +53,10 @@
 │   ├── Logo-del-sitio-768x768.png
 │   ├── Sin-titulo-2-03.png
 │   ├── Sin-titulo-2_Mesa-de-trabajo-1.png
-│   └── Voces-del-bosque-1.png
+│   ├── Voces-del-bosque-1.png
+│   ├── mapas-raster
+│   └── mapas-svg
+│       └── 03-waupasa-twi
 ├── js
 │   ├── data-territorios.js
 │   └── render-diptico.js
@@ -59,9 +65,21 @@
 │   ├── 02_Territorio_Creole_de_Bluefields.json
 │   ├── 03_Waupasa_Twi.json
 │   └── 04_Wangki_Twi-Tasba_Raya.json
+├── mapas-raster
+│   └── 03-waupasa-twi
+│       ├── desktop_03_Waupasa-Twi.png
+│       ├── desktop_03_Waupasa-Twi.webp
+│       ├── mobile_03_Waupasa-Twi.png
+│       ├── mobile_03_Waupasa-Twi.webp
+│       ├── tablet_03_Waupasa-Twi.png
+│       └── tablet_03_Waupasa-Twi.webp
+├── mapas-svg
+│   └── 03-waupasa-twi
+│       ├── desktop_03_Waupasa-Twi.svg
+│       ├── mobile_03_Waupasa Twi.svg
+│       └── tablet_03_Waupasa-Twi.svg
 ├── project_wp_tree.txt
 └── templates
-    ├──  diptico-base.html
     └── diptico-base.html
 
-16 directories, 49 files
+23 directories, 60 files

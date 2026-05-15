@@ -1,4 +1,5 @@
 .
+├── CLAUDE.md
 ├── README.md
 ├── atlas
 │   ├── 01-rama-kriol
@@ -12,6 +13,8 @@
 │   └── index.html
 ├── css
 │   └── diptico.css
+├── data
+│   └── geojson
 ├── design-system
 │   └── tokens
 │       ├── build
@@ -76,10 +79,9 @@
 │   └── 03-waupasa-twi
 │       ├── desktop-03-Waupasa-Twi.svg
 │       ├── mobile-03-Waupasa-Twi.svg
-│       ├── mobile_03_Waupasa Twi.svg
 │       └── tablet-03-Waupasa-Twi.svg
 ├── project_wp_tree.txt
 └── templates
     └── diptico-base.html
 
-23 directories, 60 files
+25 directories, 60 files

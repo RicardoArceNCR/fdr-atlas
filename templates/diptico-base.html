@@ -2,7 +2,19 @@
 <div class="diptico" id="diptico-container">
   <div class="diptico__mapa">
     <div class="mapa-editorial">
-      <object id="mapa-editorial-obj" data="" type="image/svg+xml"></object>
+      <div class="mapa-stack">
+        <img
+          id="mapa-raster"
+          class="mapa-raster"
+          alt="Mapa base del territorio"
+        />
+        <object
+          id="mapa-editorial-obj"
+          class="mapa-overlay"
+          type="image/svg+xml"
+          data=""
+        ></object>
+      </div>
     </div>
     <div id="insets-container"></div>
     <div id="escala-text" class="diptico__escala"></div>

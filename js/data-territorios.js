@@ -122,9 +122,24 @@ const TERRITORIOS = [
     numero: '03',
     nombre: 'Waupasa Twi',
     assets: {
-      desktop: { svg: "../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg" },
-      tablet:  { svg: "../../mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg" },
-      mobile:  { svg: "../../mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg" },
+      desktop: {
+        raster: "../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp",
+        svg: "../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg",
+        width: 927,
+        height: 980,
+      },
+      tablet: {
+        raster: "../../mapas-raster/03-waupasa-twi/tablet-03-Waupasa-Twi.webp",
+        svg: "../../mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg",
+        width: 780,
+        height: 1306,
+      },
+      mobile: {
+        raster: "../../mapas-raster/03-waupasa-twi/mobile-03-Waupasa-Twi.webp",
+        svg: "../../mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg",
+        width: 504,
+        height: 634,
+      },
     },
     layout: 'A',
     pueblos: ['Pueblo Miskitu'],

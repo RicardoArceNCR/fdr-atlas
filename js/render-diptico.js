@@ -7,7 +7,7 @@ import {
 function getBreakpoint() {
   const width = window.innerWidth;
   if (width <= 767) return "mobile";
-  if (width <= 1199) return "tablet";
+  if (width <= 977) return "tablet";
   return "desktop";
 }
 
@@ -18,6 +18,15 @@ window.addEventListener("resize", () => {
 
   if (current !== lastBreakpoint) {
     lastBreakpoint = current;
+
+    const panel = document.querySelector(".diptico__concesiones--mapa");
+    if (panel) {
+      if (current === "mobile") {
+        panel.classList.add("is-collapsed");
+      } else {
+        panel.classList.remove("is-collapsed");
+      }
+    }
 
     const id = document.body.dataset.territorio;
     const territorio = getTerritorio(id);
@@ -62,6 +71,7 @@ async function init() {
     renderConcesiones(territorio);
     renderFuente(territorio);
     renderInsets(territorio);
+    initToggleConcesiones();
   } catch (err) {
     console.error(err);
   }
@@ -281,6 +291,21 @@ function renderInsets(t) {
       container.appendChild(el);
     });
   }
+}
+
+function initToggleConcesiones() {
+  const panel = document.querySelector(".diptico__concesiones--mapa");
+  const btn = document.querySelector(".diptico__toggle-concesiones");
+
+  if (!panel || !btn) return;
+
+  if (getBreakpoint() === "mobile") {
+    panel.classList.add("is-collapsed");
+  }
+
+  btn.addEventListener("click", () => {
+    panel.classList.toggle("is-collapsed");
+  });
 }
 
 document.addEventListener("DOMContentLoaded", init);

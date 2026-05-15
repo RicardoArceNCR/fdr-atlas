@@ -279,38 +279,76 @@
   font-family: 'Sora', sans-serif;
 }
 
-/* ─── Concesiones ──────────────────────────────────────────────────────────── */
+/* ─── Panel informativo de concesiones sobre mapa ─────────────────────────── */
 
-.diptico__seccion-titulo {
+.diptico__concesiones--mapa {
+  position: absolute;
+  left: clamp(12px, 2vw, 24px);
+  bottom: clamp(12px, 2vw, 24px);
+  z-index: 5;
+  width: min(760px, calc(100% - 48px));
+  max-height: min(42vh, 360px);
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  border: 0.5px solid var(--border-subtle);
+  border-radius: var(--radius-md, 8px);
+  padding: 12px;
   font-family: 'Sora', sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-color-secondary);
-  margin-bottom: 0.75rem;
+}
+
+.diptico__concesiones--mapa .diptico__seccion-titulo {
+  margin-bottom: 8px;
+}
+
+.diptico__toggle-concesiones {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.diptico__toggle-concesiones span {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .diptico__toggle-concesiones span {
+    display: inline;
+    font-size: 9px;
+    color: var(--text-color-tertiary);
+  }
 }
 
 .concesiones-lista {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 0;
 }
 
 .concesion-card {
   border: 0.5px solid var(--border-subtle);
-  border-radius: var(--radius-md, 8px);
-  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm, 4px);
+  padding: 6px 8px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  background: rgba(255,255,255,0.72);
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
 }
 
 .concesion-card__patron {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: 3px;
   flex-shrink: 0;
   border: 1px solid rgba(0,0,0,0.12);
@@ -318,22 +356,24 @@
 
 .concesion-card__nombre {
   font-family: 'Sora', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
   color: var(--text-color-primary);
 }
 
 .concesion-card__empresa {
-  font-size: 12px;
+  font-size: 10px;
+  line-height: 1.25;
   color: var(--text-color-secondary);
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .concesion-card__badge {
   font-family: 'Sora', sans-serif;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
-  padding: 3px 8px;
+  padding: 3px 7px;
   border-radius: 999px;
   white-space: nowrap;
 }
@@ -385,7 +425,7 @@
 /* ─── Responsive ───────────────────────────────────────────────────────────── */
 
 /* Tablet landscape: conservar díptico */
-@media (min-width: 768px) and (max-width: 1199px) {
+@media (min-width: 768px) and (max-width: 977px) {
   .diptico[data-layout="A"] {
     grid-template-columns: 58fr 42fr;
   }
@@ -409,6 +449,18 @@
     border-top: none;
     padding: 2rem 1.5rem;
     overflow-y: auto;
+  }
+
+  .diptico__concesiones--mapa {
+    width: min(620px, calc(100% - 32px));
+    max-height: 38vh;
+    left: 16px;
+    bottom: 16px;
+    padding: 10px;
+  }
+
+  .concesiones-lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -450,6 +502,46 @@
     margin-inline: auto;
   }
 
+  .diptico__concesiones--mapa {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    max-height: none;
+    margin-top: 12px;
+    padding: 10px;
+    background: var(--background-page);
+    backdrop-filter: none;
+  }
+
+  .concesiones-lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .diptico__concesiones--mapa.is-collapsed .concesiones-lista {
+    display: none;
+  }
+
+  .concesion-card {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    padding: 8px 10px;
+  }
+
+  .concesion-card__badge {
+    grid-column: 2;
+    justify-self: start;
+    margin-top: 2px;
+  }
+
+  .concesion-card__nombre {
+    font-size: 11px;
+  }
+
+  .concesion-card__empresa {
+    font-size: 9px;
+  }
+
   .mapa-editorial object {
     width: 100%;
     display: block;
@@ -475,6 +567,18 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 }
 
 @media (max-width: 480px) {
+  .diptico__concesiones--mapa {
+    padding: 8px;
+  }
+
+  .concesiones-lista {
+    gap: 5px;
+  }
+
+  .concesion-card {
+    padding: 7px;
+  }
+
   .diptico__stats {
     grid-template-columns: 1fr 1fr;
   }
@@ -566,8 +670,8 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 .concesion-card--activa {
   border-color: var(--brand-main);
-  background: var(--background-subtle);
-  transform: translateX(2px);
+  background: var(--feedback-success-bg);
+  transform: translateY(-1px);
 }
 
 .pais-btn--activo {

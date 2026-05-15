@@ -20,12 +20,14 @@ No es dashboard. No es una app GIS completa. No es una galería de imágenes. Es
 
 ---
 
-## Decisión arquitectónica actual
+## Decisión arquitectónica actual (Mayo 2026)
 
-La arquitectura confirmada para mapas complejos es:
+La arquitectura confirmada para todos los mapas es:
 
 ```txt
-SVG completo por breakpoint
+raster base (webp) por breakpoint
++
+SVG overlay (concesiones + labels + símbolos) por breakpoint
 +
 panel editorial HTML/CSS/JS
 +
@@ -34,29 +36,24 @@ data estructurada por territorio
 tokens de diseño
 ```
 
-Para el mapa piloto `03-waupasa-twi`, el render activo usa:
+El raster y el SVG overlay se apilan con CSS (`position: absolute`) dentro de `.mapa-stack`. El `aspect-ratio` del stack se inyecta dinámicamente desde `render-diptico.js` según las dimensiones del breakpoint activo.
+
+### Pipeline de producción de mapas
 
 ```txt
-mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg
-mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg
-mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg
+QGIS (fuente de verdad espacial)
+→ PDF / captura de pantalla
+→ webp por breakpoint (raster base)
+→ Illustrator (redibuja concesiones sobre la captura)
+→ exporta solo vectores como SVG overlay
+→ HTML carga raster + SVG por separado
 ```
 
-Cada SVG debe ser autocontenido o tener links válidos a imágenes embebidas. La precisión mapa/SVG se resuelve dentro del propio SVG, no mediante hacks CSS.
+**Illustrator controla:** concesiones, labels, norte, escala, leyenda, símbolos, composición editorial.
 
----
+**El raster controla:** relieve, ríos, borde del territorio, hillshade, textura.
 
-## Cambio importante respecto a versiones anteriores
-
-Antes se exploró:
-
-```txt
-raster base + SVG overlay separado
-```
-
-Ese enfoque causó problemas de alineación responsive entre raster y overlay. Para el piloto Waupasa Twi se decidió usar **SVG completo por breakpoint**, cargado en un `<object>`.
-
-No volver a separar raster + overlay para este mapa salvo que exista una razón técnica fuerte.
+**El SVG overlay NO debe contener** el raster de fondo embebido. Solo vectores.
 
 ---
 
@@ -67,9 +64,27 @@ css/diptico.css
 js/data-territorios.js
 js/render-diptico.js
 templates/diptico-base.html
+mapas-raster/03-waupasa-twi/*.webp
 mapas-svg/03-waupasa-twi/*.svg
 design-system/tokens/build/tokens.css
 ```
+
+---
+
+## Template activo
+
+`templates/diptico-base.html` usa arquitectura de stack:
+
+```html
+<div class="mapa-editorial">
+  <div class="mapa-stack">
+    <img id="mapa-raster" class="mapa-raster" alt="Mapa base del territorio" />
+    <object id="mapa-editorial-obj" class="mapa-overlay" type="image/svg+xml"></object>
+  </div>
+</div>
+```
+
+El `aspect-ratio` del `.mapa-stack` se inyecta por JS, no está hardcodeado en CSS.
 
 ---
 
@@ -81,194 +96,113 @@ design-system/tokens/build/tokens.css
 2. Busca ese ID en `data-territorios.js`.
 3. Carga `templates/diptico-base.html`.
 4. Renderiza header, mapa, stats, concesiones, fuente e insets.
-5. Cambia el mapa SVG según breakpoint.
+5. Al cargar el mapa, inyecta `aspect-ratio` en `.mapa-stack` según `assets.width` y `assets.height` del breakpoint activo.
+6. Cambia raster y SVG overlay en resize entre breakpoints.
 
-Breakpoints actuales:
+Breakpoints:
 
 ```js
-function getBreakpoint() {
-  const width = window.innerWidth;
-  if (width <= 767) return "mobile";
-  if (width <= 1199) return "tablet";
-  return "desktop";
-}
+if (width <= 767) return "mobile";
+if (width <= 1199) return "tablet";
+return "desktop";
 ```
-
-No cambiar estos cortes sin revisar también CSS y assets exportados.
 
 ---
 
-## Data actual para Waupasa Twi
+## Data para Waupasa Twi
 
-En `data-territorios.js`:
+En `data-territorios.js`, cada breakpoint incluye ruta de raster, SVG y dimensiones:
 
 ```js
-{
-  id: '03-waupasa-twi',
-  numero: '03',
-  nombre: 'Waupasa Twi',
-  assets: {
-    desktop: { svg: "../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg" },
-    tablet:  { svg: "../../mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg" },
-    mobile:  { svg: "../../mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg" },
+assets: {
+  desktop: {
+    raster: "../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp",
+    svg:    "../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg",
+    width:  927,
+    height: 980,
   },
-  layout: 'A'
-}
+  tablet: {
+    raster: "../../mapas-raster/03-waupasa-twi/tablet-03-Waupasa-Twi.webp",
+    svg:    "../../mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg",
+    width:  780,
+    height: 1306,
+  },
+  mobile: {
+    raster: "../../mapas-raster/03-waupasa-twi/mobile-03-Waupasa-Twi.webp",
+    svg:    "../../mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg",
+    width:  504,
+    height: 634,
+  },
+},
 ```
 
-El mapa tiene 9 concesiones registradas como data editorial. Varios campos siguen como placeholder `—` y deben verificarse con FDR.
+Las dimensiones `width`/`height` deben coincidir exactamente con el tamaño del webp y el `viewBox` del SVG.
 
 ---
 
-## Template actual
-
-`templates/diptico-base.html` usa:
-
-```html
-<div class="mapa-editorial">
-  <object id="mapa-editorial-obj" data="" type="image/svg+xml"></object>
-</div>
-```
-
-El mapa se carga reemplazando el atributo `data` del `<object>`.
-
-El template todavía contiene leyenda HTML superpuesta:
-
-```html
-<div class="diptico__leyenda-mapa">
-  ...
-</div>
-```
-
-Si el SVG ya trae leyenda integrada, esta leyenda puede duplicarse. No eliminarla globalmente sin decidir si se usará en otros mapas.
-
----
-
-## CSS actual relevante
-
-En `css/diptico.css`:
+## CSS relevante
 
 ```css
-.diptico[data-layout="A"] {
-  grid-template-columns: 55fr 45fr;
-}
-
-.diptico__mapa {
-  grid-column: 1;
-  grid-row: 1 / -1;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-  background: var(--mapa-tierra-exterior);
-  padding: 2rem;
-}
-
-.mapa-editorial {
-  width: min(100%, 920px);
-  margin-inline: auto;
-}
-
-.mapa-editorial svg,
-.mapa-editorial object {
+.mapa-stack {
+  position: relative;
   width: 100%;
-  height: auto;
-  display: block;
+  aspect-ratio: 927 / 980; /* fallback desktop — JS lo sobreescribe */
 }
+
+.mapa-raster,
+.mapa-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mapa-raster  { object-fit: fill; }
+.mapa-overlay { pointer-events: none; }
 ```
 
-Tablet:
+---
 
-```css
-@media (min-width: 768px) and (max-width: 1199px) {
-  .diptico[data-layout="A"] {
-    grid-template-columns: 58fr 42fr;
-  }
+## Dimensiones de assets — Waupasa Twi
 
-  .diptico__mapa {
-    height: auto;
-    position: relative;
-    padding: clamp(1rem, 3vw, 2rem);
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-  }
+| Breakpoint | Raster (webp) | SVG viewBox | Artboard Illustrator |
+|---|---|---|---|
+| Desktop | 927 × 980 px | 0 0 927 980 | 927 × 980 px |
+| Tablet  | 780 × 1306 px | 0 0 780 1306 | 780 × 1306 px |
+| Mobile  | 504 × 634 px | 0 0 504 634 | 504 × 634 px |
 
-  .mapa-editorial {
-    width: min(100%, 760px);
-  }
-}
-```
-
-Mobile apila mapa + info desde `max-width: 767px`.
+Regla crítica: **las tres dimensiones deben ser idénticas**. Si cambiás el artboard en Illustrator, actualizá el webp y los valores `width`/`height` en `data-territorios.js`.
 
 ---
 
 ## Pipeline correcto de Illustrator
 
-Para cada mapa complejo:
-
-### 1. Crear composiciones por breakpoint
+### 1. Un artboard por breakpoint
 
 ```txt
-MAPA_MASTER_DESKTOP
-MAPA_MASTER_TABLET
-MAPA_MASTER_MOBILE
+desktop  — 927 × 980 px
+tablet   — 780 × 1306 px
+mobile   — 504 × 634 px
 ```
 
-Cada composición puede tener encuadre distinto.
+### 2. Exportar SVG overlay limpio
 
-### 2. Cada SVG debe ser exportado desde un artboard limpio
+- `Use Artboards` activado
+- Sin imagen embebida en el SVG (el raster va separado)
+- `viewBox` coherente con el artboard
+- Sin elementos importantes fuera del artboard
 
-Requisitos:
-
-- usar `Use Artboards`
-- no dejar elementos importantes fuera del canvas
-- evitar linked files rotos
-- embeber la imagen base si es necesario
-- revisar que el `viewBox` corresponda al artboard
-- exportar sin cambiar escala entre capas
-
-### 3. Verificar links rotos
-
-Después de exportar:
+Verificar que el SVG no tiene imagen embebida:
 
 ```bash
-grep -R "ENTREGA_20ABRIL_26\|03_Waupasa Twi - limpio\|image href\|xlink:href" mapas-svg/03-waupasa-twi
+grep -i "image\|xlink:href\|href" mapas-svg/03-waupasa-twi/*.svg
 ```
 
-Si aparece una ruta vieja/inexistente, el SVG puede cargar sin mapa base.
+Debe retornar vacío (o solo referencias a defs internos, no a archivos externos).
 
----
+### 3. Exportar raster (webp)
 
-## Cómo diagnosticar problemas de mapa
-
-### Si el mapa no aparece
-
-Revisar consola por 404 de imagen dentro del SVG. Abrir directo:
-
-```txt
-http://localhost:8000/mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg
-```
-
-Si directo falla, el problema es del SVG/export, no del renderer.
-
-### Si desktop/tablet no calzan con Illustrator
-
-Revisar:
-
-- `viewBox`
-- artboard activo
-- si hay elementos fuera del artboard
-- si el SVG tiene transforms en grupo raíz
-- si el mapa base está enlazado o embebido
-- si se exportó con `Use Artboards`
-
-No corregir desalineación con `transform: scale()` o `translate()` en CSS salvo diagnóstico temporal.
-
-### Si mobile tiene espacio lateral feo
-
-El espacio probablemente forma parte del artboard/viewBox. Corregir en Illustrator, no con CSS.
+Captura del PDF de QGIS recortada y exportada exactamente al tamaño del artboard correspondiente.
 
 ---
 
@@ -282,85 +216,43 @@ python3 figma-to-sd.py
 npm run build
 ```
 
-Verificar:
-
-```bash
-grep -R "concesion-pais" build/tokens.css
-grep -R "mapa-" build/tokens.css
-```
-
-Tokens importantes:
-
-```css
---concesion-pais-china
---concesion-pais-canada
---concesion-pais-colombia
---concesion-pais-nacional
---concesion-tipo-reserva
---mapa-tierra-exterior
---mapa-territorio-borde
-```
-
-No hardcodear nuevos colores si ya existen tokens.
+No editar `build/tokens.css` directamente.
 
 ---
 
-## Territorios actuales
+## Territorios
 
 | # | Territorio | Layout | Estado |
 |---|---|---|---|
-| 01 | Rama y Kriol | A | Data base iniciada |
-| 02 | Creole de Bluefields | B | Data base iniciada |
-| 03 | Waupasa Twi | A | Piloto funcional con SVG responsive |
-| 04 | Wangki Twi-Tasba Raya | C | Data base iniciada |
-| 05 | Wangki Li Aubra Tasbaya | C | Pendiente |
-| 07 | Tuahka | A | Pendiente |
-| 06, 08–15 | — | — | Pendientes |
+| 03 | Waupasa Twi | A | ✅ Piloto funcional — raster + SVG overlay responsive |
+| 01 | Rama y Kriol | A | ⏳ Data base iniciada, pendiente assets |
+| 02 | Creole de Bluefields | B | ⏳ Data base iniciada, pendiente assets |
+| 04 | Wangki Twi-Tasba Raya | C | ⏳ Data base iniciada, pendiente assets |
+| 05 | Wangki Li Aubra Tasbaya | C | ⏳ Pendiente |
+| 07 | Tuahka | A | ⏳ Pendiente |
+| 06, 08–15 | — | — | ⏳ Pendientes |
 
 ---
 
 ## Qué NO hacer
 
-- No volver a depender de `ai2html` como arquitectura principal.
-- No separar raster + overlay SVG en Waupasa Twi si el SVG completo ya funciona.
-- No corregir exports malos con hacks CSS permanentes.
-- No modificar tokens generados directamente en `build/tokens.css`.
+- No embeber el raster de fondo dentro del SVG overlay.
+- No hardcodear `aspect-ratio` en CSS por territorio — el renderer lo inyecta.
+- No corregir desalineación raster/SVG con `transform: scale()` o `translate()` en CSS.
+- No modificar `build/tokens.css` directamente.
 - No hardcodear contenido editorial en HTML si pertenece a `data-territorios.js`.
 - No crear 15 HTML diferentes con estructuras distintas.
-- No convertir esto en dashboard.
+- No usar `ai2html` como arquitectura principal.
 - No usar `localStorage`.
 
 ---
 
-## Estado actual de consola
+## Próximo paso
 
-Mensajes como estos no bloquean:
-
-```txt
-SES Removing unpermitted intrinsics
-favicon.ico 404
-```
-
-Pueden venir de extensiones, navegador o falta de favicon.
-
-Priorizar errores reales de rutas internas, especialmente 404 dentro de `mapas-svg/` o imágenes referenciadas dentro de SVG.
-
----
-
-## Próximo paso recomendado
-
-Cerrar Waupasa Twi como checkpoint estable:
-
-1. Revisar desktop/tablet/mobile directo en navegador.
-2. Revisar la página completa `/atlas/03-waupasa-twi/`.
-3. Decidir si la leyenda cartográfica queda en SVG o HTML.
-4. Limpiar assets duplicados si ya no se usan.
-5. Commit + tag estable.
-6. Replicar pipeline a 01, 02 y 04.
-
-Nombre sugerido de tag:
-
-```bash
-git tag waupasa-svg-responsive-stable-v1
-git push origin waupasa-svg-responsive-stable-v1
-```
+1. Commit + tag estable de Waupasa Twi.
+2. Replicar pipeline a 01, 02 y 04:
+   - Exportar raster (webp × 3 breakpoints)
+   - Exportar SVG overlay (× 3 breakpoints)
+   - Agregar `assets` con `width`/`height` en `data-territorios.js`
+   - Verificar alineación en navegador
+3. Completar datos editoriales pendientes (`⚠️` en data-territorios.js).

@@ -93,24 +93,54 @@ function getMapAssets(t) {
   return (t.assets && t.assets[bp]) || {};
 }
 
-function renderMapa(t) {
+async function renderMapa(t) {
   const assets = getMapAssets(t);
-  const raster = document.getElementById("mapa-raster");
-  const obj = document.getElementById("mapa-editorial-obj");
 
-  // Actualizar aspect-ratio del stack según dimensiones del breakpoint activo
+  // Actualizar aspect-ratio del stack
   const stack = document.querySelector(".mapa-stack");
   if (stack && assets.width && assets.height) {
     stack.style.aspectRatio = `${assets.width} / ${assets.height}`;
   }
 
+  // Raster como fallback si existe
+  const raster = document.getElementById("mapa-raster");
   if (raster && assets.raster) {
     raster.src = assets.raster;
   }
 
-  if (obj && assets.svg) {
-    obj.setAttribute("data", assets.svg);
+  // SVG inline — acceso directo al DOM sin contentDocument
+  const svgContainer = document.getElementById("mapa-svg-inline");
+  if (svgContainer && assets.svg) {
+    try {
+      const res = await fetch(assets.svg);
+      if (!res.ok) throw new Error(`SVG no encontrado: ${assets.svg}`);
+      const svgText = await res.text();
+
+      // Resolver rutas relativas de imágenes embebidas en el SVG.
+      // Cuando el SVG se inserta inline, las rutas relativas se resuelven
+      // desde el HTML, no desde el SVG. Calculamos la base del SVG
+      // y reemplazamos href/xlink:href relativos con rutas absolutas.
+      const svgBase = assets.svg.substring(0, assets.svg.lastIndexOf('/') + 1);
+      const svgResolved = svgText.replace(
+        /(href|xlink:href)="((?!data:|http|\/)[^"]+)"/g,
+        (match, attr, path) => `${attr}="${svgBase}${path}"`
+      );
+
+      svgContainer.innerHTML = svgResolved;
+
+      // Ocultar el <object> legacy si aún existe en el template
+      const obj = document.getElementById("mapa-editorial-obj");
+      if (obj) obj.style.display = "none";
+
+      // Conectar interactividad una vez el SVG está en el DOM
+      if (t.concesiones) {
+        initInteractividad(t.concesiones);
+      }
+    } catch (err) {
+      console.warn("No se pudo cargar SVG inline:", err);
+    }
   }
+
   renderLeyenda(t);
 }
 
@@ -194,6 +224,7 @@ function renderConcesiones(t) {
     t.concesiones.forEach((c) => {
       const card = document.createElement("div");
       card.className = "concesion-card";
+      if (c.svg_id) card.dataset.svgId = c.svg_id;
 
       const patron = document.createElement("div");
       patron.className = `concesion-card__patron patron-${c.pais}`;
@@ -253,3 +284,139 @@ function renderInsets(t) {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+/* ─── Interactividad SVG ↔ Panel ──────────────────────────────────────────── */
+
+function initInteractividad(concesiones) {
+  initTooltipPoblados();
+  initHoverPaises(concesiones);
+
+  concesiones.forEach((c) => {
+    if (!c.svg_id) return;
+
+    const svgEl = document.getElementById(c.svg_id);
+    const card = document.querySelector(`.concesion-card[data-svg-id="${c.svg_id}"]`);
+
+    if (!svgEl || !card) return;
+
+    svgEl.addEventListener("mouseenter", () => { activar(svgEl, card); });
+    svgEl.addEventListener("mouseleave", () => { desactivar(svgEl, card); });
+    card.addEventListener("mouseenter", () => { activar(svgEl, card); });
+    card.addEventListener("mouseleave", () => { desactivar(svgEl, card); });
+  });
+}
+
+function activar(svgEl, card) {
+  svgEl.classList.add("concesion--activa");
+  card.classList.add("concesion-card--activa");
+}
+
+function desactivar(svgEl, card) {
+  svgEl.classList.remove("concesion--activa");
+  card.classList.remove("concesion-card--activa");
+}
+
+function initTooltipPoblados() {
+  let tooltip = document.getElementById("mapa-tooltip");
+  if (!tooltip) {
+    tooltip = document.createElement("div");
+    tooltip.id = "mapa-tooltip";
+    tooltip.className = "mapa-tooltip";
+    document.querySelector(".diptico__mapa")?.appendChild(tooltip);
+  }
+
+  const poblados = [
+    { id: "poblado-el-lanchon", nombre: "El Lanchón" },
+    { id: "poblado-sukapin", nombre: "Sukat Pin" },
+    { id: "poblado-cuarenta-y-tres", nombre: "Cuarenta y Tres" },
+    { id: "poblado-mani-watla", nombre: "Mani Wátla" },
+    { id: "poblado-kligna", nombre: "Kligna" },
+    { id: "poblado-lapan", nombre: "Lapan" },
+    { id: "poblado-yulu", nombre: "Yulú" },
+  ];
+
+  const mapaEl = document.querySelector(".diptico__mapa");
+
+  poblados.forEach(({ id, nombre }) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.style.cursor = "pointer";
+
+    el.addEventListener("mouseenter", () => {
+      tooltip.textContent = nombre;
+      tooltip.classList.add("mapa-tooltip--visible");
+    });
+
+    el.addEventListener("mousemove", (e) => {
+      const rect = mapaEl.getBoundingClientRect();
+      tooltip.style.left = `${e.clientX - rect.left + 14}px`;
+      tooltip.style.top = `${e.clientY - rect.top - 10}px`;
+    });
+
+    el.addEventListener("mouseleave", () => {
+      tooltip.classList.remove("mapa-tooltip--visible");
+    });
+  });
+}
+
+/* ─── Hover por país ──────────────────────────────────────────────────────── */
+
+function initHoverPaises(concesiones) {
+  // Países disponibles en este territorio, derivados de los datos
+  const paisesSvg = {
+    'china':    'pais-china',
+    'canada':   'pais-canada',
+    'nacional': 'pais-nicaragua',
+  };
+
+  // Agrupar svg_ids por país desde los datos
+  const porPais = {};
+  concesiones.forEach((c) => {
+    if (!c.svg_id || !c.pais) return;
+    if (!porPais[c.pais]) porPais[c.pais] = [];
+    porPais[c.pais].push(c.svg_id);
+  });
+
+  // Para cada grupo de país en el SVG, conectar hover
+  Object.entries(paisesSvg).forEach(([pais, svgPaisId]) => {
+    const paisEl = document.getElementById(svgPaisId);
+    if (!paisEl) return;
+
+    paisEl.style.cursor = 'pointer';
+
+    const idsActivos = porPais[pais] || [];
+    const idsTodos = concesiones.filter(c => c.svg_id).map(c => c.svg_id);
+
+    paisEl.addEventListener('mouseenter', () => {
+      activarPais(idsActivos, idsTodos);
+      paisEl.classList.add('pais-btn--activo');
+    });
+
+    paisEl.addEventListener('mouseleave', () => {
+      desactivarPais(idsTodos);
+      paisEl.classList.remove('pais-btn--activo');
+    });
+  });
+}
+
+function activarPais(idsActivos, idsTodos) {
+  idsTodos.forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (idsActivos.includes(id)) {
+      el.classList.add('concesion--activa');
+      el.classList.remove('concesion--atenuada');
+    } else {
+      el.classList.add('concesion--atenuada');
+      el.classList.remove('concesion--activa');
+    }
+  });
+}
+
+function desactivarPais(idsTodos) {
+  idsTodos.forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('concesion--activa', 'concesion--atenuada');
+  });
+}

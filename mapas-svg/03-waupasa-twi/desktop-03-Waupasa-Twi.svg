@@ -11,7 +11,7 @@
         stroke: #4c79af;
       }
 
-      .st1, .st2, .st3, .st10, .st6, .st7, .st11, .st9, .st12 {
+      .st1, .st10, .st2, .st3, .st11, .st12, .st6, .st7, .st13, .st14, .st9, .st15 {
         stroke-miterlimit: 10;
       }
 
@@ -19,56 +19,74 @@
         stroke-width: 6px;
       }
 
+      .st10 {
+        fill: #e2d3d3;
+      }
+
+      .st10, .st5, .st12, .st13 {
+        stroke-width: 7px;
+      }
+
+      .st10, .st13 {
+        stroke: #d3022a;
+      }
+
       .st2 {
         stroke: #e21f26;
       }
 
-      .st2, .st11 {
+      .st2, .st14 {
         stroke-width: 3px;
+      }
+
+      .st16 {
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+        font-size: 25.3px;
       }
 
       .st3 {
         stroke: #f266b6;
       }
 
-      .st4, .st5, .st11, .st12 {
+      .st4, .st5, .st14, .st15 {
         stroke: #fff;
       }
 
-      .st10 {
+      .st11 {
         fill: #a47057;
         stroke: #231006;
       }
 
-      .st10, .st12 {
+      .st11, .st15 {
         stroke-width: 5px;
       }
 
-      .st5 {
-        stroke-width: 7px;
-      }
-
-      .st13 {
+      .st17 {
         clip-path: url(#clippath-1);
       }
 
-      .st14 {
+      .st18 {
         clip-path: url(#clippath-3);
       }
 
-      .st15 {
+      .st19 {
         clip-path: url(#clippath-4);
       }
 
-      .st16 {
+      .st20 {
         clip-path: url(#clippath-2);
       }
 
-      .st17 {
+      .st21 {
         clip-path: url(#clippath-5);
       }
 
-      .st18 {
+      .st12 {
+        fill: #c90d0d;
+        stroke: #bababa;
+      }
+
+      .st22 {
         fill: #45d62a;
       }
 
@@ -84,12 +102,16 @@
         stroke: #f4b527;
       }
 
+      .st13 {
+        fill: #1846b7;
+      }
+
       .st8 {
         stroke: #29abe2;
         stroke-width: 1.5px;
       }
 
-      .st11, .st12 {
+      .st14, .st15 {
         fill: #3a3a3a;
       }
 
@@ -97,7 +119,7 @@
         stroke: #006345;
       }
 
-      .st19 {
+      .st23 {
         clip-path: url(#clippath);
       }
     </style>
@@ -126,7 +148,7 @@
   <g id="MAPA_x5F_MASTER_x5F_DESKTOP">
     <g>
       <g id="el-encanto-i">
-        <g class="st19">
+        <g class="st23">
           <g>
             <g>
               <circle class="st9" cx="391.8" cy="427.7" r="10.2"/>
@@ -267,14 +289,14 @@
       </g>
       <g id="columbus">
         <rect class="st5" x="481.9" y="312.2" width="36.3" height="15.3"/>
-        <rect class="st18" x="481.9" y="312.2" width="36.3" height="15.3"/>
+        <rect class="st22" x="481.9" y="312.2" width="36.3" height="15.3"/>
       </g>
       <g id="vanessa">
         <rect class="st5" x="607.2" y="234.7" width="36.3" height="15.3"/>
-        <rect class="st18" x="607.2" y="234.7" width="36.3" height="15.3"/>
+        <rect class="st22" x="607.2" y="234.7" width="36.3" height="15.3"/>
       </g>
       <g id="el-encanto-ii">
-        <g class="st13">
+        <g class="st17">
           <g>
             <line class="st6" x1="394.2" y1="326.7" x2="268" y2="200.4"/>
             <line class="st6" x1="408" y1="326.7" x2="281.8" y2="200.4"/>
@@ -304,7 +326,7 @@
         </g>
       </g>
       <g id="yulu-awaskira">
-        <g class="st16">
+        <g class="st20">
           <g>
             <line class="st7" x1="528.1" y1="486.5" x2="401.9" y2="360.3"/>
             <line class="st7" x1="541.9" y1="486.5" x2="415.7" y2="360.3"/>
@@ -326,7 +348,7 @@
         </g>
       </g>
       <g id="puerto-cabezas">
-        <g class="st14">
+        <g class="st18">
           <g>
             <g>
               <circle class="st3" cx="416.8" cy="546.6" r="3.7"/>
@@ -410,7 +432,7 @@
         </g>
       </g>
       <g id="walpa-tara">
-        <g class="st15">
+        <g class="st19">
           <g>
             <line class="st2" x1="-75.9" y1="436.7" x2="205.7" y2="718.2"/>
             <line class="st2" x1="-58.6" y1="436.7" x2="223" y2="718.2"/>
@@ -444,9 +466,9 @@
           </g>
         </g>
       </g>
-      <polygon id="reserva-minera" class="st10" points="471.5 444.9 471.5 477.2 487.2 477.2 487.2 479.7 502.9 479.7 502.9 483.8 514.9 483.8 514.9 446 471.5 444.9"/>
+      <polygon id="reserva-minera" class="st11" points="471.5 444.9 471.5 477.2 487.2 477.2 487.2 479.7 502.9 479.7 502.9 483.8 514.9 483.8 514.9 446 471.5 444.9"/>
       <g id="caribe">
-        <g class="st17">
+        <g class="st21">
           <g>
             <g>
               <line class="st1" x1="574.7" y1="369.5" x2="448.5" y2="243.3"/>
@@ -477,13 +499,13 @@
       </g>
       <path id="norte" d="M819.1,131.8l30.2,27.1-35.2-87.2v-.2s0,0,0,0h0c0,0,0,0,0,0l-35.2,87.2,30.2-27.1c2.8-2.5,7.1-2.5,10,0Z"/>
       <g id="poblados">
-        <polygon id="poblado-el-lanchon" class="st11" points="722.6 302.2 709.6 328.2 736.2 328.2 722.6 302.2"/>
-        <polygon id="poblado-sukapin" class="st11" points="469.8 513 456.8 539 483.4 539 469.8 513"/>
-        <polygon id="poblado-cuarenta-y-tres" class="st11" points="560.5 307.4 547.5 333.4 574.1 333.4 560.5 307.4"/>
-        <polygon id="poblado-mani-watla" class="st11" points="563.1 329.9 550.1 355.8 576.7 355.8 563.1 329.9"/>
-        <polygon id="poblado-kligna" class="st11" points="583 552.7 570 578.7 596.6 578.7 583 552.7"/>
-        <polygon id="poblado-lapan" class="st12" points="360.1 697 347.1 722.9 373.7 722.9 360.1 697"/>
-        <polygon id="poblado-yulu" class="st11" points="641.7 382.5 628.7 408.5 655.3 408.5 641.7 382.5"/>
+        <polygon id="poblado-el-lanchon" class="st14" points="722.6 302.2 709.6 328.2 736.2 328.2 722.6 302.2"/>
+        <polygon id="poblado-sukapin" class="st14" points="469.8 513 456.8 539 483.4 539 469.8 513"/>
+        <polygon id="poblado-cuarenta-y-tres" class="st14" points="560.5 307.4 547.5 333.4 574.1 333.4 560.5 307.4"/>
+        <polygon id="poblado-mani-watla" class="st14" points="563.1 329.9 550.1 355.8 576.7 355.8 563.1 329.9"/>
+        <polygon id="poblado-kligna" class="st14" points="583 552.7 570 578.7 596.6 578.7 583 552.7"/>
+        <polygon id="poblado-lapan" class="st15" points="360.1 697 347.1 722.9 373.7 722.9 360.1 697"/>
+        <polygon id="poblado-yulu" class="st14" points="641.7 382.5 628.7 408.5 655.3 408.5 641.7 382.5"/>
         <g id="titulo-Lapan">
           <g>
             <path class="st4" d="M375,682.8h2.8v9.7h5v2.1h-7.8v-11.8Z"/>
@@ -636,5 +658,17 @@
         </g>
       </g>
     </g>
+  </g>
+  <g id="pais-china">
+    <circle class="st12" cx="96.6" cy="165.2" r="37.1"/>
+    <text class="st16" transform="translate(150.1 169.9)"><tspan x="0" y="0">China</tspan></text>
+  </g>
+  <g id="pais-canada">
+    <circle class="st10" cx="96.6" cy="272.3" r="37.1"/>
+    <text class="st16" transform="translate(150.1 277)"><tspan x="0" y="0">Canada</tspan></text>
+  </g>
+  <g id="pais-nicaragua">
+    <circle class="st13" cx="96.6" cy="376.1" r="37.1"/>
+    <text class="st16" transform="translate(150.1 380.8)"><tspan x="0" y="0">Nicaragua</tspan></text>
   </g>
 </svg>

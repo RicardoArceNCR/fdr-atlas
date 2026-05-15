@@ -1,6 +1,5 @@
 .
 ├── CLAUDE.md
-├── README.md
 ├── atlas
 │   ├── 01-rama-kriol
 │   │   └── index.html
@@ -84,4 +83,4 @@
 └── templates
     └── diptico-base.html
 
-25 directories, 60 files
+25 directories, 59 files

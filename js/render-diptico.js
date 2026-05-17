@@ -318,15 +318,16 @@ function initInteractividad(concesiones) {
   concesiones.forEach((c) => {
     if (!c.svg_id) return;
 
-    const svgEl = document.getElementById(c.svg_id);
+    const svgGroup = document.getElementById(c.svg_id);
+    const svgEl = svgGroup?.querySelector('[id*="area-hover-target"], [data-role="hover-target"]') || svgGroup;
     const card = document.querySelector(`.concesion-card[data-svg-id="${c.svg_id}"]`);
 
-    if (!svgEl || !card) return;
+    if (!svgGroup || !svgEl || !card) return;
 
-    svgEl.addEventListener("mouseenter", () => { activar(svgEl, card); });
-    svgEl.addEventListener("mouseleave", () => { desactivar(svgEl, card); });
-    card.addEventListener("mouseenter", () => { activar(svgEl, card); });
-    card.addEventListener("mouseleave", () => { desactivar(svgEl, card); });
+    svgEl.addEventListener("mouseenter", () => { activar(svgGroup, card); });
+    svgEl.addEventListener("mouseleave", () => { desactivar(svgGroup, card); });
+    card.addEventListener("mouseenter", () => { activar(svgGroup, card); });
+    card.addEventListener("mouseleave", () => { desactivar(svgGroup, card); });
   });
 }
 
@@ -392,6 +393,7 @@ function initHoverPaises(concesiones) {
     'china':    'pais-china',
     'canada':   'pais-canada',
     'nacional': 'pais-nicaragua',
+    'reserva':  'pais-reserva',
   };
 
   // Agrupar svg_ids por país desde los datos

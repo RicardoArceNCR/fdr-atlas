@@ -54,12 +54,10 @@ async function init() {
     if (!res.ok) throw new Error("Error cargando el template");
     const html = await res.text();
 
-    // Insertamos el template antes del script
     const container = document.createElement("div");
     container.innerHTML = html;
     document.body.prepend(container.firstElementChild);
 
-    // Asignamos el layout
     const diptico = document.getElementById("diptico-container");
     if (diptico) {
       diptico.dataset.layout = territorio.layout || "A";
@@ -106,19 +104,16 @@ function getMapAssets(t) {
 async function renderMapa(t) {
   const assets = getMapAssets(t);
 
-  // Actualizar aspect-ratio del stack
   const stack = document.querySelector(".mapa-stack");
   if (stack && assets.width && assets.height) {
     stack.style.aspectRatio = `${assets.width} / ${assets.height}`;
   }
 
-  // Raster como fallback si existe
   const raster = document.getElementById("mapa-raster");
   if (raster && assets.raster) {
     raster.src = assets.raster;
   }
 
-  // SVG inline — acceso directo al DOM sin contentDocument
   const svgContainer = document.getElementById("mapa-svg-inline");
   if (svgContainer && assets.svg) {
     try {
@@ -126,10 +121,6 @@ async function renderMapa(t) {
       if (!res.ok) throw new Error(`SVG no encontrado: ${assets.svg}`);
       const svgText = await res.text();
 
-      // Resolver rutas relativas de imágenes embebidas en el SVG.
-      // Cuando el SVG se inserta inline, las rutas relativas se resuelven
-      // desde el HTML, no desde el SVG. Calculamos la base del SVG
-      // y reemplazamos href/xlink:href relativos con rutas absolutas.
       const svgBase = assets.svg.substring(0, assets.svg.lastIndexOf('/') + 1);
       const svgResolved = svgText.replace(
         /(href|xlink:href)="((?!data:|http|\/)[^"]+)"/g,
@@ -138,11 +129,9 @@ async function renderMapa(t) {
 
       svgContainer.innerHTML = svgResolved;
 
-      // Ocultar el <object> legacy si aún existe en el template
       const obj = document.getElementById("mapa-editorial-obj");
       if (obj) obj.style.display = "none";
 
-      // Conectar interactividad una vez el SVG está en el DOM
       if (t.concesiones) {
         initInteractividad(t.concesiones);
       }
@@ -309,11 +298,39 @@ function initToggleConcesiones() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
 /* ─── Interactividad SVG ↔ Panel ──────────────────────────────────────────── */
 
 function initInteractividad(concesiones) {
   initTooltipPoblados();
-  initHoverPaises(concesiones);
+
+  // ── Mapa dinámico: pais (en datos) → ID del grupo pais-* en el SVG ──────
+  // Se construye desde los datos del territorio, no hardcodeado.
+  // Cubre todos los países del sistema incluyendo los que el SVG
+  // puede nombrar de forma distinta (nacional → pais-nicaragua, reserva → reserva).
+  const paisAsvgPaisId = {
+    china:    'pais-china',
+    canada:   'pais-canada',
+    nacional: 'pais-nicaragua',
+    colombia: 'pais-colombia',
+    reserva:  'pais-reserva',  // usar este cuando el layer se llame pais-reserva
+                                // si aún se llama "reserva", el fallback lo resuelve
+  };
+
+  // ── Mapa inverso: svg_id de concesión → ID del grupo pais-* en el SVG ───
+  // Generado dinámicamente desde los datos. Funciona para cualquier territorio.
+  const svgIdAPaisEl = {};
+  concesiones.forEach((c) => {
+    if (!c.svg_id || !c.pais) return;
+    const paisSvgId = paisAsvgPaisId[c.pais];
+    if (!paisSvgId) return;
+    // Intentar encontrar el elemento en el DOM (puede variar por territorio)
+    const el = document.getElementById(paisSvgId)
+            || document.getElementById('reserva'); // fallback para reserva sin prefijo
+    if (el) svgIdAPaisEl[c.svg_id] = el;
+  });
+
+  initHoverPaises(concesiones, paisAsvgPaisId);
 
   concesiones.forEach((c) => {
     if (!c.svg_id) return;
@@ -321,25 +338,36 @@ function initInteractividad(concesiones) {
     const svgGroup = document.getElementById(c.svg_id);
     const svgEl = svgGroup?.querySelector('[id*="area-hover-target"], [data-role="hover-target"]') || svgGroup;
     const card = document.querySelector(`.concesion-card[data-svg-id="${c.svg_id}"]`);
+    const paisEl = svgIdAPaisEl[c.svg_id] || null;
 
     if (!svgGroup || !svgEl || !card) return;
 
-    svgEl.addEventListener("mouseenter", () => { activar(svgGroup, card); });
-    svgEl.addEventListener("mouseleave", () => { desactivar(svgGroup, card); });
-    card.addEventListener("mouseenter", () => { activar(svgGroup, card); });
-    card.addEventListener("mouseleave", () => { desactivar(svgGroup, card); });
+    svgEl.addEventListener("mouseenter", () => activar(svgGroup, card, paisEl));
+    svgEl.addEventListener("mouseleave", () => desactivar(svgGroup, card, paisEl));
+    card.addEventListener("mouseenter", () => activar(svgGroup, card, paisEl));
+    card.addEventListener("mouseleave", () => desactivar(svgGroup, card, paisEl));
   });
 }
 
-function activar(svgEl, card) {
+/* ─── activar / desactivar ────────────────────────────────────────────────── */
+
+function activar(svgEl, card, paisEl) {
   svgEl.classList.add("concesion--activa");
   card.classList.add("concesion-card--activa");
+  // Activar animación de borde en la bandera del país correspondiente
+  if (paisEl) paisEl.classList.add("pais--activo");
 }
 
-function desactivar(svgEl, card) {
+function desactivar(svgEl, card, paisEl) {
   svgEl.classList.remove("concesion--activa");
   card.classList.remove("concesion-card--activa");
+  // Solo quitar pais--activo si no hay otro hover de país activo encima
+  if (paisEl && !paisEl.matches(':hover')) {
+    paisEl.classList.remove("pais--activo");
+  }
 }
+
+/* ─── Tooltip de poblados ─────────────────────────────────────────────────── */
 
 function initTooltipPoblados() {
   let tooltip = document.getElementById("mapa-tooltip");
@@ -351,13 +379,13 @@ function initTooltipPoblados() {
   }
 
   const poblados = [
-    { id: "poblado-el-lanchon", nombre: "El Lanchón" },
-    { id: "poblado-sukapin", nombre: "Sukat Pin" },
+    { id: "poblado-el-lanchon",      nombre: "El Lanchón" },
+    { id: "poblado-sukapin",         nombre: "Sukat Pin" },
     { id: "poblado-cuarenta-y-tres", nombre: "Cuarenta y Tres" },
-    { id: "poblado-mani-watla", nombre: "Mani Wátla" },
-    { id: "poblado-kligna", nombre: "Kligna" },
-    { id: "poblado-lapan", nombre: "Lapan" },
-    { id: "poblado-yulu", nombre: "Yulú" },
+    { id: "poblado-mani-watla",      nombre: "Mani Wátla" },
+    { id: "poblado-kligna",          nombre: "Kligna" },
+    { id: "poblado-lapan",           nombre: "Lapan" },
+    { id: "poblado-yulu",            nombre: "Yulú" },
   ];
 
   const mapaEl = document.querySelector(".diptico__mapa");
@@ -376,7 +404,7 @@ function initTooltipPoblados() {
     el.addEventListener("mousemove", (e) => {
       const rect = mapaEl.getBoundingClientRect();
       tooltip.style.left = `${e.clientX - rect.left + 14}px`;
-      tooltip.style.top = `${e.clientY - rect.top - 10}px`;
+      tooltip.style.top  = `${e.clientY - rect.top  - 10}px`;
     });
 
     el.addEventListener("mouseleave", () => {
@@ -385,17 +413,9 @@ function initTooltipPoblados() {
   });
 }
 
-/* ─── Hover por país ──────────────────────────────────────────────────────── */
+/* ─── Hover por país (bandera → concesiones en el mapa) ──────────────────── */
 
-function initHoverPaises(concesiones) {
-  // Países disponibles en este territorio, derivados de los datos
-  const paisesSvg = {
-    'china':    'pais-china',
-    'canada':   'pais-canada',
-    'nacional': 'pais-nicaragua',
-    'reserva':  'pais-reserva',
-  };
-
+function initHoverPaises(concesiones, paisAsvgPaisId) {
   // Agrupar svg_ids por país desde los datos
   const porPais = {};
   concesiones.forEach((c) => {
@@ -404,24 +424,30 @@ function initHoverPaises(concesiones) {
     porPais[c.pais].push(c.svg_id);
   });
 
-  // Para cada grupo de país en el SVG, conectar hover
-  Object.entries(paisesSvg).forEach(([pais, svgPaisId]) => {
-    const paisEl = document.getElementById(svgPaisId);
+  const idsTodos = concesiones.filter(c => c.svg_id).map(c => c.svg_id);
+
+  // Para cada país que tenga concesiones, conectar el grupo pais-* en el SVG
+  Object.entries(paisAsvgPaisId).forEach(([pais, svgPaisId]) => {
+    // Intentar con el ID estándar, con fallback para reserva sin prefijo
+    const paisEl = document.getElementById(svgPaisId)
+                || (pais === 'reserva' ? document.getElementById('reserva') : null);
     if (!paisEl) return;
+
+    const idsActivos = porPais[pais] || [];
+    if (idsActivos.length === 0) return; // No hay concesiones de este país en este mapa
 
     paisEl.style.cursor = 'pointer';
 
-    const idsActivos = porPais[pais] || [];
-    const idsTodos = concesiones.filter(c => c.svg_id).map(c => c.svg_id);
-
     paisEl.addEventListener('mouseenter', () => {
       activarPais(idsActivos, idsTodos);
-      paisEl.classList.add('pais-btn--activo');
+      // pais-btn--activo: drop-shadow existente
+      // pais--activo: trigger de la animación de borde (nuevo)
+      paisEl.classList.add('pais-btn--activo', 'pais--activo');
     });
 
     paisEl.addEventListener('mouseleave', () => {
       desactivarPais(idsTodos);
-      paisEl.classList.remove('pais-btn--activo');
+      paisEl.classList.remove('pais-btn--activo', 'pais--activo');
     });
   });
 }

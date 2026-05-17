@@ -701,111 +701,100 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   transform: translateY(0);
 }
 
-/*
- * animaciones-banderas.css
- * Animar el borde punteado de las banderas en el panel de países.
- *
- * Pegar al final de css/diptico.css
- *
- * Técnica: stroke-dashoffset animado en el compositor thread.
- * No recalcula layout. Sin repaint. Performance segura.
- *
- * Circunferencia de los círculos: 2 × π × 28.4 ≈ 178.4px
- * stroke-dasharray: dash + gap que sumen un divisor limpio de 178.4
- *   → 8 + 6 = 14 → 178.4 / 14 ≈ 12.7 segmentos (visual equilibrado)
- */
 
-/* ─── Keyframe único compartido ─────────────────────────────────────────────── */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ─── Animaciones de borde en banderas ───────────────────────────────────────
+ *
+ * PEGAR AL FINAL DE css/diptico.css
+ * Reemplaza el bloque animaciones-banderas.css anterior completo.
+ *
+ * Trigger: clase .pais--activo en el grupo pais-* del SVG.
+ * Se añade desde JS en dos casos:
+ *   1. hover sobre concesión en el mapa → activa la bandera de su país
+ *   2. hover sobre la bandera directamente → activa sus propias concesiones
+ *
+ * Técnica: stroke-dashoffset animado en compositor thread (GPU).
+ * Sin repaint. Sin layout recalculado. Performance segura.
+ *
+ * Circunferencia: 2 × π × 28.4 ≈ 178.4px
+ * ─────────────────────────────────────────────────────────────────────────── */
 
 @keyframes borde-girar {
-  to {
-    stroke-dashoffset: -178.4; /* una circunferencia completa → una vuelta exacta */
-  }
+  to { stroke-dashoffset: -178.4; }
 }
 
-/* ─── Estado base de todos los bordes ──────────────────────────────────────── */
-/*
- * Aplicamos a los <circle> dentro de los grupos [id^="border"].
- * En reposo: borde sólido, sin animación.
- * En hover del grupo padre pais-*: punteado + giro.
- *
- * will-change: stroke-dashoffset
- * Le avisa al browser que este atributo va a cambiar → crea layer GPU de antemano.
- */
+/* ── Estado base: todos los bordes de bandera ──────────────────────────────── */
 
 #paises [id^="border"] circle,
 #paises [id="border"] circle {
-  stroke-dasharray: none;
-  stroke-dashoffset: 0;
   will-change: stroke-dashoffset;
   transition: stroke-dasharray 200ms ease;
 }
 
-/* ─── Estado activo: hover sobre el grupo de país ──────────────────────────── */
+/* ── Estado activo: .pais--activo activa la animación ─────────────────────── */
 /*
- * Al hacer hover en pais-china, pais-canada, etc. (o reserva/pais-reserva):
- * 1. El borde pasa a punteado (8px raya, 6px espacio)
- * 2. El dashoffset anima hacia -178.4 → giro continuo en sentido horario
- *
- * animation-play-state: paused en reposo → no consume recursos cuando no hay hover.
+ * Selecciona el <circle> dentro del grupo border,
+ * dentro del grupo pais-* o reserva que tenga .pais--activo.
  */
 
-#paises [id^="pais-"]:hover [id^="border"] circle,
-#paises [id^="pais-"]:hover [id="border"] circle,
-#paises #reserva:hover [id="border"] circle {
+#paises [id^="pais-"].pais--activo [id^="border"] circle,
+#paises [id^="pais-"].pais--activo [id="border"] circle,
+#paises [id="reserva"].pais--activo [id="border"] circle,
+#paises [id="pais-reserva"].pais--activo [id^="border"] circle {
   stroke-dasharray: 8 6;
   stroke-dashoffset: 0;
-  animation: borde-girar 2.4s linear infinite;
+  animation: borde-girar 4s linear infinite;
 }
 
-/* ─── Velocidades distintas por país (personalidad visual) ──────────────────── */
+/* ── Velocidades por país — más suaves que la versión anterior ─────────────── */
 /*
- * China: más rápido → agresivo, expansivo
- * Canadá: velocidad media → corporativo, estable
- * Nicaragua: lento → institucional
- * Colombia: lento → extractivo pero tranquilo
- * Reserva: muy lento → zona congelada, estática
+ * Todas entre 3s y 6s. Diferencias sutiles:
+ * China levemente más ágil, Reserva más lenta.
+ * La diferencia es perceptible pero no intrusiva.
  */
 
-#paises #pais-china:hover [id^="border"] circle {
-  animation-duration: 1.6s;
-}
+#paises #pais-china.pais--activo     [id^="border"] circle { animation-duration: 3s;   }
+#paises #pais-canada.pais--activo    [id^="border"] circle { animation-duration: 4s;   }
+#paises #pais-nicaragua.pais--activo [id^="border"] circle { animation-duration: 4.5s; }
+#paises #pais-colombia.pais--activo  [id^="border"] circle { animation-duration: 4.5s; }
 
-#paises #pais-canada:hover [id^="border"] circle {
-  animation-duration: 2.4s;
-}
-
-#paises #pais-nicaragua:hover [id^="border"] circle {
-  animation-duration: 3.2s;
-}
-
-#paises #pais-colombia:hover [id^="border"] circle {
-  animation-duration: 3.2s;
-}
-
-#paises #reserva:hover [id="border"] circle,
-#paises #pais-reserva:hover [id^="border"] circle {
-  animation-duration: 4.8s;
+#paises #reserva.pais--activo     [id="border"] circle,
+#paises #pais-reserva.pais--activo [id^="border"] circle {
+  animation-duration: 6s;
   stroke-dasharray: 4 10; /* punteado más esparso → zona legal/congelada */
 }
 
-/* ─── Accesibilidad: respetar prefers-reduced-motion ────────────────────────── */
+/* ── Accesibilidad ─────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  #paises [id^="pais-"]:hover [id^="border"] circle,
-  #paises [id^="pais-"]:hover [id="border"] circle,
-  #paises #reserva:hover [id="border"] circle {
+  #paises [id^="pais-"].pais--activo [id^="border"] circle,
+  #paises [id^="pais-"].pais--activo [id="border"] circle,
+  #paises [id="reserva"].pais--activo [id="border"] circle {
     animation: none;
-    stroke-dasharray: 8 6; /* mantiene el punteado pero sin movimiento */
+    stroke-dasharray: 8 6; /* punteado visible pero sin movimiento */
   }
 }
 
-/* ─── Mobile: desactivar animación para no desperdiciar batería ──────────────── */
+/* ── Mobile: sin animación para preservar batería ─────────────────────────── */
 
 @media (max-width: 767px) {
-  #paises [id^="pais-"]:hover [id^="border"] circle,
-  #paises [id^="pais-"]:hover [id="border"] circle,
-  #paises #reserva:hover [id="border"] circle {
+  #paises [id^="pais-"].pais--activo [id^="border"] circle,
+  #paises [id^="pais-"].pais--activo [id="border"] circle,
+  #paises [id="reserva"].pais--activo [id="border"] circle {
     animation: none;
     stroke-dasharray: 8 6;
   }

@@ -700,3 +700,113 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   opacity: 1;
   transform: translateY(0);
 }
+
+/*
+ * animaciones-banderas.css
+ * Animar el borde punteado de las banderas en el panel de países.
+ *
+ * Pegar al final de css/diptico.css
+ *
+ * Técnica: stroke-dashoffset animado en el compositor thread.
+ * No recalcula layout. Sin repaint. Performance segura.
+ *
+ * Circunferencia de los círculos: 2 × π × 28.4 ≈ 178.4px
+ * stroke-dasharray: dash + gap que sumen un divisor limpio de 178.4
+ *   → 8 + 6 = 14 → 178.4 / 14 ≈ 12.7 segmentos (visual equilibrado)
+ */
+
+/* ─── Keyframe único compartido ─────────────────────────────────────────────── */
+
+@keyframes borde-girar {
+  to {
+    stroke-dashoffset: -178.4; /* una circunferencia completa → una vuelta exacta */
+  }
+}
+
+/* ─── Estado base de todos los bordes ──────────────────────────────────────── */
+/*
+ * Aplicamos a los <circle> dentro de los grupos [id^="border"].
+ * En reposo: borde sólido, sin animación.
+ * En hover del grupo padre pais-*: punteado + giro.
+ *
+ * will-change: stroke-dashoffset
+ * Le avisa al browser que este atributo va a cambiar → crea layer GPU de antemano.
+ */
+
+#paises [id^="border"] circle,
+#paises [id="border"] circle {
+  stroke-dasharray: none;
+  stroke-dashoffset: 0;
+  will-change: stroke-dashoffset;
+  transition: stroke-dasharray 200ms ease;
+}
+
+/* ─── Estado activo: hover sobre el grupo de país ──────────────────────────── */
+/*
+ * Al hacer hover en pais-china, pais-canada, etc. (o reserva/pais-reserva):
+ * 1. El borde pasa a punteado (8px raya, 6px espacio)
+ * 2. El dashoffset anima hacia -178.4 → giro continuo en sentido horario
+ *
+ * animation-play-state: paused en reposo → no consume recursos cuando no hay hover.
+ */
+
+#paises [id^="pais-"]:hover [id^="border"] circle,
+#paises [id^="pais-"]:hover [id="border"] circle,
+#paises #reserva:hover [id="border"] circle {
+  stroke-dasharray: 8 6;
+  stroke-dashoffset: 0;
+  animation: borde-girar 2.4s linear infinite;
+}
+
+/* ─── Velocidades distintas por país (personalidad visual) ──────────────────── */
+/*
+ * China: más rápido → agresivo, expansivo
+ * Canadá: velocidad media → corporativo, estable
+ * Nicaragua: lento → institucional
+ * Colombia: lento → extractivo pero tranquilo
+ * Reserva: muy lento → zona congelada, estática
+ */
+
+#paises #pais-china:hover [id^="border"] circle {
+  animation-duration: 1.6s;
+}
+
+#paises #pais-canada:hover [id^="border"] circle {
+  animation-duration: 2.4s;
+}
+
+#paises #pais-nicaragua:hover [id^="border"] circle {
+  animation-duration: 3.2s;
+}
+
+#paises #pais-colombia:hover [id^="border"] circle {
+  animation-duration: 3.2s;
+}
+
+#paises #reserva:hover [id="border"] circle,
+#paises #pais-reserva:hover [id^="border"] circle {
+  animation-duration: 4.8s;
+  stroke-dasharray: 4 10; /* punteado más esparso → zona legal/congelada */
+}
+
+/* ─── Accesibilidad: respetar prefers-reduced-motion ────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  #paises [id^="pais-"]:hover [id^="border"] circle,
+  #paises [id^="pais-"]:hover [id="border"] circle,
+  #paises #reserva:hover [id="border"] circle {
+    animation: none;
+    stroke-dasharray: 8 6; /* mantiene el punteado pero sin movimiento */
+  }
+}
+
+/* ─── Mobile: desactivar animación para no desperdiciar batería ──────────────── */
+
+@media (max-width: 767px) {
+  #paises [id^="pais-"]:hover [id^="border"] circle,
+  #paises [id^="pais-"]:hover [id="border"] circle,
+  #paises #reserva:hover [id="border"] circle {
+    animation: none;
+    stroke-dasharray: 8 6;
+  }
+}

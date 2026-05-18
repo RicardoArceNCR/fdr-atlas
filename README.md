@@ -2,452 +2,212 @@
 
 Atlas web editorial sobre concesiones mineras en territorios indígenas y afrodescendientes de Nicaragua, producido para Fundación del Río (FDR).
 
-El proyecto busca convertir mapas técnicos de concesiones en un **producto editorial cartográfico interactivo**, embebible, responsive y exportable a PDF.
+El proyecto convierte mapas técnicos de concesiones en un **producto editorial cartográfico interactivo**, embebible, responsive y exportable a PDF.
 
 ---
 
-## Estado actual
+## Estado actual — Mayo 2026
 
 **Rama activa:** `feat/waupasa-twi-editorial`
 
-**Checkpoint recomendado:** `waupasa-before-page-change-v1`
+**Mapa piloto:** `03-waupasa-twi` (Waupasa Twi)
 
-**Mapa piloto:** `03-waupasa-twi`
+### Waupasa Twi — mapa maestro del sistema
 
-El piloto Waupasa Twi funciona como **mapa maestro del sistema**:
-
-- raster base por breakpoint
-- SVG overlay inline por breakpoint
-- panel editorial HTML/CSS/JS
-- datos estructurados en `data-territorios.js`
-- interactividad SVG ↔ tarjetas
-- hover por país
-- base responsive desktop/tablet/mobile
-- base para impresión PDF
+- ✅ Raster base por breakpoint (desktop / tablet / mobile)
+- ✅ SVG overlay inline por breakpoint
+- ✅ Panel editorial renderizado desde `data-territorios.js`
+- ✅ Hover concesión ↔ card (bidireccional)
+- ✅ Hover bandera de país → activa grupo de concesiones
+- ✅ Animación stroke punteado por concesión al hover
+- ✅ Drop-shadow coloreado por país al hover
+- ✅ Tooltip de poblados
+- ✅ Responsive desktop/tablet/mobile
+- ✅ Base print/PDF
+- ⬜ Datos placeholder pendientes de verificación con FDR
+- ⬜ Hover target de `columbus` pendiente (fill:none en Illustrator)
 
 ---
 
-## Arquitectura confirmada
+## Arquitectura
 
 ```txt
 QGIS / fuente cartográfica
-→ raster base webp por breakpoint
-→ Illustrator
-→ SVG overlay limpio por breakpoint
-→ navegador carga raster + SVG inline
-→ panel editorial renderizado desde data
-→ interacción SVG/cards/países
-→ print CSS para PDF
+  → raster base webp por breakpoint
+  → Illustrator
+  → SVG overlay limpio por breakpoint
+  → navegador: raster + SVG inline
+  → panel editorial HTML/CSS/JS
+  → interacción SVG ↔ cards ↔ países
+  → print CSS para PDF
 ```
 
-Arquitectura técnica:
+Cada territorio se define con un solo `index.html`:
 
-```txt
-raster base webp por breakpoint
-+
-SVG overlay inline por breakpoint
-+
-panel editorial HTML/CSS/JS
-+
-data estructurada por territorio
-+
-tokens de diseño
-+
-sistema editorial cartográfico por país/patrón
+```html
+<body data-territorio="03-waupasa-twi">
+  <script type="module" src="../../js/render-diptico.js"></script>
+</body>
 ```
+
+El renderer carga el template, los assets y la data. No hay HTML distinto por territorio.
 
 ---
 
-## Producto final
+## Producto final — 16 dípticos
 
-El atlas contempla **16 dípticos web editoriales**:
-
-1. Rama y Kriol
-2. Creole de Bluefields
-3. Waupasa Twi
-4. Wangki Twi-Tasba Raya
-5. Wangki Li Aubra Tasbaya
-6. Twi Ahbra 10 comunidades
-7. Tuahka
-8. Tasba Pri Matriz Indígena
-9. Prinzu Awala
-10. Mayangna Sauni Bas
-11. Mayangna Sauni As
-12. Masauni Arumatun
-13. Amasau
-14. Chorotega II
-15. Matagalpa
-16. Prinzu Auhya Uh
+| # | Territorio | Cluster |
+|---|---|---|
+| 01 | Rama y Kriol | C — dual |
+| 02 | Creole de Bluefields | B — minimalista |
+| 03 | Waupasa Twi | A — presión extrema ← **maestro activo** |
+| 04 | Wangki Twi-Tasba Raya | C — dual |
+| 05 | Wangki Li Aubra Tasbaya | C — dual |
+| 06 | Twi Ahbra 10 comunidades | B — minimalista |
+| 07 | Tuahka | A — presión extrema |
+| 08 | Tasba Pri Matriz Indígena | A — presión extrema |
+| 09 | Prinzu Awala | A — presión extrema |
+| 10 | Mayangna Sauni Bas | C — dual |
+| 11 | Mayangna Sauni As | A — presión extrema |
+| 12 | Masauni Arumatun | D — fragmentación extrema |
+| 13 | Amasau | D — fragmentación extrema |
+| 14 | Chorotega II | B — minimalista |
+| 15 | Matagalpa | B — minimalista |
+| 16 | Prinzu Auhya Uh | B — minimalista |
 
 ---
 
-## Sistema editorial cartográfico
+## Orden de mapas maestros
 
-El atlas no debe resolverse como 16 mapas independientes. Debe funcionar como un sistema visual común.
+No construir los 16 mapas al mismo tiempo. Primero consolidar los cuatro maestros:
 
-Decisión principal:
+| Rol | Mapa | Estado |
+|---|---|---|
+| Multipaís denso | Waupasa Twi | En curso |
+| Minimalista | Creole de Bluefields | Siguiente |
+| Dual | Wangki Li Aubra Tasbaya | Pendiente |
+| Complejo/fragmentado | Tuahka | Pendiente |
+
+---
+
+## Sistema visual — país como identidad
 
 ```txt
 PAÍS = identidad visual principal
 CONCESIÓN = variación secundaria
 ```
 
-Esto significa que los colores y patrones deben responder primero al país de capital o tipo de concesión:
-
-- China
-- Canadá
-- Colombia
-- Nicaragua / Nacional
-- Reserva minera
-
-Y luego cada concesión recibe una variación dentro de esa familia.
+| País | Paleta | Patrones |
+|---|---|---|
+| China | rojos, naranjas | diagonales densas, círculos, cross-hatch |
+| Canadá | azules fríos | grid técnico, doble línea, hachurado fino |
+| Colombia | verdes petróleo, turquesas | retícula modular, escalonado |
+| Nicaragua | azules institucionales | líneas verticales, trama ligera |
+| Reserva | gris, café | sólido, hachurado grueso |
 
 ---
 
-## Familias visuales por país
+## Estructura SVG por concesión
 
-### China
+Cada concesión debe seguir esta estructura en Illustrator:
 
-Debe sentirse dominante, expansiva y densa.
-
-Uso recomendado:
-
-```txt
-rojos
-naranjas
-amarillos cálidos
-diagonales densas
-círculos
-cross-hatch
-puntos compactos
+```
+<g id="nombre-concesion">          ← ID que usa el JS
+  <g id="area-main*">              ← patrón con clipPath
+    <Clipping Path>                ← máscara del contorno
+    <Group>                        ← shapes del patrón
+  </g>
+  [shape] id="border*"             ← contorno para animación
+  [shape] id="area-hover-target*"  ← hit area opacidad:0
+</g>
 ```
 
-### Canadá
-
-Debe sentirse corporativo, frío, técnico y modular.
-
-Uso recomendado:
-
-```txt
-azules fríos
-azules intensos
-violetas controlados
-grid técnico
-doble línea
-hachurado fino
-```
-
-### Colombia
-
-Debe sentirse extractivo-industrial, selvático, modular y corporativo.
-
-Uso recomendado:
-
-```txt
-verdes petróleo
-turquesas
-verde oscuro
-retícula modular
-patrones escalonados
-líneas segmentadas
-```
-
-### Nicaragua / Nacional
-
-Debe sentirse institucional, administrativo y estatal.
-
-Uso recomendado:
-
-```txt
-azules institucionales
-gris petróleo
-líneas verticales
-trama ligera
-relleno parcial
-```
-
-### Reserva minera
-
-Debe sentirse como restricción, bloque legal o zona congelada.
-
-Uso recomendado:
-
-```txt
-gris
-café
-marrón
-sólido
-hachurado grueso
-```
+**Regla crítica del hover target:** el shape debe tener `fill` de cualquier color (nunca `fill:none`) con `opacidad: 0`. `fill:none` destruye el hit area. El modelo correcto es `walpa-tara`.
 
 ---
 
-## Clusters de mapas
+## Animación de borders — nota importante
 
-Para producir el atlas de forma consistente, los mapas se agrupan por comportamiento visual.
+Los IDs `border*` en el SVG **se reasignan en cada export de Illustrator**. Después de cada export, auditar:
 
-### Cluster A — Presión extrema multipaís
-
-```txt
-03_Waupasa Twi
-07_Tuahka
-08_Tasba Pri Matriz Indígena
-09_Prinzu Awala
-11_Mayangna Sauni As
+```bash
+grep -o 'id="border[^"]*"' mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg | sort
 ```
 
-Uso:
+Y actualizar el mapa en `css/diptico.css`. El mapa actual para Waupasa Twi es:
 
-```txt
-alta densidad
-varios países
-superposición compleja
-ruido controlado
 ```
-
-### Cluster B — Minimalistas / concesión única o mínima
-
-```txt
-02_Creole de Bluefields
-06_Twi Ahbra 10 comunidades
-14_Chorotega II
-15_Matagalpa
-16_Prinzu Auhya Uh
+#border  → el-encanto-i   (china)
+#border1 → columbus       (china)
+#border2 → el-encanto-ii  (china)
+#border3 → caribe         (china)
+#border4 → caribe         (china)
+#border5 → yulu-awaskira  (china)
+#border6 → reserva-minera (reserva)
+#border7 → walpa-tara     (canada)
+#border8 → vanessa        (nacional)
+#border9 → puerto-cabezas (nacional)
 ```
-
-Uso:
-
-```txt
-espacio negativo
-concesión protagonista
-dramatismo editorial
-poca saturación
-```
-
-### Cluster C — Duales / equilibrio medio
-
-```txt
-01_Rama y Kriol
-04_Wangki Twi-Tasba Raya
-05_Wangki Li Aubra Tasbaya
-10_Mayangna Sauni Bas
-```
-
-Uso:
-
-```txt
-2 a 4 concesiones
-comparación clara
-aire visual
-jerarquía limpia
-```
-
-### Cluster D — Fragmentación extrema
-
-```txt
-12_Masauni Arumatun
-13_Amasau
-```
-
-Uso:
-
-```txt
-muchísimas concesiones
-riesgo alto de sopa GIS
-opacidad baja
-agrupación fuerte por país
-leyendas compactas
-```
-
----
-
-## Mapas maestros recomendados
-
-Antes de producir los 16 mapas, se deben cerrar 4 mapas maestros:
-
-| Rol | Mapa |
-|---|---|
-| Maestro multipaís denso | Waupasa Twi |
-| Maestro minimalista | Creole de Bluefields |
-| Maestro dual | Wangki Li Aubra Tasbaya |
-| Maestro complejo/fragmentado | Tuahka |
-
-Si estos cuatro funcionan, el resto del atlas puede replicar sistema, layout, patrones, responsive e interacción con mucho menos riesgo.
 
 ---
 
 ## Archivos clave
 
 ```txt
-atlas/03-waupasa-twi/index.html
-templates/diptico-base.html
-css/diptico.css
-js/render-diptico.js
-js/data-territorios.js
-mapas-raster/03-waupasa-twi/*.webp
-mapas-svg/03-waupasa-twi/*.svg
-design-system/tokens/source/*.json
+atlas/03-waupasa-twi/index.html    ← único HTML por territorio
+templates/diptico-base.html        ← template compartido
+css/diptico.css                    ← estilos del sistema
+js/render-diptico.js               ← renderer + interactividad
+js/data-territorios.js             ← datos de todos los territorios
+mapas-raster/03-waupasa-twi/       ← webp por breakpoint
+mapas-svg/03-waupasa-twi/          ← SVG por breakpoint
 design-system/tokens/build/tokens.css
 ATLAS_PATTERN_SYSTEM.md
 CLAUDE.md
-project_wp_tree.txt
-```
-
----
-
-## CSS crítico del SVG inline
-
-```css
-.mapa-svg-inline {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-}
-
-.mapa-svg-inline svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  overflow: visible;
-}
-```
-
-Este bloque es obligatorio para que el SVG inline se apile correctamente sobre el raster.
-
----
-
-## Breakpoints del mapa Waupasa Twi
-
-| Breakpoint | Raster/SVG | Dimensiones |
-|---|---:|---:|
-| Desktop | `desktop-03-Waupasa-Twi` | 927 × 980 |
-| Tablet | `tablet-03-Waupasa-Twi` | 780 × 1306 |
-| Mobile | `mobile-03-Waupasa-Twi` | 504 × 634 |
-
-Las dimensiones del raster, el viewBox del SVG y los valores en `data-territorios.js` deben coincidir.
-
----
-
-## Reglas para exportar SVG desde Illustrator
-
-Usar:
-
-```txt
-File → Export → Export As…
-Format: SVG
-Use Artboards: ON
-```
-
-No usar Asset Export para el SVG maestro, porque puede exportar solo un grupo/layer.
-
-Opciones recomendadas:
-
-```txt
-Object IDs: Layer Names
-Responsive: OFF
-Minify: OFF
-Preserve Illustrator Editing Capabilities: OFF
-```
-
-El SVG no debe contener:
-
-```txt
-<image>
-base64
-xlink:href
-href a raster
-mask
-filter
-foreignObject
-```
-
-Validación rápida:
-
-```bash
-grep -i "image\|xlink:href\|href" mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg
-```
-
-Si no devuelve nada, el SVG no tiene raster embebido.
-
----
-
-## Pipeline quirúrgico por mapa
-
-Cada mapa debe pasar por:
-
-```txt
-1. Auditoría GIS/editorial
-2. Clasificación de cluster
-3. Definición de sistema visual
-4. Composición editorial
-5. Raster base webp por breakpoint
-6. SVG overlay limpio por breakpoint
-7. Normalización de IDs y clases
-8. Integración en data-territorios.js
-9. Validación desktop/tablet/mobile
-10. Interacción SVG ↔ panel
-11. Validación print/PDF
-12. Checkpoint Git
 ```
 
 ---
 
 ## Comandos útiles
 
-Levantar sitio local desde la raíz:
-
 ```bash
+# Levantar servidor local
 python3 -m http.server 8000
-```
+# Abrir: http://localhost:8000/atlas/03-waupasa-twi/
 
-Abrir:
-
-```txt
-http://localhost:8000/atlas/03-waupasa-twi/
-```
-
-Verificar SVG cargado:
-
-```js
-document.querySelector('#mapa-svg-inline svg')
-document.querySelector('#mapa-svg-inline').getBoundingClientRect()
-document.querySelector('#mapa-svg-inline svg').getBoundingClientRect()
-```
-
-Verificar IDs:
-
-```bash
+# Auditar IDs del SVG
 grep -o 'id="[^"]*"' mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg | sort | uniq
+
+# Auditar borders (reasignar en CSS si cambian)
+grep -o 'id="border[^"]*"' mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg | sort
+
+# Verificar que el SVG no tenga imágenes embebidas
+grep -i "image\|xlink:href\|href" mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg
 ```
 
 ---
 
-## Guardado estable recomendado
+## Checkpoint Git
 
 ```bash
-git status
+git add \
+  CLAUDE.md \
+  README.md \
+  ATLAS_PATTERN_SYSTEM.md \
+  css/diptico.css \
+  js/render-diptico.js \
+  js/data-territorios.js \
+  templates/diptico-base.html \
+  atlas/03-waupasa-twi/index.html \
+  project_wp_tree.txt \
+  mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg \
+  mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg \
+  mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg
 
-git add CLAUDE.md   README.md   ATLAS_PATTERN_SYSTEM.md   css/diptico.css   js/render-diptico.js   js/data-territorios.js   templates/diptico-base.html   project_wp_tree.txt   mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg   mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg   mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg
+git commit -m "feat(waupasa): complete hover system — all 9 concesiones animated"
 
-git commit -m "docs(atlas): define editorial cartographic pattern system"
-
-git tag atlas-pattern-system-v1
+git tag waupasa-hover-complete-v1
 
 git push origin feat/waupasa-twi-editorial
-git push origin atlas-pattern-system-v1
+git push origin waupasa-hover-complete-v1
 ```
-
----
-
-## Próximo paso
-
-1. Consolidar Waupasa Twi como mapa maestro del sistema.
-2. Crear o ajustar tokens de países, patrones y estados.
-3. Normalizar SVG para usar clases reutilizables.
-4. Implementar badges con bandera + país.
-5. Validar hover por país, concesión y tarjeta.
-6. Crear maestro minimalista con Creole de Bluefields.
-7. Crear maestro dual con Wangki Li.
-8. Crear maestro complejo con Tuahka.

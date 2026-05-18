@@ -333,12 +333,12 @@
 
 .concesion-card {
   border: 0.5px solid var(--border-subtle);
-  border-radius: var(--radius-sm, 4px);
+  border-radius: 5px;
   padding: 6px 8px;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: rgba(255,255,255,0.72);
   transition:
     border-color 160ms ease,
@@ -515,7 +515,7 @@
   }
 
   .concesiones-lista {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .diptico__concesiones--mapa.is-collapsed .concesiones-lista {
@@ -576,7 +576,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   }
 
   .concesion-card {
-    padding: 7px;
+    padding: 2px;
   }
 
   .diptico__stats {

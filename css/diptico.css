@@ -537,9 +537,7 @@
   }
 
   .concesion-card__badge {
-    grid-column: 2;
-    justify-self: start;
-    margin-top: 2px;
+    display: none;
   }
 
   .concesion-card__nombre {

@@ -652,11 +652,6 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   transition: opacity 160ms ease, filter 160ms ease;
 }
 
-.concesion--activa {
-  opacity: 1;
-  filter: drop-shadow(0 0 6px rgba(0,0,0,0.35));
-}
-
 .concesion--atenuada {
   opacity: 0.18;
 }
@@ -702,20 +697,219 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 }
 
 
+/* ─── Stroke animado en concesiones — REEMPLAZA el bloque anterior ────────────
+ *
+ * El SVG actual usa estos IDs de border para Waupasa Twi:
+ *   #border   → el-encanto-i
+ *   #border1  → columbus
+ *   #border2  → el-encanto-ii
+ *   #border3  → caribe
+ *   #border4  → caribe
+ *   #border5  → yulu-awaskira
+ *   #border6  → reserva-minera
+ *   #border7  → walpa-tara
+ *   #border8  → vanessa
+ *   #border9  → puerto-cabezas
+ *
+ * Nota: Illustrator puede reasignar estos IDs en cada export.
+ * Auditar con:
+ *   grep -o 'id="border[^\"]*"' mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg | sort
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── 1. Estado base: todos los borders invisibles en reposo ─────────────────── */
+
+#border, #border > *,
+#border1, #border1 > *,
+#border2, #border3, #border4,
+#border5, #border6, #border7,
+#border8, #border8 > *,
+#border9 {
+  opacity: 0;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+  will-change: stroke-dashoffset;
+}
 
 
 
 
+/* ── 2. Keyframe único para todos ────────────────────────────────────────────── */
+
+@keyframes dash-concesion {
+  to { stroke-dashoffset: -200; }
+}
 
 
+/* ── 3. China — el-encanto-i (#border, anidado) ─────────────────────────────── */
+
+#el-encanto-i.concesion--activa #border,
+#el-encanto-i.concesion--activa #border > * {
+  opacity: 1;
+  stroke: #b91c1c;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
 
 
+/* ── 4. China — columbus (#border1) ────────────────────────────────────── */
+
+#columbus.concesion--activa #border1,
+#columbus.concesion--activa #border1 > * {
+  opacity: 1;
+  stroke: #b91c1c;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
 
 
+/* ── 5. China — el-encanto-ii (#border2) ───────────────────────────────────── */
+
+#el-encanto-ii.concesion--activa #border2 {
+  opacity: 1;
+  stroke: #b91c1c;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
 
 
+/* ── 6. China — yulu-awaskira (#border5) ───────────────────────────────────── */
+
+#yulu-awaskira.concesion--activa #border5 {
+  opacity: 1;
+  stroke: #b91c1c;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
 
 
+/* ── 7. Reserva minera (#border6) ──────────────────────────────────────────── */
+
+#reserva-minera.concesion--activa #border6 {
+  opacity: 1;
+  stroke: #4b5563;
+  stroke-dasharray: 4 12;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 4s linear infinite;
+}
+
+
+/* ── 8. China — caribe (#border3, #border4) ────────────────────────────────── */
+
+#caribe.concesion--activa #border3,
+#caribe.concesion--activa #border4 {
+  opacity: 1;
+  stroke: #b91c1c;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+
+/* ── 9. Canadá — walpa-tara (#border7) ─────────────────────────────────────── */
+
+#walpa-tara.concesion--activa #border7 {
+  opacity: 1;
+  stroke: #b45309;
+  stroke-dasharray: 12 6;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+
+
+/* ── 10. Nicaragua — vanessa (#border8) ────────────────────────────────────── */
+
+#vanessa.concesion--activa #border8,
+#vanessa.concesion--activa #border8 > * {
+  opacity: 1;
+  stroke: #0f5fa6;
+  stroke-dasharray: 8 8;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+
+
+/* ── 11. Nicaragua — puerto-cabezas (#border9) ─────────────────────────────── */
+
+#puerto-cabezas.concesion--activa #border9 {
+  opacity: 1;
+  stroke: #0f5fa6;
+  stroke-dasharray: 8 8;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+
+
+/* ── 9. Drop-shadow coloreado por país ───────────────────────────────────────── */
+/*
+ * Reemplaza el drop-shadow negro genérico.
+ * Se aplica al grupo concesión completo.
+ */
+
+.concesion--activa {
+  opacity: 1;
+  filter: none;
+}
+
+#china .concesion--activa {
+  filter: drop-shadow(0 0 9px rgba(185, 28, 28, 0.55));
+}
+
+#canada .concesion--activa {
+  filter: drop-shadow(0 0 9px rgba(180, 83, 9, 0.50));
+}
+
+#nicaragua .concesion--activa {
+  filter: drop-shadow(0 0 9px rgba(15, 95, 166, 0.50));
+}
+
+#reserva-minera .concesion--activa {
+  filter: drop-shadow(0 0 7px rgba(75, 85, 99, 0.45));
+}
+
+
+/* ── 10. Accesibilidad ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  #border, #border1, #border2, #border3, #border4, #border5, #border6, #border7, #border8, #border9,
+  #border > *, #border1 > *, #border3 > *, #border8 > * {
+    animation: none !important;
+    stroke-dasharray: 6 6 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #border, #border1, #border2, #border3, #border4, #border5, #border6, #border7, #border8, #border9,
+  #border > *, #border1 > *, #border3 > *, #border8 > * {
+    animation: none !important;
+    stroke-dasharray: 6 6 !important;
+  }
+}
+
+
+/* ── NOTA: border IDs actuales del SVG ────────────────────────────────────────
+ *
+ * Mapa actual de border IDs Waupasa Twi:
+ *   #border   → el-encanto-i
+ *   #border1  → columbus
+ *   #border2  → el-encanto-ii
+ *   #border3  → caribe
+ *   #border4  → caribe
+ *   #border5  → yulu-awaskira
+ *   #border6  → reserva-minera
+ *   #border7  → walpa-tara
+ *   #border8  → vanessa
+ *   #border9  → puerto-cabezas
+ *
+ * Si se re-exporta desde Illustrator, auditar con:
+ *   grep -o 'id="border[^"]*"' mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg | sort
+ *
+ * Esta versión ya no depende de selectores obsoletos sobre Nicaragua.
+ * Si Illustrator reasigna los IDs, vuelve a auditar y actualiza este bloque.
+ * ─────────────────────────────────────────────────────────────────────────── */
 
 /* ─── Animaciones de borde en banderas ───────────────────────────────────────
  *

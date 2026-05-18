@@ -303,6 +303,12 @@ function initInteractividad(concesiones) {
 
   const todosLosIds = concesiones.filter(c => c.svg_id).map(c => c.svg_id);
 
+  // Mapa svg_id → pais para saber qué bandera activar
+  const idAPais = {};
+  concesiones.forEach((c) => {
+    if (c.svg_id && c.pais) idAPais[c.svg_id] = c.pais;
+  });
+
   concesiones.forEach((c) => {
     if (!c.svg_id) return;
 
@@ -312,36 +318,62 @@ function initInteractividad(concesiones) {
 
     if (!svgGroup || !svgEl || !card) return;
 
-    svgEl.addEventListener("mouseenter", () => { activar(svgGroup, card, todosLosIds); });
+    svgEl.addEventListener("mouseenter", () => { activar(svgGroup, card, todosLosIds, idAPais); });
     svgEl.addEventListener("mouseleave", () => { desactivar(svgGroup, card, todosLosIds); });
-    card.addEventListener("mouseenter", () => { activar(svgGroup, card, todosLosIds); });
+    card.addEventListener("mouseenter", () => { activar(svgGroup, card, todosLosIds, idAPais); });
     card.addEventListener("mouseleave", () => { desactivar(svgGroup, card, todosLosIds); });
   });
 }
 
-function activar(svgEl, card, todosLosIds = []) {
+function activar(svgEl, card, todosLosIds = [], idAPais = {}) {
   svgEl.classList.add("concesion--activa");
   card.classList.add("concesion-card--activa");
 
+  // Atenuar el resto de concesiones y sus cards
   todosLosIds.forEach((id) => {
     if (id === svgEl.id) return;
     const otro = document.getElementById(id);
-    if (otro) {
-      otro.classList.add("concesion--atenuada");
-      otro.classList.remove("concesion--activa");
-    }
+    const otraCard = document.querySelector(`.concesion-card[data-svg-id="${id}"]`);
+    otro?.classList.add("concesion--atenuada");
+    otro?.classList.remove("concesion--activa");
+    otraCard?.classList.add("concesion-card--atenuada");
+    otraCard?.classList.remove("concesion-card--activa");
   });
+
+  // Activar la bandera del país de esta concesión, atenuar las demás
+  const pais = idAPais[svgEl.id];
+  if (pais) {
+    const svgPaisIdActivo = PAIS_SVG_ID[pais];
+    Object.values(PAIS_SVG_ID).forEach((svgPaisId) => {
+      const paisEl = document.getElementById(svgPaisId);
+      if (!paisEl) return;
+      if (svgPaisId === svgPaisIdActivo) {
+        paisEl.classList.add("pais--activo");
+        paisEl.classList.remove("pais--inactivo");
+      } else {
+        paisEl.classList.add("pais--inactivo");
+        paisEl.classList.remove("pais--activo");
+      }
+    });
+  }
 }
 
 function desactivar(svgEl, card, todosLosIds = []) {
   svgEl.classList.remove("concesion--activa");
   card.classList.remove("concesion-card--activa");
 
+  // Limpiar todas las concesiones y cards
   todosLosIds.forEach((id) => {
     const otro = document.getElementById(id);
-    if (otro) {
-      otro.classList.remove("concesion--atenuada", "concesion--activa");
-    }
+    const otraCard = document.querySelector(`.concesion-card[data-svg-id="${id}"]`);
+    otro?.classList.remove("concesion--atenuada", "concesion--activa");
+    otraCard?.classList.remove("concesion-card--atenuada", "concesion-card--activa");
+  });
+
+  // Limpiar todos los grupos de banderas
+  Object.values(PAIS_SVG_ID).forEach((svgPaisId) => {
+    const paisEl = document.getElementById(svgPaisId);
+    paisEl?.classList.remove("pais--activo", "pais--inactivo");
   });
 }
 
@@ -438,22 +470,29 @@ function initHoverPaises(concesiones) {
 
 function activarPais(idsActivos, idsTodos) {
   idsTodos.forEach((id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
+    const svgEl = document.getElementById(id);
+    const card  = document.querySelector(`.concesion-card[data-svg-id="${id}"]`);
+
     if (idsActivos.includes(id)) {
-      el.classList.add('concesion--activa');
-      el.classList.remove('concesion--atenuada');
+      svgEl?.classList.add('concesion--activa');
+      svgEl?.classList.remove('concesion--atenuada');
+      card?.classList.add('concesion-card--activa');
+      card?.classList.remove('concesion-card--atenuada');
     } else {
-      el.classList.add('concesion--atenuada');
-      el.classList.remove('concesion--activa');
+      svgEl?.classList.add('concesion--atenuada');
+      svgEl?.classList.remove('concesion--activa');
+      card?.classList.add('concesion-card--atenuada');
+      card?.classList.remove('concesion-card--activa');
     }
   });
 }
 
 function desactivarPais(idsTodos) {
   idsTodos.forEach((id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.classList.remove('concesion--activa', 'concesion--atenuada');
+    const svgEl = document.getElementById(id);
+    const card  = document.querySelector(`.concesion-card[data-svg-id="${id}"]`);
+
+    svgEl?.classList.remove('concesion--activa', 'concesion--atenuada');
+    card?.classList.remove('concesion-card--activa', 'concesion-card--atenuada');
   });
 }

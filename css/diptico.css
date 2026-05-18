@@ -668,13 +668,76 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   transition:
     border-color 160ms ease,
     background 160ms ease,
+    color 160ms ease,
+    opacity 160ms ease,
+    box-shadow 160ms ease,
     transform 160ms ease;
 }
 
+/* ── Estado activo base ───────────────────────────────────────────────────── */
+
 .concesion-card--activa {
-  border-color: var(--brand-main);
-  background: var(--feedback-success-bg);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.concesion-card--activa .concesion-card__nombre,
+.concesion-card--activa .concesion-card__empresa {
+  color: #fff;
+}
+
+.concesion-card--activa .concesion-card__badge {
+  background: rgba(255, 255, 255, 0.20);
+  color: #fff;
+}
+
+/* ── Activo por país ─────────────────────────────────────────────────────── */
+
+/* China — rojo */
+.concesion-card--activa[data-svg-id="caribe"],
+.concesion-card--activa[data-svg-id="columbus"],
+.concesion-card--activa[data-svg-id="el-encanto-i"],
+.concesion-card--activa[data-svg-id="el-encanto-ii"],
+.concesion-card--activa[data-svg-id="yulu-awaskira"] {
+  background: #b91c1c;
+  border-color: #b91c1c;
+  box-shadow: 0 4px 10px rgba(185, 28, 28, 0.30);
+}
+
+/* Canadá — azul */
+.concesion-card--activa[data-svg-id="walpa-tara"] {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  box-shadow: 0 4px 10px rgba(29, 78, 216, 0.30);
+}
+
+/* Nicaragua / Nacional — magenta */
+.concesion-card--activa[data-svg-id="puerto-cabezas"],
+.concesion-card--activa[data-svg-id="vanessa"] {
+  background: #be185d;
+  border-color: #be185d;
+  box-shadow: 0 4px 10px rgba(190, 24, 93, 0.30);
+}
+
+/* Reserva — gris */
+.concesion-card--activa[data-svg-id="reserva-minera"] {
+  background: #4b5563;
+  border-color: #4b5563;
+  box-shadow: 0 4px 10px rgba(75, 85, 99, 0.30);
+}
+
+/* Colombia — verde (para futuros mapas) */
+.concesion-card--activa[data-svg-id*="colombia"],
+.concesion-card--activa[data-svg-id*="hemco"] {
+  background: #0f766e;
+  border-color: #0f766e;
+  box-shadow: 0 4px 10px rgba(15, 118, 110, 0.30);
+}
+
+/* ── Estado atenuado ──────────────────────────────────────────────────────── */
+
+.concesion-card--atenuada {
+  opacity: 0.35;
 }
 
 .pais-btn--activo {

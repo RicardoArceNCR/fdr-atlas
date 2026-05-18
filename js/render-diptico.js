@@ -19,15 +19,6 @@ window.addEventListener("resize", () => {
   if (current !== lastBreakpoint) {
     lastBreakpoint = current;
 
-    const panel = document.querySelector(".diptico__concesiones--mapa");
-    if (panel) {
-      if (current === "mobile") {
-        panel.classList.add("is-collapsed");
-      } else {
-        panel.classList.remove("is-collapsed");
-      }
-    }
-
     const id = document.body.dataset.territorio;
     const territorio = getTerritorio(id);
 
@@ -226,7 +217,16 @@ function renderConcesiones(t) {
       if (c.svg_id) card.dataset.svgId = c.svg_id;
 
       const patron = document.createElement("div");
-      patron.className = `concesion-card__patron patron-${c.pais}`;
+      if (c.patron_img) {
+        patron.className = "concesion-card__patron";
+        const img = document.createElement("img");
+        img.src = c.patron_img;
+        img.alt = "";
+        img.className = "concesion-card__patron-img";
+        patron.appendChild(img);
+      } else {
+        patron.className = `concesion-card__patron patron-${c.pais}`;
+      }
 
       const info = document.createElement("div");
       info.innerHTML = `
@@ -287,10 +287,6 @@ function initToggleConcesiones() {
   const btn = document.querySelector(".diptico__toggle-concesiones");
 
   if (!panel || !btn) return;
-
-  if (getBreakpoint() === "mobile") {
-    panel.classList.add("is-collapsed");
-  }
 
   btn.addEventListener("click", () => {
     panel.classList.toggle("is-collapsed");

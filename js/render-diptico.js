@@ -217,7 +217,16 @@ function renderConcesiones(t) {
       if (c.svg_id) card.dataset.svgId = c.svg_id;
 
       const patron = document.createElement("div");
-      patron.className = `concesion-card__patron patron-${c.pais}`;
+      if (c.patron_img) {
+        patron.className = "concesion-card__patron";
+        const img = document.createElement("img");
+        img.src = c.patron_img;
+        img.alt = "";
+        img.className = "concesion-card__patron-img";
+        patron.appendChild(img);
+      } else {
+        patron.className = `concesion-card__patron patron-${c.pais}`;
+      }
 
       const info = document.createElement("div");
       info.innerHTML = `

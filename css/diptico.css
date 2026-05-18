@@ -939,64 +939,64 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   to { stroke-dashoffset: -178.4; }
 }
 
-/* ── Estado base: todos los bordes de bandera ──────────────────────────────── */
-
-#paises [id^="border"] circle,
-#paises [id="border"] circle {
-  will-change: stroke-dashoffset;
-  transition: stroke-dasharray 200ms ease;
-}
-
-/* ── Estado activo: .pais--activo activa la animación ─────────────────────── */
+/* ── Estado base: bordes invisibles en reposo ──────────────────────────────── */
 /*
- * Selecciona el <circle> dentro del grupo border,
- * dentro del grupo pais-* o reserva que tenga .pais--activo.
+ * IDs estables — nombrados manualmente en Illustrator.
+ * No dependen del orden de layers → seguros ante reexport.
  */
 
-#paises [id^="pais-"].pais--activo [id^="border"] circle,
-#paises [id^="pais-"].pais--activo [id="border"] circle,
-#paises [id="reserva"].pais--activo [id="border"] circle,
-#paises [id="pais-reserva"].pais--activo [id^="border"] circle {
+#border-china circle,
+#border-canada circle,
+#border-nicaragua circle,
+#border-colombia circle,
+#border-reserva circle {
+  opacity: 0;
+  will-change: stroke-dashoffset;
+  transition: stroke-dasharray 200ms ease, opacity 200ms ease;
+}
+
+/* ── Estado activo: aparece y anima al hover ───────────────────────────────── */
+
+#pais-china.pais--activo     #border-china circle,
+#pais-canada.pais--activo    #border-canada circle,
+#pais-nicaragua.pais--activo #border-nicaragua circle,
+#pais-colombia.pais--activo  #border-colombia circle,
+#pais-reserva.pais--activo   #border-reserva circle {
+  opacity: 1;
   stroke-dasharray: 8 6;
   stroke-dashoffset: 0;
   animation: borde-girar 4s linear infinite;
 }
 
-/* ── Velocidades por país — más suaves que la versión anterior ─────────────── */
-/*
- * Todas entre 3s y 6s. Diferencias sutiles:
- * China levemente más ágil, Reserva más lenta.
- * La diferencia es perceptible pero no intrusiva.
- */
+/* ── Velocidades por país ───────────────────────────────────────────────────── */
 
-#paises #pais-china.pais--activo     [id^="border"] circle { animation-duration: 3s;   }
-#paises #pais-canada.pais--activo    [id^="border"] circle { animation-duration: 4s;   }
-#paises #pais-nicaragua.pais--activo [id^="border"] circle { animation-duration: 4.5s; }
-#paises #pais-colombia.pais--activo  [id^="border"] circle { animation-duration: 4.5s; }
-
-#paises #reserva.pais--activo     [id="border"] circle,
-#paises #pais-reserva.pais--activo [id^="border"] circle {
-  animation-duration: 6s;
-  stroke-dasharray: 4 10; /* punteado más esparso → zona legal/congelada */
-}
+#pais-china.pais--activo     #border-china circle     { animation-duration: 3s;   }
+#pais-canada.pais--activo    #border-canada circle    { animation-duration: 4s;   }
+#pais-nicaragua.pais--activo #border-nicaragua circle { animation-duration: 4.5s; }
+#pais-colombia.pais--activo  #border-colombia circle  { animation-duration: 4.5s; }
+#pais-reserva.pais--activo   #border-reserva circle   { animation-duration: 6s; stroke-dasharray: 4 10; }
 
 /* ── Accesibilidad ─────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  #paises [id^="pais-"].pais--activo [id^="border"] circle,
-  #paises [id^="pais-"].pais--activo [id="border"] circle,
-  #paises [id="reserva"].pais--activo [id="border"] circle {
+  #pais-china.pais--activo     #border-china circle,
+  #pais-canada.pais--activo    #border-canada circle,
+  #pais-nicaragua.pais--activo #border-nicaragua circle,
+  #pais-colombia.pais--activo  #border-colombia circle,
+  #pais-reserva.pais--activo   #border-reserva circle {
     animation: none;
-    stroke-dasharray: 8 6; /* punteado visible pero sin movimiento */
+    stroke-dasharray: 8 6;
   }
 }
 
 /* ── Mobile: sin animación para preservar batería ─────────────────────────── */
 
 @media (max-width: 767px) {
-  #paises [id^="pais-"].pais--activo [id^="border"] circle,
-  #paises [id^="pais-"].pais--activo [id="border"] circle,
-  #paises [id="reserva"].pais--activo [id="border"] circle {
+  #pais-china.pais--activo     #border-china circle,
+  #pais-canada.pais--activo    #border-canada circle,
+  #pais-nicaragua.pais--activo #border-nicaragua circle,
+  #pais-colombia.pais--activo  #border-colombia circle,
+  #pais-reserva.pais--activo   #border-reserva circle {
     animation: none;
     stroke-dasharray: 8 6;
   }

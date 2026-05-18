@@ -18,9 +18,20 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ─── Contenedor editorial global ──────────────────────────────────────────── */
+
+.atlas-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: var(--mapa-tierra-exterior);
+}
+
 /* ─── Root del díptico ─────────────────────────────────────────────────────── */
 
 .diptico {
+  width: 100%;
+  max-width: 1600px;
   display: grid;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
@@ -51,47 +62,46 @@
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: auto;
   background: var(--mapa-tierra-exterior);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.diptico__mapa img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
+  padding: 8px;
 }
 
 .mapa-editorial {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  aspect-ratio: 927 / 979.5;
-  height: auto;
-  margin: auto;
+  width: min(100%, 920px);
+  margin-inline: auto;
 }
 
-.mapa-base,
-.mapa-svg-layer {
+.mapa-stack {
+  position: relative;
+  width: 100%;
+  /* aspect-ratio inyectado dinámicamente por render-diptico.js según breakpoint */
+  aspect-ratio: 927 / 980; /* fallback desktop */
+}
+
+.mapa-raster,
+.mapa-overlay {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
 
-.mapa-base {
-  object-fit: contain;
+.mapa-raster {
+  object-fit: fill;
 }
 
-.mapa-svg-layer {
-  pointer-events: auto;
+.mapa-overlay {
+  pointer-events: none;
 }
 
-.mapa-svg-layer svg {
+.mapa-editorial svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.mapa-editorial object {
   width: 100%;
   height: 100%;
   display: block;
@@ -269,38 +279,76 @@
   font-family: 'Sora', sans-serif;
 }
 
-/* ─── Concesiones ──────────────────────────────────────────────────────────── */
+/* ─── Panel informativo de concesiones sobre mapa ─────────────────────────── */
 
-.diptico__seccion-titulo {
+.diptico__concesiones--mapa {
+  position: absolute;
+  left: clamp(12px, 2vw, 24px);
+  bottom: clamp(12px, 2vw, 24px);
+  z-index: 5;
+  width: min(760px, calc(100% - 48px));
+  max-height: min(42vh, 360px);
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  border: 0.5px solid var(--border-subtle);
+  border-radius: var(--radius-md, 8px);
+  padding: 12px;
   font-family: 'Sora', sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-color-secondary);
-  margin-bottom: 0.75rem;
+}
+
+.diptico__concesiones--mapa .diptico__seccion-titulo {
+  margin-bottom: 8px;
+}
+
+.diptico__toggle-concesiones {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.diptico__toggle-concesiones span {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .diptico__toggle-concesiones span {
+    display: inline;
+    font-size: 9px;
+    color: var(--text-color-tertiary);
+  }
 }
 
 .concesiones-lista {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 0;
 }
 
 .concesion-card {
   border: 0.5px solid var(--border-subtle);
-  border-radius: var(--radius-md, 8px);
-  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm, 4px);
+  padding: 6px 8px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  background: rgba(255,255,255,0.72);
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
 }
 
 .concesion-card__patron {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: 3px;
   flex-shrink: 0;
   border: 1px solid rgba(0,0,0,0.12);
@@ -308,22 +356,24 @@
 
 .concesion-card__nombre {
   font-family: 'Sora', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
   color: var(--text-color-primary);
 }
 
 .concesion-card__empresa {
-  font-size: 12px;
+  font-size: 10px;
+  line-height: 1.25;
   color: var(--text-color-secondary);
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .concesion-card__badge {
   font-family: 'Sora', sans-serif;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
-  padding: 3px 8px;
+  padding: 3px 7px;
   border-radius: 999px;
   white-space: nowrap;
 }
@@ -374,60 +424,135 @@
 
 /* ─── Responsive ───────────────────────────────────────────────────────────── */
 
-@media (max-width: 1199px) {
-
-  .diptico {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
+/* Tablet landscape: conservar díptico */
+@media (min-width: 768px) and (max-width: 977px) {
+  .diptico[data-layout="A"] {
+    grid-template-columns: 58fr 42fr;
   }
 
   .diptico__mapa {
-    position: relative;
     height: auto;
-    min-height: unset;
-    max-height: unset;
+    position: relative;
+    padding: clamp(0.1rem, 0.3vw, 0.2rem);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
   }
 
   .mapa-editorial {
-    aspect-ratio: 781.7 / 1306.8;
-    width: 100%;
-    height: auto;
+    width: min(100%, 760px);
   }
 
   .diptico__info {
-    grid-column: 1;
-    border-left: none;
-    border-top: 1px solid var(--border-subtle);
+    grid-column: 2;
+    border-left: 0.5px solid var(--border-subtle);
+    border-top: none;
+    padding: 2rem 1.5rem;
+    overflow-y: auto;
+  }
+
+  .diptico__concesiones--mapa {
+    width: min(620px, calc(100% - 32px));
+    max-height: 38vh;
+    left: 16px;
+    bottom: 16px;
+    padding: 10px;
+  }
+
+  .concesiones-lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-
+/* Mobile: stack */
 @media (max-width: 767px) {
-  .diptico {
-    grid-template-columns: 1fr;
+  .atlas-page {
+    padding-inline: 0;
+    justify-content: center;
+  }
+
+  .diptico,
+  .diptico[data-layout="A"],
+  .diptico[data-layout="B"],
+  .diptico[data-layout="C"] {
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto auto;
     min-height: auto;
   }
 
-  .diptico__mapa {
+  .diptico__mapa,
+  .diptico__info {
     grid-column: 1;
+    width: 100%;
+  }
+
+  .diptico__mapa {
     grid-row: 1;
     position: relative;
     height: auto;
-    min-height: unset;
-    max-height: unset;
+    padding: clamp(0.3rem, 0.3vw, 0.3rem);
+    overflow: hidden;
   }
 
   .mapa-editorial {
-    aspect-ratio: 503.5 / 634.7;
+    width: min(100%, 720px);
+    margin-inline: auto;
+  }
+
+  .diptico__concesiones--mapa {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    max-height: none;
+    margin-top: 12px;
+    padding: 10px;
+    background: var(--background-page);
+    backdrop-filter: none;
+  }
+
+  .concesiones-lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .diptico__concesiones--mapa.is-collapsed .concesiones-lista {
+    display: none;
+  }
+
+  .concesion-card {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    padding: 8px 10px;
+  }
+
+  .concesion-card__badge {
+    grid-column: 2;
+    justify-self: start;
+    margin-top: 2px;
+  }
+
+  .concesion-card__nombre {
+    font-size: 11px;
+  }
+
+  .concesion-card__empresa {
+    font-size: 9px;
+  }
+
+  .mapa-editorial object {
+    width: 100%;
+    display: block;
   }
 
   .diptico__info {
-    grid-column: 1;
     grid-row: 2;
     border-left: none;
     border-top: 0.5px solid var(--border-subtle);
-    padding: 1.5rem 1.25rem;
+    padding-block: 1.5rem;
+    padding-inline: clamp(1rem, 5vw, 1.5rem);
     overflow-y: visible;
   }
 
@@ -436,13 +561,38 @@
   }
 }
 
+/* Ocultar leyenda HTML para Waupasa Twi ya que está integrada en el SVG */
+body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
+  display: none;
+}
+
 @media (max-width: 480px) {
+  .diptico__concesiones--mapa {
+    padding: 8px;
+  }
+
+  .concesiones-lista {
+    gap: 5px;
+  }
+
+  .concesion-card {
+    padding: 7px;
+  }
+
   .diptico__stats {
     grid-template-columns: 1fr 1fr;
   }
 
   .diptico__titulo {
     font-size: 18px;
+  }
+
+  .diptico__leyenda-mapa {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin-top: 0.75rem;
+    width: 100%;
   }
 }
 
@@ -478,5 +628,368 @@
 
   .stat__valor {
     font-size: 16px;
+  }
+}
+
+.mapa-svg-inline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.mapa-svg-inline svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* ─── Interactividad mapa SVG inline ─────────────────────────────────────── */
+
+#mapa-svg-inline [id] {
+  transition: opacity 160ms ease, filter 160ms ease;
+}
+
+.concesion--atenuada {
+  opacity: 0.18;
+}
+
+.concesion-card {
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.concesion-card--activa {
+  border-color: var(--brand-main);
+  background: var(--feedback-success-bg);
+  transform: translateY(-1px);
+}
+
+.pais-btn--activo {
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(0,0,0,0.25));
+}
+
+.mapa-tooltip {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+  background: rgba(17, 20, 17, 0.9);
+  color: white;
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  padding: 4px 7px;
+  border-radius: 4px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+}
+
+.mapa-tooltip--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ─── Stroke animado en concesiones — REEMPLAZA el bloque anterior ────────────
+ *
+ * El SVG actual usa estos IDs de border para Waupasa Twi:
+ *   #border   → el-encanto-i
+ *   #border1  → columbus
+ *   #border2  → el-encanto-ii
+ *   #border3  → caribe
+ *   #border4  → caribe
+ *   #border5  → yulu-awaskira
+ *   #border6  → reserva-minera
+ *   #border7  → walpa-tara
+ *   #border8  → vanessa
+ *   #border9  → puerto-cabezas
+ *
+ * Nota: Illustrator puede reasignar estos IDs en cada export.
+ * Auditar con:
+ *   grep -o 'id="border[^\"]*"' mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg | sort
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── 1. Estado base: todos los borders invisibles en reposo ─────────────────── */
+
+#border, #border > *,
+#border1, #border1 > *,
+#border2, #border3, #border4,
+#border5, #border6, #border7,
+#border8, #border8 > *,
+#border9 {
+  opacity: 0;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+  will-change: stroke-dashoffset;
+}
+
+
+
+
+/* ── 2. Keyframe único para todos ────────────────────────────────────────────── */
+
+@keyframes dash-concesion {
+  to { stroke-dashoffset: -200; }
+}
+
+
+/* ── 3. China — el-encanto-i (#border, anidado) ─────────────────────────────── */
+
+#el-encanto-i.concesion--activa #border,
+#el-encanto-i.concesion--activa #border > * {
+  opacity: 1;
+  stroke: #b91c1c;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+
+/* ── 4. China — columbus (#border1) ────────────────────────────────────── */
+
+#columbus.concesion--activa #border1,
+#columbus.concesion--activa #border1 > * {
+  opacity: 1;
+  stroke: #b91c1c;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+
+/* ── 5. China — el-encanto-ii (#border2) ───────────────────────────────────── */
+
+#el-encanto-ii.concesion--activa #border2 {
+  opacity: 1;
+  stroke: #b91c1c;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+
+/* ── 6. China — yulu-awaskira (#border5) ───────────────────────────────────── */
+
+#yulu-awaskira.concesion--activa #border5 {
+  opacity: 1;
+  stroke: #b91c1c;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+
+/* ── 7. Reserva minera (#border6) ──────────────────────────────────────────── */
+
+#reserva-minera.concesion--activa #border6 {
+  opacity: 1;
+  stroke: #4b5563;
+  stroke-dasharray: 4 12;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 4s linear infinite;
+}
+
+
+/* ── 8. China — caribe (#border3, #border4) ────────────────────────────────── */
+
+#caribe.concesion--activa #border3,
+#caribe.concesion--activa #border4 {
+  opacity: 1;
+  stroke: #b91c1c;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+
+/* ── 9. Canadá — walpa-tara (#border7) ─────────────────────────────────────── */
+
+#walpa-tara.concesion--activa #border7 {
+  opacity: 1;
+  stroke: #b45309;
+  stroke-dasharray: 12 6;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+
+
+/* ── 10. Nicaragua — vanessa (#border8) ────────────────────────────────────── */
+
+#vanessa.concesion--activa #border8,
+#vanessa.concesion--activa #border8 > * {
+  opacity: 1;
+  stroke: #0f5fa6;
+  stroke-dasharray: 8 8;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+
+
+/* ── 11. Nicaragua — puerto-cabezas (#border9) ─────────────────────────────── */
+
+#puerto-cabezas.concesion--activa #border9 {
+  opacity: 1;
+  stroke: #0f5fa6;
+  stroke-dasharray: 8 8;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+
+
+/* ── 9. Drop-shadow coloreado por país ───────────────────────────────────────── */
+/*
+ * Reemplaza el drop-shadow negro genérico.
+ * Se aplica al grupo concesión completo.
+ */
+
+.concesion--activa {
+  opacity: 1;
+  filter: none;
+}
+
+#china .concesion--activa {
+  filter: drop-shadow(0 0 9px rgba(185, 28, 28, 0.55));
+}
+
+#canada .concesion--activa {
+  filter: drop-shadow(0 0 9px rgba(180, 83, 9, 0.50));
+}
+
+#nicaragua .concesion--activa {
+  filter: drop-shadow(0 0 9px rgba(15, 95, 166, 0.50));
+}
+
+#reserva-minera .concesion--activa {
+  filter: drop-shadow(0 0 7px rgba(75, 85, 99, 0.45));
+}
+
+
+/* ── 10. Accesibilidad ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  #border, #border1, #border2, #border3, #border4, #border5, #border6, #border7, #border8, #border9,
+  #border > *, #border1 > *, #border3 > *, #border8 > * {
+    animation: none !important;
+    stroke-dasharray: 6 6 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #border, #border1, #border2, #border3, #border4, #border5, #border6, #border7, #border8, #border9,
+  #border > *, #border1 > *, #border3 > *, #border8 > * {
+    animation: none !important;
+    stroke-dasharray: 6 6 !important;
+  }
+}
+
+
+/* ── NOTA: border IDs actuales del SVG ────────────────────────────────────────
+ *
+ * Mapa actual de border IDs Waupasa Twi:
+ *   #border   → el-encanto-i
+ *   #border1  → columbus
+ *   #border2  → el-encanto-ii
+ *   #border3  → caribe
+ *   #border4  → caribe
+ *   #border5  → yulu-awaskira
+ *   #border6  → reserva-minera
+ *   #border7  → walpa-tara
+ *   #border8  → vanessa
+ *   #border9  → puerto-cabezas
+ *
+ * Si se re-exporta desde Illustrator, auditar con:
+ *   grep -o 'id="border[^"]*"' mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg | sort
+ *
+ * Esta versión ya no depende de selectores obsoletos sobre Nicaragua.
+ * Si Illustrator reasigna los IDs, vuelve a auditar y actualiza este bloque.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* ─── Animaciones de borde en banderas ───────────────────────────────────────
+ *
+ * PEGAR AL FINAL DE css/diptico.css
+ * Reemplaza el bloque animaciones-banderas.css anterior completo.
+ *
+ * Trigger: clase .pais--activo en el grupo pais-* del SVG.
+ * Se añade desde JS en dos casos:
+ *   1. hover sobre concesión en el mapa → activa la bandera de su país
+ *   2. hover sobre la bandera directamente → activa sus propias concesiones
+ *
+ * Técnica: stroke-dashoffset animado en compositor thread (GPU).
+ * Sin repaint. Sin layout recalculado. Performance segura.
+ *
+ * Circunferencia: 2 × π × 28.4 ≈ 178.4px
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+@keyframes borde-girar {
+  to { stroke-dashoffset: -178.4; }
+}
+
+/* ── Estado base: todos los bordes de bandera ──────────────────────────────── */
+
+#paises [id^="border"] circle,
+#paises [id="border"] circle {
+  will-change: stroke-dashoffset;
+  transition: stroke-dasharray 200ms ease;
+}
+
+/* ── Estado activo: .pais--activo activa la animación ─────────────────────── */
+/*
+ * Selecciona el <circle> dentro del grupo border,
+ * dentro del grupo pais-* o reserva que tenga .pais--activo.
+ */
+
+#paises [id^="pais-"].pais--activo [id^="border"] circle,
+#paises [id^="pais-"].pais--activo [id="border"] circle,
+#paises [id="reserva"].pais--activo [id="border"] circle,
+#paises [id="pais-reserva"].pais--activo [id^="border"] circle {
+  stroke-dasharray: 8 6;
+  stroke-dashoffset: 0;
+  animation: borde-girar 4s linear infinite;
+}
+
+/* ── Velocidades por país — más suaves que la versión anterior ─────────────── */
+/*
+ * Todas entre 3s y 6s. Diferencias sutiles:
+ * China levemente más ágil, Reserva más lenta.
+ * La diferencia es perceptible pero no intrusiva.
+ */
+
+#paises #pais-china.pais--activo     [id^="border"] circle { animation-duration: 3s;   }
+#paises #pais-canada.pais--activo    [id^="border"] circle { animation-duration: 4s;   }
+#paises #pais-nicaragua.pais--activo [id^="border"] circle { animation-duration: 4.5s; }
+#paises #pais-colombia.pais--activo  [id^="border"] circle { animation-duration: 4.5s; }
+
+#paises #reserva.pais--activo     [id="border"] circle,
+#paises #pais-reserva.pais--activo [id^="border"] circle {
+  animation-duration: 6s;
+  stroke-dasharray: 4 10; /* punteado más esparso → zona legal/congelada */
+}
+
+/* ── Accesibilidad ─────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  #paises [id^="pais-"].pais--activo [id^="border"] circle,
+  #paises [id^="pais-"].pais--activo [id="border"] circle,
+  #paises [id="reserva"].pais--activo [id="border"] circle {
+    animation: none;
+    stroke-dasharray: 8 6; /* punteado visible pero sin movimiento */
+  }
+}
+
+/* ── Mobile: sin animación para preservar batería ─────────────────────────── */
+
+@media (max-width: 767px) {
+  #paises [id^="pais-"].pais--activo [id^="border"] circle,
+  #paises [id^="pais-"].pais--activo [id="border"] circle,
+  #paises [id="reserva"].pais--activo [id="border"] circle {
+    animation: none;
+    stroke-dasharray: 8 6;
   }
 }

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(gh pr *)",
+      "Bash(node *)",
+      "Bash(sed -i '' 's|viewBox=\"0 0 927 979.5\">|width=\"927\" height=\"979.5\" viewBox=\"0 0 927 979.5\">|' /Users/ricardo/Documents/FDR/web/atlas/mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg)",
+      "Bash(sed -i '' 's|viewBox=\"0 0 781.7 1306.8\">|width=\"781.7\" height=\"1306.8\" viewBox=\"0 0 781.7 1306.8\">|' /Users/ricardo/Documents/FDR/web/atlas/mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg)",
+      "Bash(sed -i '' 's|viewBox=\"0 0 503.5 634.7\">|width=\"503.5\" height=\"634.7\" viewBox=\"0 0 503.5 634.7\">|' /Users/ricardo/Documents/FDR/web/atlas/mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg)"
+    ]
+  }
+}

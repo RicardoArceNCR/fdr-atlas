@@ -4,3 +4,6 @@ node_modules/
 .env.local
 dist/
 .cache/
+# AI / editorial internal docs
+CLAUDE.md
+ATLAS_PATTERN_SYSTEM.md

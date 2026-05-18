@@ -121,23 +121,26 @@ const TERRITORIOS = [
     id: '03-waupasa-twi',
     numero: '03',
     nombre: 'Waupasa Twi',
-    archivo_mapa_base: '../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp',
-    archivo_svg_concesiones: '../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg',
     assets: {
       desktop: {
         raster: "../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp",
-        svg: "../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg"
+        svg: "../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg",
+        width: 927,
+        height: 980,
       },
       tablet: {
         raster: "../../mapas-raster/03-waupasa-twi/tablet-03-Waupasa-Twi.webp",
-        svg: "../../mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg"
+        svg: "../../mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg",
+        width: 780,
+        height: 1306,
       },
       mobile: {
         raster: "../../mapas-raster/03-waupasa-twi/mobile-03-Waupasa-Twi.webp",
-        svg: "../../mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg"
-      }
+        svg: "../../mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg",
+        width: 504,
+        height: 634,
+      },
     },
-    archivo_mapa_referencia: '../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp',
     layout: 'A',
     pueblos: ['Pueblo Miskitu'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
@@ -157,15 +160,15 @@ const TERRITORIOS = [
       hectareas_concesiones: '—',
     },
     concesiones: [
-      { nombre: 'Caribe', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Columbus I', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Encanto I', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Encanto II', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Yulu Awaskira', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Puerto Cabezas', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ confirmar país
-      { nombre: 'Vanessa', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Walpa Tara', empresa: '—', pais: 'canada', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ confirmar
-      { nombre: 'Reserva Minera', empresa: '—', pais: 'reserva', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Caribe',        svg_id: 'caribe',        empresa: '—', pais: 'china',    hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Columbus I',    svg_id: 'columbus',      empresa: '—', pais: 'china',    hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto I',  svg_id: 'el-encanto-i',  empresa: '—', pais: 'china',    hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', empresa: '—', pais: 'china',    hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Yulu Awaskira', svg_id: 'yulu-awaskira', empresa: '—', pais: 'china',    hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Puerto Cabezas',svg_id: 'puerto-cabezas',empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Vanessa',       svg_id: 'vanessa',       empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Walpa Tara',    svg_id: 'walpa-tara',    empresa: '—', pais: 'canada',   hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Reserva Minera',svg_id: 'reserva-minera',empresa: '—', pais: 'reserva',  hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
     fuente: 'La Gaceta, Diario Oficial de Nicaragua · Fundación del Río · URACCAN · OpenStreetMap contributors · ESRI Standard-Shaded Relief · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },

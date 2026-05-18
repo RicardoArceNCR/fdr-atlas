@@ -449,20 +449,9 @@
           </g>
         </g>
       </g>
-      <g id="columbus">
-        <g id="area-main1" data-name="area-main">
-          <rect class="st33" x="475.3" y="208.2" width="47.8" height="20.2"/>
-        </g>
-        <g id="border1" data-name="border">
-          <rect class="st33" x="475.3" y="208.2" width="47.8" height="20.2"/>
-        </g>
-        <g id="area-hover-target1" data-name="area-hover-target">
-          <rect class="st33" x="475.3" y="208.2" width="47.8" height="20.2"/>
-        </g>
-      </g>
       <g id="el-encanto-ii">
         <g class="st41">
-          <g id="area-main2" data-name="area-main">
+          <g id="area-main1" data-name="area-main">
             <path class="st54" d="M540.2,159.7c-43.4-39.5-85.5-81.6-125-125,43.4,39.5,85.5,81.6,125,125h0Z"/>
             <path class="st54" d="M553.9,159.7c-43.4-39.5-85.5-81.6-125-125,43.4,39.5,85.5,81.6,125,125h0Z"/>
             <path class="st54" d="M567.5,159.7c-43.4-39.5-85.5-81.6-125-125,43.4,39.5,85.5,81.6,125,125h0Z"/>
@@ -486,8 +475,19 @@
             <path class="st54" d="M594.9,159.7c-43.4-39.5-85.5-81.6-125-125,43.4,39.5,85.5,81.6,125,125h0Z"/>
             <path class="st54" d="M608.5,159.7c-43.4-39.5-85.5-81.6-125-125,43.4,39.5,85.5,81.6,125,125h0Z"/>
           </g>
-          <polygon id="area-hover-target2" data-name="area-hover-target" class="st39" points="516.9 63.1 516.9 112.2 499.3 112.2 499.3 82.9 441.4 82.9 441.4 169.7 380.1 169.7 400.7 85.4 516.9 63.1"/>
-          <polygon id="border2" data-name="border" class="st7" points="516.9 63.1 516.9 112.2 499.3 112.2 499.3 82.9 441.4 82.9 441.4 169.7 380.1 169.7 400.7 85.4 516.9 63.1"/>
+          <polygon id="area-hover-target1" data-name="area-hover-target" class="st39" points="516.9 63.1 516.9 112.2 499.3 112.2 499.3 82.9 441.4 82.9 441.4 169.7 380.1 169.7 400.7 85.4 516.9 63.1"/>
+          <polygon id="border1" data-name="border" class="st7" points="516.9 63.1 516.9 112.2 499.3 112.2 499.3 82.9 441.4 82.9 441.4 169.7 380.1 169.7 400.7 85.4 516.9 63.1"/>
+        </g>
+      </g>
+      <g id="columbus">
+        <g id="area-main2" data-name="area-main">
+          <rect class="st33" x="475.3" y="208.2" width="47.8" height="20.2"/>
+        </g>
+        <g id="border2" data-name="border">
+          <rect class="st33" x="475.3" y="208.2" width="47.8" height="20.2"/>
+        </g>
+        <g id="area-hover-target2" data-name="area-hover-target">
+          <rect class="st33" x="475.3" y="208.2" width="47.8" height="20.2"/>
         </g>
       </g>
       <g id="caribe">

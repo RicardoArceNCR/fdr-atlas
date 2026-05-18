@@ -4,6 +4,8 @@ import {
   getLabelPais,
 } from "./data-territorios.js";
 
+const SVG_CACHE = {};
+
 function getBreakpoint() {
   const width = window.innerWidth;
   if (width <= 767) return "mobile";
@@ -15,16 +17,11 @@ let lastBreakpoint = null;
 
 window.addEventListener("resize", () => {
   const current = getBreakpoint();
-
   if (current !== lastBreakpoint) {
     lastBreakpoint = current;
-
     const id = document.body.dataset.territorio;
     const territorio = getTerritorio(id);
-
-    if (territorio) {
-      renderMapa(territorio);
-    }
+    if (territorio) renderMapa(territorio);
   }
 });
 
@@ -50,9 +47,7 @@ async function init() {
     document.body.prepend(container.firstElementChild);
 
     const diptico = document.getElementById("diptico-container");
-    if (diptico) {
-      diptico.dataset.layout = territorio.layout || "A";
-    }
+    if (diptico) diptico.dataset.layout = territorio.layout || "A";
 
     renderHeader(territorio);
     renderMapa(territorio);
@@ -67,19 +62,17 @@ async function init() {
 }
 
 function renderHeader(t) {
-  const regionEl = document.getElementById("region-text");
-  const tituloEl = document.getElementById("titulo-text");
+  const regionEl  = document.getElementById("region-text");
+  const tituloEl  = document.getElementById("titulo-text");
   const pueblosEl = document.getElementById("pueblos-text");
-  const descEl = document.getElementById("descripcion-text");
-  const headerEl = document.getElementById("diptico-header");
-  const logoEl = document.getElementById("header-logo");
+  const descEl    = document.getElementById("descripcion-text");
+  const headerEl  = document.getElementById("diptico-header");
+  const logoEl    = document.getElementById("header-logo");
 
-  if (regionEl) regionEl.textContent = t.region || "";
-  if (tituloEl) tituloEl.textContent = t.nombre || "Territorio desconocido";
-  if (pueblosEl)
-    pueblosEl.textContent = Array.isArray(t.pueblos)
-      ? t.pueblos.join(" · ")
-      : "";
+  if (regionEl)  regionEl.textContent  = t.region || "";
+  if (tituloEl)  tituloEl.textContent  = t.nombre || "Territorio desconocido";
+  if (pueblosEl) pueblosEl.textContent = Array.isArray(t.pueblos) ? t.pueblos.join(" · ") : "";
+
   if (descEl) {
     if (t.descripcion && t.descripcion !== "—") {
       descEl.innerHTML = `<p>${t.descripcion}</p>`;
@@ -88,15 +81,13 @@ function renderHeader(t) {
     }
   }
 
-  // Banner de imagen en el header
   if (headerEl && t.banner) {
-    headerEl.style.backgroundImage = `url('${t.banner}')`;
-    headerEl.style.backgroundSize = "cover";
+    headerEl.style.backgroundImage    = `url('${t.banner}')`;
+    headerEl.style.backgroundSize     = "cover";
     headerEl.style.backgroundPosition = "center";
     headerEl.classList.add("diptico__header--con-banner");
   }
 
-  // Logo opcional (ej. Indio Maíz)
   if (logoEl && t.logo) {
     logoEl.src = t.logo;
     logoEl.alt = t.logo_alt || "";
@@ -117,18 +108,19 @@ async function renderMapa(t) {
   }
 
   const raster = document.getElementById("mapa-raster");
-  if (raster && assets.raster) {
-    raster.src = assets.raster;
-  }
+  if (raster && assets.raster) raster.src = assets.raster;
 
   const svgContainer = document.getElementById("mapa-svg-inline");
   if (svgContainer && assets.svg) {
     try {
-      const res = await fetch(assets.svg);
-      if (!res.ok) throw new Error(`SVG no encontrado: ${assets.svg}`);
-      const svgText = await res.text();
+      if (!SVG_CACHE[assets.svg]) {
+        const res = await fetch(assets.svg);
+        if (!res.ok) throw new Error(`SVG no encontrado: ${assets.svg}`);
+        SVG_CACHE[assets.svg] = await res.text();
+      }
+      const svgText = SVG_CACHE[assets.svg];
 
-      const svgBase = assets.svg.substring(0, assets.svg.lastIndexOf('/') + 1);
+      const svgBase     = assets.svg.substring(0, assets.svg.lastIndexOf('/') + 1);
       const svgResolved = svgText.replace(
         /(href|xlink:href)="((?!data:|http|\/)[^"]+)"/g,
         (match, attr, path) => `${attr}="${svgBase}${path}"`
@@ -139,9 +131,7 @@ async function renderMapa(t) {
       const obj = document.getElementById("mapa-editorial-obj");
       if (obj) obj.style.display = "none";
 
-      if (t.concesiones) {
-        initInteractividad(t.concesiones);
-      }
+      if (t.concesiones) initInteractividad(t.concesiones);
     } catch (err) {
       console.warn("No se pudo cargar SVG inline:", err);
     }
@@ -160,30 +150,23 @@ function renderLeyenda(t) {
     }
   }
 
-  const leyendaLista = document.getElementById("leyenda-lista");
+  const leyendaLista     = document.getElementById("leyenda-lista");
   const leyendaContainer = document.querySelector(".diptico__leyenda-mapa");
 
-  if (
-    !t.concesiones ||
-    !Array.isArray(t.concesiones) ||
-    t.concesiones.length === 0
-  ) {
+  if (!t.concesiones || !Array.isArray(t.concesiones) || t.concesiones.length === 0) {
     if (leyendaContainer) leyendaContainer.style.display = "none";
   } else if (leyendaLista) {
     leyendaLista.innerHTML = "";
-    const paises = [
-      ...new Set(t.concesiones.map((c) => c.pais).filter(Boolean)),
-    ];
+    const paises = [...new Set(t.concesiones.map(c => c.pais).filter(Boolean))];
     paises.forEach((pais) => {
-      const div = document.createElement("div");
+      const div    = document.createElement("div");
       div.className = "leyenda-item";
 
       const patron = document.createElement("div");
       patron.className = `leyenda-item__patron patron-${pais}`;
 
       const nombre = document.createElement("span");
-      nombre.textContent =
-        pais === "reserva" ? "Reserva Minera" : `Capital ${getLabelPais(pais)}`;
+      nombre.textContent = pais === "reserva" ? "Reserva Minera" : `Capital ${getLabelPais(pais)}`;
 
       div.appendChild(patron);
       div.appendChild(nombre);
@@ -199,28 +182,20 @@ function renderStats(t) {
     return;
   }
 
-  const haTerritorio = document.getElementById("stat-ha-territorio");
-  const concesiones = document.getElementById("stat-concesiones");
+  const haTerritorio  = document.getElementById("stat-ha-territorio");
+  const concesiones   = document.getElementById("stat-concesiones");
   const haConcesiones = document.getElementById("stat-ha-concesiones");
 
-  if (haTerritorio)
-    haTerritorio.textContent = t.stats.hectareas_territorio || "—";
-  if (concesiones)
-    concesiones.textContent =
-      t.stats.concesiones !== undefined ? t.stats.concesiones : "—";
-  if (haConcesiones)
-    haConcesiones.textContent = t.stats.hectareas_concesiones || "—";
+  if (haTerritorio)  haTerritorio.textContent  = t.stats.hectareas_territorio || "—";
+  if (concesiones)   concesiones.textContent   = t.stats.concesiones !== undefined ? t.stats.concesiones : "—";
+  if (haConcesiones) haConcesiones.textContent = t.stats.hectareas_concesiones || "—";
 }
 
 function renderConcesiones(t) {
-  const lista = document.getElementById("concesiones-lista");
+  const lista   = document.getElementById("concesiones-lista");
   const seccion = document.querySelector(".diptico__concesiones");
 
-  if (
-    !t.concesiones ||
-    !Array.isArray(t.concesiones) ||
-    t.concesiones.length === 0
-  ) {
+  if (!t.concesiones || !Array.isArray(t.concesiones) || t.concesiones.length === 0) {
     if (seccion) seccion.style.display = "none";
     return;
   }
@@ -263,7 +238,7 @@ function renderConcesiones(t) {
 }
 
 function renderFuente(t) {
-  const f = document.getElementById("fuente-text");
+  const f          = document.getElementById("fuente-text");
   const logoFuente = document.getElementById("fuente-logo");
 
   if (logoFuente && t.logo_fuente) {
@@ -272,18 +247,12 @@ function renderFuente(t) {
   }
 
   if (!f) return;
+  if (!t.fuente) { f.style.display = "none"; return; }
 
-  if (!t.fuente) {
-    f.style.display = "none";
-    return;
-  }
+  const tecnica = [t.proyeccion, t.datum && `Datum ${t.datum}`, t.zona && `Zona ${t.zona}`]
+    .filter(Boolean).join(" · ");
 
-  let partes = [t.fuente];
-  if (t.proyeccion) partes.push(`Proyección ${t.proyeccion}`);
-  if (t.datum) partes.push(`Datum ${t.datum}`);
-  if (t.zona) partes.push(`Zona ${t.zona}`);
-
-  f.innerHTML = `<strong>Fuentes y datos cartográficos:</strong> ${partes.join(" · ")}`;
+  f.innerHTML = `<strong>Fuentes:</strong> ${t.fuente}${tecnica ? ` · ${tecnica}` : ""}`;
 }
 
 function renderInsets(t) {
@@ -307,18 +276,30 @@ function renderInsets(t) {
 
 function initToggleConcesiones() {
   const panel = document.querySelector(".diptico__concesiones--mapa");
-  const btn = document.querySelector(".diptico__toggle-concesiones");
-
+  const btn   = document.querySelector(".diptico__toggle-concesiones");
   if (!panel || !btn) return;
-
-  btn.addEventListener("click", () => {
-    panel.classList.toggle("is-collapsed");
-  });
+  btn.addEventListener("click", () => panel.classList.toggle("is-collapsed"));
 }
 
 document.addEventListener("DOMContentLoaded", init);
 
 /* ─── Interactividad SVG ↔ Panel ──────────────────────────────────────────── */
+
+// Mapa canónico pais → ID del grupo SVG de bandera/leyenda
+const PAIS_SVG_ID = {
+  china:    'pais-china',
+  canada:   'pais-canada',
+  colombia: 'pais-colombia',
+  nacional: 'pais-nicaragua',
+  reserva:  'pais-reserva',
+};
+
+function getPaisEl(pais) {
+  const id = PAIS_SVG_ID[pais];
+  if (!id) return null;
+  return document.getElementById(id)
+      || (pais === 'reserva' ? document.getElementById('reserva') : null);
+}
 
 function initInteractividad(concesiones) {
   initTooltipPoblados();
@@ -326,26 +307,36 @@ function initInteractividad(concesiones) {
 
   const todosLosIds = concesiones.filter(c => c.svg_id).map(c => c.svg_id);
 
+  // Índice svg_id → pais para activar bandera desde hover de concesión
+  const svgIdAPais = {};
+  concesiones.forEach(c => { if (c.svg_id && c.pais) svgIdAPais[c.svg_id] = c.pais; });
+
   concesiones.forEach((c) => {
     if (!c.svg_id) return;
 
     const svgGroup = document.getElementById(c.svg_id);
-    const svgEl = svgGroup?.querySelector('[id*="area-hover-target"], [data-role="hover-target"]') || svgGroup;
-    const card = document.querySelector(`.concesion-card[data-svg-id="${c.svg_id}"]`);
+    const card     = document.querySelector(`.concesion-card[data-svg-id="${c.svg_id}"]`);
+
+    // columbus: rect pequeño sin hit-area separado — usar el grupo raíz directamente.
+    // Resto: buscar area-hover-target interno, fallback al grupo.
+    const svgEl = (c.svg_id === 'columbus')
+      ? svgGroup
+      : (svgGroup?.querySelector('[id*="area-hover-target"], [data-role="hover-target"]') || svgGroup);
 
     if (!svgGroup || !svgEl || !card) return;
 
-    svgEl.addEventListener("mouseenter", () => { activar(svgGroup, card, todosLosIds); });
-    svgEl.addEventListener("mouseleave", () => { desactivar(svgGroup, card, todosLosIds); });
-    card.addEventListener("mouseenter", () => { activar(svgGroup, card, todosLosIds); });
-    card.addEventListener("mouseleave", () => { desactivar(svgGroup, card, todosLosIds); });
+    svgEl.addEventListener("mouseenter", () => activar(svgGroup, card, todosLosIds, svgIdAPais));
+    svgEl.addEventListener("mouseleave", () => desactivar(svgGroup, card, todosLosIds, svgIdAPais));
+    card.addEventListener("mouseenter",  () => activar(svgGroup, card, todosLosIds, svgIdAPais));
+    card.addEventListener("mouseleave",  () => desactivar(svgGroup, card, todosLosIds, svgIdAPais));
   });
 }
 
-function activar(svgEl, card, todosLosIds = []) {
+function activar(svgEl, card, todosLosIds = [], svgIdAPais = {}) {
   svgEl.classList.add("concesion--activa");
   card.classList.add("concesion-card--activa");
 
+  // Atenuar el resto de concesiones
   todosLosIds.forEach((id) => {
     if (id === svgEl.id) return;
     const otro = document.getElementById(id);
@@ -354,18 +345,26 @@ function activar(svgEl, card, todosLosIds = []) {
       otro.classList.remove("concesion--activa");
     }
   });
+
+  // Activar bandera del país correspondiente
+  const pais   = svgIdAPais[svgEl.id];
+  const paisEl = getPaisEl(pais);
+  paisEl?.classList.add('pais-btn--activo', 'pais--activo');
 }
 
-function desactivar(svgEl, card, todosLosIds = []) {
+function desactivar(svgEl, card, todosLosIds = [], svgIdAPais = {}) {
   svgEl.classList.remove("concesion--activa");
   card.classList.remove("concesion-card--activa");
 
   todosLosIds.forEach((id) => {
     const otro = document.getElementById(id);
-    if (otro) {
-      otro.classList.remove("concesion--atenuada", "concesion--activa");
-    }
+    if (otro) otro.classList.remove("concesion--atenuada", "concesion--activa");
   });
+
+  // Desactivar bandera
+  const pais   = svgIdAPais[svgEl.id];
+  const paisEl = getPaisEl(pais);
+  paisEl?.classList.remove('pais-btn--activo', 'pais--activo');
 }
 
 /* ─── Tooltip de poblados ─────────────────────────────────────────────────── */
@@ -374,7 +373,7 @@ function initTooltipPoblados() {
   let tooltip = document.getElementById("mapa-tooltip");
   if (!tooltip) {
     tooltip = document.createElement("div");
-    tooltip.id = "mapa-tooltip";
+    tooltip.id        = "mapa-tooltip";
     tooltip.className = "mapa-tooltip";
     document.querySelector(".diptico__mapa")?.appendChild(tooltip);
   }
@@ -403,7 +402,7 @@ function initTooltipPoblados() {
     });
 
     el.addEventListener("mousemove", (e) => {
-      const rect = mapaEl.getBoundingClientRect();
+      const rect         = mapaEl.getBoundingClientRect();
       tooltip.style.left = `${e.clientX - rect.left + 14}px`;
       tooltip.style.top  = `${e.clientY - rect.top  - 10}px`;
     });
@@ -414,19 +413,9 @@ function initTooltipPoblados() {
   });
 }
 
-/* ─── Hover por país (bandera → concesiones en el mapa) ──────────────────── */
-
-// Mapa canónico pais→ID del grupo SVG de leyenda/bandera
-const PAIS_SVG_ID = {
-  china:    'pais-china',
-  canada:   'pais-canada',
-  colombia: 'pais-colombia',
-  nacional: 'pais-nicaragua',
-  reserva:  'pais-reserva',
-};
+/* ─── Hover por país (bandera → concesiones) ──────────────────────────────── */
 
 function initHoverPaises(concesiones) {
-  // Agrupar svg_ids por país desde los datos
   const porPais = {};
   concesiones.forEach((c) => {
     if (!c.svg_id || !c.pais) return;
@@ -436,13 +425,8 @@ function initHoverPaises(concesiones) {
 
   const idsTodos = concesiones.filter(c => c.svg_id).map(c => c.svg_id);
 
-  // Para cada país presente en este mapa, conectar su grupo SVG
   Object.entries(porPais).forEach(([pais, idsActivos]) => {
-    const svgPaisId = PAIS_SVG_ID[pais];
-    if (!svgPaisId) return;
-
-    const paisEl = document.getElementById(svgPaisId)
-                || (pais === 'reserva' ? document.getElementById('reserva') : null);
+    const paisEl = getPaisEl(pais);
     if (!paisEl) return;
 
     paisEl.style.cursor = 'pointer';

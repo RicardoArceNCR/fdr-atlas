@@ -600,9 +600,7 @@
   }
 
   .concesion-card__badge {
-    grid-column: 2;
-    justify-self: start;
-    margin-top: 2px;
+    display: none;
   }
 
   .concesion-card__nombre {
@@ -1044,6 +1042,18 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
  * Esta versión ya no depende de selectores obsoletos sobre Nicaragua.
  * Si Illustrator reasigna los IDs, vuelve a auditar y actualiza este bloque.
  * ─────────────────────────────────────────────────────────────────────────── */
+
+/* columbus: rect pequeño tapado por el-encanto-i — necesita z-order manual */
+#columbus {
+  pointer-events: all;
+}
+#columbus #area-hover-target1 {
+  pointer-events: all;
+  opacity: 0;
+}
+#columbus > * {
+  pointer-events: none;
+}
 
 /* ─── Animaciones de borde en banderas ───────────────────────────────────────
  *

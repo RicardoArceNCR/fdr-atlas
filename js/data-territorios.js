@@ -175,7 +175,7 @@ const TERRITORIOS = [
       { nombre: 'Walpa Tara',    svg_id: 'walpa-tara',    empresa: '—', pais: 'canada',   patron_img: '../../img/patrones/canada-xl.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
       { nombre: 'Reserva Minera',svg_id: 'reserva-minera',empresa: '—', pais: 'reserva',  patron_img: '../../img/patrones/reserva-sm.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
-    fuente: 'Fuentes y datos cartográficos: Proyección UTM Datum NAD 27 Zona 16 N Fuente: La Gaceta, Fundación del Río, URACCAN, OpenStreetMap contributors, ESRI . Standard-Shaded Relief. Abril 2026',
+    fuente: 'La Gaceta, Fundación del Río, URACCAN, OpenStreetMap contributors, ESRI Standard-Shaded Relief. Abril 2026',
   },
 
   /* ── 04 ── Wangki Twi-Tasba Raya ───────────────────────────────────────── */

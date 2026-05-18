@@ -4079,12 +4079,12 @@ export default {
     family: {
       display: {
         $type: "string",
-        $value: "Sora",
+        $value: "Plus Jakarta Sans",
         filePath: "source/primitivos.json",
         isSource: true,
         original: {
           $type: "string",
-          $value: "Sora",
+          $value: "Plus Jakarta Sans",
         },
         name: "TypographyFamilyDisplay",
         attributes: {

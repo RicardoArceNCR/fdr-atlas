@@ -461,7 +461,7 @@
     "family": {
       "display": {
         "$type": "string",
-        "$value": "Sora"
+        "$value": "Plus Jakarta Sans"
       },
       "body": {
         "$type": "string",

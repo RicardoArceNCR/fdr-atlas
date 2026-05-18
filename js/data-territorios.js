@@ -66,7 +66,7 @@ const TERRITORIOS = [
         gaceta: '—',
       },
     ],
-    fuente: 'La Gaceta, Diario Oficial de Nicaragua · Fundación del Río · URACCAN · OpenStreetMap contributors · ESRI Standard/Shaded Relief · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
+    fuente: 'Fuentes y datos cartográficos: Proyección UTM Datum NAD 27 Zona 16 N Fuente: La Gaceta, Fundación del Río, URACCAN, OpenStreetMap contributors, ESRI . Standard-Shaded Relief. Abril 2026',
   },
 
   /* ── 02 ── Creole de Bluefields ────────────────────────────────────────── */
@@ -113,7 +113,7 @@ const TERRITORIOS = [
         gaceta: '—',
       },
     ],
-    fuente: 'La Gaceta, Diario Oficial de Nicaragua · Fundación del Río · URACCAN · OpenStreetMap contributors · ESRI Shaded Relief · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
+    fuente: 'Fuentes y datos cartográficos: Proyección UTM Datum NAD 27 Zona 16 N Fuente: La Gaceta, Fundación del Río, URACCAN, OpenStreetMap contributors, ESRI . Standard-Shaded Relief. Abril 2026',
   },
 
   /* ── 03 ── Waupasa Twi ─────────────────────────────────────────────────── */
@@ -142,6 +142,11 @@ const TERRITORIOS = [
       },
     },
     layout: 'A',
+    banner: '../../img/banners/banner-03.webp',
+    logo: '../../img/banners/logo-indio-maiz.webp',
+    logo_alt: 'Indio Maíz Reserva Biológica',
+    logo_fuente: '../../img/Logo-del-sitio-768x768.png',
+    logo_fuente_alt: 'Fundación del Río',
     pueblos: ['Pueblo Miskitu'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
     descripcion: 'El territorio Waupasa Twi es el caso de mayor presión territorial del atlas. Nueve concesiones de capital de cuatro países distintos se superponen al territorio, cubriendo gran parte de su extensión y generando conflictos documentados con las comunidades miskitu.', // ⚠️ pendiente
@@ -170,7 +175,7 @@ const TERRITORIOS = [
       { nombre: 'Walpa Tara',    svg_id: 'walpa-tara',    empresa: '—', pais: 'canada',   patron_img: '../../img/patrones/canada-xl.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
       { nombre: 'Reserva Minera',svg_id: 'reserva-minera',empresa: '—', pais: 'reserva',  patron_img: '../../img/patrones/reserva-sm.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
-    fuente: 'La Gaceta, Diario Oficial de Nicaragua · Fundación del Río · URACCAN · OpenStreetMap contributors · ESRI Standard-Shaded Relief · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
+    fuente: 'Fuentes y datos cartográficos: Proyección UTM Datum NAD 27 Zona 16 N Fuente: La Gaceta, Fundación del Río, URACCAN, OpenStreetMap contributors, ESRI . Standard-Shaded Relief. Abril 2026',
   },
 
   /* ── 04 ── Wangki Twi-Tasba Raya ───────────────────────────────────────── */

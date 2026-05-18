@@ -71,6 +71,8 @@ function renderHeader(t) {
   const tituloEl = document.getElementById("titulo-text");
   const pueblosEl = document.getElementById("pueblos-text");
   const descEl = document.getElementById("descripcion-text");
+  const headerEl = document.getElementById("diptico-header");
+  const logoEl = document.getElementById("header-logo");
 
   if (regionEl) regionEl.textContent = t.region || "";
   if (tituloEl) tituloEl.textContent = t.nombre || "Territorio desconocido";
@@ -84,6 +86,20 @@ function renderHeader(t) {
     } else {
       descEl.style.display = "none";
     }
+  }
+
+  // Banner de imagen en el header
+  if (headerEl && t.banner) {
+    headerEl.style.backgroundImage = `url('${t.banner}')`;
+    headerEl.style.backgroundSize = "cover";
+    headerEl.style.backgroundPosition = "center";
+    headerEl.classList.add("diptico__header--con-banner");
+  }
+
+  // Logo opcional (ej. Indio Maíz)
+  if (logoEl && t.logo) {
+    logoEl.src = t.logo;
+    logoEl.alt = t.logo_alt || "";
   }
 }
 
@@ -248,6 +264,13 @@ function renderConcesiones(t) {
 
 function renderFuente(t) {
   const f = document.getElementById("fuente-text");
+  const logoFuente = document.getElementById("fuente-logo");
+
+  if (logoFuente && t.logo_fuente) {
+    logoFuente.src = t.logo_fuente;
+    logoFuente.alt = t.logo_fuente_alt || "";
+  }
+
   if (!f) return;
 
   if (!t.fuente) {
@@ -303,12 +326,6 @@ function initInteractividad(concesiones) {
 
   const todosLosIds = concesiones.filter(c => c.svg_id).map(c => c.svg_id);
 
-  // Mapa svg_id → pais para saber qué bandera activar
-  const idAPais = {};
-  concesiones.forEach((c) => {
-    if (c.svg_id && c.pais) idAPais[c.svg_id] = c.pais;
-  });
-
   concesiones.forEach((c) => {
     if (!c.svg_id) return;
 
@@ -318,62 +335,36 @@ function initInteractividad(concesiones) {
 
     if (!svgGroup || !svgEl || !card) return;
 
-    svgEl.addEventListener("mouseenter", () => { activar(svgGroup, card, todosLosIds, idAPais); });
+    svgEl.addEventListener("mouseenter", () => { activar(svgGroup, card, todosLosIds); });
     svgEl.addEventListener("mouseleave", () => { desactivar(svgGroup, card, todosLosIds); });
-    card.addEventListener("mouseenter", () => { activar(svgGroup, card, todosLosIds, idAPais); });
+    card.addEventListener("mouseenter", () => { activar(svgGroup, card, todosLosIds); });
     card.addEventListener("mouseleave", () => { desactivar(svgGroup, card, todosLosIds); });
   });
 }
 
-function activar(svgEl, card, todosLosIds = [], idAPais = {}) {
+function activar(svgEl, card, todosLosIds = []) {
   svgEl.classList.add("concesion--activa");
   card.classList.add("concesion-card--activa");
 
-  // Atenuar el resto de concesiones y sus cards
   todosLosIds.forEach((id) => {
     if (id === svgEl.id) return;
     const otro = document.getElementById(id);
-    const otraCard = document.querySelector(`.concesion-card[data-svg-id="${id}"]`);
-    otro?.classList.add("concesion--atenuada");
-    otro?.classList.remove("concesion--activa");
-    otraCard?.classList.add("concesion-card--atenuada");
-    otraCard?.classList.remove("concesion-card--activa");
+    if (otro) {
+      otro.classList.add("concesion--atenuada");
+      otro.classList.remove("concesion--activa");
+    }
   });
-
-  // Activar la bandera del país de esta concesión, atenuar las demás
-  const pais = idAPais[svgEl.id];
-  if (pais) {
-    const svgPaisIdActivo = PAIS_SVG_ID[pais];
-    Object.values(PAIS_SVG_ID).forEach((svgPaisId) => {
-      const paisEl = document.getElementById(svgPaisId);
-      if (!paisEl) return;
-      if (svgPaisId === svgPaisIdActivo) {
-        paisEl.classList.add("pais--activo");
-        paisEl.classList.remove("pais--inactivo");
-      } else {
-        paisEl.classList.add("pais--inactivo");
-        paisEl.classList.remove("pais--activo");
-      }
-    });
-  }
 }
 
 function desactivar(svgEl, card, todosLosIds = []) {
   svgEl.classList.remove("concesion--activa");
   card.classList.remove("concesion-card--activa");
 
-  // Limpiar todas las concesiones y cards
   todosLosIds.forEach((id) => {
     const otro = document.getElementById(id);
-    const otraCard = document.querySelector(`.concesion-card[data-svg-id="${id}"]`);
-    otro?.classList.remove("concesion--atenuada", "concesion--activa");
-    otraCard?.classList.remove("concesion-card--atenuada", "concesion-card--activa");
-  });
-
-  // Limpiar todos los grupos de banderas
-  Object.values(PAIS_SVG_ID).forEach((svgPaisId) => {
-    const paisEl = document.getElementById(svgPaisId);
-    paisEl?.classList.remove("pais--activo", "pais--inactivo");
+    if (otro) {
+      otro.classList.remove("concesion--atenuada", "concesion--activa");
+    }
   });
 }
 

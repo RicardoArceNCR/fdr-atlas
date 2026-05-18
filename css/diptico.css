@@ -12,7 +12,7 @@
 
 /* ─── Fuentes ──────────────────────────────────────────────────────────────── */
 
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap');
 
 /* ─── Reset mínimo ─────────────────────────────────────────────────────────── */
 
@@ -127,7 +127,7 @@
   border: 0.5px solid var(--border-subtle);
   border-radius: var(--radius-md, 8px);
   padding: 0.75rem 1rem;
-  font-family: 'Sora', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
 }
 
@@ -170,7 +170,7 @@
   position: absolute;
   bottom: 1.5rem;
   right: 1.5rem;
-  font-family: 'Sora', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 10px;
   color: var(--text-color-primary);
   opacity: 0.75;
@@ -183,7 +183,7 @@
   border: 0.5px solid var(--border-subtle);
   padding: 0.75rem;
   border-radius: var(--radius-md, 8px);
-  font-family: 'Sora', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   color: var(--text-color-primary);
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
@@ -213,18 +213,66 @@
   padding: 2.5rem 2rem;
   overflow-y: auto;
   border-left: 0.5px solid var(--border-subtle);
+  padding-top: 0; /* el banner absorbe el espacio superior */
 }
 
 /* ─── Header del territorio ────────────────────────────────────────────────── */
 
 .diptico__header {
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
+  position: relative;
+  margin: -2.5rem -2rem 2rem;   /* sangra hasta los bordes del panel */
+  padding: 11.5rem 2rem 1.75rem;
   border-bottom: 0.5px solid var(--border-subtle);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 140px;
+  overflow: hidden;
+  background-color: var(--color-brand-green-900); /* fallback sin banner */
+}
+
+
+.diptico__header-texto {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-width: 0;
+}
+
+.diptico__header-logo {
+  position: relative;
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0.9;
+  display: none; /* se muestra solo si tiene src */
+}
+
+.diptico__header-logo[src]:not([src=""]) {
+  display: block;
+}
+
+/* Con banner: textos en blanco con sombra suave para legibilidad */
+.diptico__header--con-banner .diptico__kicker {
+  color: rgba(255,255,255,0.90);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+.diptico__header--con-banner .diptico__titulo {
+  color: #F4A700;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+}
+
+.diptico__header--con-banner .diptico__subtitulo {
+  color: rgba(255,255,255,0.90);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
 .diptico__kicker {
-  font-family: 'Sora', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -234,7 +282,7 @@
 }
 
 .diptico__titulo {
-  font-family: 'Sora', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 22px;
   font-weight: 600;
   line-height: 1.2;
@@ -265,7 +313,7 @@
 }
 
 .stat__valor {
-  font-family: 'Sora', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 20px;
   font-weight: 600;
   color: var(--text-color-primary);
@@ -276,7 +324,7 @@
 .stat__label {
   font-size: 11px;
   color: var(--text-color-secondary);
-  font-family: 'Sora', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 /* ─── Panel informativo de concesiones sobre mapa ─────────────────────────── */
@@ -294,7 +342,7 @@
   border: 0.5px solid var(--border-subtle);
   border-radius: var(--radius-md, 8px);
   padding: 12px;
-  font-family: 'Sora', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .diptico__concesiones--mapa .diptico__seccion-titulo {
@@ -363,7 +411,7 @@
 }
 
 .concesion-card__nombre {
-  font-family: 'Sora', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.2;
@@ -378,7 +426,7 @@
 }
 
 .concesion-card__badge {
-  font-family: 'Sora', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 9px;
   font-weight: 600;
   padding: 3px 7px;
@@ -419,10 +467,25 @@
   margin-top: auto;
   padding-top: 1.5rem;
   border-top: 0.5px solid var(--border-subtle);
-  font-family: 'Sora', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 10px;
   color: var(--text-color-secondary);
   line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.diptico__fuente-logo {
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: none;
+}
+
+.diptico__fuente-logo[src]:not([src=""]) {
+  display: block;
 }
 
 .diptico__fuente strong {
@@ -537,7 +600,9 @@
   }
 
   .concesion-card__badge {
-    display: none;
+    grid-column: 2;
+    justify-self: start;
+    margin-top: 2px;
   }
 
   .concesion-card__nombre {
@@ -749,7 +814,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   pointer-events: none;
   background: rgba(17, 20, 17, 0.9);
   color: white;
-  font-family: 'Sora', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 11px;
   padding: 4px 7px;
   border-radius: 4px;

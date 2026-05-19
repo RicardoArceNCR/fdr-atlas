@@ -221,7 +221,7 @@
 .diptico__header {
   position: relative;
   margin: -2.5rem -2rem 2rem;   /* sangra hasta los bordes del panel */
-  padding: 11.5rem 2rem 1.75rem;
+  padding: 6.5rem 2rem 1.75rem;
   border-bottom: 0.5px solid var(--border-subtle);
   display: flex;
   align-items: flex-end;
@@ -243,8 +243,8 @@
 .diptico__header-logo {
   position: relative;
   z-index: 2;
-  width: 80px;
-  height: 80px;
+  width: 170px;
+  height: 170px;
   object-fit: contain;
   flex-shrink: 0;
   opacity: 0.9;
@@ -443,17 +443,17 @@
 }
 
 /* Badges por país */
-.badge-china    { background: #fef2f2; color: #991b1b; }
-.badge-canada   { background: #fffbeb; color: #92400e; }
+.badge-china    { background: #fdf2f2; color: #a92e26; }
+.badge-canada   { background: #fef9f0; color: #87451d; }
 .badge-colombia { background: #f5f3ff; color: #4c1d95; }
-.badge-nacional { background: #eff6ff; color: #1e40af; }
+.badge-nacional { background: #eef1fc; color: #263fa8; }
 .badge-reserva  { background: var(--background-subtle); color: var(--text-color-secondary); }
 
 /* Patrones visuales por país (para leyenda y lista) */
-.patron-china { background: repeating-linear-gradient(45deg, var(--concesion-pais-china), var(--concesion-pais-china) 2px, transparent 2px, transparent 6px); background-color: color-mix(in srgb, var(--concesion-pais-china) 20%, transparent); }
-.patron-canada { background: repeating-linear-gradient(45deg, var(--concesion-pais-canada), var(--concesion-pais-canada) 2px, transparent 2px, transparent 6px), repeating-linear-gradient(-45deg, var(--concesion-pais-canada), var(--concesion-pais-canada) 2px, transparent 2px, transparent 6px); background-color: color-mix(in srgb, var(--concesion-pais-canada) 20%, transparent); }
-.patron-colombia { background: radial-gradient(circle, var(--concesion-pais-colombia) 2px, transparent 2.5px); background-size: 8px 8px; background-color: color-mix(in srgb, var(--concesion-pais-colombia) 20%, transparent); }
-.patron-nacional { background: repeating-linear-gradient(90deg, var(--concesion-pais-nacional), var(--concesion-pais-nacional) 2px, transparent 2px, transparent 6px); background-color: color-mix(in srgb, var(--concesion-pais-nacional) 20%, transparent); }
+.patron-china { background: repeating-linear-gradient(40deg, var(--concesion-pais-china), var(--concesion-pais-china) 1.8px, transparent 1.8px, transparent 14px); background-color: color-mix(in srgb, var(--concesion-pais-china) 15%, transparent); }
+.patron-canada { background: repeating-linear-gradient(135deg, var(--concesion-pais-canada), var(--concesion-pais-canada) 1.8px, transparent 1.8px, transparent 14px); background-color: color-mix(in srgb, var(--concesion-pais-canada) 15%, transparent); }
+.patron-colombia { background: repeating-linear-gradient(40deg, var(--concesion-pais-colombia), var(--concesion-pais-colombia) 1.8px, transparent 1.8px, transparent 14px); background-color: color-mix(in srgb, var(--concesion-pais-colombia) 15%, transparent); }
+.patron-nacional { background: repeating-linear-gradient(45deg, var(--concesion-pais-nacional), var(--concesion-pais-nacional) 1.8px, transparent 1.8px, transparent 14px); background-color: color-mix(in srgb, var(--concesion-pais-nacional) 15%, transparent); }
 .patron-reserva { background: color-mix(in srgb, var(--concesion-tipo-reserva) 25%, transparent); }
 
 /* ─── Narrativa / contexto ─────────────────────────────────────────────────── */
@@ -474,7 +474,7 @@
 .diptico__fuente {
   margin-top: auto;
   padding-top: 1.5rem;
-  border-top: 0.5px solid var(--border-subtle);
+  border-top: none;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 10px;
   color: var(--text-color-secondary);
@@ -646,6 +646,11 @@
     margin: 0;
   }
 
+  .diptico__header-logo {
+    width: 140px;
+    height: 140px;
+}
+
   .diptico__header--con-banner .diptico__header-texto {
     padding: 1.5rem clamp(1rem, 5vw, 1.5rem);
     align-self: flex-end;
@@ -802,31 +807,31 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 .concesion-card--activa[data-svg-id="el-encanto-i"],
 .concesion-card--activa[data-svg-id="el-encanto-ii"],
 .concesion-card--activa[data-svg-id="yulu-awaskira"] {
-  background: #b91c1c;
-  border-color: #b91c1c;
-  box-shadow: 0 4px 10px rgba(185, 28, 28, 0.30);
+  background: #a92e26;
+  border-color: #a92e26;
+  box-shadow: 0 4px 10px rgba(169, 46, 38, 0.30);
 }
 
 /* Canadá — azul */
 .concesion-card--activa[data-svg-id="walpa-tara"] {
-  background: #1d4ed8;
-  border-color: #1d4ed8;
-  box-shadow: 0 4px 10px rgba(29, 78, 216, 0.30);
+  background: #87451d;
+  border-color: #87451d;
+  box-shadow: 0 4px 10px rgba(135, 69, 29, 0.30);
 }
 
 /* Nicaragua / Nacional — magenta */
 .concesion-card--activa[data-svg-id="puerto-cabezas"],
 .concesion-card--activa[data-svg-id="vanessa"] {
-  background: #be185d;
-  border-color: #be185d;
-  box-shadow: 0 4px 10px rgba(190, 24, 93, 0.30);
+  background: #263fa8;
+  border-color: #263fa8;
+  box-shadow: 0 4px 10px rgba(38, 63, 168, 0.30);
 }
 
 /* Reserva — gris */
 .concesion-card--activa[data-svg-id="reserva-minera"] {
-  background: #4b5563;
-  border-color: #4b5563;
-  box-shadow: 0 4px 10px rgba(75, 85, 99, 0.30);
+  background: #394150;
+  border-color: #394150;
+  box-shadow: 0 4px 10px rgba(57, 65, 80, 0.30);
 }
 
 /* Colombia — verde (para futuros mapas) */
@@ -923,7 +928,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #el-encanto-i.concesion--activa #border-el-encanto-i {
   opacity: 1;
-  stroke: #b91c1c;
+  stroke: #a92e26;
   stroke-dasharray: 10 5;
   stroke-dashoffset: 0;
   animation: dash-concesion 1.6s linear infinite;
@@ -931,7 +936,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #el-encanto-ii.concesion--activa #border-el-encanto-ii {
   opacity: 1;
-  stroke: #b91c1c;
+  stroke: #a92e26;
   stroke-dasharray: 10 5;
   stroke-dashoffset: 0;
   animation: dash-concesion 1.6s linear infinite;
@@ -939,7 +944,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #columbus.concesion--activa #border-columbus {
   opacity: 1;
-  stroke: #b91c1c;
+  stroke: #a92e26;
   stroke-dasharray: 10 5;
   stroke-dashoffset: 0;
   animation: dash-concesion 1.6s linear infinite;
@@ -947,7 +952,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #caribe.concesion--activa #border-caribe {
   opacity: 1;
-  stroke: #b91c1c;
+  stroke: #a92e26;
   stroke-dasharray: 10 5;
   stroke-dashoffset: 0;
   animation: dash-concesion 1.6s linear infinite;
@@ -955,7 +960,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #yulu-awaskira.concesion--activa #border-yulu-awaskira {
   opacity: 1;
-  stroke: #b91c1c;
+  stroke: #a92e26;
   stroke-dasharray: 10 5;
   stroke-dashoffset: 0;
   animation: dash-concesion 1.6s linear infinite;
@@ -963,7 +968,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #reserva-minera.concesion--activa #border-reserva-minera {
   opacity: 1;
-  stroke: #4b5563;
+  stroke: #394150;
   stroke-dasharray: 4 12;
   stroke-dashoffset: 0;
   animation: dash-concesion 4s linear infinite;
@@ -971,7 +976,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #walpa-tara.concesion--activa #border-walpa-tara {
   opacity: 1;
-  stroke: #b45309;
+  stroke: #87451d;
   stroke-dasharray: 12 6;
   stroke-dashoffset: 0;
   animation: dash-concesion 2.4s linear infinite;
@@ -979,7 +984,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #vanessa.concesion--activa #border-vanessa {
   opacity: 1;
-  stroke: #0f5fa6;
+  stroke: #263fa8;
   stroke-dasharray: 8 8;
   stroke-dashoffset: 0;
   animation: dash-concesion 2.8s linear infinite;
@@ -987,7 +992,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #puerto-cabezas.concesion--activa #border-puerto-cabezas {
   opacity: 1;
-  stroke: #0f5fa6;
+  stroke: #263fa8;
   stroke-dasharray: 8 8;
   stroke-dashoffset: 0;
   animation: dash-concesion 2.8s linear infinite;
@@ -1006,19 +1011,19 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 }
 
 #china .concesion--activa {
-  filter: drop-shadow(0 0 9px rgba(185, 28, 28, 0.55));
+  filter: drop-shadow(0 0 9px rgba(169, 46, 38, 0.55));
 }
 
 #canada .concesion--activa {
-  filter: drop-shadow(0 0 9px rgba(180, 83, 9, 0.50));
+  filter: drop-shadow(0 0 9px rgba(135, 69, 29, 0.50));
 }
 
 #nicaragua .concesion--activa {
-  filter: drop-shadow(0 0 9px rgba(15, 95, 166, 0.50));
+  filter: drop-shadow(0 0 9px rgba(38, 63, 168, 0.50));
 }
 
 #reserva-minera .concesion--activa {
-  filter: drop-shadow(0 0 7px rgba(75, 85, 99, 0.45));
+  filter: drop-shadow(0 0 7px rgba(57, 65, 80, 0.45));
 }
 
 

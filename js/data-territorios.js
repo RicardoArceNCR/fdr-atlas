@@ -143,7 +143,7 @@ const TERRITORIOS = [
     },
     layout: 'A',
     banner: '../../img/banners/banner-03.webp',
-    logo: '../../img/Logo-del-sitio-768x768.png',
+    logo: '../../img/Logo-fdr.webp',
     logo_alt: 'Fundación del Río',
     logo_fuente: '',
     logo_fuente_alt: '',
@@ -175,7 +175,7 @@ const TERRITORIOS = [
       { nombre: 'Walpa Tara',    svg_id: 'walpa-tara',    empresa: '—', pais: 'canada',   patron_img: '../../img/patrones/canada-xl.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
       { nombre: 'Reserva Minera',svg_id: 'reserva-minera',empresa: '—', pais: 'reserva',  patron_img: '../../img/patrones/reserva-sm.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
-    fuente: 'La Gaceta, Fundación del Río, URACCAN, OpenStreetMap contributors, ESRI Standard-Shaded Relief. Abril 2026',
+    fuente: '',
   },
 
   /* ── 04 ── Wangki Twi-Tasba Raya ───────────────────────────────────────── */

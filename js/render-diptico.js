@@ -304,6 +304,7 @@ function getPaisEl(pais) {
 function initInteractividad(concesiones) {
   initTooltipPoblados();
   initHoverPaises(concesiones);
+  initAnimacionNarrativa(concesiones);
 
   const todosLosIds = concesiones.filter(c => c.svg_id).map(c => c.svg_id);
 
@@ -470,4 +471,168 @@ function desactivarPais(idsTodos) {
     svgEl?.classList.remove('concesion--activa', 'concesion--atenuada');
     card?.classList.remove('concesion-card--activa', 'concesion-card--atenuada');
   });
+}
+
+/* ─── Animación narrativa por país ────────────────────────────────────────────
+ *
+ * Secuencia opt-in: China → Canadá → Nicaragua → Reserva (→ Colombia si existe)
+ * Se lanza desde un botón inyectado debajo del panel de concesiones.
+ * Reutiliza completamente activarPais / desactivarPais / getPaisEl existentes.
+ * Sin nuevo CSS. Sin nueva infraestructura.
+ *
+ * API pública: initAnimacionNarrativa(concesiones)
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+// Orden narrativo canónico — países con más concesiones primero
+const ORDEN_NARRATIVO = ['china', 'canada', 'colombia', 'nacional', 'reserva'];
+
+// Duración de cada paso en ms
+const DURACION_PASO = 2800;
+
+// Estado interno del tour
+let _tourTimers = [];
+let _tourActivo = false;
+
+function initAnimacionNarrativa(concesiones) {
+  // Calcular qué países hay en este mapa (en orden narrativo)
+  const paisesPresentes = ORDEN_NARRATIVO.filter(p =>
+    concesiones.some(c => c.pais === p && c.svg_id)
+  );
+  if (paisesPresentes.length < 2) return; // no tiene sentido animar un solo país
+
+  const idsTodos = concesiones.filter(c => c.svg_id).map(c => c.svg_id);
+
+  // Agrupar svg_ids por país
+  const porPais = {};
+  concesiones.forEach(c => {
+    if (!c.svg_id || !c.pais) return;
+    if (!porPais[c.pais]) porPais[c.pais] = [];
+    porPais[c.pais].push(c.svg_id);
+  });
+
+  // Inyectar el botón debajo del panel de concesiones
+  const panel = document.querySelector('.diptico__concesiones--mapa');
+  if (!panel) return;
+
+  const btn = document.createElement('button');
+  btn.id = 'btn-tour-narrativo';
+  btn.type = 'button';
+  btn.className = 'btn-tour-narrativo';
+  btn.setAttribute('aria-label', 'Recorrer concesiones por país');
+  btn.innerHTML = `
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <polygon points="3,1 13,7 3,13" fill="currentColor"/>
+    </svg>
+    <span>Recorrer por país</span>
+  `;
+  panel.appendChild(btn);
+
+  btn.addEventListener('click', () => {
+    if (_tourActivo) {
+      detenerTour(idsTodos, btn);
+    } else {
+      lanzarTour(paisesPresentes, porPais, idsTodos, btn);
+    }
+  });
+
+  // Cancelar tour si el usuario interactúa con el mapa manualmente
+  const mapaEl = document.querySelector('#mapa-svg-inline');
+  if (mapaEl) {
+    mapaEl.addEventListener('mouseenter', () => {
+      if (_tourActivo) {
+        detenerTour(idsTodos, btn);
+        sessionStorage.setItem(`tour-visto-${document.body.dataset.territorio}`, '1');
+      }
+    }, { passive: true });
+  }
+
+  // Autoplay — solo la primera vez en la sesión
+  const SESSION_KEY = `tour-visto-${document.body.dataset.territorio}`;
+  const yaVisto = sessionStorage.getItem(SESSION_KEY);
+
+  if (!yaVisto) {
+    setTimeout(() => {
+      if (!_tourActivo) {
+        lanzarTour(paisesPresentes, porPais, idsTodos, btn);
+        sessionStorage.setItem(SESSION_KEY, '1');
+      }
+    }, 1500);
+  }
+}
+
+function encenderPais(idsActivos) {
+  // Enciende concesiones de un país sin atenuar las demás
+  idsActivos.forEach(id => {
+    const svgEl = document.getElementById(id);
+    const card  = document.querySelector(`.concesion-card[data-svg-id="${id}"]`);
+    svgEl?.classList.add('concesion--activa');
+    svgEl?.classList.remove('concesion--atenuada');
+    card?.classList.add('concesion-card--activa');
+    card?.classList.remove('concesion-card--atenuada');
+  });
+}
+
+function lanzarTour(pasos, porPais, idsTodos, btn) {
+  _tourActivo = true;
+  btn.querySelector('span').textContent = 'Detener';
+  btn.classList.add('btn-tour-narrativo--activo');
+
+  // Ocultar todas las capas SVG al inicio — aparecerán de una en una
+  idsTodos.forEach(id => {
+    const svgEl = document.getElementById(id);
+    if (svgEl) svgEl.style.opacity = '0';
+  });
+
+  pasos.forEach((pais, i) => {
+    const t1 = setTimeout(() => {
+      // Aparecer cada concesión del país escalonada cada 300ms
+      porPais[pais].forEach((id, j) => {
+        setTimeout(() => {
+          const svgEl = document.getElementById(id);
+          if (svgEl) svgEl.style.opacity = '';   // vuelve al CSS normal
+          encenderPais([id]);
+        }, j * 300);
+      });
+      const paisEl = getPaisEl(pais);
+      paisEl?.classList.add('pais-btn--activo', 'pais--activo');
+    }, i * DURACION_PASO);
+
+    _tourTimers.push(t1);
+  });
+
+  // Finalizar tras el último paso — limpiar todas las banderas acumuladas
+  const tFin = setTimeout(() => {
+    pasos.forEach(pais => {
+      getPaisEl(pais)?.classList.remove('pais-btn--activo', 'pais--activo');
+    });
+    idsTodos.forEach(id => {
+      const svgEl = document.getElementById(id);
+      if (svgEl) svgEl.style.opacity = '';
+    });
+    desactivarPais(idsTodos);
+    _tourActivo = false;
+    btn.querySelector('span').textContent = 'Recorrer por país';
+    btn.classList.remove('btn-tour-narrativo--activo');
+  }, pasos.length * DURACION_PASO + 600);
+
+  _tourTimers.push(tFin);
+}
+
+function detenerTour(idsTodos, btn) {
+  _tourTimers.forEach(clearTimeout);
+  _tourTimers = [];
+  _tourActivo = false;
+
+  // Limpiar opacity inline que puso el tour y todos los estados
+  idsTodos.forEach(id => {
+    const svgEl = document.getElementById(id);
+    if (svgEl) svgEl.style.opacity = '';
+  });
+  desactivarPais(idsTodos);
+  Object.values(PAIS_SVG_ID).forEach(id => {
+    document.getElementById(id)?.classList.remove('pais-btn--activo', 'pais--activo');
+  });
+
+  btn.querySelector('span').textContent = 'Recorrer por país';
+  btn.classList.remove('btn-tour-narrativo--activo');
 }

@@ -43,11 +43,11 @@
 /* ─── Layouts ─────────────────────────────────────────────────────────────── */
 
 .diptico[data-layout="A"] {
-  grid-template-columns: 55fr 45fr;
+  grid-template-columns: 50fr 50fr;
 }
 
 .diptico[data-layout="B"] {
-  grid-template-columns: 65fr 35fr;
+  grid-template-columns: 50fr 50fr;
 }
 
 .diptico[data-layout="C"] {
@@ -498,7 +498,7 @@
 /* Tablet landscape: conservar díptico */
 @media (min-width: 768px) and (max-width: 977px) {
   .diptico[data-layout="A"] {
-    grid-template-columns: 58fr 42fr;
+    grid-template-columns: 50fr 50fr;
   }
 
   .diptico__mapa {
@@ -677,7 +677,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
     min-height: 0;
     height: 100vh;
     width: 100vw;
-    grid-template-columns: 55fr 45fr;
+    grid-template-columns: 50fr 50fr;
     page-break-inside: avoid;
   }
 
@@ -1135,5 +1135,55 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   #pais-reserva.pais--activo   #border-reserva circle {
     animation: none;
     stroke-dasharray: 8 6;
+  }
+}
+
+/* ─── Botón de animación narrativa ───────────────────────────────────────────
+ *
+ * Se inyecta dinámicamente por initAnimacionNarrativa().
+ * Se posiciona debajo de la lista de concesiones en el panel del mapa.
+ * Sin dependencias de tokens adicionales — usa los ya definidos.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+.btn-tour-narrativo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 5px 10px 5px 8px;
+  border: 0.5px solid var(--border-subtle);
+  border-radius: 999px;
+  background: var(--background-page);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-color-secondary);
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+  line-height: 1;
+}
+
+.btn-tour-narrativo:hover {
+  background: var(--background-subtle);
+  border-color: var(--border-default);
+  color: var(--text-color-primary);
+}
+
+.btn-tour-narrativo--activo {
+  background: var(--color-brand-green-900);
+  border-color: var(--color-brand-green-900);
+  color: #fff;
+}
+
+.btn-tour-narrativo--activo:hover {
+  background: var(--color-brand-green-800);
+  border-color: var(--color-brand-green-800);
+  color: #fff;
+}
+
+/* Ocultar en mobile — el tour es para hover, no tiene sentido sin puntero */
+@media (max-width: 767px) {
+  .btn-tour-narrativo {
+    display: none;
   }
 }

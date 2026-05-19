@@ -487,7 +487,8 @@ function desactivarPais(idsTodos) {
 const ORDEN_NARRATIVO = ['china', 'canada', 'colombia', 'nacional', 'reserva'];
 
 // Duración de cada paso en ms
-const DURACION_PASO = 2800;
+const DURACION_PASO   = 2800; // ms por paso de entrada
+const DURACION_SALIDA = 180;  // ms entre cada concesión al revertir
 
 // Estado interno del tour
 let _tourTimers = [];
@@ -600,19 +601,59 @@ function lanzarTour(pasos, porPais, idsTodos, btn) {
     _tourTimers.push(t1);
   });
 
-  // Finalizar tras el último paso — limpiar todas las banderas acumuladas
+  // Finalizar — revertir en orden inverso, más rápido
   const tFin = setTimeout(() => {
+    // Construir lista plana de todas las concesiones en el orden en que aparecieron
+    const ordenAparicion = pasos.flatMap(pais => porPais[pais]);
+    const ordenInverso   = [...ordenAparicion].reverse();
+
+    // Apagar banderas todas de golpe
     pasos.forEach(pais => {
       getPaisEl(pais)?.classList.remove('pais-btn--activo', 'pais--activo');
     });
-    idsTodos.forEach(id => {
-      const svgEl = document.getElementById(id);
-      if (svgEl) svgEl.style.opacity = '';
+
+    // Apagar capas SVG y cards una por una en orden inverso
+    // Primero desaparece el fill/patrón, luego el border como "eco"
+    ordenInverso.forEach((id, i) => {
+      const tSalida = setTimeout(() => {
+        // 1. Quitar clase activa — desaparece el fill y la card
+        const svgEl = document.getElementById(id);
+        svgEl?.classList.remove('concesion--activa');
+        svgEl?.style && (svgEl.style.opacity = '0');
+        const card = document.querySelector(`.concesion-card[data-svg-id="${id}"]`);
+        card?.classList.remove('concesion-card--activa');
+
+        // 2. Border se apaga 350ms después — efecto de eco
+        const tBorder = setTimeout(() => {
+          const borderEl = document.getElementById(`border-${id}`);
+          if (borderEl) {
+            borderEl.style.opacity = '0';
+            borderEl.style.transition = 'opacity 300ms ease';
+          }
+        }, 350);
+        _tourTimers.push(tBorder);
+      }, i * DURACION_SALIDA);
+      _tourTimers.push(tSalida);
     });
-    desactivarPais(idsTodos);
-    _tourActivo = false;
-    btn.querySelector('span').textContent = 'Recorrer por país';
-    btn.classList.remove('btn-tour-narrativo--activo');
+
+    // Reset final — limpiar opacity inline de grupos y borders
+    const tReset = setTimeout(() => {
+      idsTodos.forEach(id => {
+        const svgEl = document.getElementById(id);
+        if (svgEl) svgEl.style.opacity = '';
+        const borderEl = document.getElementById(`border-${id}`);
+        if (borderEl) {
+          borderEl.style.opacity = '';
+          borderEl.style.transition = '';
+        }
+      });
+      desactivarPais(idsTodos);
+      _tourActivo = false;
+      btn.querySelector('span').textContent = 'Recorrer por país';
+      btn.classList.remove('btn-tour-narrativo--activo');
+    }, ordenInverso.length * DURACION_SALIDA + 200);
+    _tourTimers.push(tReset);
+
   }, pasos.length * DURACION_PASO + 600);
 
   _tourTimers.push(tFin);
@@ -623,10 +664,15 @@ function detenerTour(idsTodos, btn) {
   _tourTimers = [];
   _tourActivo = false;
 
-  // Limpiar opacity inline que puso el tour y todos los estados
+  // Limpiar opacity inline de grupos y borders
   idsTodos.forEach(id => {
     const svgEl = document.getElementById(id);
     if (svgEl) svgEl.style.opacity = '';
+    const borderEl = document.getElementById(`border-${id}`);
+    if (borderEl) {
+      borderEl.style.opacity = '';
+      borderEl.style.transition = '';
+    }
   });
   desactivarPais(idsTodos);
   Object.values(PAIS_SVG_ID).forEach(id => {

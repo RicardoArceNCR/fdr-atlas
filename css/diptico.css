@@ -850,12 +850,12 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 /* ── 1. Estado base: todos los borders invisibles en reposo ─────────────────── */
 
-#border, #border > *,
-#border1, #border1 > *,
-#border2, #border3, #border4,
-#border5, #border6, #border7,
-#border8, #border8 > *,
-#border9 {
+/* ── Estado base: todos los borders de concesión invisibles en reposo ────────
+ * IDs estables — nombrados manualmente en Illustrator como border-{svg_id}
+ * Seguros ante re-export. No requieren auditoría posterior.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+[id^="border-"]:not([id^="border-china"]):not([id^="border-canada"]):not([id^="border-colombia"]):not([id^="border-nicaragua"]):not([id^="border-reserva"]:not([id="border-reserva-minera"])) {
   opacity: 0;
   transition: opacity 200ms ease;
   pointer-events: none;
@@ -872,10 +872,14 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 }
 
 
-/* ── 3. China — el-encanto-i (#border, anidado) ─────────────────────────────── */
+/* ── Animación de borders por concesión — IDs estables ───────────────────────
+ *
+ * Patrón: #{svg_id}.concesion--activa #border-{svg_id}
+ * No depende de IDs numéricos. Seguro ante re-export de Illustrator.
+ * Para nuevos mapas: nombrar el border como border-{svg_id} en Illustrator.
+ * ─────────────────────────────────────────────────────────────────────────── */
 
-#el-encanto-i.concesion--activa #border,
-#el-encanto-i.concesion--activa #border > * {
+#el-encanto-i.concesion--activa #border-el-encanto-i {
   opacity: 1;
   stroke: #b91c1c;
   stroke-dasharray: 10 5;
@@ -883,11 +887,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   animation: dash-concesion 1.6s linear infinite;
 }
 
-
-/* ── 4. China — columbus (#border1) ────────────────────────────────────── */
-
-#columbus.concesion--activa #border1,
-#columbus.concesion--activa #border1 > * {
+#el-encanto-ii.concesion--activa #border-el-encanto-ii {
   opacity: 1;
   stroke: #b91c1c;
   stroke-dasharray: 10 5;
@@ -895,10 +895,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   animation: dash-concesion 1.6s linear infinite;
 }
 
-
-/* ── 5. China — el-encanto-ii (#border2) ───────────────────────────────────── */
-
-#el-encanto-ii.concesion--activa #border2 {
+#columbus.concesion--activa #border-columbus {
   opacity: 1;
   stroke: #b91c1c;
   stroke-dasharray: 10 5;
@@ -906,10 +903,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   animation: dash-concesion 1.6s linear infinite;
 }
 
-
-/* ── 6. China — yulu-awaskira (#border5) ───────────────────────────────────── */
-
-#yulu-awaskira.concesion--activa #border5 {
+#caribe.concesion--activa #border-caribe {
   opacity: 1;
   stroke: #b91c1c;
   stroke-dasharray: 10 5;
@@ -917,10 +911,15 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   animation: dash-concesion 1.6s linear infinite;
 }
 
+#yulu-awaskira.concesion--activa #border-yulu-awaskira {
+  opacity: 1;
+  stroke: #b91c1c;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
 
-/* ── 7. Reserva minera (#border6) ──────────────────────────────────────────── */
-
-#reserva-minera.concesion--activa #border6 {
+#reserva-minera.concesion--activa #border-reserva-minera {
   opacity: 1;
   stroke: #4b5563;
   stroke-dasharray: 4 12;
@@ -928,22 +927,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   animation: dash-concesion 4s linear infinite;
 }
 
-
-/* ── 8. China — caribe (#border3, #border4) ────────────────────────────────── */
-
-#caribe.concesion--activa #border3,
-#caribe.concesion--activa #border4 {
-  opacity: 1;
-  stroke: #b91c1c;
-  stroke-dasharray: 10 5;
-  stroke-dashoffset: 0;
-  animation: dash-concesion 1.6s linear infinite;
-}
-
-
-/* ── 9. Canadá — walpa-tara (#border7) ─────────────────────────────────────── */
-
-#walpa-tara.concesion--activa #border7 {
+#walpa-tara.concesion--activa #border-walpa-tara {
   opacity: 1;
   stroke: #b45309;
   stroke-dasharray: 12 6;
@@ -951,11 +935,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   animation: dash-concesion 2.4s linear infinite;
 }
 
-
-/* ── 10. Nicaragua — vanessa (#border8) ────────────────────────────────────── */
-
-#vanessa.concesion--activa #border8,
-#vanessa.concesion--activa #border8 > * {
+#vanessa.concesion--activa #border-vanessa {
   opacity: 1;
   stroke: #0f5fa6;
   stroke-dasharray: 8 8;
@@ -963,10 +943,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   animation: dash-concesion 2.8s linear infinite;
 }
 
-
-/* ── 11. Nicaragua — puerto-cabezas (#border9) ─────────────────────────────── */
-
-#puerto-cabezas.concesion--activa #border9 {
+#puerto-cabezas.concesion--activa #border-puerto-cabezas {
   opacity: 1;
   stroke: #0f5fa6;
   stroke-dasharray: 8 8;
@@ -1006,16 +983,14 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 /* ── 10. Accesibilidad ────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  #border, #border1, #border2, #border3, #border4, #border5, #border6, #border7, #border8, #border9,
-  #border > *, #border1 > *, #border3 > *, #border8 > * {
+  [id^="border-"] {
     animation: none !important;
     stroke-dasharray: 6 6 !important;
   }
 }
 
 @media (max-width: 767px) {
-  #border, #border1, #border2, #border3, #border4, #border5, #border6, #border7, #border8, #border9,
-  #border > *, #border1 > *, #border3 > *, #border8 > * {
+  [id^="border-"] {
     animation: none !important;
     stroke-dasharray: 6 6 !important;
   }

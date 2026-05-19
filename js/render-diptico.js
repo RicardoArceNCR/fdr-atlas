@@ -556,10 +556,10 @@ function initAnimacionNarrativa(concesiones) {
     }
   });
 
-  // Cancelar tour si el usuario interactúa con el mapa manualmente
-  const mapaEl = document.querySelector('#mapa-svg-inline');
+  // Cancelar tour si el usuario interactúa con cualquier elemento del mapa
+  const mapaEl = document.querySelector('.diptico__mapa');
   if (mapaEl) {
-    mapaEl.addEventListener('mouseenter', () => {
+    mapaEl.addEventListener('mousemove', () => {
       if (_tourActivo) {
         detenerTour(idsTodos, btn);
         sessionStorage.setItem(`tour-visto-${document.body.dataset.territorio}`, '1');

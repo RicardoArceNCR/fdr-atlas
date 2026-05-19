@@ -19,6 +19,16 @@ window.addEventListener("resize", () => {
   const current = getBreakpoint();
   if (current !== lastBreakpoint) {
     lastBreakpoint = current;
+
+    // Cancelar tour activo antes de recargar el mapa
+    if (_tourActivo) {
+      const idsTodos = Array.from(
+        document.querySelectorAll('.concesion-card[data-svg-id]')
+      ).map(c => c.dataset.svgId);
+      const btn = document.getElementById('btn-tour-narrativo');
+      if (btn) detenerTour(idsTodos, btn);
+    }
+
     const id = document.body.dataset.territorio;
     const territorio = getTerritorio(id);
     if (territorio) renderMapa(territorio);
@@ -515,6 +525,10 @@ function initAnimacionNarrativa(concesiones) {
   const panel = document.querySelector('.diptico__concesiones--mapa');
   if (!panel) return;
 
+  // Evitar duplicados en resize — reusar el botón si ya existe
+  const btnExistente = document.getElementById('btn-tour-narrativo');
+  if (btnExistente) btnExistente.remove();
+
   const btn = document.createElement('button');
   btn.id = 'btn-tour-narrativo';
   btn.type = 'button';
@@ -526,7 +540,13 @@ function initAnimacionNarrativa(concesiones) {
     </svg>
     <span>Recorrer por país</span>
   `;
-  panel.appendChild(btn);
+  // Insertar el botón inline junto al título "Detalle de concesiones"
+  const toggleBtn = panel.querySelector('.diptico__toggle-concesiones');
+  if (toggleBtn) {
+    toggleBtn.appendChild(btn);
+  } else {
+    panel.appendChild(btn);
+  }
 
   btn.addEventListener('click', () => {
     if (_tourActivo) {

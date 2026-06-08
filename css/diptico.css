@@ -214,7 +214,6 @@
   overflow-y: auto;
   border-left: 0.5px solid var(--border-subtle);
   padding-top: 0; /* el banner absorbe el espacio superior */
-  background-color: #0B2617;
 }
 
 /* ─── Header del territorio ────────────────────────────────────────────────── */
@@ -223,11 +222,12 @@
   position: relative;
   margin: -2.5rem -2rem 2rem;   /* sangra hasta los bordes del panel */
   padding: 6.5rem 2rem 1.75rem;
+  border-bottom: 0.5px solid var(--border-subtle);
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
-  min-height: 279px;
+  min-height: 140px;
   overflow: hidden;
   background-color: var(--color-brand-green-900); /* fallback sin banner */
 }
@@ -308,7 +308,7 @@
 }
 
 .stat {
-  background: var(--surface-container);
+  background: var(--background-subtle);
   border-radius: var(--radius-md, 8px);
   padding: 0.75rem;
 }
@@ -324,7 +324,7 @@
 
 .stat__label {
   font-size: 11px;
-  color: var(--text-color-tertiary);
+  color: var(--text-color-secondary);
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
@@ -424,7 +424,7 @@
   font-size: 12px;
   font-weight: 600;
   line-height: 1.2;
-  color: var(--text-color-secondary);
+  color: var(--text-color-primary);
 }
 
 .concesion-card__empresa {
@@ -444,8 +444,8 @@
 }
 
 /* Badges por país */
-.badge-china    { background: #fdf2f2; color: #a92e26; }
-.badge-canada   { background: #fef9f0; color: #87451d; }
+.badge-china    { background: #fff0ee; color: #dd3519; }
+.badge-canada   { background: #f3f7ee; color: #4a6b2a; }
 .badge-colombia { background: #f5f3ff; color: #4c1d95; }
 .badge-nacional { background: #eef1fc; color: #263fa8; }
 .badge-reserva  { background: var(--background-subtle); color: var(--text-color-secondary); }
@@ -647,10 +647,11 @@
     margin: 0;
   }
 
-  .diptico__logo-mapa {
-    width: 60px;
-    height: 60px;
-  }
+  /* Logo flotante sobre el mapa — arriba a la derecha */
+.diptico__logo-mapa {
+    width: 140px;
+    height: 140px;
+}
 
   .diptico__header--con-banner .diptico__header-texto {
     padding: 1.5rem clamp(1rem, 5vw, 1.5rem);
@@ -808,16 +809,16 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 .concesion-card--activa[data-svg-id="el-encanto-i"],
 .concesion-card--activa[data-svg-id="el-encanto-ii"],
 .concesion-card--activa[data-svg-id="yulu-awaskira"] {
-  background: #a92e26;
-  border-color: #a92e26;
-  box-shadow: 0 4px 10px rgba(169, 46, 38, 0.30);
+  background: #dd3519;
+  border-color: #dd3519;
+  box-shadow: 0 4px 10px rgba(221, 53, 25, 0.30);
 }
 
-/* Canadá — azul */
+/* Canadá — verde */
 .concesion-card--activa[data-svg-id="walpa-tara"] {
-  background: #87451d;
-  border-color: #87451d;
-  box-shadow: 0 4px 10px rgba(135, 69, 29, 0.30);
+  background: #739b50;
+  border-color: #739b50;
+  box-shadow: 0 4px 10px rgba(115, 155, 80, 0.30);
 }
 
 /* Nicaragua / Nacional — magenta */
@@ -929,7 +930,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #el-encanto-i.concesion--activa #border-el-encanto-i {
   opacity: 1;
-  stroke: #a92e26;
+  stroke: #e56d55;
   stroke-dasharray: 10 5;
   stroke-dashoffset: 0;
   animation: dash-concesion 1.6s linear infinite;
@@ -937,7 +938,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #el-encanto-ii.concesion--activa #border-el-encanto-ii {
   opacity: 1;
-  stroke: #a92e26;
+  stroke: #ea8e3b;
   stroke-dasharray: 10 5;
   stroke-dashoffset: 0;
   animation: dash-concesion 1.6s linear infinite;
@@ -945,7 +946,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #columbus.concesion--activa #border-columbus {
   opacity: 1;
-  stroke: #a92e26;
+  stroke: #e07e24;
   stroke-dasharray: 10 5;
   stroke-dashoffset: 0;
   animation: dash-concesion 1.6s linear infinite;
@@ -953,7 +954,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #caribe.concesion--activa #border-caribe {
   opacity: 1;
-  stroke: #a92e26;
+  stroke: #dd3519;
   stroke-dasharray: 10 5;
   stroke-dashoffset: 0;
   animation: dash-concesion 1.6s linear infinite;
@@ -961,7 +962,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #yulu-awaskira.concesion--activa #border-yulu-awaskira {
   opacity: 1;
-  stroke: #a92e26;
+  stroke: #f4a13d;
   stroke-dasharray: 10 5;
   stroke-dashoffset: 0;
   animation: dash-concesion 1.6s linear infinite;
@@ -977,7 +978,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 #walpa-tara.concesion--activa #border-walpa-tara {
   opacity: 1;
-  stroke: #87451d;
+  stroke: #739b50;
   stroke-dasharray: 12 6;
   stroke-dashoffset: 0;
   animation: dash-concesion 2.4s linear infinite;

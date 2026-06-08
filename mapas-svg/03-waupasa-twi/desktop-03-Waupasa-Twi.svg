@@ -1082,6 +1082,7 @@
   </g>
   <g id="referencia">
     <rect class="st44" y="0" width="927.1" height="99.1"/>
+    <path class="st44" d="M927.8,4.9h-100.2c-36.8,35.2-378.5,93.7-222.3,93.7s230.9,53.3,322.6,56.2V4.9Z"/>
     <g class="st46">
       <text class="st32" transform="translate(42.2 42)"><tspan x="0" y="0">Concesiones mineras en</tspan></text>
       <text class="st32" transform="translate(42.2 76.1)"><tspan x="0" y="0">territorio Waupasa Twi</tspan></text>
@@ -1161,6 +1162,5 @@
       <circle class="st14" cx="163.6" cy="171.6" r="19.1"/>
       <circle class="st68" cx="163.6" cy="171.6" r="9.2"/>
     </g>
-    <circle class="st44" cx="861.2" cy="63.2" r="54.5"/>
   </g>
 </svg>

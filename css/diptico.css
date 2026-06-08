@@ -649,8 +649,12 @@
 
   /* Logo flotante sobre el mapa — arriba a la derecha */
 .diptico__logo-mapa {
-    width: 140px;
-    height: 140px;
+    width: 80px;
+    height: 70px;
+}
+
+.diptico__logo-mapa {
+    top: 3rem;
 }
 
   .diptico__header--con-banner .diptico__header-texto {

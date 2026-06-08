@@ -214,6 +214,7 @@
   overflow-y: auto;
   border-left: 0.5px solid var(--border-subtle);
   padding-top: 0; /* el banner absorbe el espacio superior */
+  background-color: #0B2617;
 }
 
 /* ─── Header del territorio ────────────────────────────────────────────────── */
@@ -222,12 +223,11 @@
   position: relative;
   margin: -2.5rem -2rem 2rem;   /* sangra hasta los bordes del panel */
   padding: 6.5rem 2rem 1.75rem;
-  border-bottom: 0.5px solid var(--border-subtle);
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
-  min-height: 140px;
+  min-height: 279px;
   overflow: hidden;
   background-color: var(--color-brand-green-900); /* fallback sin banner */
 }
@@ -240,18 +240,19 @@
   min-width: 0;
 }
 
-.diptico__header-logo {
-  position: relative;
-  z-index: 2;
-  width: 170px;
-  height: 170px;
+/* Logo flotante sobre el mapa — arriba a la derecha */
+.diptico__logo-mapa {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  width: 72px;
+  height: 72px;
   object-fit: contain;
-  flex-shrink: 0;
-  opacity: 0.9;
-  display: none; /* se muestra solo si tiene src */
+  display: none;
 }
 
-.diptico__header-logo[src]:not([src=""]) {
+.diptico__logo-mapa[src]:not([src=""]) {
   display: block;
 }
 
@@ -307,7 +308,7 @@
 }
 
 .stat {
-  background: var(--background-subtle);
+  background: var(--surface-container);
   border-radius: var(--radius-md, 8px);
   padding: 0.75rem;
 }
@@ -323,7 +324,7 @@
 
 .stat__label {
   font-size: 11px;
-  color: var(--text-color-secondary);
+  color: var(--text-color-tertiary);
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
@@ -423,7 +424,7 @@
   font-size: 12px;
   font-weight: 600;
   line-height: 1.2;
-  color: var(--text-color-primary);
+  color: var(--text-color-secondary);
 }
 
 .concesion-card__empresa {
@@ -646,10 +647,10 @@
     margin: 0;
   }
 
-  .diptico__header-logo {
-    width: 140px;
-    height: 140px;
-}
+  .diptico__logo-mapa {
+    width: 60px;
+    height: 60px;
+  }
 
   .diptico__header--con-banner .diptico__header-texto {
     padding: 1.5rem clamp(1rem, 5vw, 1.5rem);

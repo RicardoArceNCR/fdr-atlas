@@ -57,7 +57,7 @@
 }
 
 .diptico.diptico--tema-verde .stat {
-  background-color: #163025;
+  background-color: #17402A;
   color: rgba(220, 242, 230, 0.92);
 }
 
@@ -636,7 +636,7 @@
     max-height: none;
     margin-top: 12px;
     padding: 10px;
-    background: var(--background-page);
+    background: white;
     backdrop-filter: none;
   }
 

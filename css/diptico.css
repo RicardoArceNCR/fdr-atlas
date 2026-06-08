@@ -40,6 +40,52 @@
   color: var(--text-color-primary);
 }
 
+/* ─── Tema verde oscuro — territorios con alta presión minera ─────────────── */
+
+.diptico.diptico--tema-verde {
+  --background-page:      #1a3028;
+  --background-subtle:    #163025;
+  --text-color-primary:   rgba(220, 242, 230, 0.92);
+  --text-color-secondary: rgba(190, 225, 205, 0.65);
+  --border-subtle:        rgba(255, 255, 255, 0.08);
+}
+
+.diptico.diptico--tema-verde,
+.diptico.diptico--tema-verde .diptico__info {
+  background-color: #1a3028;
+  color: rgba(220, 242, 230, 0.92);
+}
+
+.diptico.diptico--tema-verde .stat {
+  background-color: #163025;
+  color: rgba(220, 242, 230, 0.92);
+}
+
+.diptico.diptico--tema-verde .stat__valor {
+  color: rgba(235, 250, 240, 1);
+}
+
+.diptico.diptico--tema-verde .stat__label {
+  color: rgba(190, 225, 205, 0.65);
+}
+
+.diptico.diptico--tema-verde .diptico__narrativa {
+  color: rgba(220, 242, 230, 0.92);
+}
+
+.diptico.diptico--tema-verde .concesion-card__nombre {
+  color: #1a1a18;
+}
+
+.diptico.diptico--tema-verde .concesion-card__empresa {
+  color: #5a5a58;
+}
+
+.diptico.diptico--tema-verde .concesion-card--activa .concesion-card__nombre,
+.diptico.diptico--tema-verde .concesion-card--activa .concesion-card__empresa {
+  color: #fff;
+}
+
 /* ─── Layouts ─────────────────────────────────────────────────────────────── */
 
 .diptico[data-layout="A"] {

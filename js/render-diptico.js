@@ -57,7 +57,10 @@ async function init() {
     document.body.prepend(container.firstElementChild);
 
     const diptico = document.getElementById("diptico-container");
-    if (diptico) diptico.dataset.layout = territorio.layout || "A";
+    if (diptico) {
+      diptico.dataset.layout = territorio.layout || "A";
+      if (territorio.tema) diptico.classList.add(`diptico--tema-${territorio.tema}`);
+    }
 
     renderHeader(territorio);
     renderMapa(territorio);

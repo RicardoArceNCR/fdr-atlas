@@ -142,6 +142,7 @@ const TERRITORIOS = [
       },
     },
     layout: 'A',
+    tema: 'verde',
     banner: '../../img/banners/banner-03.webp',
     logo: '../../img/Logo-fdr.webp',
     logo_alt: 'Fundación del Río',

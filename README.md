@@ -6,7 +6,7 @@ El proyecto convierte mapas técnicos de concesiones en un **producto editorial 
 
 ---
 
-## Estado actual — Mayo 2026
+## Estado actual — Junio 2026
 
 **Rama activa:** `feat/waupasa-twi-editorial`
 
@@ -24,8 +24,10 @@ El proyecto convierte mapas técnicos de concesiones en un **producto editorial 
 - ✅ Tooltip de poblados
 - ✅ Responsive desktop/tablet/mobile
 - ✅ Base print/PDF
+- ✅ Bordes grises en reposo (`#4c4c4c` 33%) — vía `diptico.css`, sin tocar el SVG
+- ✅ `border-*` nombrados explícitamente en Illustrator — IDs estables entre exports
 - ⬜ Datos placeholder pendientes de verificación con FDR
-- ⬜ Hover target de `columbus` pendiente (fill:none en Illustrator)
+- ⬜ Hover target de `columbus` pendiente (fill:none en Illustrator — ver CLAUDE.md)
 
 ---
 
@@ -35,7 +37,7 @@ El proyecto convierte mapas técnicos de concesiones en un **producto editorial 
 QGIS / fuente cartográfica
   → raster base webp por breakpoint
   → Illustrator
-  → SVG overlay limpio por breakpoint
+  → SVG overlay limpio por breakpoint  ← NO modificar el SVG a mano
   → navegador: raster + SVG inline
   → panel editorial HTML/CSS/JS
   → interacción SVG ↔ cards ↔ países
@@ -83,7 +85,7 @@ No construir los 16 mapas al mismo tiempo. Primero consolidar los cuatro maestro
 
 | Rol | Mapa | Estado |
 |---|---|---|
-| Multipaís denso | Waupasa Twi | En curso |
+| Multipaís denso | Waupasa Twi | ✅ completo |
 | Minimalista | Creole de Bluefields | Siguiente |
 | Dual | Wangki Li Aubra Tasbaya | Pendiente |
 | Complejo/fragmentado | Tuahka | Pendiente |
@@ -100,7 +102,7 @@ CONCESIÓN = variación secundaria
 | País | Paleta | Patrones |
 |---|---|---|
 | China | rojos, naranjas | diagonales densas, círculos, cross-hatch |
-| Canadá | azules fríos | grid técnico, doble línea, hachurado fino |
+| Canadá | verdes | grid técnico, doble línea, hachurado fino |
 | Colombia | verdes petróleo, turquesas | retícula modular, escalonado |
 | Nicaragua | azules institucionales | líneas verticales, trama ligera |
 | Reserva | gris, café | sólido, hachurado grueso |
@@ -112,42 +114,41 @@ CONCESIÓN = variación secundaria
 Cada concesión debe seguir esta estructura en Illustrator:
 
 ```
-<g id="nombre-concesion">          ← ID que usa el JS
-  <g id="area-main*">              ← patrón con clipPath
-    <Clipping Path>                ← máscara del contorno
-    <Group>                        ← shapes del patrón
+<g id="nombre-concesion">               ← ID que usa el JS
+  <g id="area-main">                    ← patrón reposo con clipPath
   </g>
-  [shape] id="border*"             ← contorno para animación
-  [shape] id="area-hover-target*"  ← hit area opacidad:0
+  <g id="area-main-hover">              ← patrón hover con clipPath
+  </g>
+  [shape] id="border-nombre-concesion"  ← contorno, nombre explícito ⬅ CRÍTICO
+  [shape] id="area-hover-target">       ← hit area opacidad:0
 </g>
 ```
 
-**Regla crítica del hover target:** el shape debe tener `fill` de cualquier color (nunca `fill:none`) con `opacidad: 0`. `fill:none` destruye el hit area. El modelo correcto es `walpa-tara`.
+**Regla crítica — hover target:** el shape debe tener `fill` de cualquier color
+(nunca `fill:none`) con opacidad `0`. `fill:none` destruye el hit area en CSS.
+El modelo correcto es `walpa-tara`. Ver `vanessa` como contraejemplo resuelto.
+
+**Regla crítica — border IDs:** nombrar siempre como `border-nombre-concesion`
+(ej. `border-vanessa`, `border-walpa-tara`). Illustrator puede numerar
+automáticamente (`border`, `border1`, `border2`...) si no se fuerza el nombre
+en el panel de capas. IDs automáticos se rompen entre exports.
 
 ---
 
-## Animación de borders — nota importante
+## Bordes grises en reposo — decisión de arquitectura
 
-Los IDs `border*` en el SVG **se reasignan en cada export de Illustrator**. Después de cada export, auditar:
+Los bordes de las concesiones se ven en `#4c4c4c` al 33% en reposo y
+recuperan su color al hacer hover. **Este CSS vive en `diptico.css`, no en
+el SVG.** Razón: Illustrator regenera el `<style>` del SVG en cada export,
+borrando cualquier edición manual. `diptico.css` persiste siempre.
 
-```bash
-grep -o 'id="border[^"]*"' mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg | sort
-```
+El SVG exportado desde Illustrator se usa tal cual, sin post-procesado.
+No existe ni debe existir un layer `borde-base` en Illustrator — los
+`border-*` que ya están en cada grupo de concesión son suficientes.
 
-Y actualizar el mapa en `css/diptico.css`. El mapa actual para Waupasa Twi es:
-
-```
-#border  → el-encanto-i   (china)
-#border1 → columbus       (china)
-#border2 → el-encanto-ii  (china)
-#border3 → caribe         (china)
-#border4 → caribe         (china)
-#border5 → yulu-awaskira  (china)
-#border6 → reserva-minera (reserva)
-#border7 → walpa-tara     (canada)
-#border8 → vanessa        (nacional)
-#border9 → puerto-cabezas (nacional)
-```
+Para un nuevo territorio: pegar el bloque de bordes de `diptico.css` y
+agregar las reglas de color de hover con los nuevos IDs. Ver sección
+correspondiente en `CLAUDE.md`.
 
 ---
 
@@ -156,14 +157,14 @@ Y actualizar el mapa en `css/diptico.css`. El mapa actual para Waupasa Twi es:
 ```txt
 atlas/03-waupasa-twi/index.html    ← único HTML por territorio
 templates/diptico-base.html        ← template compartido
-css/diptico.css                    ← estilos del sistema
+css/diptico.css                    ← estilos del sistema (incluye bordes)
 js/render-diptico.js               ← renderer + interactividad
 js/data-territorios.js             ← datos de todos los territorios
 mapas-raster/03-waupasa-twi/       ← webp por breakpoint
 mapas-svg/03-waupasa-twi/          ← SVG por breakpoint
 design-system/tokens/build/tokens.css
 ATLAS_PATTERN_SYSTEM.md
-CLAUDE.md
+CLAUDE.md                          ← decisiones técnicas y diagnóstico
 ```
 
 ---
@@ -175,14 +176,17 @@ CLAUDE.md
 python3 -m http.server 8000
 # Abrir: http://localhost:8000/atlas/03-waupasa-twi/
 
-# Auditar IDs del SVG
+# Auditar todos los IDs del SVG
 grep -o 'id="[^"]*"' mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg | sort | uniq
 
-# Auditar borders (reasignar en CSS si cambian)
+# Auditar border-* (verificar que tengan nombres explícitos, no border1/border2)
 grep -o 'id="border[^"]*"' mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg | sort
 
 # Verificar que el SVG no tenga imágenes embebidas
 grep -i "image\|xlink:href\|href" mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg
+
+# Verificar que no exista borde-base (no debe existir)
+grep "borde-base" mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg
 ```
 
 ---
@@ -199,15 +203,14 @@ git add \
   js/data-territorios.js \
   templates/diptico-base.html \
   atlas/03-waupasa-twi/index.html \
-  project_wp_tree.txt \
   mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg \
   mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg \
   mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg
 
-git commit -m "feat(waupasa): complete hover system — all 9 concesiones animated"
+git commit -m "feat(waupasa): borders via CSS — no manual SVG edits required"
 
-git tag waupasa-hover-complete-v1
+git tag waupasa-borders-css-v2
 
 git push origin feat/waupasa-twi-editorial
-git push origin waupasa-hover-complete-v1
+git push origin waupasa-borders-css-v2
 ```

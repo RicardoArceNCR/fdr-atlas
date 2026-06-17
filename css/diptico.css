@@ -16,7 +16,13 @@
 
 /* ─── Reset mínimo ─────────────────────────────────────────────────────────── */
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 /* ─── Contenedor editorial global ──────────────────────────────────────────── */
 
@@ -43,11 +49,11 @@
 /* ─── Tema verde oscuro — territorios con alta presión minera ─────────────── */
 
 .diptico.diptico--tema-verde {
-  --background-page:      #1a3028;
-  --background-subtle:    #163025;
-  --text-color-primary:   rgba(220, 242, 230, 0.92);
+  --background-page: #1a3028;
+  --background-subtle: #163025;
+  --text-color-primary: rgba(220, 242, 230, 0.92);
   --text-color-secondary: rgba(190, 225, 205, 0.65);
-  --border-subtle:        rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.08);
 }
 
 .diptico.diptico--tema-verde,
@@ -122,7 +128,8 @@
   position: relative;
   width: 100%;
   /* aspect-ratio inyectado dinámicamente por render-diptico.js según breakpoint */
-  aspect-ratio: 927 / 980; /* fallback desktop */
+  aspect-ratio: 927 / 980;
+  /* fallback desktop */
 }
 
 .mapa-raster,
@@ -200,7 +207,7 @@
   height: 14px;
   border-radius: 2px;
   flex-shrink: 0;
-  border: 1px solid rgba(0,0,0,0.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 /* Norte y escala */
@@ -221,6 +228,7 @@
   color: var(--text-color-primary);
   opacity: 0.75;
 }
+
 /* Insets (recuadros de detalle) */
 .inset-detalle {
   position: absolute;
@@ -231,7 +239,7 @@
   border-radius: var(--radius-md, 8px);
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: var(--text-color-primary);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .inset-detalle__titulo {
@@ -245,9 +253,20 @@
   color: var(--text-color-secondary);
 }
 
-#detalle_norte { top: 1.5rem; left: 1.5rem; }
-#detalle_sur { bottom: 5rem; left: 1.5rem; }
-#detalle_concesion { top: 1.5rem; left: 1.5rem; }
+#detalle_norte {
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+#detalle_sur {
+  bottom: 5rem;
+  left: 1.5rem;
+}
+
+#detalle_concesion {
+  top: 1.5rem;
+  left: 1.5rem;
+}
 
 /* ─── Panel derecho — editorial ────────────────────────────────────────────── */
 
@@ -259,14 +278,16 @@
   padding: 2.5rem 2rem;
   overflow-y: auto;
   border-left: 0.5px solid var(--border-subtle);
-  padding-top: 0; /* el banner absorbe el espacio superior */
+  padding-top: 0;
+  /* el banner absorbe el espacio superior */
 }
 
 /* ─── Header del territorio ────────────────────────────────────────────────── */
 
 .diptico__header {
   position: relative;
-  margin: -2.5rem -2rem 2rem;   /* sangra hasta los bordes del panel */
+  margin: -2.5rem -2rem 2rem;
+  /* sangra hasta los bordes del panel */
   padding: 6.5rem 2rem 1.75rem;
   display: flex;
   align-items: flex-end;
@@ -274,7 +295,8 @@
   gap: 1rem;
   min-height: 140px;
   overflow: hidden;
-  background-color: var(--color-brand-green-900); /* fallback sin banner */
+  background-color: var(--color-brand-green-900);
+  /* fallback sin banner */
 }
 
 
@@ -303,18 +325,18 @@
 
 /* Con banner: textos en blanco con sombra suave para legibilidad */
 .diptico__header--con-banner .diptico__kicker {
-  color: rgba(255,255,255,0.90);
-  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  color: rgba(255, 255, 255, 0.90);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .diptico__header--con-banner .diptico__titulo {
   color: #F4A700;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 }
 
 .diptico__header--con-banner .diptico__subtitulo {
-  color: rgba(255,255,255,0.90);
-  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  color: rgba(255, 255, 255, 0.90);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .diptico__kicker {
@@ -441,7 +463,7 @@
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 6px;
-  background: rgba(255,255,255,0.72);
+  background: rgba(255, 255, 255, 0.72);
   transition:
     border-color 160ms ease,
     background 160ms ease,
@@ -453,7 +475,7 @@
   height: 16px;
   border-radius: 3px;
   flex-shrink: 0;
-  border: 1px solid rgba(0,0,0,0.12);
+  border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .concesion-card__patron-img {
@@ -489,18 +511,55 @@
 }
 
 /* Badges por país */
-.badge-china    { background: #fff0ee; color: #dd3519; }
-.badge-canada   { background: #f3f7ee; color: #4a6b2a; }
-.badge-colombia { background: #f5f3ff; color: #4c1d95; }
-.badge-nacional { background: #eef1fc; color: #263fa8; }
-.badge-reserva  { background: var(--background-subtle); color: var(--text-color-secondary); }
+.badge-china {
+  background: #fff0ee;
+  color: #dd3519;
+}
+
+.badge-canada {
+  background: #f3f7ee;
+  color: #4a6b2a;
+}
+
+.badge-colombia {
+  background: #f5f3ff;
+  color: #4c1d95;
+}
+
+.badge-nacional {
+  background: #eef1fc;
+  color: #263fa8;
+}
+
+.badge-reserva {
+  background: var(--background-subtle);
+  color: var(--text-color-secondary);
+}
 
 /* Patrones visuales por país (para leyenda y lista) */
-.patron-china { background: repeating-linear-gradient(40deg, var(--concesion-pais-china), var(--concesion-pais-china) 1.8px, transparent 1.8px, transparent 14px); background-color: color-mix(in srgb, var(--concesion-pais-china) 15%, transparent); }
-.patron-canada { background: repeating-linear-gradient(135deg, var(--concesion-pais-canada), var(--concesion-pais-canada) 1.8px, transparent 1.8px, transparent 14px); background-color: color-mix(in srgb, var(--concesion-pais-canada) 15%, transparent); }
-.patron-colombia { background: repeating-linear-gradient(40deg, var(--concesion-pais-colombia), var(--concesion-pais-colombia) 1.8px, transparent 1.8px, transparent 14px); background-color: color-mix(in srgb, var(--concesion-pais-colombia) 15%, transparent); }
-.patron-nacional { background: repeating-linear-gradient(45deg, var(--concesion-pais-nacional), var(--concesion-pais-nacional) 1.8px, transparent 1.8px, transparent 14px); background-color: color-mix(in srgb, var(--concesion-pais-nacional) 15%, transparent); }
-.patron-reserva { background: color-mix(in srgb, var(--concesion-tipo-reserva) 25%, transparent); }
+.patron-china {
+  background: repeating-linear-gradient(40deg, var(--concesion-pais-china), var(--concesion-pais-china) 1.8px, transparent 1.8px, transparent 14px);
+  background-color: color-mix(in srgb, var(--concesion-pais-china) 15%, transparent);
+}
+
+.patron-canada {
+  background: repeating-linear-gradient(135deg, var(--concesion-pais-canada), var(--concesion-pais-canada) 1.8px, transparent 1.8px, transparent 14px);
+  background-color: color-mix(in srgb, var(--concesion-pais-canada) 15%, transparent);
+}
+
+.patron-colombia {
+  background: repeating-linear-gradient(40deg, var(--concesion-pais-colombia), var(--concesion-pais-colombia) 1.8px, transparent 1.8px, transparent 14px);
+  background-color: color-mix(in srgb, var(--concesion-pais-colombia) 15%, transparent);
+}
+
+.patron-nacional {
+  background: repeating-linear-gradient(45deg, var(--concesion-pais-nacional), var(--concesion-pais-nacional) 1.8px, transparent 1.8px, transparent 14px);
+  background-color: color-mix(in srgb, var(--concesion-pais-nacional) 15%, transparent);
+}
+
+.patron-reserva {
+  background: color-mix(in srgb, var(--concesion-tipo-reserva) 25%, transparent);
+}
 
 /* ─── Narrativa / contexto ─────────────────────────────────────────────────── */
 
@@ -511,7 +570,7 @@
   margin-bottom: 2rem;
 }
 
-.diptico__narrativa p + p {
+.diptico__narrativa p+p {
   margin-top: 0.75rem;
 }
 
@@ -693,14 +752,14 @@
   }
 
   /* Logo flotante sobre el mapa — arriba a la derecha */
-.diptico__logo-mapa {
+  .diptico__logo-mapa {
     width: 60px;
     height: 50px;
-}
+  }
 
-.diptico__logo-mapa {
+  .diptico__logo-mapa {
     top: 3rem;
-}
+  }
 
   .diptico__header--con-banner .diptico__header-texto {
     padding: 1.5rem clamp(1rem, 5vw, 1.5rem);
@@ -901,7 +960,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 .pais-btn--activo {
   opacity: 1;
-  filter: drop-shadow(0 0 4px rgba(0,0,0,0.25));
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.25));
 }
 
 .mapa-tooltip {
@@ -953,9 +1012,10 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
  * Seguros ante re-export. No requieren auditoría posterior.
  * ─────────────────────────────────────────────────────────────────────────── */
 
+/* Reposo: gris translúcido — el color vivo llega desde el bloque
+ * "Bordes de concesiones: gris en reposo, color en hover" al final del archivo.
+ * Este selector solo mantiene propiedades de infraestructura. */
 [id^="border-"]:not([id^="border-china"]):not([id^="border-canada"]):not([id^="border-colombia"]):not([id^="border-nicaragua"]):not([id^="border-reserva"]:not([id="border-reserva-minera"])) {
-  opacity: 0;
-  transition: opacity 200ms ease;
   pointer-events: none;
   will-change: stroke-dashoffset;
 }
@@ -966,7 +1026,9 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 /* ── 2. Keyframe único para todos ────────────────────────────────────────────── */
 
 @keyframes dash-concesion {
-  to { stroke-dashoffset: -200; }
+  to {
+    stroke-dashoffset: -200;
+  }
 }
 
 
@@ -1120,11 +1182,13 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 #columbus {
   pointer-events: all;
 }
+
 #columbus #area-hover-target1 {
   pointer-events: all;
   opacity: 0;
 }
-#columbus > * {
+
+#columbus>* {
   pointer-events: none;
 }
 
@@ -1145,7 +1209,9 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
  * ─────────────────────────────────────────────────────────────────────────── */
 
 @keyframes borde-girar {
-  to { stroke-dashoffset: -178.4; }
+  to {
+    stroke-dashoffset: -178.4;
+  }
 }
 
 /* ── Estado base: bordes invisibles en reposo ──────────────────────────────── */
@@ -1166,11 +1232,11 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 /* ── Estado activo: aparece y anima al hover ───────────────────────────────── */
 
-#pais-china.pais--activo     #border-china circle,
-#pais-canada.pais--activo    #border-canada circle,
+#pais-china.pais--activo #border-china circle,
+#pais-canada.pais--activo #border-canada circle,
 #pais-nicaragua.pais--activo #border-nicaragua circle,
-#pais-colombia.pais--activo  #border-colombia circle,
-#pais-reserva.pais--activo   #border-reserva circle {
+#pais-colombia.pais--activo #border-colombia circle,
+#pais-reserva.pais--activo #border-reserva circle {
   opacity: 1;
   stroke-dasharray: 8 6;
   stroke-dashoffset: 0;
@@ -1179,20 +1245,36 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 /* ── Velocidades por país ───────────────────────────────────────────────────── */
 
-#pais-china.pais--activo     #border-china circle     { animation-duration: 3s;   }
-#pais-canada.pais--activo    #border-canada circle    { animation-duration: 4s;   }
-#pais-nicaragua.pais--activo #border-nicaragua circle { animation-duration: 4.5s; }
-#pais-colombia.pais--activo  #border-colombia circle  { animation-duration: 4.5s; }
-#pais-reserva.pais--activo   #border-reserva circle   { animation-duration: 6s; stroke-dasharray: 4 10; }
+#pais-china.pais--activo #border-china circle {
+  animation-duration: 3s;
+}
+
+#pais-canada.pais--activo #border-canada circle {
+  animation-duration: 4s;
+}
+
+#pais-nicaragua.pais--activo #border-nicaragua circle {
+  animation-duration: 4.5s;
+}
+
+#pais-colombia.pais--activo #border-colombia circle {
+  animation-duration: 4.5s;
+}
+
+#pais-reserva.pais--activo #border-reserva circle {
+  animation-duration: 6s;
+  stroke-dasharray: 4 10;
+}
 
 /* ── Accesibilidad ─────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  #pais-china.pais--activo     #border-china circle,
-  #pais-canada.pais--activo    #border-canada circle,
+
+  #pais-china.pais--activo #border-china circle,
+  #pais-canada.pais--activo #border-canada circle,
   #pais-nicaragua.pais--activo #border-nicaragua circle,
-  #pais-colombia.pais--activo  #border-colombia circle,
-  #pais-reserva.pais--activo   #border-reserva circle {
+  #pais-colombia.pais--activo #border-colombia circle,
+  #pais-reserva.pais--activo #border-reserva circle {
     animation: none;
     stroke-dasharray: 8 6;
   }
@@ -1201,11 +1283,12 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 /* ── Mobile: sin animación para preservar batería ─────────────────────────── */
 
 @media (max-width: 767px) {
-  #pais-china.pais--activo     #border-china circle,
-  #pais-canada.pais--activo    #border-canada circle,
+
+  #pais-china.pais--activo #border-china circle,
+  #pais-canada.pais--activo #border-canada circle,
   #pais-nicaragua.pais--activo #border-nicaragua circle,
-  #pais-colombia.pais--activo  #border-colombia circle,
-  #pais-reserva.pais--activo   #border-reserva circle {
+  #pais-colombia.pais--activo #border-colombia circle,
+  #pais-reserva.pais--activo #border-reserva circle {
     animation: none;
     stroke-dasharray: 8 6;
   }
@@ -1259,4 +1342,95 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   .btn-tour-narrativo {
     display: none;
   }
+}
+
+/* ── area-main-hover: patrón flip visible solo al activar concesión ─────────
+ *
+ * Illustrator exporta area-main-hover con IDs numéricos (area-main-hover1,
+ * area-main-hover2…) pero preserva data-name="area-main-hover".
+ * Usamos [data-name] como selector estable ante re-exports.
+ *
+ * El primero (#area-main-hover) no tiene data-name — selector combinado.
+ *
+ * Estado actual (junio 2026):
+ *   ✅ el-encanto-i   → #area-main-hover
+ *   ✅ el-encanto-ii  → #area-main-hover1
+ *   ✅ yulu-awaskira  → #area-main-hover2
+ *   ✅ caribe         → #area-main-hover3
+ *   ❌ columbus       → pendiente Illustrator
+ *   ❌ reserva-minera → pendiente Illustrator
+ *   ❌ walpa-tara     → pendiente Illustrator
+ *   ❌ vanessa        → pendiente Illustrator
+ *   ❌ puerto-cabezas → pendiente Illustrator
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+#area-main-hover,
+[data-name="area-main-hover"] {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.concesion--activa #area-main-hover,
+.concesion--activa [data-name="area-main-hover"] {
+  opacity: 1;
+}
+
+/* ─── Bordes de concesiones: gris en reposo, color en hover ─────────────────
+ *
+ * Estos estilos se inyectan vía diptico.css sobre el SVG inline.
+ * El SVG exportado desde Illustrator no necesita modificarse manualmente
+ * en cada reexportación — este bloque persiste aquí y aplica siempre.
+ *
+ * Los [id^="border-"] excluyen los grupos de bandera/leyenda (border-china,
+ * border-canada, etc.) que tienen otro rol en el SVG.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* Reposo: gris #4c4c4c al 33% para todos los border-* de concesiones */
+#mapa-svg-inline [id^="border-"]:not([id="border-china"]):not([id="border-canada"]):not([id="border-colombia"]):not([id="border-nicaragua"]):not([id="border-reserva"]) {
+  stroke: #4c4c4c !important;
+  stroke-opacity: 0.53 !important;
+  transition: stroke 160ms ease, stroke-opacity 160ms ease;
+}
+
+/* Hover / activo: restaura el color original del país */
+#mapa-svg-inline .concesion--activa [id^="border-"] {
+  stroke-opacity: 1 !important;
+}
+
+/* Colores por país al activarse */
+#mapa-svg-inline #el-encanto-i.concesion--activa [id^="border-"] {
+  stroke: #d7620e !important;
+}
+
+#mapa-svg-inline #columbus.concesion--activa [id^="border-"] {
+  stroke: #d7620e !important;
+}
+
+#mapa-svg-inline #el-encanto-ii.concesion--activa [id^="border-"] {
+  stroke: #f47317 !important;
+}
+
+#mapa-svg-inline #yulu-awaskira.concesion--activa [id^="border-"] {
+  stroke: #f98838 !important;
+}
+
+#mapa-svg-inline #caribe.concesion--activa [id^="border-"] {
+  stroke: #d7620e !important;
+}
+
+#mapa-svg-inline #walpa-tara.concesion--activa [id^="border-"] {
+  stroke: #1c621c !important;
+}
+
+#mapa-svg-inline #vanessa.concesion--activa [id^="border-"] {
+  stroke: #193966 !important;
+}
+
+#mapa-svg-inline #puerto-cabezas.concesion--activa [id^="border-"] {
+  stroke: #193966 !important;
+}
+
+#mapa-svg-inline #reserva-minera.concesion--activa [id^="border-"] {
+  stroke: #4c4c4c !important;
+  stroke-opacity: 0.8 !important;
 }

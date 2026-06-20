@@ -1,4 +1,741 @@
-<!--
-Índice público del Atlas FDR.
-Pendiente: listar los 15 territorios.
--->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas de Concesiones Mineras — Fundación del Río</title>
+    <link rel="stylesheet" href="../design-system/tokens/build/tokens.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --lobby-bg: #0e1f17;
+            --lobby-bg-deep: #0a1812;
+            --lobby-surface: #15291f;
+            --lobby-surface-hover: #1b3327;
+            --lobby-line: rgba(220, 242, 230, 0.10);
+            --lobby-line-strong: rgba(220, 242, 230, 0.18);
+            --lobby-text: rgba(226, 240, 230, 0.95);
+            --lobby-text-dim: rgba(196, 218, 204, 0.58);
+            --lobby-text-faint: rgba(196, 218, 204, 0.36);
+            --lobby-accent: #f4a700;
+        }
+
+        html {
+            background: var(--lobby-bg);
+        }
+
+        body {
+            font-family: 'Source Serif 4', serif;
+            background: var(--lobby-bg);
+            color: var(--lobby-text);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── Fondo cartográfico ambiental ──────────────────────────────────────── */
+
+        .lobby-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse 900px 700px at 78% -8%, rgba(244, 167, 0, 0.10), transparent 60%),
+                radial-gradient(ellipse 700px 600px at 8% 90%, rgba(38, 63, 168, 0.10), transparent 60%),
+                var(--lobby-bg);
+            pointer-events: none;
+        }
+
+        .lobby-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--lobby-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--lobby-line) 1px, transparent 1px);
+            background-size: 64px 64px;
+            opacity: 0.35;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 75%);
+        }
+
+        /* ─── Shell ──────────────────────────────────────────────────────────────── */
+
+        .lobby {
+            position: relative;
+            z-index: 1;
+            max-width: 1320px;
+            margin-inline: auto;
+            padding: 0 32px 96px;
+        }
+
+        /* ─── Header ─────────────────────────────────────────────────────────────── */
+
+        .lobby__nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 28px 0 0;
+        }
+
+        .lobby__brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--lobby-text);
+        }
+
+        .lobby__brand-mark {
+            width: 30px;
+            height: 30px;
+            border-radius: 7px;
+            background: var(--color-brand-green-700, #245f3a);
+            display: grid;
+            place-items: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .lobby__nav-meta {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 11px;
+            color: var(--lobby-text-faint);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        /* ─── Hero ───────────────────────────────────────────────────────────────── */
+
+        .lobby__hero {
+            padding: 88px 0 56px;
+            max-width: 760px;
+        }
+
+        .lobby__kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--lobby-accent);
+            margin-bottom: 22px;
+        }
+
+        .lobby__kicker::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--lobby-accent);
+        }
+
+        .lobby__title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(34px, 4.4vw, 52px);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+            color: #fff;
+            margin-bottom: 22px;
+        }
+
+        .lobby__title em {
+            font-style: italic;
+            font-family: 'Source Serif 4', serif;
+            font-weight: 500;
+            color: var(--lobby-accent);
+        }
+
+        .lobby__dek {
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--lobby-text-dim);
+            max-width: 56ch;
+        }
+
+        /* ─── Stat strip ─────────────────────────────────────────────────────────── */
+
+        .lobby__stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--lobby-line);
+            border-bottom: 1px solid var(--lobby-line);
+            margin-bottom: 64px;
+        }
+
+        .lobby__stat {
+            padding: 24px 28px;
+            border-right: 1px solid var(--lobby-line);
+        }
+
+        .lobby__stat:last-child {
+            border-right: none;
+        }
+
+        .lobby__stat-valor {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .lobby__stat-label {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 11.5px;
+            color: var(--lobby-text-faint);
+            letter-spacing: 0.02em;
+        }
+
+        /* ─── Sección título ─────────────────────────────────────────────────────── */
+
+        .lobby__seccion {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 28px;
+            padding-top: 8px;
+        }
+
+        .lobby__seccion-titulo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--lobby-text);
+        }
+
+        .lobby__seccion-nota {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 12px;
+            color: var(--lobby-text-faint);
+        }
+
+        /* ─── Filtros por país ───────────────────────────────────────────────────── */
+
+        .lobby__filtros {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+
+        .filtro-chip {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 7px 14px 7px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--lobby-line-strong);
+            background: transparent;
+            color: var(--lobby-text-dim);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: border-color 150ms ease, background 150ms ease, color 150ms ease;
+        }
+
+        .filtro-chip__swatch {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .filtro-chip:hover {
+            border-color: var(--lobby-line-strong);
+            background: var(--lobby-surface);
+            color: var(--lobby-text);
+        }
+
+        .filtro-chip.is-activo {
+            background: var(--lobby-text);
+            border-color: var(--lobby-text);
+            color: var(--lobby-bg-deep);
+        }
+
+        .filtro-chip.is-activo .filtro-chip__swatch {
+            box-shadow: 0 0 0 2px var(--lobby-bg-deep) inset;
+        }
+
+        /* ─── Grid de territorios ────────────────────────────────────────────────── */
+
+        .lobby__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+            margin-bottom: 64px;
+        }
+
+        .t-card {
+            position: relative;
+            background: var(--lobby-surface);
+            border: 1px solid var(--lobby-line);
+            border-radius: 14px;
+            padding: 20px 20px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+            overflow: hidden;
+            transition: border-color 200ms ease, background 200ms ease, transform 200ms ease;
+            --t-accent: var(--lobby-text-faint);
+        }
+
+        .t-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--t-accent);
+            opacity: 0.7;
+            transition: opacity 200ms ease;
+        }
+
+        .t-card.is-disponible:hover {
+            background: var(--lobby-surface-hover);
+            border-color: var(--lobby-line-strong);
+            transform: translateY(-2px);
+        }
+
+        .t-card.is-disponible:hover::before {
+            opacity: 1;
+        }
+
+        .t-card.is-pendiente {
+            cursor: default;
+            opacity: 0.5;
+        }
+
+        .t-card.is-pendiente::before {
+            opacity: 0.25;
+        }
+
+        .t-card__top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .t-card__numero {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--lobby-text-faint);
+            letter-spacing: 0.04em;
+        }
+
+        .t-card__estado {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 3px 9px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .t-card__estado--listo {
+            background: rgba(98, 188, 121, 0.16);
+            color: #8fdba8;
+        }
+
+        .t-card__estado--avance {
+            background: rgba(244, 167, 0, 0.14);
+            color: #f4c455;
+        }
+
+        .t-card__estado--pendiente {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--lobby-text-faint);
+        }
+
+        .t-card__nombre {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+        }
+
+        .t-card__region {
+            font-size: 12.5px;
+            color: var(--lobby-text-dim);
+            line-height: 1.5;
+        }
+
+        .t-card__paises {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .t-pais-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .t-card__foot {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-top: 12px;
+            border-top: 1px solid var(--lobby-line);
+        }
+
+        .t-card__concesiones {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 12px;
+            color: var(--lobby-text-dim);
+        }
+
+        .t-card__concesiones strong {
+            color: var(--lobby-text);
+            font-weight: 700;
+        }
+
+        .t-card__cluster {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            color: var(--lobby-text-faint);
+        }
+
+        /* ─── Leyenda de países ──────────────────────────────────────────────────── */
+
+        .lobby__leyenda {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+            padding: 24px 0 0;
+            border-top: 1px solid var(--lobby-line);
+            margin-bottom: 56px;
+        }
+
+        .leyenda-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 12px;
+            color: var(--lobby-text-dim);
+        }
+
+        .leyenda-item__dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ─── Footer ─────────────────────────────────────────────────────────────── */
+
+        .lobby__footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding-top: 28px;
+            border-top: 1px solid var(--lobby-line);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 11.5px;
+            color: var(--lobby-text-faint);
+        }
+
+        /* ─── Responsive ─────────────────────────────────────────────────────────── */
+
+        @media (max-width: 860px) {
+            .lobby {
+                padding: 0 20px 72px;
+            }
+
+            .lobby__stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .lobby__stat:nth-child(2) {
+                border-right: none;
+            }
+
+            .lobby__stat {
+                border-bottom: 1px solid var(--lobby-line);
+            }
+
+            .lobby__stat:nth-last-child(-n+2) {
+                border-bottom: none;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .lobby__hero {
+                padding-top: 64px;
+            }
+
+            .lobby__grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .t-card {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="lobby-bg"></div>
+
+    <div class="lobby">
+
+        <nav class="lobby__nav">
+            <div class="lobby__brand">
+                <div class="lobby__brand-mark">FDR</div>
+                Atlas de Concesiones
+            </div>
+            <div class="lobby__nav-meta">Fundación del Río · Junio 2026</div>
+        </nav>
+
+        <header class="lobby__hero">
+            <div class="lobby__kicker">Atlas cartográfico editorial</div>
+            <h1 class="lobby__title">Dieciséis territorios.<br>Cuatro países de capital<br>en <em>tierra indígena.</em>
+            </h1>
+            <p class="lobby__dek">
+                Concesiones mineras superpuestas a territorios indígenas y afrodescendientes
+                de la costa caribe de Nicaragua. Cada díptico cruza el mapa técnico con el
+                registro editorial de quién concesiona, dónde, y sobre qué comunidad.
+            </p>
+        </header>
+
+        <section class="lobby__stats" id="stats-strip"></section>
+
+        <div class="lobby__seccion">
+            <div class="lobby__seccion-titulo">Territorios</div>
+            <div class="lobby__seccion-nota" id="grid-nota"></div>
+        </div>
+
+        <div class="lobby__filtros" id="filtros"></div>
+
+        <section class="lobby__grid" id="grid"></section>
+
+        <div class="lobby__leyenda" id="leyenda"></div>
+
+        <footer class="lobby__footer">
+            <span>La Gaceta · URACCAN · OpenStreetMap · ESRI Standard-Shaded Relief</span>
+            <span>Proyección UTM · Datum NAD 27 · Zona 16 N</span>
+        </footer>
+
+    </div>
+
+    <script type="module">
+        import { TERRITORIOS, getLabelPais } from "../js/data-territorios.js";
+
+        const PAIS_COLOR = {
+            china: '#dd3519',
+            canada: '#739b50',
+            colombia: '#5b21b6',
+            nacional: '#263fa8',
+            reserva: '#7d8593',
+        };
+
+        // Catálogo completo de los 16 dípticos (de README.md) — los que no están
+        // en TERRITORIOS todavía se muestran como "en preparación", sin inventar datos.
+        const CATALOGO = [
+            { id: '01-rama-kriol', numero: '01', nombre: 'Rama y Kriol', cluster: 'C — dual' },
+            { id: '02-creole-bluefields', numero: '02', nombre: 'Creole de Bluefields', cluster: 'B — minimalista' },
+            { id: '03-waupasa-twi', numero: '03', nombre: 'Waupasa Twi', cluster: 'A — presión extrema' },
+            { id: '04-wangki-twi-tasba-raya', numero: '04', nombre: 'Wangki Twi-Tasba Raya', cluster: 'C — dual' },
+            { id: '05-wangki-li', numero: '05', nombre: 'Wangki Li Aubra Tasbaya', cluster: 'C — dual' },
+            { id: '06-twi-ahbra', numero: '06', nombre: 'Twi Ahbra 10 comunidades', cluster: 'B — minimalista' },
+            { id: '07-tuahka', numero: '07', nombre: 'Tuahka', cluster: 'A — presión extrema' },
+            { id: '08-tasba-pri', numero: '08', nombre: 'Tasba Pri Matriz Indígena', cluster: 'A — presión extrema' },
+            { id: '09-prinzu-awala', numero: '09', nombre: 'Prinzu Awala', cluster: 'A — presión extrema' },
+            { id: '10-mayangna-sauni-bas', numero: '10', nombre: 'Mayangna Sauni Bas', cluster: 'C — dual' },
+            { id: '11-mayangna-sauni-as', numero: '11', nombre: 'Mayangna Sauni As', cluster: 'A — presión extrema' },
+            { id: '12-masauni-arumatun', numero: '12', nombre: 'Masauni Arumatun', cluster: 'D — fragmentación extrema' },
+            { id: '13-amasau', numero: '13', nombre: 'Amasau', cluster: 'D — fragmentación extrema' },
+            { id: '14-chorotega-ii', numero: '14', nombre: 'Chorotega II', cluster: 'B — minimalista' },
+            { id: '15-matagalpa', numero: '15', nombre: 'Matagalpa', cluster: 'B — minimalista' },
+            { id: '16-prinzu-auhya-uh', numero: '16', nombre: 'Prinzu Auhya Uh', cluster: 'B — minimalista' },
+        ];
+
+        const MAPA = new Map(TERRITORIOS.map(t => [t.id, t]));
+
+        function paisesDe(t) {
+            if (!t || !t.concesiones) return [];
+            return [...new Set(t.concesiones.map(c => c.pais).filter(Boolean))];
+        }
+
+        function estadoDe(t, catalogoItem) {
+            if (!t) return { tipo: 'pendiente', label: 'En preparación' };
+            const tieneSvg = !!(t.assets && t.assets.desktop && t.assets.desktop.svg);
+            const concesionesConGrupo = (t.concesiones || []).filter(c => c.svg_id).length;
+            const totalConcesiones = (t.concesiones || []).length;
+            if (tieneSvg && concesionesConGrupo === totalConcesiones && totalConcesiones > 0) {
+                return { tipo: 'listo', label: 'Mapa interactivo' };
+            }
+            if (totalConcesiones > 0) {
+                return { tipo: 'avance', label: 'En construcción' };
+            }
+            return { tipo: 'pendiente', label: 'En preparación' };
+        }
+
+        function render(filtroPais) {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+
+            let visibles = 0;
+
+            CATALOGO.forEach(item => {
+                const t = MAPA.get(item.id);
+                const paises = paisesDe(t);
+                if (filtroPais && !paises.includes(filtroPais)) return;
+                visibles++;
+
+                const estado = estadoDe(t, item);
+                const disponible = estado.tipo !== 'pendiente';
+                const accent = paises.length ? PAIS_COLOR[paises[0]] : 'rgba(196,218,204,0.3)';
+
+                const el = document.createElement(disponible ? 'a' : 'div');
+                if (disponible) el.href = `${item.id}/`;
+                el.className = `t-card ${disponible ? 'is-disponible' : 'is-pendiente'}`;
+                el.style.setProperty('--t-accent', accent);
+
+                const region = t?.region ? t.region.replace(/\s*\([^)]*\)/, '') : 'Región pendiente de asignar';
+                const nConcesiones = t?.stats?.concesiones ?? (t?.concesiones?.length || 0);
+
+                el.innerHTML = `
+      <div class="t-card__top">
+        <span class="t-card__numero">№ ${item.numero}</span>
+        <span class="t-card__estado t-card__estado--${estado.tipo}">${estado.label}</span>
+      </div>
+      <div>
+        <div class="t-card__nombre">${item.nombre}</div>
+        <div class="t-card__region">${region}</div>
+      </div>
+      <div class="t-card__paises">
+        ${paises.map(p => `<span class="t-pais-dot" style="background:${PAIS_COLOR[p] || '#7d8593'}" title="${getLabelPais(p)}"></span>`).join('') || ''}
+      </div>
+      <div class="t-card__foot">
+        <span class="t-card__concesiones">${nConcesiones ? `<strong>${nConcesiones}</strong> concesión${nConcesiones === 1 ? '' : 'es'}` : 'Sin datos aún'}</span>
+        <span class="t-card__cluster">${item.cluster}</span>
+      </div>
+    `;
+                grid.appendChild(el);
+            });
+
+            document.getElementById('grid-nota').textContent =
+                filtroPais ? `${visibles} de ${CATALOGO.length} territorios` : `${CATALOGO.length} territorios planificados`;
+        }
+
+        function renderStats() {
+            const conDatos = TERRITORIOS.length;
+            const conMapa = TERRITORIOS.filter(t => t.assets?.desktop?.svg).length;
+            const todosPaises = new Set();
+            let totalConcesiones = 0;
+            TERRITORIOS.forEach(t => {
+                (t.concesiones || []).forEach(c => {
+                    if (c.pais) todosPaises.add(c.pais);
+                    totalConcesiones++;
+                });
+            });
+
+            const stats = [
+                { valor: '16', label: 'Territorios en el atlas' },
+                { valor: String(conMapa), label: 'Mapas interactivos activos' },
+                { valor: String(totalConcesiones), label: 'Concesiones registradas' },
+                { valor: String(todosPaises.size), label: 'Países de capital identificados' },
+            ];
+
+            document.getElementById('stats-strip').innerHTML = stats.map(s => `
+    <div class="lobby__stat">
+      <div class="lobby__stat-valor">${s.valor}</div>
+      <div class="lobby__stat-label">${s.label}</div>
+    </div>
+  `).join('');
+        }
+
+        function renderFiltrosYLeyenda() {
+            const paisesUsados = new Set();
+            TERRITORIOS.forEach(t => paisesDe(t).forEach(p => paisesUsados.add(p)));
+            const orden = ['china', 'canada', 'nacional', 'colombia', 'reserva'];
+            const paises = orden.filter(p => paisesUsados.has(p));
+
+            const filtrosEl = document.getElementById('filtros');
+            let filtroActivo = null;
+
+            function pintarChips() {
+                filtrosEl.innerHTML = `
+      <button class="filtro-chip ${filtroActivo === null ? 'is-activo' : ''}" data-pais="">Todos</button>
+      ${paises.map(p => `
+        <button class="filtro-chip ${filtroActivo === p ? 'is-activo' : ''}" data-pais="${p}">
+          <span class="filtro-chip__swatch" style="background:${PAIS_COLOR[p]}"></span>${getLabelPais(p)}
+        </button>
+      `).join('')}
+    `;
+                filtrosEl.querySelectorAll('.filtro-chip').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        filtroActivo = btn.dataset.pais || null;
+                        pintarChips();
+                        render(filtroActivo);
+                    });
+                });
+            }
+            pintarChips();
+
+            document.getElementById('leyenda').innerHTML = paises.map(p => `
+    <div class="leyenda-item">
+      <span class="leyenda-item__dot" style="background:${PAIS_COLOR[p]}"></span>
+      Capital ${getLabelPais(p)}
+    </div>
+  `).join('') + `
+    <div class="leyenda-item">
+      <span class="leyenda-item__dot" style="background:${PAIS_COLOR.reserva}"></span>
+      Reserva minera nacional
+    </div>
+  `;
+        }
+
+        renderStats();
+        renderFiltrosYLeyenda();
+        render(null);
+    </script>
+
+</body>
+
+</html>

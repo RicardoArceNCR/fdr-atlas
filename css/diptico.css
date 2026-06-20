@@ -909,44 +909,48 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   color: #fff;
 }
 
-/* ── Activo por país ─────────────────────────────────────────────────────── */
+/* ── Activo por país ───────────────────────────────────────────────────────
+ *
+ * Usa data-pais (no data-svg-id): el color de fondo de la card es el mismo
+ * para todas las concesiones de un país, así que un solo selector por país
+ * cubre cualquier concesión de cualquier territorio, sin listas que
+ * mantener a mano. Para un territorio nuevo no hay que tocar este bloque —
+ * basta con que cada concesión en data-territorios.js tenga su `pais`
+ * correcto ('china' | 'canada' | 'colombia' | 'nacional' | 'reserva').
+ * El matiz individual por concesión (naranja claro/oscuro, etc.) sigue
+ * viviendo en el `border-*` del SVG vía data-territorios.js, no aquí.
+ * ─────────────────────────────────────────────────────────────────────────── */
 
 /* China — rojo */
-.concesion-card--activa[data-svg-id="caribe"],
-.concesion-card--activa[data-svg-id="columbus"],
-.concesion-card--activa[data-svg-id="el-encanto-i"],
-.concesion-card--activa[data-svg-id="el-encanto-ii"],
-.concesion-card--activa[data-svg-id="yulu-awaskira"] {
+.concesion-card--activa[data-pais="china"] {
   background: #dd3519;
   border-color: #dd3519;
   box-shadow: 0 4px 10px rgba(221, 53, 25, 0.30);
 }
 
 /* Canadá — verde */
-.concesion-card--activa[data-svg-id="walpa-tara"] {
+.concesion-card--activa[data-pais="canada"] {
   background: #739b50;
   border-color: #739b50;
   box-shadow: 0 4px 10px rgba(115, 155, 80, 0.30);
 }
 
 /* Nicaragua / Nacional — magenta */
-.concesion-card--activa[data-svg-id="puerto-cabezas"],
-.concesion-card--activa[data-svg-id="vanessa"] {
+.concesion-card--activa[data-pais="nacional"] {
   background: #263fa8;
   border-color: #263fa8;
   box-shadow: 0 4px 10px rgba(38, 63, 168, 0.30);
 }
 
 /* Reserva — gris */
-.concesion-card--activa[data-svg-id="reserva-minera"] {
+.concesion-card--activa[data-pais="reserva"] {
   background: #394150;
   border-color: #394150;
   box-shadow: 0 4px 10px rgba(57, 65, 80, 0.30);
 }
 
-/* Colombia — verde (para futuros mapas) */
-.concesion-card--activa[data-svg-id*="colombia"],
-.concesion-card--activa[data-svg-id*="hemco"] {
+/* Colombia — verde petróleo */
+.concesion-card--activa[data-pais="colombia"] {
   background: #0f766e;
   border-color: #0f766e;
   box-shadow: 0 4px 10px rgba(15, 118, 110, 0.30);

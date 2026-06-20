@@ -1108,15 +1108,15 @@
         <g id="area-main-hover2" data-name="area-main-hover">
           <g class="st44">
             <g>
-              <path class="st6" d="M305.8,715.4l22.9-22.9" vector-effect="none"/>
-              <path class="st6" d="M310.5,720.1l22.9-22.9" vector-effect="none"/>
-              <path class="st6" d="M315.2,724.7l22.9-22.9" vector-effect="none"/>
-              <path class="st6" d="M319.8,729.4l22.9-22.9" vector-effect="none"/>
-              <path class="st6" d="M324.5,734.1l22.9-22.9" vector-effect="none"/>
-              <path class="st6" d="M329.2,738.7l22.9-22.9" vector-effect="none"/>
-              <path class="st6" d="M333.8,743.4l22.9-22.9" vector-effect="none"/>
-              <path class="st6" d="M338.5,748.1l22.9-22.9" vector-effect="none"/>
-              <path class="st6" d="M343.2,752.7l22.9-22.9" vector-effect="none"/>
+              <path class="st6" d="M329.9,679.2l33,33" vector-effect="none"/>
+              <path class="st6" d="M325.2,683.9l46.3,46.3" vector-effect="none"/>
+              <path class="st6" d="M320.6,688.5l46.3,46.3" vector-effect="none"/>
+              <path class="st6" d="M315.9,693.2l46.3,46.3" vector-effect="none"/>
+              <path class="st6" d="M311.2,697.9l46.3,46.3" vector-effect="none"/>
+              <path class="st6" d="M306.5,702.5l46.3,46.3" vector-effect="none"/>
+              <path class="st6" d="M301.9,707.2l46.3,46.3" vector-effect="none"/>
+              <path class="st6" d="M297.2,711.9l46.3,46.3" vector-effect="none"/>
+              <path class="st6" d="M292.5,716.5l46.3,46.3" vector-effect="none"/>
             </g>
           </g>
         </g>

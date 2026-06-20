@@ -219,6 +219,7 @@ function renderConcesiones(t) {
       const card = document.createElement("div");
       card.className = "concesion-card";
       if (c.svg_id) card.dataset.svgId = c.svg_id;
+      if (c.pais) card.dataset.pais = c.pais;
 
       const patron = document.createElement("div");
       if (c.patron_img) {

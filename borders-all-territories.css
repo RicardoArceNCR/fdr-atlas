@@ -1,0 +1,516 @@
+/* ═══════════════════════════════════════════════════════════════════════
+ * ANIMACIONES DE BORDE — TODOS LOS TERRITORIOS
+ * Auto-generado desde REFERENCIA_CONCESIONES.csv · Jun 2026
+ *
+ * REGLA DE COLOR: máximo 3 variantes por país, asignadas globalmente
+ * por orden alfabético del svg_id dentro del país.
+ * Mismo lote = mismo color en todos los territorios → Sección 1 y 2 siempre coinciden.
+ *
+ * Correcciones manuales sobre el CSV:
+ *   puerto-cabezas → Nicaragua (data-territorios.js 'nacional')
+ *   reserva-minera → Reserva (capa separada, no en CSV)
+ *   columbus       → China (Waupasa Twi, no aparece en CSV)
+ *
+ * Para pegar en diptico.css: reemplazar los bloques individuales de
+ * colores hover y animaciones. NO tocar el bloque de bordes grises.
+ * ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Tabla de colores globales (referencia) ─────────────────────────
+ * caribe                         China        #d7620e
+ * columbus                       China        #f47317
+ * columbus-i                     China        #f98838
+ * el-bongo-de-hidalgo            China        #d7620e
+ * el-castillo                    China        #f47317
+ * el-deseo                       China        #f98838
+ * el-encanto-i                   China        #d7620e
+ * el-encanto-ii                  China        #f47317
+ * el-hormiguero                  China        #f98838
+ * el-salto                       China        #d7620e
+ * kukalaya                       China        #f47317
+ * la-guinea                      China        #f98838
+ * la-perla                       China        #d7620e
+ * la-reyna-ii                    China        #f47317
+ * san-leonardo                   China        #f98838
+ * santa-emilia                   China        #d7620e
+ * victoria                       China        #f47317
+ * waspan                         China        #f98838
+ * yalaguina                      China        #d7620e
+ * yalaguina-ii                   China        #f47317
+ * yulu-awaskira                  China        #f98838
+ * asa                            Canada       #1c621c
+ * atlas                          Canada       #2d7a2d
+ * aurora                         Canada       #739b50
+ * begonia                        Canada       #1c621c
+ * camelia                        Canada       #2d7a2d
+ * casiopea                       Canada       #739b50
+ * centauro                       Canada       #1c621c
+ * marsella                       Canada       #2d7a2d
+ * minerva                        Canada       #739b50
+ * pegaso                         Canada       #1c621c
+ * polaris                        Canada       #2d7a2d
+ * veracruz                       Canada       #739b50
+ * walpa-tara                     Canada       #1c621c
+ * bonanza-h-i                    Nicaragua    #193966
+ * hb-v                           Nicaragua    #263fa8
+ * hemco-bonanza-ii               Nicaragua    #1e4f8c
+ * hemco-bonanza-iv               Nicaragua    #193966
+ * hemco-bonanza-v                Nicaragua    #263fa8
+ * hemco-rb-i                     Nicaragua    #1e4f8c
+ * hemco-rb-ii                    Nicaragua    #193966
+ * hemco-rosita-i                 Nicaragua    #263fa8
+ * hemco-rosita-iv                Nicaragua    #1e4f8c
+ * hemco-rosita-v                 Nicaragua    #193966
+ * hemco-rosita-vi                Nicaragua    #263fa8
+ * hemco-sid                      Nicaragua    #1e4f8c
+ * limay                          Nicaragua    #193966
+ * matusalen                      Nicaragua    #263fa8
+ * muy-muy                        Nicaragua    #1e4f8c
+ * nueva-america-h-i              Nicaragua    #193966
+ * puerto-cabezas                 Nicaragua    #263fa8
+ * rosita-d                       Nicaragua    #1e4f8c
+ * rosita-h-2                     Nicaragua    #193966
+ * segovia-mining-1               Nicaragua    #263fa8
+ * segovia-mining-3               Nicaragua    #1e4f8c
+ * segovia-mining-6               Nicaragua    #193966
+ * vanessa                        Nicaragua    #263fa8
+ * reserva-minera                 Reserva      #4c4c4c
+ * ─────────────────────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────────────────────
+ * SECCIÓN 1 — Colores hover · #mapa-svg-inline
+ * ───────────────────────────────────────────────────────────────────── */
+
+/* ── 03 ── Waupasa Twi */
+#mapa-svg-inline #caribe.concesion--activa [id^="border-"] { stroke: #d7620e !important; }
+#mapa-svg-inline #el-encanto-i.concesion--activa [id^="border-"] { stroke: #d7620e !important; }
+#mapa-svg-inline #el-encanto-ii.concesion--activa [id^="border-"] { stroke: #f47317 !important; }
+#mapa-svg-inline #puerto-cabezas.concesion--activa [id^="border-"] { stroke: #263fa8 !important; }
+#mapa-svg-inline #vanessa.concesion--activa [id^="border-"] { stroke: #263fa8 !important; }
+#mapa-svg-inline #walpa-tara.concesion--activa [id^="border-"] { stroke: #1c621c !important; }
+#mapa-svg-inline #yulu-awaskira.concesion--activa [id^="border-"] { stroke: #f98838 !important; }
+#mapa-svg-inline #columbus.concesion--activa [id^="border-"] { stroke: #f47317 !important; }
+#mapa-svg-inline #reserva-minera.concesion--activa [id^="border-"] { stroke: #4c4c4c !important; }
+
+/* ── 01 ── Territorio Rama y Kriol */
+#mapa-svg-inline #el-castillo.concesion--activa [id^="border-"] { stroke: #f47317 !important; }
+#mapa-svg-inline #la-guinea.concesion--activa [id^="border-"] { stroke: #f98838 !important; }
+#mapa-svg-inline #victoria.concesion--activa [id^="border-"] { stroke: #f47317 !important; }
+
+/* ── 02 ── Territorio Creole de Bluefilelds */
+#mapa-svg-inline #victoria.concesion--activa [id^="border-"] { stroke: #f47317 !important; }
+
+/* ── 04 ── Wangki Twi - Tasba Raya */
+#mapa-svg-inline #el-encanto-ii.concesion--activa [id^="border-"] { stroke: #f47317 !important; }
+#mapa-svg-inline #waspan.concesion--activa [id^="border-"] { stroke: #f98838 !important; }
+
+/* ── 05 ── Wangki Li Aubra Tasbaya */
+#mapa-svg-inline #matusalen.concesion--activa [id^="border-"] { stroke: #263fa8 !important; }
+#mapa-svg-inline #waspan.concesion--activa [id^="border-"] { stroke: #f98838 !important; }
+
+/* ── 06 ── Twi ahbra 10 comunidades */
+#mapa-svg-inline #el-encanto-ii.concesion--activa [id^="border-"] { stroke: #f47317 !important; }
+
+/* ── 07 ── Tuahka */
+#mapa-svg-inline #begonia.concesion--activa [id^="border-"] { stroke: #1c621c !important; }
+#mapa-svg-inline #el-salto.concesion--activa [id^="border-"] { stroke: #d7620e !important; }
+#mapa-svg-inline #hemco-rb-ii.concesion--activa [id^="border-"] { stroke: #193966 !important; }
+#mapa-svg-inline #hemco-rosita-iv.concesion--activa [id^="border-"] { stroke: #1e4f8c !important; }
+#mapa-svg-inline #hemco-rosita-v.concesion--activa [id^="border-"] { stroke: #193966 !important; }
+#mapa-svg-inline #hemco-rosita-vi.concesion--activa [id^="border-"] { stroke: #263fa8 !important; }
+#mapa-svg-inline #marsella.concesion--activa [id^="border-"] { stroke: #2d7a2d !important; }
+#mapa-svg-inline #nueva-america-h-i.concesion--activa [id^="border-"] { stroke: #193966 !important; }
+#mapa-svg-inline #rosita-h-2.concesion--activa [id^="border-"] { stroke: #193966 !important; }
+#mapa-svg-inline #rosita-d.concesion--activa [id^="border-"] { stroke: #1e4f8c !important; }
+#mapa-svg-inline #san-leonardo.concesion--activa [id^="border-"] { stroke: #f98838 !important; }
+
+/* ── 08 ── Tasba Pri Matriz Indigena */
+#mapa-svg-inline #camelia.concesion--activa [id^="border-"] { stroke: #2d7a2d !important; }
+#mapa-svg-inline #columbus-i.concesion--activa [id^="border-"] { stroke: #f98838 !important; }
+#mapa-svg-inline #el-bongo-de-hidalgo.concesion--activa [id^="border-"] { stroke: #d7620e !important; }
+#mapa-svg-inline #el-encanto-i.concesion--activa [id^="border-"] { stroke: #d7620e !important; }
+#mapa-svg-inline #el-encanto-ii.concesion--activa [id^="border-"] { stroke: #f47317 !important; }
+#mapa-svg-inline #walpa-tara.concesion--activa [id^="border-"] { stroke: #1c621c !important; }
+
+/* ── 09 ── Prinzu Awala */
+#mapa-svg-inline #atlas.concesion--activa [id^="border-"] { stroke: #2d7a2d !important; }
+#mapa-svg-inline #begonia.concesion--activa [id^="border-"] { stroke: #1c621c !important; }
+#mapa-svg-inline #casiopea.concesion--activa [id^="border-"] { stroke: #739b50 !important; }
+#mapa-svg-inline #centauro.concesion--activa [id^="border-"] { stroke: #1c621c !important; }
+#mapa-svg-inline #minerva.concesion--activa [id^="border-"] { stroke: #739b50 !important; }
+#mapa-svg-inline #pegaso.concesion--activa [id^="border-"] { stroke: #1c621c !important; }
+#mapa-svg-inline #polaris.concesion--activa [id^="border-"] { stroke: #2d7a2d !important; }
+#mapa-svg-inline #san-leonardo.concesion--activa [id^="border-"] { stroke: #f98838 !important; }
+
+/* ── 16 ── Prinzu_Auhya Uh */
+#mapa-svg-inline #casiopea.concesion--activa [id^="border-"] { stroke: #739b50 !important; }
+#mapa-svg-inline #minerva.concesion--activa [id^="border-"] { stroke: #739b50 !important; }
+#mapa-svg-inline #walpa-tara.concesion--activa [id^="border-"] { stroke: #1c621c !important; }
+
+/* ── 10 ── Mayangna Sauni Bas */
+#mapa-svg-inline #asa.concesion--activa [id^="border-"] { stroke: #1c621c !important; }
+#mapa-svg-inline #el-deseo.concesion--activa [id^="border-"] { stroke: #f98838 !important; }
+#mapa-svg-inline #el-hormiguero.concesion--activa [id^="border-"] { stroke: #f98838 !important; }
+#mapa-svg-inline #veracruz.concesion--activa [id^="border-"] { stroke: #739b50 !important; }
+
+/* ── 11 ── Mayangna Sauni As */
+#mapa-svg-inline #bonanza-h-i.concesion--activa [id^="border-"] { stroke: #193966 !important; }
+#mapa-svg-inline #hb-v.concesion--activa [id^="border-"] { stroke: #263fa8 !important; }
+#mapa-svg-inline #hemco-bonanza-iv.concesion--activa [id^="border-"] { stroke: #193966 !important; }
+#mapa-svg-inline #hemco-bonanza-v.concesion--activa [id^="border-"] { stroke: #263fa8 !important; }
+#mapa-svg-inline #kukalaya.concesion--activa [id^="border-"] { stroke: #f47317 !important; }
+#mapa-svg-inline #matusalen.concesion--activa [id^="border-"] { stroke: #263fa8 !important; }
+#mapa-svg-inline #waspan.concesion--activa [id^="border-"] { stroke: #f98838 !important; }
+
+/* ── 12 ── Mayangna Sauni Arungka-Matungbak */
+#mapa-svg-inline #bonanza-h-i.concesion--activa [id^="border-"] { stroke: #193966 !important; }
+#mapa-svg-inline #el-salto.concesion--activa [id^="border-"] { stroke: #d7620e !important; }
+#mapa-svg-inline #hemco-bonanza-ii.concesion--activa [id^="border-"] { stroke: #1e4f8c !important; }
+#mapa-svg-inline #hemco-bonanza-iv.concesion--activa [id^="border-"] { stroke: #193966 !important; }
+#mapa-svg-inline #hemco-rb-i.concesion--activa [id^="border-"] { stroke: #1e4f8c !important; }
+#mapa-svg-inline #hemco-rb-ii.concesion--activa [id^="border-"] { stroke: #193966 !important; }
+#mapa-svg-inline #hemco-rosita-i.concesion--activa [id^="border-"] { stroke: #263fa8 !important; }
+#mapa-svg-inline #hemco-rosita-v.concesion--activa [id^="border-"] { stroke: #193966 !important; }
+#mapa-svg-inline #kukalaya.concesion--activa [id^="border-"] { stroke: #f47317 !important; }
+#mapa-svg-inline #rosita-h-2.concesion--activa [id^="border-"] { stroke: #193966 !important; }
+
+/* ── 15 ── Matagalpa */
+#mapa-svg-inline #aurora.concesion--activa [id^="border-"] { stroke: #739b50 !important; }
+#mapa-svg-inline #la-perla.concesion--activa [id^="border-"] { stroke: #d7620e !important; }
+#mapa-svg-inline #la-reyna-ii.concesion--activa [id^="border-"] { stroke: #f47317 !important; }
+#mapa-svg-inline #santa-emilia.concesion--activa [id^="border-"] { stroke: #d7620e !important; }
+
+/* ── 14 ── Chorotega */
+#mapa-svg-inline #hemco-sid.concesion--activa [id^="border-"] { stroke: #1e4f8c !important; }
+#mapa-svg-inline #la-perla.concesion--activa [id^="border-"] { stroke: #d7620e !important; }
+#mapa-svg-inline #limay.concesion--activa [id^="border-"] { stroke: #193966 !important; }
+#mapa-svg-inline #muy-muy.concesion--activa [id^="border-"] { stroke: #1e4f8c !important; }
+#mapa-svg-inline #segovia-mining-1.concesion--activa [id^="border-"] { stroke: #263fa8 !important; }
+#mapa-svg-inline #segovia-mining-3.concesion--activa [id^="border-"] { stroke: #1e4f8c !important; }
+#mapa-svg-inline #segovia-mining-6.concesion--activa [id^="border-"] { stroke: #193966 !important; }
+#mapa-svg-inline #yalaguina.concesion--activa [id^="border-"] { stroke: #d7620e !important; }
+#mapa-svg-inline #yalaguina-ii.concesion--activa [id^="border-"] { stroke: #f47317 !important; }
+
+/* ── 13 ── Awas Tingni  Mayangnina Sauni Umani (AMASAU) */
+#mapa-svg-inline #waspan.concesion--activa [id^="border-"] { stroke: #f98838 !important; }
+
+
+/* ─────────────────────────────────────────────────────────────────────
+ * SECCIÓN 2 — Animaciones stroke-dasharray
+ * Deduplicadas: colores consistentes con Sección 1 (misma fuente global).
+ * Selector sin #mapa-svg-inline — funciona con SVG inline global.
+ * ───────────────────────────────────────────────────────────────────── */
+
+/* ── 03 ── Waupasa Twi */
+#caribe.concesion--activa #border-caribe {
+  opacity: 1; stroke: #d7620e;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#el-encanto-i.concesion--activa #border-el-encanto-i {
+  opacity: 1; stroke: #d7620e;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#el-encanto-ii.concesion--activa #border-el-encanto-ii {
+  opacity: 1; stroke: #f47317;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#puerto-cabezas.concesion--activa #border-puerto-cabezas {
+  opacity: 1; stroke: #263fa8;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#vanessa.concesion--activa #border-vanessa {
+  opacity: 1; stroke: #263fa8;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#walpa-tara.concesion--activa #border-walpa-tara {
+  opacity: 1; stroke: #1c621c;
+  stroke-dasharray: 12 6; stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+#yulu-awaskira.concesion--activa #border-yulu-awaskira {
+  opacity: 1; stroke: #f98838;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#columbus.concesion--activa #border-columbus {
+  opacity: 1; stroke: #f47317;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#reserva-minera.concesion--activa #border-reserva-minera {
+  opacity: 1; stroke: #4c4c4c;
+  stroke-dasharray: 4 12; stroke-dashoffset: 0;
+  animation: dash-concesion 4.0s linear infinite;
+}
+
+/* ── 01 ── Territorio Rama y Kriol */
+#el-castillo.concesion--activa #border-el-castillo {
+  opacity: 1; stroke: #f47317;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#la-guinea.concesion--activa #border-la-guinea {
+  opacity: 1; stroke: #f98838;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#victoria.concesion--activa #border-victoria {
+  opacity: 1; stroke: #f47317;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+/* ── 04 ── Wangki Twi - Tasba Raya */
+#waspan.concesion--activa #border-waspan {
+  opacity: 1; stroke: #f98838;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+/* ── 05 ── Wangki Li Aubra Tasbaya */
+#matusalen.concesion--activa #border-matusalen {
+  opacity: 1; stroke: #263fa8;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+
+/* ── 07 ── Tuahka */
+#begonia.concesion--activa #border-begonia {
+  opacity: 1; stroke: #1c621c;
+  stroke-dasharray: 12 6; stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+#el-salto.concesion--activa #border-el-salto {
+  opacity: 1; stroke: #d7620e;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#hemco-rb-ii.concesion--activa #border-hemco-rb-ii {
+  opacity: 1; stroke: #193966;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#hemco-rosita-iv.concesion--activa #border-hemco-rosita-iv {
+  opacity: 1; stroke: #1e4f8c;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#hemco-rosita-v.concesion--activa #border-hemco-rosita-v {
+  opacity: 1; stroke: #193966;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#hemco-rosita-vi.concesion--activa #border-hemco-rosita-vi {
+  opacity: 1; stroke: #263fa8;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#marsella.concesion--activa #border-marsella {
+  opacity: 1; stroke: #2d7a2d;
+  stroke-dasharray: 12 6; stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+#nueva-america-h-i.concesion--activa #border-nueva-america-h-i {
+  opacity: 1; stroke: #193966;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#rosita-h-2.concesion--activa #border-rosita-h-2 {
+  opacity: 1; stroke: #193966;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#rosita-d.concesion--activa #border-rosita-d {
+  opacity: 1; stroke: #1e4f8c;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#san-leonardo.concesion--activa #border-san-leonardo {
+  opacity: 1; stroke: #f98838;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+/* ── 08 ── Tasba Pri Matriz Indigena */
+#camelia.concesion--activa #border-camelia {
+  opacity: 1; stroke: #2d7a2d;
+  stroke-dasharray: 12 6; stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+#columbus-i.concesion--activa #border-columbus-i {
+  opacity: 1; stroke: #f98838;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#el-bongo-de-hidalgo.concesion--activa #border-el-bongo-de-hidalgo {
+  opacity: 1; stroke: #d7620e;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+/* ── 09 ── Prinzu Awala */
+#atlas.concesion--activa #border-atlas {
+  opacity: 1; stroke: #2d7a2d;
+  stroke-dasharray: 12 6; stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+#casiopea.concesion--activa #border-casiopea {
+  opacity: 1; stroke: #739b50;
+  stroke-dasharray: 12 6; stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+#centauro.concesion--activa #border-centauro {
+  opacity: 1; stroke: #1c621c;
+  stroke-dasharray: 12 6; stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+#minerva.concesion--activa #border-minerva {
+  opacity: 1; stroke: #739b50;
+  stroke-dasharray: 12 6; stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+#pegaso.concesion--activa #border-pegaso {
+  opacity: 1; stroke: #1c621c;
+  stroke-dasharray: 12 6; stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+#polaris.concesion--activa #border-polaris {
+  opacity: 1; stroke: #2d7a2d;
+  stroke-dasharray: 12 6; stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+
+/* ── 10 ── Mayangna Sauni Bas */
+#asa.concesion--activa #border-asa {
+  opacity: 1; stroke: #1c621c;
+  stroke-dasharray: 12 6; stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+#el-deseo.concesion--activa #border-el-deseo {
+  opacity: 1; stroke: #f98838;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#el-hormiguero.concesion--activa #border-el-hormiguero {
+  opacity: 1; stroke: #f98838;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#veracruz.concesion--activa #border-veracruz {
+  opacity: 1; stroke: #739b50;
+  stroke-dasharray: 12 6; stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+
+/* ── 11 ── Mayangna Sauni As */
+#bonanza-h-i.concesion--activa #border-bonanza-h-i {
+  opacity: 1; stroke: #193966;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#hb-v.concesion--activa #border-hb-v {
+  opacity: 1; stroke: #263fa8;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#hemco-bonanza-iv.concesion--activa #border-hemco-bonanza-iv {
+  opacity: 1; stroke: #193966;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#hemco-bonanza-v.concesion--activa #border-hemco-bonanza-v {
+  opacity: 1; stroke: #263fa8;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#kukalaya.concesion--activa #border-kukalaya {
+  opacity: 1; stroke: #f47317;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+/* ── 12 ── Mayangna Sauni Arungka-Matungbak */
+#hemco-bonanza-ii.concesion--activa #border-hemco-bonanza-ii {
+  opacity: 1; stroke: #1e4f8c;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#hemco-rb-i.concesion--activa #border-hemco-rb-i {
+  opacity: 1; stroke: #1e4f8c;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#hemco-rosita-i.concesion--activa #border-hemco-rosita-i {
+  opacity: 1; stroke: #263fa8;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+
+/* ── 15 ── Matagalpa */
+#aurora.concesion--activa #border-aurora {
+  opacity: 1; stroke: #739b50;
+  stroke-dasharray: 12 6; stroke-dashoffset: 0;
+  animation: dash-concesion 2.4s linear infinite;
+}
+#la-perla.concesion--activa #border-la-perla {
+  opacity: 1; stroke: #d7620e;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#la-reyna-ii.concesion--activa #border-la-reyna-ii {
+  opacity: 1; stroke: #f47317;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#santa-emilia.concesion--activa #border-santa-emilia {
+  opacity: 1; stroke: #d7620e;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+/* ── 14 ── Chorotega */
+#hemco-sid.concesion--activa #border-hemco-sid {
+  opacity: 1; stroke: #1e4f8c;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#limay.concesion--activa #border-limay {
+  opacity: 1; stroke: #193966;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#muy-muy.concesion--activa #border-muy-muy {
+  opacity: 1; stroke: #1e4f8c;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#segovia-mining-1.concesion--activa #border-segovia-mining-1 {
+  opacity: 1; stroke: #263fa8;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#segovia-mining-3.concesion--activa #border-segovia-mining-3 {
+  opacity: 1; stroke: #1e4f8c;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#segovia-mining-6.concesion--activa #border-segovia-mining-6 {
+  opacity: 1; stroke: #193966;
+  stroke-dasharray: 8 8; stroke-dashoffset: 0;
+  animation: dash-concesion 2.8s linear infinite;
+}
+#yalaguina.concesion--activa #border-yalaguina {
+  opacity: 1; stroke: #d7620e;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+#yalaguina-ii.concesion--activa #border-yalaguina-ii {
+  opacity: 1; stroke: #f47317;
+  stroke-dasharray: 10 5; stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+

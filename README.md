@@ -29,6 +29,18 @@ El proyecto convierte mapas técnicos de concesiones en un **producto editorial 
 - ⬜ Datos placeholder pendientes de verificación con FDR
 - ⬜ Hover target de `columbus` pendiente (fill:none en Illustrator — ver CLAUDE.md)
 
+### Rama y Kriol — segundo territorio completo (Jun 2026)
+
+- ✅ Las 3 concesiones (`victoria`, `el-castillo`, `la-guinea`) con estructura
+  SVG completa y animación de border funcionando
+- ✅ Confirmó dos bugs nuevos no vistos en Waupasa Twi, ya documentados en
+  `CLAUDE.md`: `opacity` vs `fill-opacity` en `area-hover-target`, y
+  `area-hover-target` con `stroke` propio tapando la animación del border
+- ✅ Fix aplicado vía regla global en `diptico.css`, cubre los 16 territorios
+  sin necesidad de tocarlo de nuevo
+- ⬜ Datos placeholder pendientes de verificación con FDR (empresa, hectáreas,
+  año, estado, gaceta — igual que Waupasa Twi)
+
 ---
 
 ## Arquitectura
@@ -127,6 +139,13 @@ Cada concesión debe seguir esta estructura en Illustrator:
 **Regla crítica — hover target:** el shape debe tener `fill` de cualquier color
 (nunca `fill:none`) con opacidad `0`. `fill:none` destruye el hit area en CSS.
 El modelo correcto es `walpa-tara`. Ver `vanessa` como contraejemplo resuelto.
+**La opacidad debe bajarse específicamente en el fill (panel Apariencia,
+fila `Fill: Opacity 0%`), nunca en el objeto completo (`opacity: 0`) — esto
+también destruye el hit area aunque el SVG se vea igual.** Ver `victoria`
+(01-rama-kriol) como caso resuelto. Además, el hover target no debe heredar
+ningún `stroke` propio: si lo tiene, tapa visualmente la animación punteada
+del `border-*` real aunque ambos sigan funcionando a nivel de CSS. Mitigado
+de forma global en `diptico.css`.
 
 **Regla crítica — border IDs:** nombrar siempre como `border-nombre-concesion`
 (ej. `border-vanessa`, `border-walpa-tara`). Illustrator puede numerar

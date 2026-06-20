@@ -1111,6 +1111,32 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   animation: dash-concesion 2.8s linear infinite;
 }
 
+/* ── 01 ── Rama y Kriol ──────────────────────────────────────────────────── */
+
+#victoria.concesion--activa #border-victoria {
+  opacity: 1;
+  stroke: #d7620e;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+#el-castillo.concesion--activa #border-el-castillo {
+  opacity: 1;
+  stroke: #f47317;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
+#la-guinea.concesion--activa #border-la-guinea {
+  opacity: 1;
+  stroke: #f98838;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 0;
+  animation: dash-concesion 1.6s linear infinite;
+}
+
 
 /* ── 9. Drop-shadow coloreado por país ───────────────────────────────────────── */
 /*
@@ -1177,6 +1203,20 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
  * Esta versión ya no depende de selectores obsoletos sobre Nicaragua.
  * Si Illustrator reasigna los IDs, vuelve a auditar y actualiza este bloque.
  * ─────────────────────────────────────────────────────────────────────────── */
+
+/* ─── area-hover-target: nunca debe pintar su propio stroke ──────────────────
+ *
+ * Illustrator a veces hereda 'stroke' en la misma clase compartida que define
+ * el fill-opacity:0 del hit area (ver victoria/01-rama-kriol). Si el hit area
+ * dibuja un stroke sólido encima del border real, tapa por completo el
+ * stroke-dasharray animado de border-{svg_id}, aunque la animación CSS esté
+ * funcionando correctamente. area-hover-target debe ser invisible siempre:
+ * sin fill visible (fill-opacity:0) y sin stroke visible.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+#mapa-svg-inline [id*="area-hover-target"] {
+  stroke: none !important;
+}
 
 /* columbus: rect pequeño tapado por el-encanto-i — necesita z-order manual */
 #columbus {
@@ -1433,4 +1473,38 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 #mapa-svg-inline #reserva-minera.concesion--activa [id^="border-"] {
   stroke: #4c4c4c !important;
   stroke-opacity: 0.8 !important;
+}
+
+/* ── 01 ── Rama y Kriol ──────────────────────────────────────────────────── */
+/* Todas las concesiones son China → naranja                                  */
+#mapa-svg-inline #victoria.concesion--activa [id^="border-"] {
+  stroke: #d7620e !important;
+}
+
+/* ⚠️ Agregar cuando el-castillo y la-guinea tengan grupo en Illustrator: */
+#mapa-svg-inline #el-castillo.concesion--activa [id^="border-"] {
+  stroke: #f47317 !important;
+}
+
+#mapa-svg-inline #la-guinea.concesion--activa [id^="border-"] {
+  stroke: #f98838 !important;
+}
+
+/* ─── Ríos — presencia permanente ───────────────────────────────────────────
+ *
+ * Los ríos son contexto editorial crítico — muestran qué recursos hídricos
+ * están dentro de las concesiones. Nunca se atenúan, ni con concesión activa.
+ *
+ * #rios  → sombra gris (#bcbcbc) — profundidad topográfica
+ * #rios1 → canal azul (#0072bd)  — red hídrica principal
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+#mapa-svg-inline #rios,
+#mapa-svg-inline #rios1 {
+  transition: filter 300ms ease;
+}
+
+/* Resplandor sutil permanente en el canal azul */
+#mapa-svg-inline #rios1 {
+  filter: drop-shadow(0 0 1.5px rgba(0, 114, 189, 0.45));
 }

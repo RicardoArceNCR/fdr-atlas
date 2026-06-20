@@ -14,59 +14,102 @@
 const TERRITORIOS = [
 
   /* ── 01 ── Rama y Kriol ────────────────────────────────────────────────── */
+  /*
+   * AUDIT SVG — 01-Territorio_Rama_y_Kriol.svg (Jun 2026)
+   *
+   * Grupos con ID propio:
+   *   ✅ victoria       → border-victoria + area-hover-target ← OK
+   *   ⚠️ el-castillo   → sin grupo propio aún (geometría sin ID)
+   *   ⚠️ la-guinea     → sin grupo propio aún (geometría sin ID)
+   *
+   * Poblados con ID: poblado-el-lanchon, poblado-sukapin, poblado-cuarenta-y-tres,
+   *   poblado-mani-watla, poblado-kligna, poblado-lapan, poblado-yulu
+   *   (cada uno tiene variantes: -1, -2 para clusters — el tooltip usa el primero)
+   *
+   * Pendiente en Illustrator:
+   *   → Crear grupos <g id="el-castillo"> y <g id="la-guinea"> con
+   *     area-main, area-main-hover, border-el-castillo / border-la-guinea
+   *     y area-hover-target (fill ≠ none, opacity 0)
+   */
   {
     id: '01-rama-kriol',
     numero: '01',
     nombre: 'Rama y Kriol',
-    archivo_mapa_base: '../../img/01-Territorio Rama y Kriol - limpio.png',
+    assets: {
+      desktop: {
+        raster: '../../mapas-raster/01-rama-kriol/desktop-01-Rama-Kriol.webp',
+        svg:    '../../mapas-svg/01-rama-kriol/desktop-01-Rama-Kriol.svg',
+        width:  927,
+        height: 980,
+      },
+      // ⚠️ tablet y mobile pendientes — usar desktop como fallback por ahora
+      tablet: {
+        raster: '../../mapas-raster/01-rama-kriol/desktop-01-Rama-Kriol.webp',
+        svg:    '../../mapas-svg/01-rama-kriol/desktop-01-Rama-Kriol.svg',
+        width:  927,
+        height: 980,
+      },
+      mobile: {
+        raster: '../../mapas-raster/01-rama-kriol/desktop-01-Rama-Kriol.webp',
+        svg:    '../../mapas-svg/01-rama-kriol/desktop-01-Rama-Kriol.svg',
+        width:  927,
+        height: 980,
+      },
+    },
     layout: 'A',
+    tema: 'verde',
+    banner:        '../../img/banners/banner-01.webp',
+    logo:          '../../img/Logo-fdr.webp',
+    logo_alt:      'Fundación del Río',
+    logo_fuente:   '',
+    logo_fuente_alt: '',
     pueblos: ['Pueblo Rama', 'Comunidad Kriol'],
     region: 'Región Autónoma de la Costa Caribe Sur (RACCS)',
-    descripcion: 'El territorio Rama y Kriol abarca la zona costera sur del Caribe nicaragüense. Tres concesiones mineras se superponen a este territorio, afectando áreas de importancia ecológica y cultural para el pueblo Rama y las comunidades Kriol.', // ⚠️ pendiente revisión
-    escala: '—',
+    descripcion: 'El territorio Rama y Kriol abarca la zona costera sur del Caribe nicaragüense. Tres concesiones mineras se superponen a este territorio, afectando áreas de importancia ecológica y cultural para el pueblo Rama y las comunidades Kriol.', // ⚠️ pendiente revisión con FDR
     proyeccion: 'UTM',
     datum: 'NAD 27',
     zona: '16 N',
-    elementos_cartograficos: {
-      poblados: true,
-      rios: true,
-      ubicacion_referencia: true
-    },
     stats: {
       hectareas_territorio: '404,000', // ⚠️ pendiente
       concesiones: 3,
-      hectareas_concesiones: '—', // ⚠️ pendiente
+      hectareas_concesiones: '—',
     },
     concesiones: [
       {
-        nombre: 'El Castillo',
-        empresa: '—',       // ⚠️ pendiente
-        pais: 'china',
-        hectareas: '—',     // ⚠️ pendiente
-        año: '—',           // ⚠️ pendiente
-        estado: '—',        // ⚠️ activa / solicitud / suspendida
-        gaceta: '—',        // ⚠️ número de La Gaceta
+        nombre:     'Victoria',
+        svg_id:     'victoria',          // ✅ grupo existe en SVG
+        empresa:    '—',                 // ⚠️ pendiente
+        pais:       'china',
+        patron_img: '../../img/patrones/patron-china.webp',
+        hectareas:  '—',
+        año:        '—',
+        estado:     '—',
+        gaceta:     '—',
       },
       {
-        nombre: 'La Guinea',
-        empresa: '—',
-        pais: 'china',
-        hectareas: '—',
-        año: '—',
-        estado: '—',
-        gaceta: '—',
+        nombre:     'El Castillo',
+        svg_id:     'el-castillo',       // ⚠️ pendiente — agregar grupo en Illustrator
+        empresa:    '—',
+        pais:       'china',
+        patron_img: '../../img/patrones/patron-china.webp',
+        hectareas:  '—',
+        año:        '—',
+        estado:     '—',
+        gaceta:     '—',
       },
       {
-        nombre: 'Victoria',
-        empresa: '—',
-        pais: 'china',
-        hectareas: '—',
-        año: '—',
-        estado: '—',
-        gaceta: '—',
+        nombre:     'La Guinea',
+        svg_id:     'la-guinea',         // ⚠️ pendiente — agregar grupo en Illustrator
+        empresa:    '—',
+        pais:       'china',
+        patron_img: '../../img/patrones/patron-china.webp',
+        hectareas:  '—',
+        año:        '—',
+        estado:     '—',
+        gaceta:     '—',
       },
     ],
-    fuente: 'Fuentes y datos cartográficos: Proyección UTM Datum NAD 27 Zona 16 N Fuente: La Gaceta, Fundación del Río, URACCAN, OpenStreetMap contributors, ESRI . Standard-Shaded Relief. Abril 2026',
+    fuente: 'La Gaceta, Fundación del Río, URACCAN, OpenStreetMap contributors, ESRI Standard-Shaded Relief. Abril 2026',
   },
 
   /* ── 02 ── Creole de Bluefields ────────────────────────────────────────── */

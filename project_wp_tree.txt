@@ -1,5 +1,4 @@
 .
-├── README.md
 ├── atlas
 │   ├── 01-rama-kriol
 │   │   └── index.html
@@ -10,6 +9,7 @@
 │   ├── 04-wangki-twi-tasba-raya
 │   │   └── index.html
 │   └── index.html
+├── CLAUDE.md
 ├── css
 │   └── diptico.css
 ├── data
@@ -46,29 +46,35 @@
 │   ├── 03_Waupasa Twi.png
 │   ├── 03_Waupasa Twi.webp
 │   ├── 04_Wangki Twi-Tasba Raya.jpeg
+│   ├── banners
+│   │   ├── banner-03.webp
+│   │   ├── Logo-con-transparencia.webp
+│   │   └── logo-indio-maiz.webp
 │   ├── CIDH-191-8-1.jpeg
 │   ├── Comunidades-ind¡genas-nicaragua-1080x675-1.jpeg
 │   ├── Desos-39-1-1536x1024.jpg
 │   ├── Educacion-ambiental-1-2048x1152.jpg
 │   ├── IndioMaiz0718_0596-1-scaled.jpg
 │   ├── Logo-del-sitio-768x768.png
-│   ├── Sin-titulo-2-03.png
+│   ├── Logo-fdr.webp
+│   ├── patrones
+│   │   ├── canada-xl.webp
+│   │   ├── china-2xsm.webp
+│   │   ├── china-lg.webp
+│   │   ├── china-md.webp
+│   │   ├── china-sm.webp
+│   │   ├── china-xl.webp
+│   │   ├── nicaragua-2xsm.webp
+│   │   ├── nicaragua-sm.webp
+│   │   ├── patron-canada.webp
+│   │   ├── patron-china.webp
+│   │   ├── patron-colombia.webp
+│   │   ├── patron-nicaragua.webp
+│   │   ├── patron-reserva-minera.webp
+│   │   └── reserva-sm.webp
 │   ├── Sin-titulo-2_Mesa-de-trabajo-1.png
-│   ├── Voces-del-bosque-1.png
-│   ├── banners
-│   │   ├── Logo-con-transparencia.webp
-│   │   ├── banner-03.webp
-│   │   └── logo-indio-maiz.webp
-│   └── patrones
-│       ├── canada-xl.webp
-│       ├── china-2xsm.webp
-│       ├── china-lg.webp
-│       ├── china-md.webp
-│       ├── china-sm.webp
-│       ├── china-xl.webp
-│       ├── nicaragua-2xsm.webp
-│       ├── nicaragua-sm.webp
-│       └── reserva-sm.webp
+│   ├── Sin-titulo-2-03.png
+│   └── Voces-del-bosque-1.png
 ├── js
 │   ├── data-territorios.js
 │   └── render-diptico.js
@@ -78,6 +84,9 @@
 │   ├── 03_Waupasa_Twi.json
 │   └── 04_Wangki_Twi-Tasba_Raya.json
 ├── mapas-raster
+│   ├── 01-rama-kriol
+│   │   ├── desktop-03-Waupasa-Twi.png
+│   │   └── desktop-03-Waupasa-Twi.webp
 │   └── 03-waupasa-twi
 │       ├── desktop-03-Waupasa-Twi.png
 │       ├── desktop-03-Waupasa-Twi.webp
@@ -86,13 +95,22 @@
 │       ├── tablet-03-Waupasa-Twi.png
 │       └── tablet-03-Waupasa-Twi.webp
 ├── mapas-svg
+│   ├── 01-rama-kriol
+│   │   ├── 01-Territorio Rama y Kriol.svg
+│   │   └── desktop-01-Rama-Kriol.svg
+│   ├── 01-Territorio Rama y Kriol
+│   │   └── 01-Territorio Rama y Kriol.svg
 │   └── 03-waupasa-twi
+│       ├── 01-Territorio Rama y Kriol.svg
 │       ├── desktop-03-Waupasa-Twi-4.ai
 │       ├── desktop-03-Waupasa-Twi.svg
+│       ├── funciona-desktop-03-Waupasa-Twi.svg
+│       ├── mobile-03-Waupasa-Twi.ai
 │       ├── mobile-03-Waupasa-Twi.svg
 │       └── tablet-03-Waupasa-Twi.svg
 ├── project_wp_tree.txt
+├── README.md
 └── templates
     └── diptico-base.html
 
-24 directories, 72 files
+27 directories, 87 files

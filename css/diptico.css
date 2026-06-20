@@ -967,6 +967,22 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.25));
 }
 
+/* ── Banderas de países sin concesiones en este territorio ──────────────────
+ *
+ * Marcada por marcarPaisesSinConcesiones() en render-diptico.js. Sin esto,
+ * las 5 banderas de la leyenda se ven igual de "presentes" sin importar
+ * cuántos países realmente aparecen en el mapa — confuso en territorios
+ * mono o bipaís (Rama y Kriol, Creole de Bluefields, Wangki Li, etc.).
+ * Combina opacidad + escala de grises para que el contraste se note incluso
+ * entre banderas de colores parecidos.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+.pais-btn--sin-concesiones {
+  opacity: 0.32;
+  filter: grayscale(85%);
+  pointer-events: none;
+}
+
 .mapa-tooltip {
   position: absolute;
   z-index: 10;

@@ -114,6 +114,15 @@ function getMapAssets(t) {
 
 async function renderMapa(t) {
   const assets = getMapAssets(t);
+  const svgContainer = document.getElementById("mapa-svg-inline");
+
+  // Fallback visible si faltan assets — mensaje en el contenedor del mapa
+  if (!t.assets || Object.keys(t.assets).length === 0) {
+    if (svgContainer) {
+      svgContainer.innerHTML = '<div style="padding:2rem;text-align:center;color:#888;font-family:sans-serif;font-size:14px">⚠️ Mapa en preparación</div>';
+    }
+    return;
+  }
 
   const stack = document.querySelector(".mapa-stack");
   if (stack && assets.width && assets.height) {
@@ -123,7 +132,6 @@ async function renderMapa(t) {
   const raster = document.getElementById("mapa-raster");
   if (raster && assets.raster) raster.src = assets.raster;
 
-  const svgContainer = document.getElementById("mapa-svg-inline");
   if (svgContainer && assets.svg) {
     try {
       if (!SVG_CACHE[assets.svg]) {
@@ -147,6 +155,7 @@ async function renderMapa(t) {
       if (t.concesiones) initInteractividad(t.concesiones);
     } catch (err) {
       console.warn("No se pudo cargar SVG inline:", err);
+      svgContainer.innerHTML = `<div style="padding:2rem;text-align:center;color:#c55;font-family:sans-serif;font-size:14px">⚠️ Error al cargar el mapa: ${err.message}</div>`;
     }
   }
 

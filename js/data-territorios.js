@@ -117,7 +117,26 @@ const TERRITORIOS = [
     id: '02-creole-bluefields',
     numero: '02',
     nombre: 'Creole de Bluefields',
-    archivo_mapa_base: '../../img/02_Territorio Creole de Bluefields - limpio.png',
+    assets: {
+      desktop: {
+        raster: '../../mapas-raster/02-creole-bluefields/desktop-02-Creole-Bluefields.webp',
+        svg:    '../../mapas-svg/02-creole-bluefields/desktop-02-Creole-Bluefields.svg',
+        width:  927,
+        height: 980,
+      },
+      tablet: {
+        raster: '../../mapas-raster/02-creole-bluefields/desktop-02-Creole-Bluefields.webp',
+        svg:    '../../mapas-svg/02-creole-bluefields/desktop-02-Creole-Bluefields.svg',
+        width:  927,
+        height: 980,
+      },
+      mobile: {
+        raster: '../../mapas-raster/02-creole-bluefields/desktop-02-Creole-Bluefields.webp',
+        svg:    '../../mapas-svg/02-creole-bluefields/desktop-02-Creole-Bluefields.svg',
+        width:  927,
+        height: 980,
+      },
+    },
     layout: 'B',
     pueblos: ['Comunidad Creole'],
     region: 'Región Autónoma de la Costa Caribe Sur (RACCS)',
@@ -148,6 +167,7 @@ const TERRITORIOS = [
     concesiones: [
       {
         nombre: 'Victoria',
+        svg_id: 'victoria',
         empresa: '—',
         pais: 'china',
         hectareas: '—',
@@ -223,11 +243,32 @@ const TERRITORIOS = [
   },
 
   /* ── 04 ── Wangki Twi-Tasba Raya ───────────────────────────────────────── */
+  /*
+   * ⚠️ Stopgap: raster JPEG existente, sin SVG interactivo (pendiente Illustrator).
+   * El mapa se ve como imagen estática, sin hover ni tour.
+   * Reemplazar con assets.svg cuando Illustrator exporte el SVG con grupos id, border-*, area-hover-target.
+   */
   {
     id: '04-wangki-twi-tasba-raya',
     numero: '04',
     nombre: 'Wangki Twi-Tasba Raya',
-    archivo_mapa_base: '../../img/04_Wangki Twi-Tasba Raya.jpeg', // ⚠️ PNG pendiente
+    assets: {
+      desktop: {
+        raster: '../../img/04_Wangki Twi-Tasba Raya.jpeg',
+        width:  927,
+        height: 980,
+      },
+      tablet: {
+        raster: '../../img/04_Wangki Twi-Tasba Raya.jpeg',
+        width:  780,
+        height: 1306,
+      },
+      mobile: {
+        raster: '../../img/04_Wangki Twi-Tasba Raya.jpeg',
+        width:  504,
+        height: 634,
+      },
+    },
     layout: 'C',
     pueblos: ['Pueblo Miskitu'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
@@ -268,11 +309,16 @@ const TERRITORIOS = [
   },
 
   /* ── 05 ── Wangki Li Aubra Tasbaya ─────────────────────────────────────── */
+  /*
+   * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
+   * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
+   * PNG/webp, y assets.desktop.svg cuando Illustrator exporte el SVG real.
+   */
   {
     id: '05-wangki-li',
     numero: '05',
     nombre: 'Wangki Li Aubra Tasbaya',
-    archivo_mapa_base: '../../mapas/05-wangki-li/mapa-limpio.png', // ⚠️ PNG pendiente
+    assets: {},
     layout: 'C',
     pueblos: ['Pueblo Miskitu'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
@@ -299,11 +345,16 @@ const TERRITORIOS = [
   },
 
   /* ── 07 ── Tuahka ──────────────────────────────────────────────────────── */
+  /*
+   * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
+   * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
+   * PNG/webp, y assets.desktop.svg cuando Illustrator exporte el SVG real.
+   */
   {
     id: '07-tuahka',
     numero: '07',
     nombre: 'Tuahka',
-    archivo_mapa_base: '../../mapas/07-tuahka/mapa-limpio.png', // ⚠️ PNG pendiente
+    assets: {},
     layout: 'A',
     pueblos: ['Pueblo Mayangna Tuahka'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',

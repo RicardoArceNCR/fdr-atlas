@@ -1528,3 +1528,32 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 #mapa-svg-inline #rios1 {
   filter: drop-shadow(0 0 1.5px rgba(0, 114, 189, 0.45));
 }
+
+/* ─── Poblados — etiquetas y marcadores ──────────────────────────────────────
+ *
+ * Las etiquetas de texto (nombres de poblados) se agrupan dentro de #poblados
+ * en Illustrator. Los triángulos marcadores van en #poblado-marcadores.
+ * El halo blanco hace legibles los nombres sobre el raster del mapa.
+ *
+ * La cascada hace el trabajo: la regla general aplica halo a TODO path
+ * dentro de #poblados, y la segunda regla (más específica) lo sobreescribe
+ * solo para los triángulos dentro de #poblado-marcadores.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* Halo blanco — etiquetas de texto de poblados */
+#mapa-svg-inline #poblados path {
+  fill: #1a1a1a;
+  stroke: #fff;
+  stroke-width: 6px;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+}
+
+/* Triángulos marcadores — pisa la regla anterior */
+#mapa-svg-inline #poblado-marcadores path {
+  fill: #56b79f;
+  stroke: #fff;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  paint-order: normal;
+}

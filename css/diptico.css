@@ -1550,10 +1550,10 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 }
 
 /* Triángulos marcadores — pisa la regla anterior */
-#mapa-svg-inline #poblado-marcadores path {
+#mapa-svg-inline #poblados [id^="poblado-marcadores"] path {
   fill: #56b79f;
   stroke: #fff;
   stroke-width: 3px;
   stroke-linejoin: round;
-  paint-order: normal;
+  paint-order: stroke fill;
 }

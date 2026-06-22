@@ -10,36 +10,31 @@ El proyecto convierte mapas técnicos de concesiones en un **producto editorial 
 
 **Rama activa:** `feat/waupasa-twi-editorial`
 
-**Mapa piloto:** `03-waupasa-twi` (Waupasa Twi)
+### Territorios con mapa web completo
 
-### Waupasa Twi — mapa maestro del sistema
+| # | Territorio | Assets | Hover | Datos |
+|---|---|---|---|---|
+| 01 | Rama y Kriol | ✅ raster + SVG | ✅ 3 concesiones | ⬜ empresa/ha pendientes |
+| 02 | Creole de Bluefields | ✅ raster + SVG | ✅ 1 concesión | ⬜ empresa/ha pendientes |
+| 03 | Waupasa Twi | ✅ raster + SVG (3 breakpoints) | ✅ 8 concesiones | ⬜ empresa/ha pendientes |
+| 04 | Wangki Twi-Tasba Raya | ✅ raster JPEG (stopgap) | ❌ sin SVG interactivo | ⬜ pendiente |
+| 06 | Twi Yahbra (Diez comunidades) | ✅ raster + SVG | ⬜ anatomía hover pendiente en Illustrator | ✅ datos completos |
 
-- ✅ Raster base por breakpoint (desktop / tablet / mobile)
-- ✅ SVG overlay inline por breakpoint
-- ✅ Panel editorial renderizado desde `data-territorios.js`
-- ✅ Hover concesión ↔ card (bidireccional)
-- ✅ Hover bandera de país → activa grupo de concesiones
-- ✅ Animación stroke punteado por concesión al hover
-- ✅ Drop-shadow coloreado por país al hover
-- ✅ Tooltip de poblados
-- ✅ Responsive desktop/tablet/mobile
-- ✅ Base print/PDF
-- ✅ Bordes grises en reposo (`#4c4c4c` 33%) — vía `diptico.css`, sin tocar el SVG
-- ✅ `border-*` nombrados explícitamente en Illustrator — IDs estables entre exports
-- ⬜ Datos placeholder pendientes de verificación con FDR
-- ⬜ Hover target de `columbus` pendiente (fill:none en Illustrator — ver CLAUDE.md)
+### Territorios registrados en data-territorios.js, sin assets todavía
 
-### Rama y Kriol — segundo territorio completo (Jun 2026)
+05, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18 — carpetas `atlas/NN/` creadas,
+mapa no renderiza hasta que existan raster + SVG.
 
-- ✅ Las 3 concesiones (`victoria`, `el-castillo`, `la-guinea`) con estructura
-  SVG completa y animación de border funcionando
-- ✅ Confirmó dos bugs nuevos no vistos en Waupasa Twi, ya documentados en
-  `CLAUDE.md`: `opacity` vs `fill-opacity` en `area-hover-target`, y
-  `area-hover-target` con `stroke` propio tapando la animación del border
-- ✅ Fix aplicado vía regla global en `diptico.css`, cubre los 16 territorios
-  sin necesidad de tocarlo de nuevo
-- ⬜ Datos placeholder pendientes de verificación con FDR (empresa, hectáreas,
-  año, estado, gaceta — igual que Waupasa Twi)
+### Bugs confirmados y documentados (Jun 2026)
+
+- ✅ `opacity` vs `fill-opacity` en `area-hover-target` → ver CLAUDE.md
+- ✅ `area-hover-target` con `stroke` propio tapa animación → fix global en `diptico.css`
+- ✅ `area-hover-target` anidado dentro de `area-main-hover` rompe hover → ver CLAUDE.md
+- ✅ `layout: 'pendiente'` colapsa el mapa a 38×40px → usar siempre A/B/C/D
+- ✅ Faltar `tema`/`banner`/`logo` en `data-territorios.js` → panel derecho sin color/imagen
+- ✅ viewBox incorrecto (772.6) por Export As con Crop to Content → usar Save As
+- ✅ webp renombrado sin re-exportar → verificar md5sum antes de subir
+- ✅ Carpeta `atlas/NN/` inexistente → 404 aunque el JS esté perfecto
 
 ---
 
@@ -59,48 +54,55 @@ QGIS / fuente cartográfica
 Cada territorio se define con un solo `index.html`:
 
 ```html
-<body data-territorio="03-waupasa-twi">
+<body data-territorio="06-twi-ahbra-10-comunidades">
   <script type="module" src="../../js/render-diptico.js"></script>
 </body>
 ```
 
 El renderer carga el template, los assets y la data. No hay HTML distinto por territorio.
+**Sin la carpeta `atlas/NN-territorio/` con su `index.html` → 404.** El servidor es
+Python estático (`python3 -m http.server 8000`), no hay router.
 
 ---
 
-## Producto final — 16 dípticos
+## Producto final — 18 dípticos
 
-| # | Territorio | Cluster |
-|---|---|---|
-| 01 | Rama y Kriol | C — dual |
-| 02 | Creole de Bluefields | B — minimalista |
-| 03 | Waupasa Twi | A — presión extrema ← **maestro activo** |
-| 04 | Wangki Twi-Tasba Raya | C — dual |
-| 05 | Wangki Li Aubra Tasbaya | C — dual |
-| 06 | Twi Ahbra 10 comunidades | B — minimalista |
-| 07 | Tuahka | A — presión extrema |
-| 08 | Tasba Pri Matriz Indígena | A — presión extrema |
-| 09 | Prinzu Awala | A — presión extrema |
-| 10 | Mayangna Sauni Bas | C — dual |
-| 11 | Mayangna Sauni As | A — presión extrema |
-| 12 | Masauni Arumatun | D — fragmentación extrema |
-| 13 | Amasau | D — fragmentación extrema |
-| 14 | Chorotega II | B — minimalista |
-| 15 | Matagalpa | B — minimalista |
-| 16 | Prinzu Auhya Uh | B — minimalista |
+| # | Territorio oficial (Contenido_Atlas.md) | Cluster | id en proyecto |
+|---|---|---|---|
+| 01 | Rama y Kriol | C — dual | `01-rama-kriol` |
+| 02 | Negro Creole de Bluefields | B — minimalista | `02-creole-bluefields` |
+| 03 | Twi Waupasa | A — presión extrema ← **maestro activo** | `03-waupasa-twi` |
+| 04 | Wangki Twi-Tasba Raya | C — dual | `04-wangki-twi-tasba-raya` |
+| 05 | Wangki Li Aubra Tasbaya | C — dual | `05-wangki-li` |
+| 06 | Twi Yahbra (Diez comunidades) | B — minimalista | `06-twi-ahbra-10-comunidades` |
+| 07 | Tuahka Takaln Balna | A — presión extrema | `07-tuahka` |
+| 08 | Tasba Pri Matriz Indígena | A — presión extrema | `08-tasba-pri` |
+| 09 | Prinzu Awala | A — presión extrema | `09-prinzu-awala` |
+| 10 | Mayangna Sauni Bas "Sikilta" | C — dual | `10-mayangna-sauni-bas` |
+| 11 | Mayangna Sauni As | A — presión extrema | `11-mayangna-sauni-as` |
+| 12 | Mayangna Sauni Arungka "Matunbak" | D — fragmentación extrema | `12-mayangna-arungka-matungbak` |
+| 13 | Mayangna Awas Tingni Mayangnina Sauni Umani (AMASAU) | D — fragmentación extrema | `13-amasau` |
+| 14 | Chorotega - Norte | B — minimalista | `14-chorotega-norte` |
+| 15 | Matagalpa | B — minimalista | `15-matagalpa` |
+| 16 | Prinzu Auhya Un | B — minimalista | `16-prinzu-auhya-un` |
+| 17 | Muy Muy | B — minimalista | `17-muy-muy` |
+| 18 | Sébaco | B — minimalista | `18-sebaco` |
+
+⚠️ El README original decía 16 territorios. El Contenido_Atlas.md oficial de FDR
+lista 18. Los ids de 17 y 18 son tentativos — confirmar con FDR antes de publicar.
 
 ---
 
 ## Orden de mapas maestros
 
-No construir los 16 mapas al mismo tiempo. Primero consolidar los cuatro maestros:
+No construir los 18 mapas al mismo tiempo. Primero consolidar los cuatro maestros:
 
 | Rol | Mapa | Estado |
 |---|---|---|
-| Multipaís denso | Waupasa Twi | ✅ completo |
-| Minimalista | Creole de Bluefields | Siguiente |
-| Dual | Wangki Li Aubra Tasbaya | Pendiente |
-| Complejo/fragmentado | Tuahka | Pendiente |
+| Multipaís denso | Waupasa Twi (03) | ✅ completo |
+| Minimalista | Twi Yahbra (06) | ⬜ hover pendiente en Illustrator |
+| Dual | Wangki Li Aubra Tasbaya (05) | ⬜ pendiente |
+| Complejo/fragmentado | Tuahka (07) | ⬜ pendiente |
 
 ---
 
@@ -119,6 +121,10 @@ CONCESIÓN = variación secundaria
 | Nicaragua | azules institucionales | líneas verticales, trama ligera |
 | Reserva | gris, café | sólido, hachurado grueso |
 
+⚠️ Pendiente de resolver: si HEMCO (aparece en 07, 11, 12) es `colombia` o `nacional`.
+El CSV (`PAIS_CAPITAL`) dice Nicaragua, pero el Contenido_Atlas.md dice "empresa colombiana".
+No cambiar hasta confirmar con FDR.
+
 ---
 
 ## Estructura SVG por concesión
@@ -132,57 +138,26 @@ Cada concesión debe seguir esta estructura en Illustrator:
   <g id="area-main-hover">              ← patrón hover con clipPath
   </g>
   [shape] id="border-nombre-concesion"  ← contorno, nombre explícito ⬅ CRÍTICO
-  [shape] id="area-hover-target">       ← hit area opacidad:0
+  [shape] id="area-hover-target"        ← hit area, fill ≠ none, fill-opacity 0
+                                           ← NUNCA dentro de area-main-hover
 </g>
 ```
 
-**Regla crítica — hover target:** el shape debe tener `fill` de cualquier color
-(nunca `fill:none`) con opacidad `0`. `fill:none` destruye el hit area en CSS.
-El modelo correcto es `walpa-tara`. Ver `vanessa` como contraejemplo resuelto.
-**La opacidad debe bajarse específicamente en el fill (panel Apariencia,
-fila `Fill: Opacity 0%`), nunca en el objeto completo (`opacity: 0`) — esto
-también destruye el hit area aunque el SVG se vea igual.** Ver `victoria`
-(01-rama-kriol) como caso resuelto. Además, el hover target no debe heredar
-ningún `stroke` propio: si lo tiene, tapa visualmente la animación punteada
-del `border-*` real aunque ambos sigan funcionando a nivel de CSS. Mitigado
-de forma global en `diptico.css`.
-
-**Regla crítica — border IDs:** nombrar siempre como `border-nombre-concesion`
-(ej. `border-vanessa`, `border-walpa-tara`). Illustrator puede numerar
-automáticamente (`border`, `border1`, `border2`...) si no se fuerza el nombre
-en el panel de capas. IDs automáticos se rompen entre exports.
-
----
-
-## Bordes grises en reposo — decisión de arquitectura
-
-Los bordes de las concesiones se ven en `#4c4c4c` al 33% en reposo y
-recuperan su color al hacer hover. **Este CSS vive en `diptico.css`, no en
-el SVG.** Razón: Illustrator regenera el `<style>` del SVG en cada export,
-borrando cualquier edición manual. `diptico.css` persiste siempre.
-
-El SVG exportado desde Illustrator se usa tal cual, sin post-procesado.
-No existe ni debe existir un layer `borde-base` en Illustrator — los
-`border-*` que ya están en cada grupo de concesión son suficientes.
-
-Para un nuevo territorio: pegar el bloque de bordes de `diptico.css` y
-agregar las reglas de color de hover con los nuevos IDs. Ver sección
-correspondiente en `CLAUDE.md`.
+Ver CLAUDE.md para diagnóstico detallado de cada regla.
 
 ---
 
 ## Archivos clave
 
 ```txt
-atlas/03-waupasa-twi/index.html    ← único HTML por territorio
+atlas/NN-territorio/index.html     ← UN html por territorio, copiar y editar data-territorio
 templates/diptico-base.html        ← template compartido
 css/diptico.css                    ← estilos del sistema (incluye bordes)
 js/render-diptico.js               ← renderer + interactividad
-js/data-territorios.js             ← datos de todos los territorios
-mapas-raster/03-waupasa-twi/       ← webp por breakpoint
-mapas-svg/03-waupasa-twi/          ← SVG por breakpoint
+js/data-territorios.js             ← datos de los 18 territorios
+mapas-raster/NN-territorio/        ← webp por breakpoint
+mapas-svg/NN-territorio/           ← SVG por breakpoint
 design-system/tokens/build/tokens.css
-ATLAS_PATTERN_SYSTEM.md
 CLAUDE.md                          ← decisiones técnicas y diagnóstico
 ```
 
@@ -193,19 +168,40 @@ CLAUDE.md                          ← decisiones técnicas y diagnóstico
 ```bash
 # Levantar servidor local
 python3 -m http.server 8000
-# Abrir: http://localhost:8000/atlas/03-waupasa-twi/
+
+# Crear carpeta de territorio nuevo (copiar desde 06 como plantilla)
+mkdir -p atlas/NN-territorio
+cp atlas/06-twi-ahbra-10-comunidades/index.html atlas/NN-territorio/index.html
+# Luego editar data-territorio="NN-territorio" y <title> en ese index.html
+
+# Crear todas las carpetas pendientes de una vez
+for id in 05-wangki-li 07-tuahka 08-tasba-pri 09-prinzu-awala \
+           10-mayangna-sauni-bas 11-mayangna-sauni-as \
+           12-mayangna-arungka-matungbak 13-amasau \
+           14-chorotega-norte 15-matagalpa 16-prinzu-auhya-un \
+           17-muy-muy 18-sebaco; do
+  mkdir -p atlas/$id
+  cp atlas/06-twi-ahbra-10-comunidades/index.html atlas/$id/index.html
+  sed -i '' "s/06-twi-ahbra-10-comunidades/$id/" atlas/$id/index.html
+done
+
+# Verificar que cada index.html tiene el data-territorio correcto
+grep "data-territorio" atlas/*/index.html
 
 # Auditar todos los IDs del SVG
-grep -o 'id="[^"]*"' mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg | sort | uniq
+grep -o 'id="[^"]*"' mapas-svg/NN-territorio/desktop-NN.svg | sort | uniq
 
-# Auditar border-* (verificar que tengan nombres explícitos, no border1/border2)
-grep -o 'id="border[^"]*"' mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg | sort
+# Auditar border-* (verificar nombres explícitos, no border1/border2)
+grep -o 'id="border[^"]*"' mapas-svg/NN-territorio/desktop-NN.svg | sort
 
-# Verificar que el SVG no tenga imágenes embebidas
-grep -i "image\|xlink:href\|href" mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg
+# Verificar viewBox del SVG (debe ser 927 980, no 772.6)
+grep -o '<svg[^>]*>' mapas-svg/NN-territorio/desktop-NN.svg
 
-# Verificar que no exista borde-base (no debe existir)
-grep "borde-base" mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg
+# Verificar que el raster es distinto al anterior
+md5sum mapas-raster/NN-territorio/desktop-NN.webp mapas-raster/NN-anterior/desktop-NN-anterior.webp
+
+# Verificar que area-hover-target NO esté dentro de area-main-hover
+grep -n "area-hover-target" mapas-svg/NN-territorio/desktop-NN.svg
 ```
 
 ---
@@ -216,20 +212,14 @@ grep "borde-base" mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg
 git add \
   CLAUDE.md \
   README.md \
-  ATLAS_PATTERN_SYSTEM.md \
   css/diptico.css \
   js/render-diptico.js \
   js/data-territorios.js \
   templates/diptico-base.html \
-  atlas/03-waupasa-twi/index.html \
-  mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg \
-  mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg \
-  mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg
+  atlas/06-twi-ahbra-10-comunidades/index.html \
+  mapas-svg/06-twi-ahbra-10-comunidades/ \
+  mapas-raster/06-twi-ahbra-10-comunidades/
 
-git commit -m "feat(waupasa): borders via CSS — no manual SVG edits required"
-
-git tag waupasa-borders-css-v2
-
+git commit -m "feat(06-twi-yahbra): mapa estático online — hover pendiente en Illustrator"
 git push origin feat/waupasa-twi-editorial
-git push origin waupasa-borders-css-v2
 ```

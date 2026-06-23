@@ -78,6 +78,7 @@ const TERRITORIOS = [
       {
         nombre: 'Victoria',
         svg_id: 'victoria',          // ✅ grupo existe en SVG
+        color_override: '#d7620e',
         empresa: '—',                 // ⚠️ pendiente
         pais: 'china',
         patron_img: '../../img/patrones/patron-china.webp',
@@ -89,6 +90,7 @@ const TERRITORIOS = [
       {
         nombre: 'El Castillo',
         svg_id: 'el-castillo',       // ⚠️ pendiente — agregar grupo en Illustrator
+        color_override: '#f47317',
         empresa: '—',
         pais: 'china',
         patron_img: '../../img/patrones/patron-china.webp',
@@ -100,6 +102,7 @@ const TERRITORIOS = [
       {
         nombre: 'La Guinea',
         svg_id: 'la-guinea',         // ⚠️ pendiente — agregar grupo en Illustrator
+        color_override: '#f98838',
         empresa: '—',
         pais: 'china',
         patron_img: '../../img/patrones/patron-china.webp',
@@ -174,6 +177,7 @@ const TERRITORIOS = [
       {
         nombre: 'Victoria',
         svg_id: 'victoria',
+        color_override: '#d7620e',
         empresa: '—',
         pais: 'china',
         hectareas: '—',
@@ -235,15 +239,15 @@ const TERRITORIOS = [
       hectareas_concesiones: '55,154.07',
     },
     concesiones: [
-      { nombre: 'Caribe', svg_id: 'caribe', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Columbus I', svg_id: 'columbus', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Encanto I', svg_id: 'el-encanto-i', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Yulu Awaskira', svg_id: 'yulu-awaskira', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Puerto Cabezas', svg_id: 'puerto-cabezas', empresa: '—', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Vanessa', svg_id: 'vanessa', empresa: '—', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Walpa Tara', svg_id: 'walpa-tara', empresa: '—', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Reserva Minera', svg_id: 'reserva-minera', empresa: '—', pais: 'reserva', patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Caribe', svg_id: 'caribe', color_override: '#d7620e', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Columbus I', svg_id: 'columbus', color_override: '#d7620e', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto I', svg_id: 'el-encanto-i', color_override: '#e56d55', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', color_override: '#ea8e3b', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Yulu Awaskira', svg_id: 'yulu-awaskira', color_override: '#f4a13d', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Puerto Cabezas', svg_id: 'puerto-cabezas', color_override: '#193966', empresa: '—', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Vanessa', svg_id: 'vanessa', color_override: '#263fa8', empresa: '—', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Walpa Tara', svg_id: 'walpa-tara', color_override: '#739b50', empresa: '—', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Reserva Minera', svg_id: 'reserva-minera', color_override: '#394150', empresa: '—', pais: 'reserva', patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
     fuente: '',
   },
@@ -499,7 +503,7 @@ const TERRITORIOS = [
       hectareas_concesiones: '15,786.81',
     },
     concesiones: [
-      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '15786.8', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', color_override: '#ea8e3b', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '15786.8', ano: '—', estado: '—', gaceta: '—' },
     ],
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
@@ -562,10 +566,10 @@ const TERRITORIOS = [
       { nombre: 'Camelia', svg_id: 'camelia', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '248.0', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'Columbus I', svg_id: 'columbus-i', empresa: 'Zhong Fu Devolopment SA', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '13567.3', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'El Bongo de Hidalgo', svg_id: 'el-bongo-de-hidalgo', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '11467.9', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Encanto I', svg_id: 'el-encanto-i', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '11423.9', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '8451.4', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Walpa Tara', svg_id: 'walpa-tara', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '13124.6', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Reserva Minera', svg_id: 'reserva-minera', empresa: '—', pais: 'reserva', patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto I', svg_id: 'el-encanto-i', color_override: '#e56d55', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '11423.9', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', color_override: '#ea8e3b', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '8451.4', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Walpa Tara', svg_id: 'walpa-tara', color_override: '#739b50', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '13124.6', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Reserva Minera', svg_id: 'reserva-minera', color_override: '#394150', empresa: '—', pais: 'reserva', patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
     ],
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },

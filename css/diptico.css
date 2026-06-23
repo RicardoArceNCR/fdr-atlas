@@ -1052,111 +1052,19 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 }
 
 
-/* ── Animación de borders por concesión — IDs estables ───────────────────────
+/* ── Animación de borders por concesión ───────────────────────────────────────
  *
- * Patrón: #{svg_id}.concesion--activa #border-{svg_id}
- * No depende de IDs numéricos. Seguro ante re-export de Illustrator.
- * Para nuevos mapas: nombrar el border como border-{svg_id} en Illustrator.
+ * ✅ SISTEMA DINÁMICO ACTIVO — los colores y animaciones se inyectan
+ * automáticamente desde render-diptico.js via inyectarCSSConcesiones().
+ *
+ * Las escalas de color por país y los dasharray viven en ESCALAS_PAIS
+ * y DASH_PAIS en render-diptico.js.
+ *
+ * Para cambiar un color específico: usar color_override en data-territorios.js.
+ * Para cambiar la paleta de un país: editar ESCALAS_PAIS en render-diptico.js.
+ * Para agregar una concesión nueva: agregar svg_id en data-territorios.js.
+ * Nunca más tocar este archivo para concesiones.
  * ─────────────────────────────────────────────────────────────────────────── */
-
-#el-encanto-i.concesion--activa #border-el-encanto-i {
-  opacity: 1;
-  stroke: #e56d55;
-  stroke-dasharray: 10 5;
-  stroke-dashoffset: 0;
-  animation: dash-concesion 1.6s linear infinite;
-}
-
-#el-encanto-ii.concesion--activa #border-el-encanto-ii {
-  opacity: 1;
-  stroke: #ea8e3b;
-  stroke-dasharray: 10 5;
-  stroke-dashoffset: 0;
-  animation: dash-concesion 1.6s linear infinite;
-}
-
-#columbus.concesion--activa #border-columbus {
-  opacity: 1;
-  stroke: #e07e24;
-  stroke-dasharray: 10 5;
-  stroke-dashoffset: 0;
-  animation: dash-concesion 1.6s linear infinite;
-}
-
-#caribe.concesion--activa #border-caribe {
-  opacity: 1;
-  stroke: #dd3519;
-  stroke-dasharray: 10 5;
-  stroke-dashoffset: 0;
-  animation: dash-concesion 1.6s linear infinite;
-}
-
-#yulu-awaskira.concesion--activa #border-yulu-awaskira {
-  opacity: 1;
-  stroke: #f4a13d;
-  stroke-dasharray: 10 5;
-  stroke-dashoffset: 0;
-  animation: dash-concesion 1.6s linear infinite;
-}
-
-#reserva-minera.concesion--activa #border-reserva-minera {
-  opacity: 1;
-  stroke: #394150;
-  stroke-dasharray: 4 12;
-  stroke-dashoffset: 0;
-  animation: dash-concesion 4s linear infinite;
-}
-
-#walpa-tara.concesion--activa #border-walpa-tara {
-  opacity: 1;
-  stroke: #739b50;
-  stroke-dasharray: 12 6;
-  stroke-dashoffset: 0;
-  animation: dash-concesion 2.4s linear infinite;
-}
-
-#vanessa.concesion--activa #border-vanessa {
-  opacity: 1;
-  stroke: #263fa8;
-  stroke-dasharray: 8 8;
-  stroke-dashoffset: 0;
-  animation: dash-concesion 2.8s linear infinite;
-}
-
-#puerto-cabezas.concesion--activa #border-puerto-cabezas {
-  opacity: 1;
-  stroke: #263fa8;
-  stroke-dasharray: 8 8;
-  stroke-dashoffset: 0;
-  animation: dash-concesion 2.8s linear infinite;
-}
-
-/* ── 01 ── Rama y Kriol ──────────────────────────────────────────────────── */
-
-#victoria.concesion--activa #border-victoria {
-  opacity: 1;
-  stroke: #d7620e;
-  stroke-dasharray: 10 5;
-  stroke-dashoffset: 0;
-  animation: dash-concesion 1.6s linear infinite;
-}
-
-#el-castillo.concesion--activa #border-el-castillo {
-  opacity: 1;
-  stroke: #f47317;
-  stroke-dasharray: 10 5;
-  stroke-dashoffset: 0;
-  animation: dash-concesion 1.6s linear infinite;
-}
-
-#la-guinea.concesion--activa #border-la-guinea {
-  opacity: 1;
-  stroke: #f98838;
-  stroke-dasharray: 10 5;
-  stroke-dashoffset: 0;
-  animation: dash-concesion 1.6s linear infinite;
-}
-
 
 /* ── 9. Drop-shadow coloreado por país ───────────────────────────────────────── */
 /*
@@ -1453,61 +1361,10 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 }
 
 /* Hover / activo: restaura el color original del país */
+/* ✅ Los colores específicos por concesión los inyecta render-diptico.js     */
+/* Para cambiar colores: ver ESCALAS_PAIS en render-diptico.js                */
 #mapa-svg-inline .concesion--activa [id^="border-"] {
   stroke-opacity: 1 !important;
-}
-
-/* Colores por país al activarse */
-#mapa-svg-inline #el-encanto-i.concesion--activa [id^="border-"] {
-  stroke: #d7620e !important;
-}
-
-#mapa-svg-inline #columbus.concesion--activa [id^="border-"] {
-  stroke: #d7620e !important;
-}
-
-#mapa-svg-inline #el-encanto-ii.concesion--activa [id^="border-"] {
-  stroke: #f47317 !important;
-}
-
-#mapa-svg-inline #yulu-awaskira.concesion--activa [id^="border-"] {
-  stroke: #f98838 !important;
-}
-
-#mapa-svg-inline #caribe.concesion--activa [id^="border-"] {
-  stroke: #d7620e !important;
-}
-
-#mapa-svg-inline #walpa-tara.concesion--activa [id^="border-"] {
-  stroke: #1c621c !important;
-}
-
-#mapa-svg-inline #vanessa.concesion--activa [id^="border-"] {
-  stroke: #193966 !important;
-}
-
-#mapa-svg-inline #puerto-cabezas.concesion--activa [id^="border-"] {
-  stroke: #193966 !important;
-}
-
-#mapa-svg-inline #reserva-minera.concesion--activa [id^="border-"] {
-  stroke: #4c4c4c !important;
-  stroke-opacity: 0.8 !important;
-}
-
-/* ── 01 ── Rama y Kriol ──────────────────────────────────────────────────── */
-/* Todas las concesiones son China → naranja                                  */
-#mapa-svg-inline #victoria.concesion--activa [id^="border-"] {
-  stroke: #d7620e !important;
-}
-
-/* ⚠️ Agregar cuando el-castillo y la-guinea tengan grupo en Illustrator: */
-#mapa-svg-inline #el-castillo.concesion--activa [id^="border-"] {
-  stroke: #f47317 !important;
-}
-
-#mapa-svg-inline #la-guinea.concesion--activa [id^="border-"] {
-  stroke: #f98838 !important;
 }
 
 /* ─── Ríos — presencia permanente ───────────────────────────────────────────

@@ -2,39 +2,40 @@
 
 Atlas web editorial sobre concesiones mineras en territorios indígenas y afrodescendientes de Nicaragua, producido para Fundación del Río (FDR).
 
-El proyecto convierte mapas técnicos de concesiones en un **producto editorial cartográfico interactivo**, embebible, responsive y exportable a PDF.
-
 ---
 
 ## Estado actual — Junio 2026
 
 **Rama activa:** `feat/waupasa-twi-editorial`
 
-### Territorios con mapa web completo
+### Territorios con mapa web
 
 | # | Territorio | Assets | Hover | Datos |
 |---|---|---|---|---|
 | 01 | Rama y Kriol | ✅ raster + SVG | ✅ 3 concesiones | ⬜ empresa/ha pendientes |
-| 02 | Creole de Bluefields | ✅ raster + SVG | ✅ 1 concesión | ⬜ empresa/ha pendientes |
-| 03 | Waupasa Twi | ✅ raster + SVG (3 breakpoints) | ✅ 8 concesiones | ⬜ empresa/ha pendientes |
+| 02 | Negro Creole de Bluefields | ✅ raster + SVG | ✅ 1 concesión | ⬜ empresa/ha pendientes |
+| 03 | Twi Waupasa | ✅ raster + SVG (3 breakpoints) | ✅ 8 concesiones | ⬜ empresa/ha pendientes |
 | 04 | Wangki Twi-Tasba Raya | ✅ raster JPEG (stopgap) | ❌ sin SVG interactivo | ⬜ pendiente |
-| 06 | Twi Yahbra (Diez comunidades) | ✅ raster + SVG | ⬜ anatomía hover pendiente en Illustrator | ✅ datos completos |
+| 06 | Twi Yahbra (Diez comunidades) | ✅ raster + SVG | ⬜ hover pendiente en Illustrator | ✅ datos completos |
+| 07 | Tuahka Takaln Balna | ✅ raster + SVG parcial | ✅ 2 de 11 concesiones | ⬜ empresa/ha pendientes |
 
-### Territorios registrados en data-territorios.js, sin assets todavía
+### Territorios registrados, sin assets
 
-05, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18 — carpetas `atlas/NN/` creadas,
+05, 08–18 — carpetas `atlas/NN/` creadas, `data-territorios.js` completo,
 mapa no renderiza hasta que existan raster + SVG.
 
 ### Bugs confirmados y documentados (Jun 2026)
 
-- ✅ `opacity` vs `fill-opacity` en `area-hover-target` → ver CLAUDE.md
+- ✅ `opacity` vs `fill-opacity` en `area-hover-target` → CLAUDE.md
 - ✅ `area-hover-target` con `stroke` propio tapa animación → fix global en `diptico.css`
-- ✅ `area-hover-target` anidado dentro de `area-main-hover` rompe hover → ver CLAUDE.md
-- ✅ `layout: 'pendiente'` colapsa el mapa a 38×40px → usar siempre A/B/C/D
-- ✅ Faltar `tema`/`banner`/`logo` en `data-territorios.js` → panel derecho sin color/imagen
-- ✅ viewBox incorrecto (772.6) por Export As con Crop to Content → usar Save As
-- ✅ webp renombrado sin re-exportar → verificar md5sum antes de subir
-- ✅ Carpeta `atlas/NN/` inexistente → 404 aunque el JS esté perfecto
+- ✅ `area-hover-target` dentro de `area-main-hover` → CLAUDE.md
+- ✅ **Orden de capas en Illustrator** — `area-hover-target` debe estar encima de `area-main-hover` → CLAUDE.md
+- ✅ `layout: 'pendiente'` colapsa mapa a 38×40px → usar A/B/C/D
+- ✅ Faltar `tema`/`banner`/`logo` → panel derecho sin color/imagen
+- ✅ viewBox incorrecto por Export As → usar Save As
+- ✅ webp renombrado sin re-exportar → verificar md5sum
+- ✅ Carpeta `atlas/NN/` inexistente → 404
+- ✅ Tour no arranca con 1 sola concesión → corregido en `render-diptico.js:548`
 
 ---
 
@@ -54,20 +55,36 @@ QGIS / fuente cartográfica
 Cada territorio se define con un solo `index.html`:
 
 ```html
-<body data-territorio="06-twi-ahbra-10-comunidades">
+<body data-territorio="07-tuahka">
   <script type="module" src="../../js/render-diptico.js"></script>
 </body>
 ```
 
-El renderer carga el template, los assets y la data. No hay HTML distinto por territorio.
-**Sin la carpeta `atlas/NN-territorio/` con su `index.html` → 404.** El servidor es
-Python estático (`python3 -m http.server 8000`), no hay router.
+El servidor es Python estático (`python3 -m http.server 8000`) — sin la
+carpeta `atlas/NN-territorio/index.html`, 404.
+
+---
+
+## Sistema de colores — dinámico desde Jun 2026
+
+Los colores de animación de concesiones ya **no** están hardcodeados en
+`diptico.css`. Se inyectan automáticamente desde `render-diptico.js` via
+`inyectarCSSConcesiones()`, usando escalas de color por país (`ESCALAS_PAIS`)
+y asignación por posición dentro del grupo del mismo país.
+
+Para sobreescribir un color específico: `color_override: '#hex'` en la
+concesión dentro de `data-territorios.js`. Los territorios 01, 02 y 03 ya
+tienen `color_override` en todas sus concesiones para preservar los colores
+originales.
+
+**Para agregar una concesión nueva: solo agregar `svg_id` en `data-territorios.js`.
+No tocar `diptico.css`.**
 
 ---
 
 ## Producto final — 18 dípticos
 
-| # | Territorio oficial (Contenido_Atlas.md) | Cluster | id en proyecto |
+| # | Territorio oficial | Cluster | id en proyecto |
 |---|---|---|---|
 | 01 | Rama y Kriol | C — dual | `01-rama-kriol` |
 | 02 | Negro Creole de Bluefields | B — minimalista | `02-creole-bluefields` |
@@ -85,79 +102,47 @@ Python estático (`python3 -m http.server 8000`), no hay router.
 | 14 | Chorotega - Norte | B — minimalista | `14-chorotega-norte` |
 | 15 | Matagalpa | B — minimalista | `15-matagalpa` |
 | 16 | Prinzu Auhya Un | B — minimalista | `16-prinzu-auhya-un` |
-| 17 | Muy Muy | B — minimalista | `17-muy-muy` |
-| 18 | Sébaco | B — minimalista | `18-sebaco` |
-
-⚠️ El README original decía 16 territorios. El Contenido_Atlas.md oficial de FDR
-lista 18. Los ids de 17 y 18 son tentativos — confirmar con FDR antes de publicar.
+| 17 | Muy Muy | B — minimalista | `17-muy-muy` ⚠️ id tentativo |
+| 18 | Sébaco | B — minimalista | `18-sebaco` ⚠️ id tentativo |
 
 ---
 
 ## Orden de mapas maestros
-
-No construir los 18 mapas al mismo tiempo. Primero consolidar los cuatro maestros:
 
 | Rol | Mapa | Estado |
 |---|---|---|
 | Multipaís denso | Waupasa Twi (03) | ✅ completo |
 | Minimalista | Twi Yahbra (06) | ⬜ hover pendiente en Illustrator |
 | Dual | Wangki Li Aubra Tasbaya (05) | ⬜ pendiente |
-| Complejo/fragmentado | Tuahka (07) | ⬜ pendiente |
+| Complejo/fragmentado | Tuahka (07) | ⬜ SVG parcial — 9 concesiones pendientes en Illustrator |
 
 ---
 
 ## Sistema visual — país como identidad
 
-```txt
-PAÍS = identidad visual principal
-CONCESIÓN = variación secundaria
-```
-
-| País | Paleta | Patrones |
+| País | Escala de colores (oscuro → claro) | Patrones |
 |---|---|---|
-| China | rojos, naranjas | diagonales densas, círculos, cross-hatch |
-| Canadá | verdes | grid técnico, doble línea, hachurado fino |
-| Colombia | verdes petróleo, turquesas | retícula modular, escalonado |
-| Nicaragua | azules institucionales | líneas verticales, trama ligera |
-| Reserva | gris, café | sólido, hachurado grueso |
+| China | `#7a1a08` → `#fbb96a` | diagonales densas, cross-hatch |
+| Canadá | `#0d3d0d` → `#a8dfa8` | grid técnico, hachurado fino |
+| Colombia | `#2e0f6b` → `#ccb0f5` | retícula modular, escalonado |
+| Nicaragua | `#0f2347` → `#a4b8f0` | líneas verticales, trama ligera |
+| Reserva | `#1a1a1a` → `#c0c7ce` | sólido, hachurado grueso |
 
-⚠️ Pendiente de resolver: si HEMCO (aparece en 07, 11, 12) es `colombia` o `nacional`.
-El CSV (`PAIS_CAPITAL`) dice Nicaragua, pero el Contenido_Atlas.md dice "empresa colombiana".
+⚠️ Pendiente de resolver: si HEMCO (07, 11, 12) es `colombia` o `nacional`.
 No cambiar hasta confirmar con FDR.
-
----
-
-## Estructura SVG por concesión
-
-Cada concesión debe seguir esta estructura en Illustrator:
-
-```
-<g id="nombre-concesion">               ← ID que usa el JS
-  <g id="area-main">                    ← patrón reposo con clipPath
-  </g>
-  <g id="area-main-hover">              ← patrón hover con clipPath
-  </g>
-  [shape] id="border-nombre-concesion"  ← contorno, nombre explícito ⬅ CRÍTICO
-  [shape] id="area-hover-target"        ← hit area, fill ≠ none, fill-opacity 0
-                                           ← NUNCA dentro de area-main-hover
-</g>
-```
-
-Ver CLAUDE.md para diagnóstico detallado de cada regla.
 
 ---
 
 ## Archivos clave
 
 ```txt
-atlas/NN-territorio/index.html     ← UN html por territorio, copiar y editar data-territorio
+css/diptico.css                    ← layout, bordes base (sin colores hardcodeados)
+js/render-diptico.js               ← renderer + interactividad + ESCALAS_PAIS
+js/data-territorios.js             ← datos + svg_id + color_override opcional
 templates/diptico-base.html        ← template compartido
-css/diptico.css                    ← estilos del sistema (incluye bordes)
-js/render-diptico.js               ← renderer + interactividad
-js/data-territorios.js             ← datos de los 18 territorios
+atlas/NN-territorio/index.html     ← un HTML por territorio
 mapas-raster/NN-territorio/        ← webp por breakpoint
 mapas-svg/NN-territorio/           ← SVG por breakpoint
-design-system/tokens/build/tokens.css
 CLAUDE.md                          ← decisiones técnicas y diagnóstico
 ```
 
@@ -166,42 +151,25 @@ CLAUDE.md                          ← decisiones técnicas y diagnóstico
 ## Comandos útiles
 
 ```bash
-# Levantar servidor local
+# Levantar servidor
 python3 -m http.server 8000
 
-# Crear carpeta de territorio nuevo (copiar desde 06 como plantilla)
+# Crear carpeta de territorio nuevo
 mkdir -p atlas/NN-territorio
 cp atlas/06-twi-ahbra-10-comunidades/index.html atlas/NN-territorio/index.html
-# Luego editar data-territorio="NN-territorio" y <title> en ese index.html
+# Editar data-territorio="NN-territorio" y <title>
 
-# Crear todas las carpetas pendientes de una vez
-for id in 05-wangki-li 07-tuahka 08-tasba-pri 09-prinzu-awala \
-           10-mayangna-sauni-bas 11-mayangna-sauni-as \
-           12-mayangna-arungka-matungbak 13-amasau \
-           14-chorotega-norte 15-matagalpa 16-prinzu-auhya-un \
-           17-muy-muy 18-sebaco; do
-  mkdir -p atlas/$id
-  cp atlas/06-twi-ahbra-10-comunidades/index.html atlas/$id/index.html
-  sed -i '' "s/06-twi-ahbra-10-comunidades/$id/" atlas/$id/index.html
-done
-
-# Verificar que cada index.html tiene el data-territorio correcto
-grep "data-territorio" atlas/*/index.html
-
-# Auditar todos los IDs del SVG
+# Auditar SVG
 grep -o 'id="[^"]*"' mapas-svg/NN-territorio/desktop-NN.svg | sort | uniq
-
-# Auditar border-* (verificar nombres explícitos, no border1/border2)
 grep -o 'id="border[^"]*"' mapas-svg/NN-territorio/desktop-NN.svg | sort
-
-# Verificar viewBox del SVG (debe ser 927 980, no 772.6)
 grep -o '<svg[^>]*>' mapas-svg/NN-territorio/desktop-NN.svg
-
-# Verificar que el raster es distinto al anterior
-md5sum mapas-raster/NN-territorio/desktop-NN.webp mapas-raster/NN-anterior/desktop-NN-anterior.webp
-
-# Verificar que area-hover-target NO esté dentro de area-main-hover
 grep -n "area-hover-target" mapas-svg/NN-territorio/desktop-NN.svg
+
+# Verificar raster distinto al anterior
+md5sum mapas-raster/NN-territorio/desktop-NN.webp mapas-raster/NN-anterior/desktop.webp
+
+# Verificar data-territorio en todos los index.html
+grep "data-territorio" atlas/*/index.html
 ```
 
 ---
@@ -210,16 +178,14 @@ grep -n "area-hover-target" mapas-svg/NN-territorio/desktop-NN.svg
 
 ```bash
 git add \
-  CLAUDE.md \
-  README.md \
+  CLAUDE.md README.md \
   css/diptico.css \
   js/render-diptico.js \
   js/data-territorios.js \
-  templates/diptico-base.html \
-  atlas/06-twi-ahbra-10-comunidades/index.html \
-  mapas-svg/06-twi-ahbra-10-comunidades/ \
-  mapas-raster/06-twi-ahbra-10-comunidades/
+  atlas/07-tuahka/ \
+  mapas-svg/07-tuahka/ \
+  mapas-raster/07-tuahka/
 
-git commit -m "feat(06-twi-yahbra): mapa estático online — hover pendiente en Illustrator"
+git commit -m "feat(07-tuahka): SVG parcial online — 2/11 concesiones con hover"
 git push origin feat/waupasa-twi-editorial
 ```

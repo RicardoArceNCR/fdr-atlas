@@ -342,7 +342,77 @@ function marcarPaisesSinConcesiones(concesiones) {
   });
 }
 
+
+/* ─── Sistema de colores dinámico por país ────────────────────────────────────
+ *
+ * Cada país tiene una escala de colores. El color se asigna automáticamente
+ * según el orden de la concesión dentro del grupo del mismo país.
+ * Se puede sobreescribir con color_override por concesión en data-territorios.js.
+ *
+ * Reemplaza todos los bloques hardcodeados de animación en diptico.css.
+ * Nunca más tocar diptico.css para agregar una concesión nueva.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+const ESCALAS_PAIS = {
+  china: ['#7a1a08', '#a82510', '#dd3519', '#f47317', '#f98838', '#fbb96a'],
+  canada: ['#0d3d0d', '#1c621c', '#287a28', '#3d9e3d', '#6dbf6d', '#a8dfa8'],
+  colombia: ['#2e0f6b', '#4a1d9e', '#5b21b6', '#7c3fd4', '#a472e8', '#ccb0f5'],
+  nacional: ['#0f2347', '#193966', '#263fa8', '#3a5cc7', '#6b8de0', '#a4b8f0'],
+  reserva: ['#1a1a1a', '#2e2e2e', '#394150', '#555f6e', '#8a949f', '#c0c7ce'],
+};
+
+const DASH_PAIS = {
+  china: { array: '10 5', duration: '1.6s' },
+  canada: { array: '12 6', duration: '2.4s' },
+  colombia: { array: '8 6', duration: '2.0s' },
+  nacional: { array: '8 8', duration: '2.8s' },
+  reserva: { array: '4 12', duration: '4.0s' },
+};
+
+function inyectarCSSConcesiones(concesiones) {
+  // Eliminar inyección anterior si existe (para re-renders por breakpoint)
+  const anterior = document.getElementById('atlas-concesiones-css');
+  if (anterior) anterior.remove();
+
+  const contadores = {};
+  const rules = [];
+
+  concesiones
+    .filter(c => c.svg_id && c.pais)
+    .forEach(c => {
+      const escala = ESCALAS_PAIS[c.pais] || ESCALAS_PAIS.reserva;
+      const dash = DASH_PAIS[c.pais] || DASH_PAIS.reserva;
+
+      // Índice dentro del grupo del mismo país
+      contadores[c.pais] = contadores[c.pais] ?? 0;
+      const color = c.color_override || escala[contadores[c.pais] % escala.length];
+      contadores[c.pais]++;
+
+      // Bloque A — animación del trazo punteado en el border
+      rules.push(`
+#${c.svg_id}.concesion--activa #border-${c.svg_id} {
+  opacity: 1;
+  stroke: ${color};
+  stroke-dasharray: ${dash.array};
+  stroke-dashoffset: 0;
+  animation: dash-concesion ${dash.duration} linear infinite;
+}`);
+
+      // Bloque B — color del border en hover (stroke-opacity ya lo maneja diptico.css)
+      rules.push(`
+#mapa-svg-inline #${c.svg_id}.concesion--activa [id^="border-"] {
+  stroke: ${color} !important;
+}`);
+    });
+
+  const style = document.createElement('style');
+  style.id = 'atlas-concesiones-css';
+  style.textContent = rules.join('\n');
+  document.head.appendChild(style);
+}
+
 function initInteractividad(concesiones) {
+  inyectarCSSConcesiones(concesiones);
   initTooltipPoblados();
   initHoverPaises(concesiones);
   initAnimacionNarrativa(concesiones);

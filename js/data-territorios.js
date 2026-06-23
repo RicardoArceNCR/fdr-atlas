@@ -434,7 +434,11 @@ const TERRITORIOS = [
       hectareas_concesiones: '48,362.78',
     },
     concesiones: [
-      { nombre: 'Sin nombre', svg_id: 'sin-nombre', pais: 'sin-nombre', empresa: '—', hectareas: '—', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ identificar — posiblemente BEGONIA
+      { nombre: 'Sin nombre', svg_id: 'sin-nombre-1', pais: 'sin-nombre', empresa: '—', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ identificar
+      { nombre: 'Sin nombre', svg_id: 'sin-nombre-2', pais: 'sin-nombre', empresa: '—', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ identificar
+      { nombre: 'Sin nombre', svg_id: 'sin-nombre-3', pais: 'sin-nombre', empresa: '—', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ identificar
+      { nombre: 'Sin nombre', svg_id: 'sin-nombre-4', pais: 'sin-nombre', empresa: '—', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ identificar
+      { nombre: 'Sin nombre', svg_id: 'sin-nombre-5', pais: 'sin-nombre', empresa: '—', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ identificar
       { nombre: 'Rosita D', svg_id: 'rosita-d', empresa: '—', pais: 'china', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
       { nombre: 'San Leonardo', svg_id: 'san-leonardo', empresa: '—', pais: 'china', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
       { nombre: 'El Salto', svg_id: 'el-salto', empresa: '—', pais: 'china', hectareas: '—', año: '—', estado: '—', gaceta: '—' },

@@ -951,9 +951,9 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 
 /* Colombia — verde petróleo */
 .concesion-card--activa[data-pais="colombia"] {
-  background: #0f766e;
-  border-color: #0f766e;
-  box-shadow: 0 4px 10px rgba(15, 118, 110, 0.30);
+  background: #5b21b6;
+  border-color: #5b21b6;
+  box-shadow: 0 4px 10px rgba(91, 33, 182, 0.30);
 }
 
 /* ── Estado atenuado ──────────────────────────────────────────────────────── */

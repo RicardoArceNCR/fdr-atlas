@@ -355,12 +355,13 @@ function marcarPaisesSinConcesiones(concesiones) {
  * ─────────────────────────────────────────────────────────────────────────── */
 
 const ESCALAS_PAIS = {
-  china: ['#7a1a08', '#a82510', '#dd3519', '#f47317', '#f98838', '#fbb96a'],
-  canada: ['#0d3d0d', '#1c621c', '#287a28', '#3d9e3d', '#6dbf6d', '#a8dfa8'],
-  colombia: ['#2e0f6b', '#4a1d9e', '#5b21b6', '#7c3fd4', '#a472e8', '#ccb0f5'],
-  nacional: ['#0f2347', '#193966', '#263fa8', '#3a5cc7', '#6b8de0', '#a4b8f0'],
-  reserva: ['#1a1a1a', '#2e2e2e', '#394150', '#555f6e', '#8a949f', '#c0c7ce'],
-  'sin-nombre': ['#6b7280', '#9ca3af', '#d1d5db'],  // pendiente de identificar
+  //  8 tonos por país, de más oscuro a más claro — se rotan por índice
+  china: ['#7a1a08', '#a82510', '#c4300f', '#dd3519', '#f05a2a', '#f47317', '#f98838', '#fbb96a'],
+  canada: ['#0d3d0d', '#1c621c', '#236e23', '#287a28', '#3d9e3d', '#5ab85a', '#6dbf6d', '#a8dfa8'],
+  colombia: ['#1a0840', '#2e0f6b', '#3d1490', '#4a1d9e', '#5b21b6', '#7c3fd4', '#a472e8', '#ccb0f5'],
+  nacional: ['#0a1a38', '#0f2347', '#193966', '#20458a', '#263fa8', '#3a5cc7', '#6b8de0', '#a4b8f0'],
+  reserva: ['#111418', '#1a1a1a', '#2e2e2e', '#394150', '#4a5568', '#555f6e', '#8a949f', '#c0c7ce'],
+  'sin-nombre': ['#4b5563', '#6b7280', '#9ca3af', '#d1d5db'],
 };
 
 const DASH_PAIS = {
@@ -411,6 +412,67 @@ function inyectarCSSConcesiones(concesiones) {
   style.id = 'atlas-concesiones-css';
   style.textContent = rules.join('\n');
   document.head.appendChild(style);
+
+  // Pisar el stroke del area-main (patrón en reposo) que llega azul desde QGIS.
+  // Se hace en JS porque el SVG se regenera en cada export de Illustrator
+  // y no podemos garantizar que el color del patrón sea el correcto.
+  // color_override prevalece sobre la escala automática.
+  pisarColorPatron(concesiones);
+}
+
+/* ─── Corrección de color del patrón area-main y area-main-hover ─────────────
+ *
+ * El patrón de QGIS exporta con stroke azul (#4279e4) en todos los paths
+ * del area-main y area-main-hover, sin importar el país de la concesión.
+ * Esta función pisa el stroke con el color calculado en AMBOS grupos:
+ *   - area-main       → patrón visible en reposo
+ *   - area-main-hover → patrón visible al hover (sin esto vuelve a azul)
+ *
+ * Selector: data-name="area-main" y data-name="area-main-hover" son los
+ * atributos que Illustrator escribe en data-name cuando el id tiene sufijo
+ * numérico (area-main7). Los que no tienen sufijo solo tienen id="area-main".
+ * Cubrimos ambos casos con querySelectorAll combinado.
+ *
+ * Sobrevive a cualquier re-export de Illustrator porque actúa sobre el DOM
+ * ya parseado, no sobre el SVG en disco.
+ * ─────────────────────────────────────────────────────────────────────────── */
+function pisarColorPatron(concesiones) {
+  const contadores = {};
+
+  concesiones
+    .filter(c => c.svg_id && c.pais)
+    .forEach(c => {
+      const escala = ESCALAS_PAIS[c.pais] || ESCALAS_PAIS.reserva;
+
+      contadores[c.pais] = contadores[c.pais] ?? 0;
+      const color = c.color_override || escala[contadores[c.pais] % escala.length];
+      contadores[c.pais]++;
+
+      const grupo = document.getElementById(c.svg_id);
+      if (!grupo) return;
+
+      // Seleccionar AMBOS grupos: reposo (area-main) y hover (area-main-hover)
+      // Illustrator puede sufijarlo con número: area-main7, area-main-hover7
+      // Se cubren con id^= y con data-name= (Illustrator escribe ambos)
+      const areaNodes = grupo.querySelectorAll(
+        '[id^="area-main"], [data-name="area-main"], [data-name="area-main-hover"]'
+      );
+
+      areaNodes.forEach(areaEl => {
+        areaEl.querySelectorAll('path, line, polyline, rect, circle, ellipse').forEach(el => {
+          el.style.stroke = color;
+          // Solo pisar fill si el elemento tiene fill de color (no none/transparent)
+          // Los patrones de líneas diagonales solo usan stroke — no tocar su fill:none
+          const attrFill = el.getAttribute('fill');
+          const computedFill = getComputedStyle(el).fill;
+          const sinFill = attrFill === 'none' || computedFill === 'none'
+            || computedFill === 'rgba(0, 0, 0, 0)' || computedFill === 'transparent';
+          if (!sinFill) {
+            el.style.fill = color;
+          }
+        });
+      });
+    });
 }
 
 function initInteractividad(concesiones) {

@@ -7,7 +7,7 @@
  *   ✅ = verificado con fuentes primarias (La Gaceta, FDR)
  *   ⚠️ = placeholder, pendiente de verificación con equipo FDR
  *
- * Países de capital válidos: 'china' | 'canada' | 'colombia' | 'nacional' | 'reserva'
+ * Países de capital válidos: 'china' | 'canada' | 'colombia' | 'nacional' | 'reserva' | 'sin-nombre'
  * Coinciden con los tokens CSS --concesion-pais-* y --concesion-tipo-*
  */
 
@@ -430,10 +430,11 @@ const TERRITORIOS = [
     },
     stats: {
       hectareas_territorio: '54,556.36',
-      concesiones: 13, // ⚠️ array `concesiones` tiene 11 items — faltan 2 concesiones antes de que el número sea consistente
+      concesiones: 13, // ⚠️ array `concesiones` tiene 12 items — falta 1 concesión
       hectareas_concesiones: '48,362.78',
     },
     concesiones: [
+      { nombre: 'Sin nombre', svg_id: 'sin-nombre', pais: 'sin-nombre', empresa: '—', hectareas: '—', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ identificar — posiblemente BEGONIA
       { nombre: 'Rosita D', svg_id: 'rosita-d', empresa: '—', pais: 'china', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
       { nombre: 'San Leonardo', svg_id: 'san-leonardo', empresa: '—', pais: 'china', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
       { nombre: 'El Salto', svg_id: 'el-salto', empresa: '—', pais: 'china', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
@@ -1210,6 +1211,7 @@ function getBadgeClass(pais) {
     colombia: 'badge-colombia',
     nacional: 'badge-nacional',
     reserva: 'badge-reserva',
+    'sin-nombre': 'badge-sin-nombre',
   };
   return clases[pais] || 'badge-reserva';
 }
@@ -1225,6 +1227,7 @@ function getLabelPais(pais) {
     colombia: 'Colombia',
     nacional: 'Nicaragua',
     reserva: 'Reserva',
+    'sin-nombre': 'Sin identificar',
   };
   return labels[pais] || pais;
 }

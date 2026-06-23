@@ -188,7 +188,7 @@ function renderLeyenda(t) {
       patron.className = `leyenda-item__patron patron-${pais}`;
 
       const nombre = document.createElement("span");
-      nombre.textContent = pais === "reserva" ? "Reserva Minera" : `Capital ${getLabelPais(pais)}`;
+      nombre.textContent = pais === "reserva" ? "Reserva Minera" : pais === "sin-nombre" ? "Sin identificar" : `Capital ${getLabelPais(pais)}`;
 
       div.appendChild(patron);
       div.appendChild(nombre);
@@ -321,7 +321,8 @@ function getPaisEl(pais) {
   const id = PAIS_SVG_ID[pais];
   if (!id) return null;
   return document.getElementById(id)
-    || (pais === 'reserva' ? document.getElementById('reserva') : null);
+    || (pais === 'reserva' ? document.getElementById('reserva') : null)
+    || null; // sin-nombre no tiene grupo SVG de bandera
 }
 
 /**
@@ -359,6 +360,7 @@ const ESCALAS_PAIS = {
   colombia: ['#2e0f6b', '#4a1d9e', '#5b21b6', '#7c3fd4', '#a472e8', '#ccb0f5'],
   nacional: ['#0f2347', '#193966', '#263fa8', '#3a5cc7', '#6b8de0', '#a4b8f0'],
   reserva: ['#1a1a1a', '#2e2e2e', '#394150', '#555f6e', '#8a949f', '#c0c7ce'],
+  'sin-nombre': ['#6b7280', '#9ca3af', '#d1d5db'],  // pendiente de identificar
 };
 
 const DASH_PAIS = {
@@ -596,7 +598,7 @@ function desactivarPais(idsTodos) {
  * ─────────────────────────────────────────────────────────────────────────── */
 
 // Orden narrativo canónico — países con más concesiones primero
-const ORDEN_NARRATIVO = ['china', 'canada', 'colombia', 'nacional', 'reserva'];
+const ORDEN_NARRATIVO = ['china', 'canada', 'colombia', 'nacional', 'reserva', 'sin-nombre'];
 
 // Duración de cada paso en ms
 const DURACION_PASO = 2800; // ms por paso de entrada

@@ -545,7 +545,7 @@ function initAnimacionNarrativa(concesiones) {
   // El tour tiene sentido si hay algo que recorrer paso a paso: 2+ países,
   // o 1 país con 2+ concesiones (caso monopaís, ej. Rama y Kriol).
   if (paisesPresentes.length < 1) return;
-  if (paisesPresentes.length === 1 && idsConSvg.length < 2) return;
+  if (paisesPresentes.length < 1 || idsConSvg.length < 1) return;
 
   const idsTodos = concesiones.filter(c => c.svg_id).map(c => c.svg_id);
 

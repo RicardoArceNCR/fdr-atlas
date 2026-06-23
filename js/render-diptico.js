@@ -392,7 +392,7 @@ function inyectarCSSConcesiones(concesiones) {
 
       // Bloque A — animación del trazo punteado en el border
       rules.push(`
-#${c.svg_id}.concesion--activa #border-${c.svg_id} {
+#${c.svg_id}.concesion--activa [id^="border-${c.svg_id}"] {
   opacity: 1;
   stroke: ${color};
   stroke-dasharray: ${dash.array};

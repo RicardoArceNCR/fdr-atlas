@@ -434,19 +434,24 @@ const TERRITORIOS = [
       hectareas_concesiones: '48,362.78',
     },
     concesiones: [
-      // ── Verificado contra desktop-07-Tuahka.svg (Jun 2026) ──────────────────
-      // SVG tiene exactamente estos 7 grupos de concesión:
-      //   el-salto, hemco-rosita-v, sin-nombre-1, sin-nombre-2,
-      //   rosita-d, rosita-h-2, hemco-rb-ii
-      // ⚠️ Pendiente añadir en Illustrator: begonia, san-leonardo, marsella,
-      //    hemco-rosita-iv, hemco-rosita-vi, sin-nombre-3/4/5, nueva-america-h-i
-      { nombre: 'Sin nombre', svg_id: 'sin-nombre-1', pais: 'sin-nombre', empresa: '—', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Sin nombre', svg_id: 'sin-nombre-2', pais: 'sin-nombre', empresa: '—', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Rosita D', svg_id: 'rosita-d', pais: 'china', empresa: '—', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Salto', svg_id: 'el-salto', pais: 'china', empresa: '—', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO - RB II', svg_id: 'hemco-rb-ii', empresa: 'HEMCO', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO - Rosita V', svg_id: 'hemco-rosita-v', empresa: 'HEMCO', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Rosita H-2', svg_id: 'rosita-h-2', pais: 'sin-nombre', empresa: '—', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ verificar país
+      // ── Lista completa según PDF Tuahka (Abril 2026) ────────────────────────
+      // ⏳ = aún sin grupo en SVG. Al crearlo con el svg_id exacto, se activa solo.
+      // IDs sin-nombre deben ser sin-nombre-1, sin-nombre-2, sin-nombre-3...
+      // Si Illustrator auto-nombra sin-nombre-21, renombrarlo a sin-nombre-3 en el panel.
+      { nombre: 'Rosita D', svg_id: 'rosita-d', pais: 'china', empresa: 'Empresa sin identificar', hectareas: '—' },
+      { nombre: 'San Leonardo', svg_id: 'san-leonardo', pais: 'china', empresa: 'Thomas Metal', hectareas: '1711.6' },
+      { nombre: 'El Salto', svg_id: 'el-salto', pais: 'china', empresa: 'Empresa sin identificar', hectareas: '—' },
+      { nombre: 'Begonia', svg_id: 'begonia', pais: 'canada', empresa: 'Empresa sin identificar', hectareas: '—' }, // ⏳
+      { nombre: 'Marsella', svg_id: 'marsella', pais: 'canada', empresa: 'Empresa sin identificar', hectareas: '—' },
+      { nombre: 'HEMCO - RB II', svg_id: 'hemco-rb-ii', pais: 'colombia', empresa: 'HEMCO', hectareas: '—' },
+      { nombre: 'HEMCO - Rosita V', svg_id: 'hemco-rosita-v', pais: 'colombia', empresa: 'HEMCO', hectareas: '—' },
+      { nombre: 'HEMCO - Rosita IV', svg_id: 'hemco-rosita-iv', pais: 'colombia', empresa: 'HEMCO', hectareas: '—' }, // ⏳
+      { nombre: 'HEMCO - Rosita VI', svg_id: 'hemco-rosita-vi', pais: 'colombia', empresa: 'HEMCO', hectareas: '—' }, // ⏳
+      { nombre: 'Nueva América H-I', svg_id: 'nueva-america-h-i', pais: 'nacional', empresa: 'Empresa sin identificar', hectareas: '—' }, // ⏳
+      { nombre: 'Rosita H-2', svg_id: 'rosita-h-2', pais: 'nacional', empresa: 'Empresa sin identificar', hectareas: '—' },
+      { nombre: 'Sin nombre', svg_id: 'sin-nombre-1', pais: 'sin-nombre', empresa: '—', hectareas: '—' },
+      { nombre: 'Sin nombre', svg_id: 'sin-nombre-2', pais: 'sin-nombre', empresa: '—', hectareas: '—' },
+      { nombre: 'Sin nombre', svg_id: 'sin-nombre-3', pais: 'sin-nombre', empresa: '—', hectareas: '—' }, // SVG tiene sin-nombre-21 → renombrar a sin-nombre-3
     ],
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Shaded Relief · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },

@@ -494,11 +494,16 @@ function initInteractividad(concesiones) {
     const svgGroup = document.getElementById(c.svg_id);
     const card = document.querySelector(`.concesion-card[data-svg-id="${c.svg_id}"]`);
 
-    // columbus: rect pequeño sin hit-area separado — usar el grupo raíz directamente.
-    // Resto: buscar area-hover-target interno, fallback al grupo.
-    const svgEl = (c.svg_id === 'columbus')
-      ? svgGroup
-      : (svgGroup?.querySelector('[id*="area-hover-target"], [data-role="hover-target"]') || svgGroup);
+    // Estrategia para encontrar el hit area, en orden de prioridad:
+    // 1. area-hover-target DENTRO del grupo (contrato estándar)
+    // 2. area-hover-target GLOBAL con sufijo numérico (Illustrator lo pone fuera del grupo)
+    // 3. border-{svg_id} global — misma geometría, sirve como hit area
+    // 4. Fallback al grupo raíz
+    const svgEl = svgGroup?.querySelector('[id*="area-hover-target"], [data-name="area-hover-target"]')
+      || document.getElementById(`area-hover-target`)
+      || document.querySelector(`[data-name="area-hover-target"][id*="${c.svg_id}"]`)
+      || document.getElementById(`border-${c.svg_id}`)
+      || svgGroup;
 
     if (!svgGroup || !svgEl || !card) return;
 

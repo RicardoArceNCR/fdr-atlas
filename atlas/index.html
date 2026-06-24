@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atlas de Concesiones Mineras — Fundación del Río</title>
+    <title>Atlas FDR — Concesiones Mineras · Nicaragua</title>
     <link rel="stylesheet" href="../design-system/tokens/build/tokens.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..144,400;0,8..144,600;1,8..144,400&display=swap"
+        rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-
         *,
         *::before,
         *::after {
@@ -17,501 +20,394 @@
             padding: 0;
         }
 
-        :root {
-            --lobby-bg: #0e1f17;
-            --lobby-bg-deep: #0a1812;
-            --lobby-surface: #15291f;
-            --lobby-surface-hover: #1b3327;
-            --lobby-line: rgba(220, 242, 230, 0.10);
-            --lobby-line-strong: rgba(220, 242, 230, 0.18);
-            --lobby-text: rgba(226, 240, 230, 0.95);
-            --lobby-text-dim: rgba(196, 218, 204, 0.58);
-            --lobby-text-faint: rgba(196, 218, 204, 0.36);
-            --lobby-accent: #f4a700;
-        }
-
-        html {
-            background: var(--lobby-bg);
-        }
-
+        html,
         body {
-            font-family: 'Source Serif 4', serif;
-            background: var(--lobby-bg);
-            color: var(--lobby-text);
+            height: 100%;
+            overflow: hidden;
+            background: var(--background-base);
+            color: var(--text-color-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ─── Fondo cartográfico ambiental ──────────────────────────────────────── */
-
-        .lobby-bg {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            background:
-                radial-gradient(ellipse 900px 700px at 78% -8%, rgba(244, 167, 0, 0.10), transparent 60%),
-                radial-gradient(ellipse 700px 600px at 8% 90%, rgba(38, 63, 168, 0.10), transparent 60%),
-                var(--lobby-bg);
-            pointer-events: none;
-        }
-
-        .lobby-bg::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(var(--lobby-line) 1px, transparent 1px),
-                linear-gradient(90deg, var(--lobby-line) 1px, transparent 1px);
-            background-size: 64px 64px;
-            opacity: 0.35;
-            mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 75%);
-        }
-
-        /* ─── Shell ──────────────────────────────────────────────────────────────── */
-
-        .lobby {
-            position: relative;
-            z-index: 1;
-            max-width: 1320px;
-            margin-inline: auto;
-            padding: 0 32px 96px;
-        }
-
-        /* ─── Header ─────────────────────────────────────────────────────────────── */
-
-        .lobby__nav {
+        .lobby-nav {
+            height: 53px;
+            background: var(--background-page);
+            border-bottom: 0.5px solid var(--border-subtle);
+            padding: 0 28px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 28px 0 0;
+            position: relative;
+            z-index: 10;
         }
 
-        .lobby__brand {
+        .nav-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            color: var(--lobby-text);
+            gap: 10px;
+            text-decoration: none;
         }
 
-        .lobby__brand-mark {
-            width: 30px;
-            height: 30px;
+        .nav-logo-mark {
+            width: 28px;
+            height: 28px;
+            background: var(--color-brand-green-800);
             border-radius: 7px;
-            background: var(--color-brand-green-700, #245f3a);
-            display: grid;
-            place-items: center;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 800;
-            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
         }
 
-        .lobby__nav-meta {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 11px;
-            color: var(--lobby-text-faint);
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
+        .nav-logo-mark svg {
+            display: block;
         }
 
-        /* ─── Hero ───────────────────────────────────────────────────────────────── */
-
-        .lobby__hero {
-            padding: 88px 0 56px;
-            max-width: 760px;
-        }
-
-        .lobby__kicker {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 11px;
+        .nav-name {
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--lobby-accent);
-            margin-bottom: 22px;
+            color: var(--text-color-primary);
+            line-height: 1.2;
         }
 
-        .lobby__kicker::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--lobby-accent);
+        .nav-sub {
+            font-size: 11px;
+            color: var(--text-color-secondary);
         }
 
-        .lobby__title {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: clamp(34px, 4.4vw, 52px);
-            font-weight: 700;
-            line-height: 1.08;
-            letter-spacing: -0.02em;
-            color: #fff;
-            margin-bottom: 22px;
+        .nav-right {
+            font-size: 11px;
+            color: var(--text-color-tertiary);
         }
 
-        .lobby__title em {
-            font-style: italic;
-            font-family: 'Source Serif 4', serif;
-            font-weight: 500;
-            color: var(--lobby-accent);
-        }
-
-        .lobby__dek {
-            font-size: 17px;
-            line-height: 1.7;
-            color: var(--lobby-text-dim);
-            max-width: 56ch;
-        }
-
-        /* ─── Stat strip ─────────────────────────────────────────────────────────── */
-
-        .lobby__stats {
+        .lobby-main {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            border-top: 1px solid var(--lobby-line);
-            border-bottom: 1px solid var(--lobby-line);
-            margin-bottom: 64px;
+            grid-template-columns: 320px 1fr;
+            height: calc(100vh - 53px);
         }
 
-        .lobby__stat {
-            padding: 24px 28px;
-            border-right: 1px solid var(--lobby-line);
+        .lobby-left {
+            padding: 40px 28px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 0.5px solid var(--border-subtle);
+            background: var(--background-page);
+            overflow-y: auto;
         }
 
-        .lobby__stat:last-child {
+        .kicker {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-brand-green-700);
+            margin-bottom: 12px;
+        }
+
+        .titulo {
+            font-family: 'Source Serif 4', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-brand-green-950);
+            line-height: 1.12;
+            letter-spacing: -0.3px;
+            margin-bottom: 14px;
+        }
+
+        .desc {
+            font-size: 13px;
+            color: var(--text-color-secondary);
+            line-height: 1.65;
+        }
+
+        .left-stats {
+            display: flex;
+            margin-top: 28px;
+            border: 0.5px solid var(--border-subtle);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .stat-item {
+            flex: 1;
+            padding: 12px 14px;
+            background: var(--background-base);
+            border-right: 0.5px solid var(--border-subtle);
+        }
+
+        .stat-item:last-child {
             border-right: none;
         }
 
-        .lobby__stat-valor {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 30px;
-            font-weight: 700;
-            color: #fff;
-            line-height: 1;
-            margin-bottom: 8px;
-            letter-spacing: -0.01em;
-        }
-
-        .lobby__stat-label {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 11.5px;
-            color: var(--lobby-text-faint);
-            letter-spacing: 0.02em;
-        }
-
-        /* ─── Sección título ─────────────────────────────────────────────────────── */
-
-        .lobby__seccion {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 16px;
-            margin-bottom: 28px;
-            padding-top: 8px;
-        }
-
-        .lobby__seccion-titulo {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            color: var(--lobby-text);
-        }
-
-        .lobby__seccion-nota {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 12px;
-            color: var(--lobby-text-faint);
-        }
-
-        /* ─── Filtros por país ───────────────────────────────────────────────────── */
-
-        .lobby__filtros {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 40px;
-        }
-
-        .filtro-chip {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 12px;
+        .stat-val {
+            font-family: 'Source Serif 4', serif;
+            font-size: 22px;
             font-weight: 600;
-            padding: 7px 14px 7px 10px;
-            border-radius: 999px;
-            border: 1px solid var(--lobby-line-strong);
-            background: transparent;
-            color: var(--lobby-text-dim);
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            transition: border-color 150ms ease, background 150ms ease, color 150ms ease;
+            color: var(--color-brand-green-700);
+            line-height: 1;
         }
 
-        .filtro-chip__swatch {
-            width: 8px;
-            height: 8px;
+        .stat-lab {
+            font-size: 10px;
+            color: var(--text-color-tertiary);
+            margin-top: 3px;
+        }
+
+        .left-paises {
+            margin-top: 18px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .pais-pill {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            color: var(--text-color-secondary);
+        }
+
+        .pais-dot {
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
+            display: inline-block;
             flex-shrink: 0;
         }
 
-        .filtro-chip:hover {
-            border-color: var(--lobby-line-strong);
-            background: var(--lobby-surface);
-            color: var(--lobby-text);
+        .dot-china {
+            background: var(--concesion-pais-china);
         }
 
-        .filtro-chip.is-activo {
-            background: var(--lobby-text);
-            border-color: var(--lobby-text);
-            color: var(--lobby-bg-deep);
+        .dot-canada {
+            background: var(--concesion-pais-canada);
         }
 
-        .filtro-chip.is-activo .filtro-chip__swatch {
-            box-shadow: 0 0 0 2px var(--lobby-bg-deep) inset;
+        .dot-colombia {
+            background: var(--concesion-pais-colombia);
         }
 
-        /* ─── Grid de territorios ────────────────────────────────────────────────── */
+        .dot-nica {
+            background: var(--concesion-pais-nacional);
+        }
 
-        .lobby__grid {
+        .left-footer {
+            margin-top: 28px;
+        }
+
+        .fdr-logo {
+            height: 24px;
+            width: auto;
+            opacity: 0.65;
+        }
+
+        .lobby-right {
+            padding: 18px 20px;
+            background: var(--background-base);
+            overflow-y: auto;
+        }
+
+        .right-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-color-tertiary);
+            margin-bottom: 12px;
+        }
+
+        .tc-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 14px;
-            margin-bottom: 64px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 9px;
         }
 
-        .t-card {
-            position: relative;
-            background: var(--lobby-surface);
-            border: 1px solid var(--lobby-line);
-            border-radius: 14px;
-            padding: 20px 20px 18px;
+        .tc {
+            background: var(--background-page);
+            border: 0.5px solid var(--border-subtle);
+            border-radius: 9px;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            gap: 14px;
             text-decoration: none;
             color: inherit;
-            overflow: hidden;
-            transition: border-color 200ms ease, background 200ms ease, transform 200ms ease;
-            --t-accent: var(--lobby-text-faint);
+            transition: border-color 140ms ease, transform 130ms ease, box-shadow 140ms ease;
         }
 
-        .t-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--t-accent);
-            opacity: 0.7;
-            transition: opacity 200ms ease;
-        }
-
-        .t-card.is-disponible:hover {
-            background: var(--lobby-surface-hover);
-            border-color: var(--lobby-line-strong);
+        .tc--activo:hover {
+            border-color: var(--color-brand-green-700);
             transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
         }
 
-        .t-card.is-disponible:hover::before {
-            opacity: 1;
-        }
-
-        .t-card.is-pendiente {
+        .tc--dim {
             cursor: default;
-            opacity: 0.5;
         }
 
-        .t-card.is-pendiente::before {
-            opacity: 0.25;
+        .tc-thumb {
+            height: 68px;
+            position: relative;
+            overflow: hidden;
+            background: var(--background-strong);
+            flex-shrink: 0;
         }
 
-        .t-card__top {
+        .tc-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 200ms ease;
+        }
+
+        .tc--activo:hover .tc-thumb img {
+            transform: scale(1.04);
+        }
+
+        .tc-thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(17, 26, 20, 0.15);
+        }
+
+        .tc--dim .tc-thumb-overlay {
+            background: rgba(240, 238, 234, 0.5);
+        }
+
+        .tc--dim .tc-thumb img {
+            filter: grayscale(50%);
+            opacity: 0.45;
+        }
+
+        .tc-thumb-placeholder {
+            width: 100%;
+            height: 100%;
             display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 12px;
+            align-items: center;
+            justify-content: center;
         }
 
-        .t-card__numero {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--lobby-text-faint);
-            letter-spacing: 0.04em;
-        }
-
-        .t-card__estado {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 10px;
+        .tc-num-bg {
+            font-family: 'Source Serif 4', serif;
+            font-size: 28px;
             font-weight: 600;
+            color: rgba(0, 0, 0, 0.07);
+            user-select: none;
+        }
+
+        .tc-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            font-size: 9px;
+            font-weight: 700;
             letter-spacing: 0.04em;
-            text-transform: uppercase;
-            padding: 3px 9px;
+            padding: 2px 6px;
             border-radius: 999px;
-            white-space: nowrap;
         }
 
-        .t-card__estado--listo {
-            background: rgba(98, 188, 121, 0.16);
-            color: #8fdba8;
-        }
-
-        .t-card__estado--avance {
-            background: rgba(244, 167, 0, 0.14);
-            color: #f4c455;
-        }
-
-        .t-card__estado--pendiente {
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--lobby-text-faint);
-        }
-
-        .t-card__nombre {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 17px;
-            font-weight: 700;
+        .badge-live {
+            background: var(--color-brand-green-800);
             color: #fff;
-            line-height: 1.25;
-            letter-spacing: -0.01em;
         }
 
-        .t-card__region {
-            font-size: 12.5px;
-            color: var(--lobby-text-dim);
-            line-height: 1.5;
+        .badge-pronto {
+            background: var(--background-page);
+            color: var(--text-color-tertiary);
+            border: 0.5px solid var(--border-subtle);
         }
 
-        .t-card__paises {
+        .tc-body {
+            padding: 8px 10px 10px;
             display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            flex: 1;
         }
 
-        .t-pais-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .t-card__foot {
-            margin-top: auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            padding-top: 12px;
-            border-top: 1px solid var(--lobby-line);
-        }
-
-        .t-card__concesiones {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 12px;
-            color: var(--lobby-text-dim);
-        }
-
-        .t-card__concesiones strong {
-            color: var(--lobby-text);
+        .tc-num {
+            font-size: 9px;
             font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--text-color-tertiary);
+            margin-bottom: 2px;
         }
 
-        .t-card__cluster {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 0.03em;
-            color: var(--lobby-text-faint);
-        }
-
-        /* ─── Leyenda de países ──────────────────────────────────────────────────── */
-
-        .lobby__leyenda {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 22px;
-            padding: 24px 0 0;
-            border-top: 1px solid var(--lobby-line);
-            margin-bottom: 56px;
-        }
-
-        .leyenda-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        .tc-nombre {
+            font-family: 'Source Serif 4', serif;
             font-size: 12px;
-            color: var(--lobby-text-dim);
+            font-weight: 600;
+            color: var(--color-brand-green-950);
+            line-height: 1.25;
+            flex: 1;
         }
 
-        .leyenda-item__dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            flex-shrink: 0;
+        .tc-nombre--dim {
+            color: var(--border-default);
         }
 
-        /* ─── Footer ─────────────────────────────────────────────────────────────── */
-
-        .lobby__footer {
+        .tc-footer {
+            margin-top: 7px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
-            padding-top: 28px;
-            border-top: 1px solid var(--lobby-line);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 11.5px;
-            color: var(--lobby-text-faint);
         }
 
-        /* ─── Responsive ─────────────────────────────────────────────────────────── */
+        .tc-dots {
+            display: flex;
+            gap: 4px;
+        }
 
-        @media (max-width: 860px) {
-            .lobby {
-                padding: 0 20px 72px;
+        .tc-cta {
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--color-brand-green-700);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .tc-cta svg {
+            display: block;
+        }
+
+        .tc-cta-dim {
+            font-size: 9px;
+            color: var(--border-subtle);
+        }
+
+        @media (max-width: 768px) {
+
+            html,
+            body {
+                overflow: auto;
             }
 
-            .lobby__stats {
+            .lobby-main {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .lobby-left {
+                border-right: none;
+                border-bottom: 0.5px solid var(--border-subtle);
+                padding: 28px 20px;
+            }
+
+            .lobby-right {
+                padding: 16px;
+            }
+
+            .tc-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
-            .lobby__stat:nth-child(2) {
-                border-right: none;
-            }
-
-            .lobby__stat {
-                border-bottom: 1px solid var(--lobby-line);
-            }
-
-            .lobby__stat:nth-last-child(-n+2) {
-                border-bottom: none;
-            }
         }
 
-        @media (max-width: 540px) {
-            .lobby__hero {
-                padding-top: 64px;
-            }
-
-            .lobby__grid {
+        @media (max-width: 420px) {
+            .tc-grid {
                 grid-template-columns: 1fr;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .t-card {
-                transition: none;
             }
         }
     </style>
@@ -519,223 +415,435 @@
 
 <body>
 
-    <div class="lobby-bg"></div>
-
-    <div class="lobby">
-
-        <nav class="lobby__nav">
-            <div class="lobby__brand">
-                <div class="lobby__brand-mark">FDR</div>
-                Atlas de Concesiones
+    <nav class="lobby-nav" role="banner">
+        <a href="#" class="nav-brand" aria-label="Inicio Atlas FDR">
+            <div class="nav-logo-mark" aria-hidden="true">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                    <circle cx="7.5" cy="7.5" r="5" stroke="white" stroke-width="1.4" />
+                    <path d="M7.5 4.5v6M5 6.5l2.5 1.2 2.5-1.2" stroke="white" stroke-width="1.2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
             </div>
-            <div class="lobby__nav-meta">Fundación del Río · Junio 2026</div>
-        </nav>
+            <div>
+                <div class="nav-name">Atlas FDR</div>
+                <div class="nav-sub">Concesiones mineras · Nicaragua</div>
+            </div>
+        </a>
+        <div class="nav-right">Fundación del Río · 2026</div>
+    </nav>
 
-        <header class="lobby__hero">
-            <div class="lobby__kicker">Atlas cartográfico editorial</div>
-            <h1 class="lobby__title">Dieciséis territorios.<br>Cuatro países de capital<br>en <em>tierra indígena.</em>
-            </h1>
-            <p class="lobby__dek">
-                Concesiones mineras superpuestas a territorios indígenas y afrodescendientes
-                de la costa caribe de Nicaragua. Cada díptico cruza el mapa técnico con el
-                registro editorial de quién concesiona, dónde, y sobre qué comunidad.
-            </p>
-        </header>
+    <main class="lobby-main">
 
-        <section class="lobby__stats" id="stats-strip"></section>
+        <div class="lobby-left">
+            <div>
+                <div class="kicker">Atlas de territorios</div>
+                <h1 class="titulo">Concesiones mineras<br>en territorios indígenas<br>y afrodescendientes</h1>
+                <p class="desc">Mapas cartográficos interactivos sobre la presencia de capital extractivo chino,
+                    canadiense, colombiano y nacional en los territorios de la Costa Caribe de Nicaragua.</p>
 
-        <div class="lobby__seccion">
-            <div class="lobby__seccion-titulo">Territorios</div>
-            <div class="lobby__seccion-nota" id="grid-nota"></div>
+                <div class="left-stats">
+                    <div class="stat-item">
+                        <div class="stat-val">16</div>
+                        <div class="stat-lab">territorios</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-val">79</div>
+                        <div class="stat-lab">concesiones</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-val">4</div>
+                        <div class="stat-lab">países</div>
+                    </div>
+                </div>
+
+                <div class="left-paises">
+                    <span class="pais-pill"><span class="pais-dot dot-china" aria-hidden="true"></span>China</span>
+                    <span class="pais-pill"><span class="pais-dot dot-canada" aria-hidden="true"></span>Canadá</span>
+                    <span class="pais-pill"><span class="pais-dot dot-colombia"
+                            aria-hidden="true"></span>Colombia</span>
+                    <span class="pais-pill"><span class="pais-dot dot-nica" aria-hidden="true"></span>Nicaragua</span>
+                </div>
+            </div>
+
+            <div class="left-footer">
+                <img src="../img/Logo-fdr.webp" alt="Fundación del Río" class="fdr-logo"
+                    onerror="this.style.display='none'">
+            </div>
         </div>
 
-        <div class="lobby__filtros" id="filtros"></div>
+        <div class="lobby-right">
+            <div class="right-label">16 territorios · Costa Caribe de Nicaragua</div>
+            <div class="tc-grid" role="list">
 
-        <section class="lobby__grid" id="grid"></section>
+                <!-- 01 -->
+                <a href="01-rama-kriol/index.html" class="tc tc--activo" role="listitem">
+                    <div class="tc-thumb">
+                        <img src="../img/01-Territorio Rama y Kriol.webp" alt="">
+                        <div class="tc-thumb-overlay" aria-hidden="true"></div>
+                        <span class="tc-badge badge-live">● Disponible</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">01 · RACCS</div>
+                        <div class="tc-nombre">Rama y Kriol</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" title="China"></span>
+                                <span class="pais-dot dot-nica" title="Nicaragua"></span>
+                            </div>
+                            <div class="tc-cta">Ver <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
+                                    <path d="M1.5 4.5h6M5 2.5l2.5 2L5 6.5" stroke="currentColor" stroke-width="1.3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg></div>
+                        </div>
+                    </div>
+                </a>
 
-        <div class="lobby__leyenda" id="leyenda"></div>
+                <!-- 02 -->
+                <a href="02-creole-bluefields/index.html" class="tc tc--activo" role="listitem">
+                    <div class="tc-thumb">
+                        <img src="../img/02_Territorio Creole de Bluefields.webp" alt="">
+                        <div class="tc-thumb-overlay" aria-hidden="true"></div>
+                        <span class="tc-badge badge-live">● Disponible</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">02 · RACCS</div>
+                        <div class="tc-nombre">Creole de Bluefields</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" title="China"></span>
+                            </div>
+                            <div class="tc-cta">Ver <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
+                                    <path d="M1.5 4.5h6M5 2.5l2.5 2L5 6.5" stroke="currentColor" stroke-width="1.3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg></div>
+                        </div>
+                    </div>
+                </a>
 
-        <footer class="lobby__footer">
-            <span>La Gaceta · URACCAN · OpenStreetMap · ESRI Standard-Shaded Relief</span>
-            <span>Proyección UTM · Datum NAD 27 · Zona 16 N</span>
-        </footer>
+                <!-- 03 -->
+                <a href="03-waupasa-twi/index.html" class="tc tc--activo" role="listitem">
+                    <div class="tc-thumb">
+                        <img src="../img/03_Waupasa Twi.webp" alt="">
+                        <div class="tc-thumb-overlay" aria-hidden="true"></div>
+                        <span class="tc-badge badge-live">● Disponible</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">03 · RACCN</div>
+                        <div class="tc-nombre">Waupasa Twi</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" title="China"></span>
+                                <span class="pais-dot dot-canada" title="Canadá"></span>
+                                <span class="pais-dot dot-nica" title="Nicaragua"></span>
+                            </div>
+                            <div class="tc-cta">Ver <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
+                                    <path d="M1.5 4.5h6M5 2.5l2.5 2L5 6.5" stroke="currentColor" stroke-width="1.3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg></div>
+                        </div>
+                    </div>
+                </a>
 
-    </div>
+                <!-- 04 -->
+                <a href="04-wangki-twi-tasba-raya/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <img src="../img/04_Wangki Twi-Tasba Raya.jpeg" alt="" aria-hidden="true">
+                        <div class="tc-thumb-overlay" aria-hidden="true"></div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">04 · RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">Wangki Twi-Tasba Raya</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" style="opacity:.3"></span>
+                                <span class="pais-dot dot-nica" style="opacity:.3"></span>
+                            </div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-    <script type="module">
-        import { TERRITORIOS, getLabelPais } from "../js/data-territorios.js";
+                <!-- 05 -->
+                <a href="05-wangki-li/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">05</span></div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">05 · RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">Wangki Li Aubra Tasbaya</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" style="opacity:.3"></span>
+                                <span class="pais-dot dot-nica" style="opacity:.3"></span>
+                            </div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-        const PAIS_COLOR = {
-            china: '#dd3519',
-            canada: '#739b50',
-            colombia: '#5b21b6',
-            nacional: '#263fa8',
-            reserva: '#7d8593',
-        };
+                <!-- 06 -->
+                <a href="06-kipla-sait/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">06</span></div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">06 · RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">Kipla Sait Tasbaika</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots"></div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-        // Catálogo completo de los 16 dípticos (de README.md) — los que no están
-        // en TERRITORIOS todavía se muestran como "en preparación", sin inventar datos.
-        const CATALOGO = [
-            { id: '01-rama-kriol', numero: '01', nombre: 'Rama y Kriol', cluster: 'C — dual' },
-            { id: '02-creole-bluefields', numero: '02', nombre: 'Creole de Bluefields', cluster: 'B — minimalista' },
-            { id: '03-waupasa-twi', numero: '03', nombre: 'Waupasa Twi', cluster: 'A — presión extrema' },
-            { id: '04-wangki-twi-tasba-raya', numero: '04', nombre: 'Wangki Twi-Tasba Raya', cluster: 'C — dual' },
-            { id: '05-wangki-li', numero: '05', nombre: 'Wangki Li Aubra Tasbaya', cluster: 'C — dual' },
-            { id: '06-twi-ahbra', numero: '06', nombre: 'Twi Ahbra 10 comunidades', cluster: 'B — minimalista' },
-            { id: '07-tuahka', numero: '07', nombre: 'Tuahka', cluster: 'A — presión extrema' },
-            { id: '08-tasba-pri', numero: '08', nombre: 'Tasba Pri Matriz Indígena', cluster: 'A — presión extrema' },
-            { id: '09-prinzu-awala', numero: '09', nombre: 'Prinzu Awala', cluster: 'A — presión extrema' },
-            { id: '10-mayangna-sauni-bas', numero: '10', nombre: 'Mayangna Sauni Bas', cluster: 'C — dual' },
-            { id: '11-mayangna-sauni-as', numero: '11', nombre: 'Mayangna Sauni As', cluster: 'A — presión extrema' },
-            { id: '12-masauni-arumatun', numero: '12', nombre: 'Masauni Arumatun', cluster: 'D — fragmentación extrema' },
-            { id: '13-amasau', numero: '13', nombre: 'Amasau', cluster: 'D — fragmentación extrema' },
-            { id: '14-chorotega-ii', numero: '14', nombre: 'Chorotega II', cluster: 'B — minimalista' },
-            { id: '15-matagalpa', numero: '15', nombre: 'Matagalpa', cluster: 'B — minimalista' },
-            { id: '16-prinzu-auhya-uh', numero: '16', nombre: 'Prinzu Auhya Uh', cluster: 'B — minimalista' },
-        ];
+                <!-- 07 -->
+                <a href="07-tuahka/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">07</span></div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">07 · RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">Tuahka</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" style="opacity:.3"></span>
+                                <span class="pais-dot dot-canada" style="opacity:.3"></span>
+                                <span class="pais-dot dot-nica" style="opacity:.3"></span>
+                            </div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-        const MAPA = new Map(TERRITORIOS.map(t => [t.id, t]));
+                <!-- 08 -->
+                <a href="08-tasba-pri/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">08</span></div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">08 · RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">Tasba Pri Matriz Indígena</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" style="opacity:.3"></span>
+                                <span class="pais-dot dot-canada" style="opacity:.3"></span>
+                            </div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-        function paisesDe(t) {
-            if (!t || !t.concesiones) return [];
-            return [...new Set(t.concesiones.map(c => c.pais).filter(Boolean))];
-        }
+                <!-- 09 -->
+                <a href="09-prinzu-awala/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">09</span></div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">09 · RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">Prinzu Awala</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" style="opacity:.3"></span>
+                                <span class="pais-dot dot-canada" style="opacity:.3"></span>
+                            </div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-        function estadoDe(t, catalogoItem) {
-            if (!t) return { tipo: 'pendiente', label: 'En preparación' };
-            const tieneSvg = !!(t.assets && t.assets.desktop && t.assets.desktop.svg);
-            const concesionesConGrupo = (t.concesiones || []).filter(c => c.svg_id).length;
-            const totalConcesiones = (t.concesiones || []).length;
-            if (tieneSvg && concesionesConGrupo === totalConcesiones && totalConcesiones > 0) {
-                return { tipo: 'listo', label: 'Mapa interactivo' };
-            }
-            if (totalConcesiones > 0) {
-                return { tipo: 'avance', label: 'En construcción' };
-            }
-            return { tipo: 'pendiente', label: 'En preparación' };
-        }
+                <!-- 10 -->
+                <a href="10-twi-yahbra/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">10</span></div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">10 · RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">Twi Yahbra</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" style="opacity:.3"></span>
+                            </div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-        function render(filtroPais) {
-            const grid = document.getElementById('grid');
-            grid.innerHTML = '';
+                <!-- 11 -->
+                <a href="11-sikilta/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">11</span></div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">11 · RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">Sikilta</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots"></div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-            let visibles = 0;
+                <!-- 12 -->
+                <a href="12-mayangna-sauni-arungka/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">12</span></div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">12 · RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">Mayangna Sauni Arungka</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" style="opacity:.3"></span>
+                                <span class="pais-dot dot-nica" style="opacity:.3"></span>
+                            </div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-            CATALOGO.forEach(item => {
-                const t = MAPA.get(item.id);
-                const paises = paisesDe(t);
-                if (filtroPais && !paises.includes(filtroPais)) return;
-                visibles++;
+                <!-- 13 -->
+                <a href="13-mayangna-sauni-bu/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">13</span></div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">13 · RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">Mayangna Sauni Bu</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-nica" style="opacity:.3"></span>
+                            </div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-                const estado = estadoDe(t, item);
-                const disponible = estado.tipo !== 'pendiente';
-                const accent = paises.length ? PAIS_COLOR[paises[0]] : 'rgba(196,218,204,0.3)';
+                <!-- 14 -->
+                <a href="14-mayangna-sauni-bas/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">14</span></div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">14 · RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">Mayangna Sauni Bas</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" style="opacity:.3"></span>
+                                <span class="pais-dot dot-canada" style="opacity:.3"></span>
+                            </div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-                const el = document.createElement(disponible ? 'a' : 'div');
-                if (disponible) el.href = `${item.id}/`;
-                el.className = `t-card ${disponible ? 'is-disponible' : 'is-pendiente'}`;
-                el.style.setProperty('--t-accent', accent);
+                <!-- 15 -->
+                <a href="15-prinzu-auhya-uh/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">15</span></div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">15 · RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">Prinzu Auhya Uh</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-canada" style="opacity:.3"></span>
+                            </div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-                const region = t?.region ? t.region.replace(/\s*\([^)]*\)/, '') : 'Región pendiente de asignar';
-                const nConcesiones = t?.stats?.concesiones ?? (t?.concesiones?.length || 0);
+                <!-- 16 -->
+                <a href="16-miskitu-indian/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">16</span></div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">16 · RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">Miskitu Indian Tasbaika Kum</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots"></div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-                el.innerHTML = `
-      <div class="t-card__top">
-        <span class="t-card__numero">№ ${item.numero}</span>
-        <span class="t-card__estado t-card__estado--${estado.tipo}">${estado.label}</span>
-      </div>
-      <div>
-        <div class="t-card__nombre">${item.nombre}</div>
-        <div class="t-card__region">${region}</div>
-      </div>
-      <div class="t-card__paises">
-        ${paises.map(p => `<span class="t-pais-dot" style="background:${PAIS_COLOR[p] || '#7d8593'}" title="${getLabelPais(p)}"></span>`).join('') || ''}
-      </div>
-      <div class="t-card__foot">
-        <span class="t-card__concesiones">${nConcesiones ? `<strong>${nConcesiones}</strong> concesión${nConcesiones === 1 ? '' : 'es'}` : 'Sin datos aún'}</span>
-        <span class="t-card__cluster">${item.cluster}</span>
-      </div>
-    `;
-                grid.appendChild(el);
-            });
+                <!-- AMASAU -->
+                <a href="amasau/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg" style="font-size:18px;">AS</span>
+                        </div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">RACCN</div>
+                        <div class="tc-nombre tc-nombre--dim">AMASAU</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" style="opacity:.3"></span>
+                            </div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-            document.getElementById('grid-nota').textContent =
-                filtroPais ? `${visibles} de ${CATALOGO.length} territorios` : `${CATALOGO.length} territorios planificados`;
-        }
+                <!-- Chorotega -->
+                <a href="chorotega/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg" style="font-size:16px;">CH</span>
+                        </div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">Chorotega</div>
+                        <div class="tc-nombre tc-nombre--dim">Chorotega</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" style="opacity:.3"></span>
+                                <span class="pais-dot dot-nica" style="opacity:.3"></span>
+                            </div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-        function renderStats() {
-            const conDatos = TERRITORIOS.length;
-            const conMapa = TERRITORIOS.filter(t => t.assets?.desktop?.svg).length;
-            const todosPaises = new Set();
-            let totalConcesiones = 0;
-            TERRITORIOS.forEach(t => {
-                (t.concesiones || []).forEach(c => {
-                    if (c.pais) todosPaises.add(c.pais);
-                    totalConcesiones++;
-                });
-            });
+                <!-- Matagalpa -->
+                <a href="matagalpa/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-thumb">
+                        <div class="tc-thumb-placeholder"><span class="tc-num-bg" style="font-size:16px;">MT</span>
+                        </div>
+                        <span class="tc-badge badge-pronto">En preparación</span>
+                    </div>
+                    <div class="tc-body">
+                        <div class="tc-num">Matagalpa</div>
+                        <div class="tc-nombre tc-nombre--dim">Matagalpa</div>
+                        <div class="tc-footer">
+                            <div class="tc-dots">
+                                <span class="pais-dot dot-china" style="opacity:.3"></span>
+                                <span class="pais-dot dot-canada" style="opacity:.3"></span>
+                            </div>
+                            <div class="tc-cta-dim">Próximamente</div>
+                        </div>
+                    </div>
+                </a>
 
-            const stats = [
-                { valor: '16', label: 'Territorios en el atlas' },
-                { valor: String(conMapa), label: 'Mapas interactivos activos' },
-                { valor: String(totalConcesiones), label: 'Concesiones registradas' },
-                { valor: String(todosPaises.size), label: 'Países de capital identificados' },
-            ];
+            </div>
+        </div>
 
-            document.getElementById('stats-strip').innerHTML = stats.map(s => `
-    <div class="lobby__stat">
-      <div class="lobby__stat-valor">${s.valor}</div>
-      <div class="lobby__stat-label">${s.label}</div>
-    </div>
-  `).join('');
-        }
-
-        function renderFiltrosYLeyenda() {
-            const paisesUsados = new Set();
-            TERRITORIOS.forEach(t => paisesDe(t).forEach(p => paisesUsados.add(p)));
-            const orden = ['china', 'canada', 'nacional', 'colombia', 'reserva'];
-            const paises = orden.filter(p => paisesUsados.has(p));
-
-            const filtrosEl = document.getElementById('filtros');
-            let filtroActivo = null;
-
-            function pintarChips() {
-                filtrosEl.innerHTML = `
-      <button class="filtro-chip ${filtroActivo === null ? 'is-activo' : ''}" data-pais="">Todos</button>
-      ${paises.map(p => `
-        <button class="filtro-chip ${filtroActivo === p ? 'is-activo' : ''}" data-pais="${p}">
-          <span class="filtro-chip__swatch" style="background:${PAIS_COLOR[p]}"></span>${getLabelPais(p)}
-        </button>
-      `).join('')}
-    `;
-                filtrosEl.querySelectorAll('.filtro-chip').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        filtroActivo = btn.dataset.pais || null;
-                        pintarChips();
-                        render(filtroActivo);
-                    });
-                });
-            }
-            pintarChips();
-
-            document.getElementById('leyenda').innerHTML = paises.map(p => `
-    <div class="leyenda-item">
-      <span class="leyenda-item__dot" style="background:${PAIS_COLOR[p]}"></span>
-      Capital ${getLabelPais(p)}
-    </div>
-  `).join('') + `
-    <div class="leyenda-item">
-      <span class="leyenda-item__dot" style="background:${PAIS_COLOR.reserva}"></span>
-      Reserva minera nacional
-    </div>
-  `;
-        }
-
-        renderStats();
-        renderFiltrosYLeyenda();
-        render(null);
-    </script>
-
+    </main>
 </body>
 
 </html>

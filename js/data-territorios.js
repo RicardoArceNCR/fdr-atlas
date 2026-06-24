@@ -960,7 +960,17 @@ const TERRITORIOS = [
       concesiones: 10,
       hectareas_concesiones: '77,849.68',
     },
-    concesiones: [],
+    concesiones: [
+      { nombre: 'Yalagüina',       svg_id: 'yalagueina',        empresa: 'Brother Metal',                    pais: 'china',    patron_img: '../../img/patrones/patron-china.webp',     hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Yalagüina II',    svg_id: 'yalagueina-ii',     empresa: 'Brother Metal',                    pais: 'china',    patron_img: '../../img/patrones/patron-china.webp',     hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'La Perla',        svg_id: 'la-perla',          empresa: 'Thomas Metal',                     pais: 'china',    patron_img: '../../img/patrones/patron-china.webp',     hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Limay',           svg_id: 'limay',             empresa: 'Little Stone Mine',                pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Segovia Mining 1',svg_id: 'segovia-mining-1',  empresa: 'Global Group, Sociedad Anónima',   pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Segovia Mining 3',svg_id: 'segovia-mining-3',  empresa: 'Global Group, Sociedad Anónima',   pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Segovia Mining 6',svg_id: 'segovia-mining-6',  empresa: 'Global Group, Sociedad Anónima',   pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'HEMCO - SID',     svg_id: 'hemco-sid',         empresa: 'Minera San Cristóbal, S. A.',      pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Reserva Minera',  svg_id: 'reserva-minera',    empresa: '—',                                pais: 'reserva',  patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+    ],
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -1018,7 +1028,12 @@ const TERRITORIOS = [
       concesiones: 4,
       hectareas_concesiones: '77,026.50',
     },
-    concesiones: [],
+    concesiones: [
+      { nombre: 'Aurora',        svg_id: 'aurora',        empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'La Perla',      svg_id: 'la-perla',      empresa: 'Thomas Metal',                    pais: 'china',  patron_img: '../../img/patrones/patron-china.webp',  hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'La Reyna II',   svg_id: 'la-reyna-ii',   empresa: 'Thomas Metal',                    pais: 'china',  patron_img: '../../img/patrones/patron-china.webp',  hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Santa Emilia',  svg_id: 'santa-emilia',  empresa: 'Thomas Metal',                    pais: 'china',  patron_img: '../../img/patrones/patron-china.webp',  hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+    ],
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 

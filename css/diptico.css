@@ -106,6 +106,18 @@
   grid-template-columns: 50fr 50fr;
 }
 
+.diptico[data-layout="D"] {
+  grid-template-columns: 50fr 50fr;
+}
+
+.diptico[data-layout="D"] .concesiones-lista {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.diptico[data-layout="D"] .concesion-card {
+  display: block;
+}
+
 /* ─── Panel izquierdo — mapa ───────────────────────────────────────────────── */
 
 .diptico__mapa {
@@ -658,7 +670,8 @@
   .diptico,
   .diptico[data-layout="A"],
   .diptico[data-layout="B"],
-  .diptico[data-layout="C"] {
+  .diptico[data-layout="C"],
+  .diptico[data-layout="D"] {
     width: 100%;
     max-width: none;
     margin-inline: auto;

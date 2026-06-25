@@ -1106,7 +1106,11 @@ const TERRITORIOS = [
       concesiones: 3,
       hectareas_concesiones: '52,156.71',
     },
-    concesiones: [],
+    concesiones: [
+      { nombre: 'Camelia',    svg_id: 'camelia',    empresa: '—', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Minerva',    svg_id: 'minerva',    empresa: '—', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Walpa Tara', svg_id: 'walpa-tara', empresa: '—', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+    ],
     concesion_minera: 'Se han otorgado 3 lotes de concesiones mineras a una empresa minera canadiense, que en total cubren el 13.79% de su territorio. Dichas concesiones mineras afectan de forma directa 4 quebradas y 8 ríos, para un total de 112.62 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },

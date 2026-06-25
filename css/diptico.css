@@ -103,6 +103,10 @@
   grid-template-columns: 50fr 50fr;
 }
 
+.diptico[data-layout="C"] .diptico__concesiones--mapa {
+  padding: 5px;
+}
+
 .diptico[data-layout="D"] {
   grid-template-columns: 50fr 50fr;
 }

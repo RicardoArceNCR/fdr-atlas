@@ -256,33 +256,37 @@ const TERRITORIOS = [
   },
 
   /* ── 04 ── Wangki Twi-Tasba Raya ───────────────────────────────────────── */
-  /*
-   * ⚠️ Stopgap: raster JPEG existente, sin SVG interactivo (pendiente Illustrator).
-   * El mapa se ve como imagen estática, sin hover ni tour.
-   * Reemplazar con assets.svg cuando Illustrator exporte el SVG con grupos id, border-*, area-hover-target.
-   */
   {
     id: '04-wangki-twi-tasba-raya',
     numero: '04',
     nombre: 'Wangki Twi-Tasba Raya',
     assets: {
       desktop: {
-        raster: '../../img/04_Wangki Twi-Tasba Raya.jpeg',
+        raster: '../../mapas-raster/04-wangki-twi-tasba-raya/desktop-04-wangki-twi-tasba-raya.webp',
+        svg: '../../mapas-svg/04-wangki-twi-tasba-raya/desktop-04-Wangki-Twi-Tasba-Raya.svg',
         width: 927,
         height: 980,
       },
       tablet: {
-        raster: '../../img/04_Wangki Twi-Tasba Raya.jpeg',
+        raster: '../../mapas-raster/04-wangki-twi-tasba-raya/desktop-04-wangki-twi-tasba-raya.webp',
+        svg: '../../mapas-svg/04-wangki-twi-tasba-raya/desktop-04-Wangki-Twi-Tasba-Raya.svg',
         width: 780,
         height: 1306,
       },
       mobile: {
-        raster: '../../img/04_Wangki Twi-Tasba Raya.jpeg',
+        raster: '../../mapas-raster/04-wangki-twi-tasba-raya/desktop-04-wangki-twi-tasba-raya.webp',
+        svg: '../../mapas-svg/04-wangki-twi-tasba-raya/desktop-04-Wangki-Twi-Tasba-Raya.svg',
         width: 504,
         height: 634,
       },
     },
     layout: 'C',
+    tema: 'verde',
+    banner: '../../img/banners/banner-03.webp',
+    logo: '../../img/Logo-fdr.webp',
+    logo_alt: 'Fundación del Río',
+    logo_fuente: '',
+    logo_fuente_alt: '',
     pueblos: ['Pueblo Miskitu'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
     descripcion: 'Este territorio se ubica en el noreste de Nicaragua, en la Región Autónoma de la Costa Caribe Norte. Está conformado por 21 comunidades indígenas de la etnia Miskitu. Cuenta con una población estimada de 18,114 habitantes.',
@@ -315,9 +319,10 @@ const TERRITORIOS = [
       hectareas_concesiones: '489.40',
     },
     concesiones: [
-      { nombre: 'El Encanto II', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Waspan', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ también en 05
+      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Waspan', svg_id: 'waspan', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
+    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -333,20 +338,20 @@ const TERRITORIOS = [
     nombre: 'Wangki Li Aubra Tasbaya',
     assets: {
       desktop: {
-        raster: '../../mapas-raster/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.webp',
-        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.svg',
+        raster: '../../mapas-raster/05-wangki-li/desktop-05-Wangki-Li.webp',
+        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li.svg',
         width: 927,
         height: 980,
       },
       tablet: {
-        raster: '../../mapas-raster/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.webp',
-        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.svg',
+        raster: '../../mapas-raster/05-wangki-li/desktop-05-Wangki-Li.webp',
+        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li.svg',
         width: 927,
         height: 980,
       },
       mobile: {
-        raster: '../../mapas-raster/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.webp',
-        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.svg',
+        raster: '../../mapas-raster/05-wangki-li/desktop-05-Wangki-Li.webp',
+        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li.svg',
         width: 927,
         height: 980,
       },
@@ -376,9 +381,10 @@ const TERRITORIOS = [
       hectareas_concesiones: '13,083.22',
     },
     concesiones: [
-      { nombre: 'Waspan', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ también en 04
-      { nombre: 'Matusalén', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ confirmar país
+      { nombre: 'Waspan', svg_id: 'waspan', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Matusalén', svg_id: 'matusalen', empresa: '—', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
+    concesion_minera: 'Se han otorgado 2 lotes de concesiones mineras: 1 a una empresa minera china y el otro a una empresa minera nicaragüense, que en total cubren el 14.79% de su territorio. Dichas concesiones afectan de forma directa 1 quebrada y 3 ríos, para un total de 12.61 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 

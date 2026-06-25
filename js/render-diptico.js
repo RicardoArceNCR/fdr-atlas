@@ -94,6 +94,16 @@ function renderHeader(t) {
     }
   }
 
+  const concesionEl = document.getElementById('concesion-minera-text');
+  if (concesionEl) {
+    if (t.concesion_minera && t.concesion_minera !== '—') {
+      concesionEl.querySelector('.concesion-minera-body').textContent = t.concesion_minera;
+      concesionEl.hidden = false;
+    } else {
+      concesionEl.hidden = true;
+    }
+  }
+
   if (headerEl && t.banner) {
     headerEl.style.backgroundImage = `url('${t.banner}')`;
     headerEl.style.backgroundSize = "cover";

@@ -1,64 +1,65 @@
 <div class="atlas-page">
-<div class="diptico" id="diptico-container">
-  <div class="diptico__mapa">
-    <img class="diptico__logo-mapa" id="header-logo" src="" alt="" aria-hidden="true">
-    <div class="mapa-editorial">
-      <div class="mapa-stack">
-        <img
-          id="mapa-raster"
-          class="mapa-raster"
-          alt="Mapa base del territorio"
-        />
-        <div id="mapa-svg-inline" class="mapa-svg-inline"></div>
+  <div class="diptico" id="diptico-container">
+    <div class="diptico__mapa">
+      <img class="diptico__logo-mapa" id="header-logo" src="" alt="" aria-hidden="true">
+      <div class="mapa-editorial">
+        <div class="mapa-stack">
+          <img id="mapa-raster" class="mapa-raster" alt="Mapa base del territorio" />
+          <div id="mapa-svg-inline" class="mapa-svg-inline"></div>
+        </div>
+      </div>
+
+      <div class="diptico__concesiones diptico__concesiones--mapa">
+        <button class="diptico__seccion-titulo diptico__toggle-concesiones" type="button">
+          Detalle de concesiones
+          <span>Mostrar / ocultar</span>
+        </button>
+        <div class="concesiones-lista" id="concesiones-lista"></div>
+      </div>
+
+      <div id="insets-container"></div>
+      <div id="escala-text" class="diptico__escala"></div>
+
+      <div class="diptico__leyenda-mapa">
+        <div class="diptico__leyenda-mapa-titulo">Concesiones Mineras</div>
+        <div id="leyenda-lista"></div>
       </div>
     </div>
+    <div class="diptico__info">
+      <div class="diptico__header" id="diptico-header">
+        <div class="diptico__header-texto">
+          <div class="diptico__kicker" id="region-text"></div>
+          <h1 class="diptico__titulo" id="titulo-text"></h1>
+          <p class="diptico__subtitulo" id="pueblos-text"></p>
+        </div>
+      </div>
 
-    <div class="diptico__concesiones diptico__concesiones--mapa">
-      <button class="diptico__seccion-titulo diptico__toggle-concesiones" type="button">
-        Detalle de concesiones
-        <span>Mostrar / ocultar</span>
-      </button>
-      <div class="concesiones-lista" id="concesiones-lista"></div>
-    </div>
+      <div class="diptico__stats">
+        <div class="stat">
+          <div class="stat__valor" id="stat-ha-territorio"></div>
+          <div class="stat__label">Ha. del territorio</div>
+        </div>
+        <div class="stat">
+          <div class="stat__valor" id="stat-concesiones"></div>
+          <div class="stat__label">Concesiones</div>
+        </div>
+        <div class="stat">
+          <div class="stat__valor" id="stat-ha-concesiones"></div>
+          <div class="stat__label">Ha. concesionadas</div>
+        </div>
+      </div>
 
-    <div id="insets-container"></div>
-    <div id="escala-text" class="diptico__escala"></div>
+      <div class="diptico__narrativa" id="descripcion-text"></div>
 
-    <div class="diptico__leyenda-mapa">
-      <div class="diptico__leyenda-mapa-titulo">Concesiones Mineras</div>
-      <div id="leyenda-lista"></div>
+      <div class="diptico__concesion-minera" id="concesion-minera-text" hidden>
+        <div class="concesion-minera-titulo">Concesión Minera</div>
+        <div class="concesion-minera-body"></div>
+      </div>
+
+      <div class="diptico__fuente" id="fuente-text-wrapper">
+        <img class="diptico__fuente-logo" id="fuente-logo" src="" alt="" aria-hidden="true">
+        <div id="fuente-text"></div>
+      </div>
     </div>
   </div>
-  <div class="diptico__info">
-    <div class="diptico__header" id="diptico-header">
-      <div class="diptico__header-texto">
-        <div class="diptico__kicker" id="region-text"></div>
-        <h1 class="diptico__titulo" id="titulo-text"></h1>
-        <p class="diptico__subtitulo" id="pueblos-text"></p>
-      </div>
-    </div>
-
-    <div class="diptico__stats">
-      <div class="stat">
-        <div class="stat__valor" id="stat-ha-territorio"></div>
-        <div class="stat__label">Ha. del territorio</div>
-      </div>
-      <div class="stat">
-        <div class="stat__valor" id="stat-concesiones"></div>
-        <div class="stat__label">Concesiones</div>
-      </div>
-      <div class="stat">
-        <div class="stat__valor" id="stat-ha-concesiones"></div>
-        <div class="stat__label">Ha. concesionadas</div>
-      </div>
-    </div>
-
-    <div class="diptico__narrativa" id="descripcion-text"></div>
-
-    <div class="diptico__fuente" id="fuente-text-wrapper">
-      <img class="diptico__fuente-logo" id="fuente-logo" src="" alt="" aria-hidden="true">
-      <div id="fuente-text"></div>
-    </div>
-  </div>
-</div>
 </div>

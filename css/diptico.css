@@ -597,6 +597,31 @@
   margin-top: 0.75rem;
 }
 
+/* ─── Concesión Minera ──────────────────────────────────────────────────────── */
+
+.diptico__concesion-minera {
+  margin-bottom: 2rem;
+  padding: 1rem 1.125rem;
+  background: #faf7f4;
+  border-left: 3px solid #d7620e;
+  border-radius: 0 4px 4px 0;
+}
+
+.concesion-minera-titulo {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d7620e;
+  margin-bottom: 0.5rem;
+}
+
+.concesion-minera-body {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--text-color-primary);
+}
+
 /* ─── Fuente ───────────────────────────────────────────────────────────────── */
 
 .diptico__fuente {

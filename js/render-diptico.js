@@ -373,6 +373,20 @@ const DASH_PAIS = {
   reserva: { array: '4 12', duration: '4.0s' },
 };
 
+/* ─── SVG data URI del swatch — geometría exacta del Illustrator ─────────────
+ *
+ * Mismas 5 líneas de patron-china.svg: (-78.3,95.9)→(48.6,-40.6) · spacing
+ * 30.7px · stroke-width 5 · clip rx 7.2. El color se inyecta como hex literal
+ * porque currentColor no hereda CSS dentro de background-image data URI.
+ *
+ * Usado por el Bloque D de inyectarCSSConcesiones para que cada swatch
+ * muestre el tono exacto de su concesión (ESCALAS_PAIS o color_override).
+ * ─────────────────────────────────────────────────────────────────────────── */
+function svgPatronDataUri(color) {
+  const hex = color.replace('#', '%23');
+  return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 75 76'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Crect x='2.5' y='2.7' width='70.1' height='70.7' rx='7.2' ry='7.2'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23c)'%3E%3Cline stroke='${hex}' stroke-width='5' stroke-miterlimit='10' x1='-78.3' y1='95.9' x2='48.6' y2='-40.6'/%3E%3Cline stroke='${hex}' stroke-width='5' stroke-miterlimit='10' x1='-47.5' y1='95.9' x2='79.4' y2='-40.6'/%3E%3Cline stroke='${hex}' stroke-width='5' stroke-miterlimit='10' x1='-16.8' y1='95.9' x2='110.1' y2='-40.6'/%3E%3Cline stroke='${hex}' stroke-width='5' stroke-miterlimit='10' x1='14' y1='95.9' x2='140.9' y2='-40.6'/%3E%3Cline stroke='${hex}' stroke-width='5' stroke-miterlimit='10' x1='44.7' y1='95.9' x2='171.7' y2='-40.6'/%3E%3C/g%3E%3C/svg%3E")`;
+}
+
 function inyectarCSSConcesiones(concesiones) {
   // Eliminar inyección anterior si existe (para re-renders por breakpoint)
   const anterior = document.getElementById('atlas-concesiones-css');
@@ -413,6 +427,18 @@ function inyectarCSSConcesiones(concesiones) {
 .concesion-card[data-svg-id="${c.svg_id}"].concesion-card--activa {
   border-color: ${color};
 }`);
+
+      // Bloque D — swatch de la concesion-card con el tono exacto de la escala.
+      // El CSS base (.patron-{pais}) usa el color genérico del país; este bloque
+      // lo pisa con el tono individual calculado por ESCALAS_PAIS o color_override.
+      // Opera sobre el DOM (las cards ya existen cuando se llama esta función).
+      const patronEl = document.querySelector(
+        `.concesion-card[data-svg-id="${c.svg_id}"] .concesion-card__patron`
+      );
+      if (patronEl) {
+        patronEl.style.backgroundImage = svgPatronDataUri(color);
+        patronEl.style.backgroundColor = `color-mix(in srgb, ${color} 12%, transparent)`;
+      }
     });
 
   const style = document.createElement('style');

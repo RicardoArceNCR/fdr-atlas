@@ -112,6 +112,7 @@ const TERRITORIOS = [
         gaceta: '—',
       },
     ],
+    concesion_minera: 'Se han otorgado 3 lotes de concesiones mineras a 2 empresas mineras chinas que cubren el 13.2% de su territorio. Dichas concesiones mineras afectan de forma directa 9 quebradas y 16 ríos, para un total de 213.08 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta, Fundación del Río, URACCAN, OpenStreetMap contributors, ESRI Standard-Shaded Relief. Abril 2026',
   },
 
@@ -186,6 +187,7 @@ const TERRITORIOS = [
         gaceta: '—',
       },
     ],
+    concesion_minera: 'Se ha otorgado 1 lote de concesión minera a 1 empresa minera china que cubre el 0.13% de su territorio. Si se considerara todo el territorio reclamado existirían al menos 6 lotes de concesiones mineras adicionales, en manos de 3 empresas chinas y 1 empresa nicaragüense.',
     fuente: 'Fuentes y datos cartográficos: Proyección UTM Datum NAD 27 Zona 16 N Fuente: La Gaceta, Fundación del Río, URACCAN, OpenStreetMap contributors, ESRI . Standard-Shaded Relief. Abril 2026',
   },
 
@@ -249,6 +251,7 @@ const TERRITORIOS = [
       { nombre: 'Walpa Tara', svg_id: 'walpa-tara', color_override: '#739b50', empresa: '—', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
       { nombre: 'Reserva Minera', svg_id: 'reserva-minera', color_override: '#394150', empresa: '—', pais: 'reserva', patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
+    concesion_minera: 'Se han otorgado 8 lotes de concesiones mineras: 5 lotes a empresas mineras chinas, 1 lote a una empresa de origen canadiense, 1 lote a una empresa nicaragüense y 1 lote de Área de Reserva Minera, que en total cubren el 42.86% de su territorio. Dichas concesiones mineras afectan de forma directa 8 quebradas y 9 ríos, para un total de 125.83 kilómetros de longitud de la red hídrica superficial.',
     fuente: '',
   },
 
@@ -262,28 +265,19 @@ const TERRITORIOS = [
     id: '04-wangki-twi-tasba-raya',
     numero: '04',
     nombre: 'Wangki Twi-Tasba Raya',
-    tema: 'verde',
-    banner: '../../img/banners/banner-03.webp',
-    logo: '../../img/Logo-fdr.webp',
-    logo_alt: 'Fundación del Río',
-    logo_fuente: '',
-    logo_fuente_alt: '',
     assets: {
       desktop: {
-        svg: '../../mapas-svg/04-wangki-twi-tasba-raya/desktop-04-Wangki-Twi-Tasba-Raya.svg',
-        raster: '../../mapas-raster/04-wangki-twi-tasba-raya/desktop-04-wangki-twi-tasba-raya.webp',
+        raster: '../../img/04_Wangki Twi-Tasba Raya.jpeg',
         width: 927,
         height: 980,
       },
       tablet: {
-        svg: '../../mapas-svg/04-wangki-twi-tasba-raya/desktop-04-Wangki-Twi-Tasba-Raya.svg',
-        raster: '../../mapas-raster/04-wangki-twi-tasba-raya/desktop-04-wangki-twi-tasba-raya.webp',
+        raster: '../../img/04_Wangki Twi-Tasba Raya.jpeg',
         width: 780,
         height: 1306,
       },
       mobile: {
-        svg: '../../mapas-svg/04-wangki-twi-tasba-raya/desktop-04-Wangki-Twi-Tasba-Raya.svg',
-        raster: '../../mapas-raster/04-wangki-twi-tasba-raya/desktop-04-wangki-twi-tasba-raya.webp',
+        raster: '../../img/04_Wangki Twi-Tasba Raya.jpeg',
         width: 504,
         height: 634,
       },
@@ -321,25 +315,9 @@ const TERRITORIOS = [
       hectareas_concesiones: '489.40',
     },
     concesiones: [
-      {
-        nombre: 'El Encanto II',
-        svg_id: 'el-encanto-ii',
-        empresa: 'Empresa sin identificar',
-        pais: 'china',
-        patron_img: '../../img/patrones/patron-china.webp',
-        hectareas: '—', año: '—', estado: '—', gaceta: '—',
-      },
-      {
-        nombre: 'Waspan',
-        svg_id: 'waspan',
-        empresa: 'Empresa sin identificar',
-        pais: 'china',
-        patron_img: '../../img/patrones/patron-china.webp',
-        hectareas: '—', año: '—', estado: '—', gaceta: '—',
-        // ⚠️ también referenciada en territorio 05
-      },
+      { nombre: 'El Encanto II', empresa: '—', pais: 'colombia', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Waspan', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ también en 05
     ],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -355,20 +333,20 @@ const TERRITORIOS = [
     nombre: 'Wangki Li Aubra Tasbaya',
     assets: {
       desktop: {
-        raster: '../../mapas-raster/05-wangki-li/desktop-05-wangki-li.webp',
-        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li.svg',
+        raster: '../../mapas-raster/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.webp',
+        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.svg',
         width: 927,
         height: 980,
       },
       tablet: {
-        raster: '../../mapas-raster/05-wangki-li/desktop-05-wangki-li.webp',
-        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li.svg',
+        raster: '../../mapas-raster/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.webp',
+        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.svg',
         width: 927,
         height: 980,
       },
       mobile: {
-        raster: '../../mapas-raster/05-wangki-li/desktop-05-wangki-li.webp',
-        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li.svg',
+        raster: '../../mapas-raster/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.webp',
+        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.svg',
         width: 927,
         height: 980,
       },
@@ -398,10 +376,9 @@ const TERRITORIOS = [
       hectareas_concesiones: '13,083.22',
     },
     concesiones: [
-      { nombre: 'Waspan', svg_id: 'waspan', empresa: 'Empresa sin identificar', pais: 'china', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Matusalén', svg_id: 'matusalen', empresa: 'Empresa sin identificar', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Waspan', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ también en 04
+      { nombre: 'Matusalén', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ confirmar país
     ],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -538,7 +515,6 @@ const TERRITORIOS = [
     concesiones: [
       { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', color_override: '#ea8e3b', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '15786.8', ano: '—', estado: '—', gaceta: '—' },
     ],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -605,7 +581,6 @@ const TERRITORIOS = [
       { nombre: 'Walpa Tara', svg_id: 'walpa-tara', color_override: '#739b50', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '13124.6', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'Reserva Minera', svg_id: 'reserva-minera', color_override: '#394150', empresa: '—', pais: 'reserva', patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
     ],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -673,7 +648,6 @@ const TERRITORIOS = [
       { nombre: 'Polaris', svg_id: 'polaris', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '16575.2', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'San Leonardo', svg_id: 'san-leonardo', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '1711.6', ano: '—', estado: '—', gaceta: '—' },
     ],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -737,7 +711,6 @@ const TERRITORIOS = [
       { nombre: 'El Hormiguero', svg_id: 'el-hormiguero', empresa: 'Brother Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '1502.0', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'Veracruz', svg_id: 'veracruz', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '7.0', ano: '—', estado: '—', gaceta: '—' },
     ],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -804,7 +777,6 @@ const TERRITORIOS = [
       { nombre: 'Matusalén', empresa: 'GLOBAL GROUP, SOCIEDAD ANONIMA', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '4192.4', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'Waspan', svg_id: 'waspan', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '6648.5', ano: '—', estado: '—', gaceta: '—' },
     ],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -875,7 +847,6 @@ const TERRITORIOS = [
       { nombre: 'Kukalaya', svg_id: 'kukalaya', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '5386.1', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'Rosita H-2', svg_id: 'rosita-h-2', empresa: 'Desarrollo Minero de Nicaragua, S. A. (DESMINIC)', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '993.1', ano: '—', estado: '—', gaceta: '—' },
     ],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -936,7 +907,6 @@ const TERRITORIOS = [
     concesiones: [
       { nombre: 'Waspan', svg_id: 'waspan', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '3280.2', ano: '—', estado: '—', gaceta: '—' },
     ],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -1005,7 +975,6 @@ const TERRITORIOS = [
       { nombre: 'HEMCO - SID', svg_id: 'hemco-sid', empresa: 'Minera San Cristóbal, S. A.', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'Reserva Minera', svg_id: 'reserva-minera', empresa: '—', pais: 'reserva', patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
     ],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -1069,7 +1038,6 @@ const TERRITORIOS = [
       { nombre: 'La Reyna II', svg_id: 'la-reyna-ii', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'Santa Emilia', svg_id: 'santa-emilia', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
     ],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -1128,7 +1096,6 @@ const TERRITORIOS = [
       hectareas_concesiones: '52,156.71',
     },
     concesiones: [],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -1187,7 +1154,6 @@ const TERRITORIOS = [
       hectareas_concesiones: '4,081.76',
     },
     concesiones: [],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
@@ -1246,7 +1212,6 @@ const TERRITORIOS = [
       hectareas_concesiones: '256.60',
     },
     concesiones: [],
-    concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 

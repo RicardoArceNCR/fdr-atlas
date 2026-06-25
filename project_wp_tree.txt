@@ -109,8 +109,12 @@
 │   │   ├── mobile-03-Waupasa-Twi.webp
 │   │   ├── tablet-03-Waupasa-Twi.png
 │   │   └── tablet-03-Waupasa-Twi.webp
-│   ├── 04-
-│   ├── 05-
+│   ├── 04-wangki-twi-tasba-raya
+│   │   ├── desktop-04-wangki-twi-tasba-raya.png
+│   │   └── desktop-04-wangki-twi-tasba-raya.webp
+│   ├── 05-wangki-li
+│   │   ├── desktop-05-wangki-li.png
+│   │   └── desktop-05-wangki-li.webp
 │   ├── 06-twi-ahbra-10-comunidades
 │   │   ├── desktop-06-Twi-Ahbra-10-Comunidades.png
 │   │   └── desktop-06-Twi-Ahbra-10-Comunidades.webp
@@ -132,10 +136,15 @@
 │   │   ├── desktop-10-Mayangna-Sauni-Bas.svg
 │   │   └── desktop-10-Mayangna-Sauni-Bas.webp
 │   ├── 11-mayangna-sauni-as
+│   │   ├── desktop-10-Mayagna-Sauni-As.png
+│   │   ├── desktop-11-Mayangna-Sauni-As.webp
+│   │   └── mapa-textura-2.png
 │   ├── 12-mayangna-arungka-matungbak
 │   │   ├── desktop-12-Mayangna-Arungka-Matungbak.webp
 │   │   └── desktop-12-Maynagna-Arungka-Matungbak.png
 │   ├── 13-amasau
+│   │   ├── desktop-13-Amasau.png
+│   │   └── desktop-13-Amasau.webp
 │   ├── 14-chorotega-norte
 │   ├── 15-matagalpa
 │   └── 16-prinzu-auhya-un
@@ -143,14 +152,19 @@
 │   ├── 01-rama-kriol
 │   │   └── desktop-01-Rama-Kriol.svg
 │   ├── 02-creole-bluefields
-│   │   └── desktop-02-Creole-Bluefields.svg
+│   │   ├── desktop-02-Creole-Bluefields.svg
+│   │   └── desktop-02-Creole-de-Bluefields.svg
 │   ├── 03-waupasa-twi
 │   │   ├── desktop-03-Waupasa-Twi-4.ai
 │   │   ├── desktop-03-Waupasa-Twi.svg
+│   │   ├── desktop-04-Wangki-Twi-Tasba-Raya.svg
 │   │   ├── mobile-03-Waupasa-Twi.ai
 │   │   ├── mobile-03-Waupasa-Twi.svg
 │   │   └── tablet-03-Waupasa-Twi.svg
-│   ├── 04-twi-ahbra-10-comunidades
+│   ├── 04-wangki-twi-tasba-raya
+│   │   └── desktop-04-Wangki-Twi-Tasba-Raya.svg
+│   ├── 05-wangki-li
+│   │   └── desktop-05-Wangki-Li.svg
 │   ├── 06-twi-ahbra-10-comunidades
 │   │   └── desktop-06-Twi-Ahbra-10-Comunidades.svg
 │   ├── 07-tuahka
@@ -165,9 +179,12 @@
 │   ├── 10-mayangna-sauni-bas
 │   │   └── desktop-10-Mayangna-Sauni-Bas.svg
 │   ├── 11-mayangna-sauni-as
+│   │   ├── desktop-11-Mayagna-Sauni-As.svg
+│   │   └── desktop-11-Mayangna-Sauni-As.svg
 │   ├── 12-mayangna-arungka-matungbak
 │   │   └── desktop-12-Mayangna-Arungka-Matungbak.svg
 │   ├── 13-amasau
+│   │   └── desktop-13-Amasau.svg
 │   ├── 14-chorotega-norte
 │   ├── 15-matagalpa
 │   └── 16-prinzu-auhya-un
@@ -182,4 +199,4 @@
 └── templates
     └── diptico-base.html
 
-69 directories, 114 files
+70 directories, 130 files

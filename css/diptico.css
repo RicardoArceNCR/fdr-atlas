@@ -532,13 +532,8 @@
   border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.concesion-card__patron-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 2px;
-}
+/* .concesion-card__patron-img eliminado — los patrones se renderizan
+ * con SVG data URI vía .patron-{pais}. No hay <img> en el DOM. */
 
 .concesion-card__nombre {
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -590,27 +585,53 @@
   color: var(--text-color-secondary);
 }
 
-/* Patrones visuales por país (para leyenda y lista) */
+/* ─── Patrones visuales por país (leyenda + concesion-card) ──────────────────
+ *
+ * SVG data URI por país — geometría exacta del archivo Illustrator
+ * (patron-china.svg). Todas las líneas comparten la misma trayectoria;
+ * el color del stroke es el hex del token de país hardcodeado en el URI.
+ *
+ * viewBox 75×76 · stroke-width 5 · 5 líneas · espaciado ~30.7px
+ * Líneas: de (-78.3,95.9)→(48.6,-40.6) repetidas cada 30.7px en X
+ *
+ * ⚠️  Los colores están hardcodeados en el SVG data URI porque currentColor
+ * no hereda CSS dentro de background-image. Si cambias un token en
+ * tokens.css, actualiza también el hex en el data URI de ese país.
+ *
+ * background-color añade el tinte de fondo semitransparente.
+ *
+ * .patron-reserva: sin líneas — mantiene sólido semitransparente.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* China — #dd3519 */
 .patron-china {
-  background: repeating-linear-gradient(40deg, var(--concesion-pais-china), var(--concesion-pais-china) 1.8px, transparent 1.8px, transparent 14px);
-  background-color: color-mix(in srgb, var(--concesion-pais-china) 15%, transparent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 75 76'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Crect x='2.5' y='2.7' width='70.1' height='70.7' rx='7.2' ry='7.2'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23c)'%3E%3Cline stroke='%23dd3519' stroke-width='5' stroke-miterlimit='10' x1='-78.3' y1='95.9' x2='48.6' y2='-40.6'/%3E%3Cline stroke='%23dd3519' stroke-width='5' stroke-miterlimit='10' x1='-47.5' y1='95.9' x2='79.4' y2='-40.6'/%3E%3Cline stroke='%23dd3519' stroke-width='5' stroke-miterlimit='10' x1='-16.8' y1='95.9' x2='110.1' y2='-40.6'/%3E%3Cline stroke='%23dd3519' stroke-width='5' stroke-miterlimit='10' x1='14' y1='95.9' x2='140.9' y2='-40.6'/%3E%3Cline stroke='%23dd3519' stroke-width='5' stroke-miterlimit='10' x1='44.7' y1='95.9' x2='171.7' y2='-40.6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  background-color: color-mix(in srgb, var(--concesion-pais-china) 12%, transparent);
 }
 
+/* Canadá — #739b50 */
 .patron-canada {
-  background: repeating-linear-gradient(135deg, var(--concesion-pais-canada), var(--concesion-pais-canada) 1.8px, transparent 1.8px, transparent 14px);
-  background-color: color-mix(in srgb, var(--concesion-pais-canada) 15%, transparent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 75 76'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Crect x='2.5' y='2.7' width='70.1' height='70.7' rx='7.2' ry='7.2'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23c)'%3E%3Cline stroke='%23739b50' stroke-width='5' stroke-miterlimit='10' x1='-78.3' y1='95.9' x2='48.6' y2='-40.6'/%3E%3Cline stroke='%23739b50' stroke-width='5' stroke-miterlimit='10' x1='-47.5' y1='95.9' x2='79.4' y2='-40.6'/%3E%3Cline stroke='%23739b50' stroke-width='5' stroke-miterlimit='10' x1='-16.8' y1='95.9' x2='110.1' y2='-40.6'/%3E%3Cline stroke='%23739b50' stroke-width='5' stroke-miterlimit='10' x1='14' y1='95.9' x2='140.9' y2='-40.6'/%3E%3Cline stroke='%23739b50' stroke-width='5' stroke-miterlimit='10' x1='44.7' y1='95.9' x2='171.7' y2='-40.6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  background-color: color-mix(in srgb, var(--concesion-pais-canada) 12%, transparent);
 }
 
+/* Colombia — #5b21b6 */
 .patron-colombia {
-  background: repeating-linear-gradient(40deg, var(--concesion-pais-colombia), var(--concesion-pais-colombia) 1.8px, transparent 1.8px, transparent 14px);
-  background-color: color-mix(in srgb, var(--concesion-pais-colombia) 15%, transparent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 75 76'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Crect x='2.5' y='2.7' width='70.1' height='70.7' rx='7.2' ry='7.2'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23c)'%3E%3Cline stroke='%235b21b6' stroke-width='5' stroke-miterlimit='10' x1='-78.3' y1='95.9' x2='48.6' y2='-40.6'/%3E%3Cline stroke='%235b21b6' stroke-width='5' stroke-miterlimit='10' x1='-47.5' y1='95.9' x2='79.4' y2='-40.6'/%3E%3Cline stroke='%235b21b6' stroke-width='5' stroke-miterlimit='10' x1='-16.8' y1='95.9' x2='110.1' y2='-40.6'/%3E%3Cline stroke='%235b21b6' stroke-width='5' stroke-miterlimit='10' x1='14' y1='95.9' x2='140.9' y2='-40.6'/%3E%3Cline stroke='%235b21b6' stroke-width='5' stroke-miterlimit='10' x1='44.7' y1='95.9' x2='171.7' y2='-40.6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  background-color: color-mix(in srgb, var(--concesion-pais-colombia) 12%, transparent);
 }
 
+/* Nacional — #263fa8 */
 .patron-nacional {
-  background: repeating-linear-gradient(45deg, var(--concesion-pais-nacional), var(--concesion-pais-nacional) 1.8px, transparent 1.8px, transparent 14px);
-  background-color: color-mix(in srgb, var(--concesion-pais-nacional) 15%, transparent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 75 76'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Crect x='2.5' y='2.7' width='70.1' height='70.7' rx='7.2' ry='7.2'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23c)'%3E%3Cline stroke='%23263fa8' stroke-width='5' stroke-miterlimit='10' x1='-78.3' y1='95.9' x2='48.6' y2='-40.6'/%3E%3Cline stroke='%23263fa8' stroke-width='5' stroke-miterlimit='10' x1='-47.5' y1='95.9' x2='79.4' y2='-40.6'/%3E%3Cline stroke='%23263fa8' stroke-width='5' stroke-miterlimit='10' x1='-16.8' y1='95.9' x2='110.1' y2='-40.6'/%3E%3Cline stroke='%23263fa8' stroke-width='5' stroke-miterlimit='10' x1='14' y1='95.9' x2='140.9' y2='-40.6'/%3E%3Cline stroke='%23263fa8' stroke-width='5' stroke-miterlimit='10' x1='44.7' y1='95.9' x2='171.7' y2='-40.6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  background-color: color-mix(in srgb, var(--concesion-pais-nacional) 12%, transparent);
 }
 
+/* Reserva — sin líneas; mantiene sólido semitransparente */
 .patron-reserva {
   background: color-mix(in srgb, var(--concesion-tipo-reserva) 25%, transparent);
 }

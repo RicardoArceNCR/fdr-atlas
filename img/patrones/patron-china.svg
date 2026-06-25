@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="patrones" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 75 76">
+  <!-- Generator: Adobe Illustrator 30.5.1, SVG Export Plug-In . SVG Version: 2.1.4 Build 3)  -->
+  <defs>
+    <style>
+      .st0, .st1, .st2 {
+        fill: none;
+      }
+
+      .st3 {
+        clip-path: url(#clippath-1);
+      }
+
+      .st4 {
+        clip-path: url(#clippath-3);
+      }
+
+      .st5 {
+        clip-path: url(#clippath-4);
+      }
+
+      .st6 {
+        clip-path: url(#clippath-2);
+      }
+
+      .st1 {
+        stroke-width: 5px;
+      }
+
+      .st1, .st2 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+
+      .st7 {
+        clip-path: url(#clippath);
+      }
+
+      .st2 {
+        stroke-width: 3px;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="st0" x="2.5" y="2.7" width="70.1" height="70.7" rx="7.2" ry="7.2"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect class="st0" x="2.5" y="2.7" width="70.1" height="70.7" rx="7.2" ry="7.2"/>
+    </clipPath>
+    <clipPath id="clippath-2">
+      <rect class="st0" x="2.5" y="2.7" width="70.1" height="70.7" rx="7.2" ry="7.2"/>
+    </clipPath>
+    <clipPath id="clippath-3">
+      <rect class="st0" x="2.5" y="2.7" width="70.1" height="70.7" rx="7.2" ry="7.2"/>
+    </clipPath>
+    <clipPath id="clippath-4">
+      <rect class="st0" x="2.5" y="2.7" width="70.1" height="70.7" rx="7.2" ry="7.2"/>
+    </clipPath>
+  </defs>
+  <g id="patron-nicaragua">
+    <g id="area-main">
+      <g class="st7">
+        <g>
+          <line class="st1" x1="-78.3" y1="95.9" x2="48.6" y2="-40.6"/>
+          <line class="st1" x1="-47.5" y1="95.9" x2="79.4" y2="-40.6"/>
+          <line class="st1" x1="-16.8" y1="95.9" x2="110.1" y2="-40.6"/>
+          <line class="st1" x1="14" y1="95.9" x2="140.9" y2="-40.6"/>
+          <line class="st1" x1="44.7" y1="95.9" x2="171.7" y2="-40.6"/>
+        </g>
+      </g>
+    </g>
+    <rect id="border" class="st2" x="2.5" y="2.7" width="70.1" height="70.7" rx="7.2" ry="7.2"/>
+  </g>
+  <g id="patron-nicaragua1" data-name="patron-nicaragua">
+    <g id="area-main1" data-name="area-main">
+      <g class="st3">
+        <g>
+          <line class="st1" x1="-78.3" y1="95.9" x2="48.6" y2="-40.6"/>
+          <line class="st1" x1="-47.5" y1="95.9" x2="79.4" y2="-40.6"/>
+          <line class="st1" x1="-16.8" y1="95.9" x2="110.1" y2="-40.6"/>
+          <line class="st1" x1="14" y1="95.9" x2="140.9" y2="-40.6"/>
+          <line class="st1" x1="44.7" y1="95.9" x2="171.7" y2="-40.6"/>
+        </g>
+      </g>
+    </g>
+    <rect id="border1" data-name="border" class="st2" x="2.5" y="2.7" width="70.1" height="70.7" rx="7.2" ry="7.2"/>
+  </g>
+  <g id="patron-colombia">
+    <g id="area-main2" data-name="area-main">
+      <g class="st6">
+        <g>
+          <line class="st1" x1="-78.3" y1="95.9" x2="48.6" y2="-40.6"/>
+          <line class="st1" x1="-47.5" y1="95.9" x2="79.4" y2="-40.6"/>
+          <line class="st1" x1="-16.8" y1="95.9" x2="110.1" y2="-40.6"/>
+          <line class="st1" x1="14" y1="95.9" x2="140.9" y2="-40.6"/>
+          <line class="st1" x1="44.7" y1="95.9" x2="171.7" y2="-40.6"/>
+        </g>
+      </g>
+    </g>
+    <rect id="border2" data-name="border" class="st2" x="2.5" y="2.7" width="70.1" height="70.7" rx="7.2" ry="7.2"/>
+  </g>
+  <g id="patron-china">
+    <g id="area-main3" data-name="area-main">
+      <g class="st4">
+        <g>
+          <line class="st1" x1="-78.3" y1="95.9" x2="48.6" y2="-40.6"/>
+          <line class="st1" x1="-47.5" y1="95.9" x2="79.4" y2="-40.6"/>
+          <line class="st1" x1="-16.8" y1="95.9" x2="110.1" y2="-40.6"/>
+          <line class="st1" x1="14" y1="95.9" x2="140.9" y2="-40.6"/>
+          <line class="st1" x1="44.7" y1="95.9" x2="171.7" y2="-40.6"/>
+        </g>
+      </g>
+    </g>
+    <rect id="border3" data-name="border" class="st2" x="2.5" y="2.7" width="70.1" height="70.7" rx="7.2" ry="7.2"/>
+  </g>
+  <g id="patron-china1" data-name="patron-china">
+    <g id="area-main4" data-name="area-main">
+      <g class="st5">
+        <g>
+          <line class="st1" x1="-78.3" y1="95.9" x2="48.6" y2="-40.6"/>
+          <line class="st1" x1="-47.5" y1="95.9" x2="79.4" y2="-40.6"/>
+          <line class="st1" x1="-16.8" y1="95.9" x2="110.1" y2="-40.6"/>
+          <line class="st1" x1="14" y1="95.9" x2="140.9" y2="-40.6"/>
+          <line class="st1" x1="44.7" y1="95.9" x2="171.7" y2="-40.6"/>
+        </g>
+      </g>
+    </g>
+    <rect id="border4" data-name="border" class="st2" x="2.5" y="2.7" width="70.1" height="70.7" rx="7.2" ry="7.2"/>
+  </g>
+</svg>

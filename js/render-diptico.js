@@ -261,6 +261,15 @@ function renderConcesiones(t) {
   }
 }
 
+/* ─── Texto de fuente compartido ─────────────────────────────────────────────
+ *
+ * Fuente canónica para todos los territorios del atlas.
+ * Para actualizar el texto: editar solo esta constante.
+ * El campo `fuente` en data-territorios.js queda como referencia histórica
+ * pero ya no se usa para el render.
+ * ─────────────────────────────────────────────────────────────────────────── */
+const FUENTE_BASE = 'Elaboración propia a partir de información de La Gaceta · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026 · UTM · Datum NAD 27 · Zona 16 N';
+
 function renderFuente(t) {
   const f = document.getElementById("fuente-text");
   const logoFuente = document.getElementById("fuente-logo");
@@ -271,12 +280,7 @@ function renderFuente(t) {
   }
 
   if (!f) return;
-  if (!t.fuente) { f.style.display = "none"; return; }
-
-  const tecnica = [t.proyeccion, t.datum && `Datum ${t.datum}`, t.zona && `Zona ${t.zona}`]
-    .filter(Boolean).join(" · ");
-
-  f.innerHTML = `<strong>Fuentes:</strong> ${t.fuente}${tecnica ? ` · ${tecnica}` : ""}`;
+  f.innerHTML = `<strong>Fuente:</strong> ${FUENTE_BASE}`;
 }
 
 function renderInsets(t) {

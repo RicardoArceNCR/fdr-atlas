@@ -116,6 +116,7 @@
 
 .diptico[data-layout="D"] .concesion-card {
   display: block;
+  padding: 6px 2px;
 }
 
 .diptico[data-layout="D"] .concesion-card__nombre {
@@ -124,6 +125,35 @@
 }
 
 .diptico[data-layout="D"] .concesion-card__empresa {
+  font-size: 9px;
+  line-height: 1.25;
+  margin-top: 1px;
+}
+
+.diptico[data-layout="D"] .diptico__concesiones--mapa {
+  padding: 5px;
+}
+
+/* ─── Layout E — 7 columnas de concesiones ──────────────────────────────────── */
+
+.diptico[data-layout="E"] {
+  grid-template-columns: 50fr 50fr;
+}
+
+.diptico[data-layout="E"] .concesiones-lista {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.diptico[data-layout="E"] .concesion-card {
+  display: block;
+}
+
+.diptico[data-layout="E"] .concesion-card__nombre {
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.diptico[data-layout="E"] .concesion-card__empresa {
   font-size: 9px;
   line-height: 1.25;
   margin-top: 1px;
@@ -707,7 +737,8 @@
   .diptico[data-layout="A"],
   .diptico[data-layout="B"],
   .diptico[data-layout="C"],
-  .diptico[data-layout="D"] {
+  .diptico[data-layout="D"],
+  .diptico[data-layout="E"] {
     width: 100%;
     max-width: none;
     margin-inline: auto;

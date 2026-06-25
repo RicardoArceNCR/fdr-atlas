@@ -410,7 +410,7 @@ const TERRITORIOS = [
         height: 980,
       },
     },
-    layout: 'A',
+    layout: 'E',
     pueblos: ['Pueblo Mayangna Tuahka'],
     region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
     tema: 'verde',

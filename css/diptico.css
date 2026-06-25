@@ -87,7 +87,7 @@
   color: #5a5a58;
 }
 
-/* tema-verde: sin fondo en card activa → texto mantiene el color del tema */
+/* tema-verde: sin fondo en card activa — texto mantiene color del tema */
 
 /* ─── Layouts ─────────────────────────────────────────────────────────────── */
 
@@ -978,7 +978,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   /* border-color lo inyecta render-diptico.js con el tono exacto de la escala */
 }
 
-/* texto y badge mantienen su color en reposo — el borde cromático da el feedback */
+/* texto y badge mantienen su color — el borde cromático da el feedback */
 
 /* ── Activo por país (sombra cromática) ─────────────────────────────────────
  *
@@ -1446,6 +1446,25 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 /* Resplandor sutil permanente en el canal azul */
 #mapa-svg-inline #rios1 {
   filter: drop-shadow(0 0 1.5px rgba(0, 114, 189, 0.45));
+}
+
+
+/* ─── Modo ocultar concesiones — botón ojo ───────────────────────────────────
+ *
+ * Clase aplicada a #mapa-svg-inline cuando el usuario activa el toggle de ojo.
+ * Oculta patrones (area-main) y borders animados de concesiones.
+ * Preserva: ríos, poblados, banderas, insets, raster base.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+#mapa-svg-inline.concesiones--ocultas [data-name="area-main"],
+#mapa-svg-inline.concesiones--ocultas [id^="area-main"] {
+  opacity: 0 !important;
+  transition: opacity 220ms ease;
+}
+
+#mapa-svg-inline.concesiones--ocultas [id^="border-"]:not([id="border-china"]):not([id="border-canada"]):not([id="border-colombia"]):not([id="border-nicaragua"]):not([id="border-reserva"]) {
+  opacity: 0 !important;
+  transition: opacity 220ms ease;
 }
 
 /* ─── Poblados — etiquetas y marcadores ──────────────────────────────────────

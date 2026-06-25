@@ -495,6 +495,7 @@ function initInteractividad(concesiones) {
   inyectarCSSConcesiones(concesiones);
   initTooltipPoblados();
   initHoverPaises(concesiones);
+  initToggleOjo(concesiones);
   initSeleccionarTodas(concesiones);
   initAnimacionNarrativa(concesiones);
   marcarPaisesSinConcesiones(concesiones);
@@ -532,6 +533,7 @@ function initInteractividad(concesiones) {
 }
 
 function activar(svgEl, card, todosLosIds = [], svgIdAPais = {}) {
+  resetOjo();
   resetSeleccionarTodas();
   svgEl.classList.add("concesion--activa");
   card.classList.add("concesion-card--activa");
@@ -632,6 +634,7 @@ function initHoverPaises(concesiones) {
     paisEl.style.cursor = 'pointer';
 
     paisEl.addEventListener('mouseenter', () => {
+      resetOjo();
       resetSeleccionarTodas();
       activarPais(idsActivos, idsTodos);
       paisEl.classList.add('pais-btn--activo', 'pais--activo');
@@ -694,13 +697,91 @@ const DURACION_SALIDA = 180;  // ms entre cada concesión al revertir
 let _tourTimers = [];
 let _tourActivo = false;
 let _todasActivas = false;
+let _concesionesOcultas = false;
+
+/* ─── Toggle ojo — ocultar/mostrar patrones y bordes de concesiones ─────────
+ *
+ * Alterna .concesiones--ocultas en #mapa-svg-inline.
+ * El CSS oculta area-main y border-* de concesiones.
+ * Preserva ríos, poblados, banderas y raster base.
+ * Al ocultar cancela seleccionar-todas y el tour si estaban activos.
+ * ─────────────────────────────────────────────────────────────────────────── */
+function initToggleOjo(concesiones) {
+  const panel = document.querySelector('.diptico__concesiones--mapa');
+  if (!panel) return;
+
+  document.getElementById('btn-toggle-ojo')?.remove();
+
+  const btn = document.createElement('button');
+  btn.id = 'btn-toggle-ojo';
+  btn.type = 'button';
+  btn.className = 'btn-tour-narrativo';
+  btn.setAttribute('aria-label', 'Ocultar concesiones del mapa');
+  btn.innerHTML = `
+    <svg id="ojo-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <ellipse cx="7" cy="7" rx="6" ry="4" stroke="currentColor" stroke-width="1.4" fill="none"/>
+      <circle cx="7" cy="7" r="2" fill="currentColor"/>
+    </svg>
+    <span>Ocultar</span>
+  `;
+
+  const toggleBtn = panel.querySelector('.diptico__toggle-concesiones');
+  if (toggleBtn) toggleBtn.appendChild(btn);
+  else panel.appendChild(btn);
+
+  btn.addEventListener('click', () => {
+    _concesionesOcultas ? mostrarConcesiones(btn) : ocultarConcesiones(concesiones, btn);
+  });
+}
+
+function ocultarConcesiones(concesiones, btn) {
+  const idsTodos = concesiones.filter(c => c.svg_id).map(c => c.svg_id);
+  if (_tourActivo) {
+    const btnTour = document.getElementById('btn-tour-narrativo');
+    if (btnTour) detenerTour(idsTodos, btnTour);
+  }
+  if (_todasActivas) {
+    const btnTodas = document.getElementById('btn-seleccionar-todas');
+    if (btnTodas) apagarTodas(idsTodos, btnTodas);
+  }
+  idsTodos.forEach(id => {
+    document.getElementById(id)?.classList.remove('concesion--activa', 'concesion--atenuada');
+    document.querySelector(`.concesion-card[data-svg-id="${id}"]`)?.classList.remove('concesion-card--activa', 'concesion-card--atenuada');
+  });
+
+  _concesionesOcultas = true;
+  document.getElementById('mapa-svg-inline')?.classList.add('concesiones--ocultas');
+  btn.classList.add('btn-tour-narrativo--activo');
+  btn.querySelector('span').textContent = 'Mostrar';
+  btn.setAttribute('aria-label', 'Mostrar concesiones del mapa');
+  btn.querySelector('#ojo-icon').innerHTML = `
+    <ellipse cx="7" cy="7" rx="6" ry="4" stroke="currentColor" stroke-width="1.4" fill="none"/>
+    <line x1="2" y1="2" x2="12" y2="12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  `;
+}
+
+function mostrarConcesiones(btn) {
+  _concesionesOcultas = false;
+  document.getElementById('mapa-svg-inline')?.classList.remove('concesiones--ocultas');
+  btn.classList.remove('btn-tour-narrativo--activo');
+  btn.querySelector('span').textContent = 'Ocultar';
+  btn.setAttribute('aria-label', 'Ocultar concesiones del mapa');
+  btn.querySelector('#ojo-icon').innerHTML = `
+    <ellipse cx="7" cy="7" rx="6" ry="4" stroke="currentColor" stroke-width="1.4" fill="none"/>
+    <circle cx="7" cy="7" r="2" fill="currentColor"/>
+  `;
+}
+
+function resetOjo() {
+  if (!_concesionesOcultas) return;
+  const btn = document.getElementById('btn-toggle-ojo');
+  if (btn) mostrarConcesiones(btn);
+}
 
 /* ─── Botón "Seleccionar todas" ───────────────────────────────────────────────
  *
- * Enciende simultáneamente todos los grupos SVG y cards del territorio.
- * No activa banderas de países ni cambia el estado del tour.
- * Cualquier interacción posterior (hover individual, bandera, tour)
- * apaga el estado y devuelve el botón a su forma inactiva.
+ * Enciende simultáneamente todos los SVG y cards del territorio.
+ * No activa banderas. Cualquier otra interacción lo apaga automáticamente.
  * ─────────────────────────────────────────────────────────────────────────── */
 function initSeleccionarTodas(concesiones) {
   const idsConSvg = concesiones.filter(c => c.svg_id);
@@ -711,8 +792,7 @@ function initSeleccionarTodas(concesiones) {
   const panel = document.querySelector('.diptico__concesiones--mapa');
   if (!panel) return;
 
-  const btnExistente = document.getElementById('btn-seleccionar-todas');
-  if (btnExistente) btnExistente.remove();
+  document.getElementById('btn-seleccionar-todas')?.remove();
 
   const btn = document.createElement('button');
   btn.id = 'btn-seleccionar-todas';
@@ -729,34 +809,28 @@ function initSeleccionarTodas(concesiones) {
     <span>Seleccionar todas</span>
   `;
 
-  // Insertar a la izquierda del btn-tour-narrativo dentro del toggle
   const toggleBtn = panel.querySelector('.diptico__toggle-concesiones');
-  if (toggleBtn) {
-    toggleBtn.appendChild(btn);
-  } else {
-    panel.appendChild(btn);
-  }
+  if (toggleBtn) toggleBtn.appendChild(btn);
+  else panel.appendChild(btn);
 
   btn.addEventListener('click', () => {
-    if (_todasActivas) {
-      apagarTodas(idsTodos, btn);
-    } else {
-      encenderTodas(idsTodos, btn);
-    }
+    _todasActivas ? apagarTodas(idsTodos, btn) : encenderTodas(idsTodos, btn);
   });
 }
 
 function encenderTodas(idsTodos, btn) {
-  // Si hay tour activo, detenerlo primero
+  // Si las capas están ocultas, mostrarlas primero — seleccionar sin ver no tiene sentido
+  if (_concesionesOcultas) {
+    const btnOjo = document.getElementById('btn-toggle-ojo');
+    if (btnOjo) mostrarConcesiones(btnOjo);
+  }
   if (_tourActivo) {
     const btnTour = document.getElementById('btn-tour-narrativo');
     if (btnTour) detenerTour(idsTodos, btnTour);
   }
-
   _todasActivas = true;
   btn.classList.add('btn-tour-narrativo--activo');
   btn.querySelector('span').textContent = 'Deseleccionar';
-
   idsTodos.forEach(id => {
     const svgEl = document.getElementById(id);
     const card = document.querySelector(`.concesion-card[data-svg-id="${id}"]`);
@@ -771,12 +845,9 @@ function apagarTodas(idsTodos, btn) {
   _todasActivas = false;
   btn.classList.remove('btn-tour-narrativo--activo');
   btn.querySelector('span').textContent = 'Seleccionar todas';
-
   idsTodos.forEach(id => {
-    const svgEl = document.getElementById(id);
-    const card = document.querySelector(`.concesion-card[data-svg-id="${id}"]`);
-    svgEl?.classList.remove('concesion--activa', 'concesion--atenuada');
-    card?.classList.remove('concesion-card--activa', 'concesion-card--atenuada');
+    document.getElementById(id)?.classList.remove('concesion--activa', 'concesion--atenuada');
+    document.querySelector(`.concesion-card[data-svg-id="${id}"]`)?.classList.remove('concesion-card--activa', 'concesion-card--atenuada');
   });
 }
 
@@ -883,6 +954,7 @@ function encenderPais(idsActivos) {
 }
 
 function lanzarTour(pasos, porPais, idsTodos, btn) {
+  resetOjo();
   _tourActivo = true;
   btn.querySelector('span').textContent = 'Detener';
   btn.classList.add('btn-tour-narrativo--activo');
@@ -972,7 +1044,6 @@ function detenerTour(idsTodos, btn) {
   _tourTimers.forEach(clearTimeout);
   _tourTimers = [];
   _tourActivo = false;
-  // Si seleccionar-todas estaba activo, apagarlo también
   const btnTodas = document.getElementById('btn-seleccionar-todas');
   if (btnTodas && _todasActivas) apagarTodas(idsTodos, btnTodas);
 

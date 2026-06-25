@@ -614,7 +614,8 @@
 /* ─── Narrativa / contexto ─────────────────────────────────────────────────── */
 
 .diptico__narrativa {
-  font-size: 14px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13.5px;
   line-height: 1.75;
   color: var(--text-color-primary);
   margin-bottom: 2rem;
@@ -626,27 +627,48 @@
 
 /* ─── Concesión Minera ──────────────────────────────────────────────────────── */
 
+/* ─── Bloque concesión minera ───────────────────────────────────────────────
+ *
+ * Colores hardcodeados — no hereda del tema para garantizar legibilidad
+ * tanto en tema claro como en tema verde oscuro.
+ * El override .diptico--tema-verde adapta el fondo al contexto oscuro.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
 .diptico__concesion-minera {
   margin-bottom: 2rem;
-  padding: 1rem 1.125rem;
-  background: #faf7f4;
+  padding: 1rem 1.25rem;
+  background: #fdf6f0;
+  border: 1px solid rgba(215, 98, 14, 0.20);
   border-left: 3px solid #d7620e;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 6px 6px 0;
 }
 
 .concesion-minera-titulo {
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
   color: #d7620e;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.625rem;
 }
 
 .concesion-minera-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13.5px;
-  line-height: 1.7;
-  color: var(--text-color-primary);
+  line-height: 1.75;
+  color: #2c2c2a;
+}
+
+/* Tema verde: fondo semitransparente sobre oscuro, texto claro adaptado */
+.diptico--tema-verde .diptico__concesion-minera {
+  background: rgba(255, 246, 236, 0.07);
+  border-color: rgba(215, 98, 14, 0.35);
+  border-left-color: #d7620e;
+}
+
+.diptico--tema-verde .concesion-minera-body {
+  color: rgba(255, 235, 210, 0.88);
 }
 
 /* ─── Fuente ───────────────────────────────────────────────────────────────── */
@@ -975,7 +997,6 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   border-width: 1.5px;
-  /* border-color lo inyecta render-diptico.js con el tono exacto de la escala */
 }
 
 /* texto y badge mantienen su color — el borde cromático da el feedback */

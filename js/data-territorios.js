@@ -355,20 +355,20 @@ const TERRITORIOS = [
     nombre: 'Wangki Li Aubra Tasbaya',
     assets: {
       desktop: {
-        raster: '../../mapas-raster/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.webp',
-        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.svg',
+        raster: '../../mapas-raster/05-wangki-li/desktop-05-wangki-li.webp',
+        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li.svg',
         width: 927,
         height: 980,
       },
       tablet: {
-        raster: '../../mapas-raster/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.webp',
-        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.svg',
+        raster: '../../mapas-raster/05-wangki-li/desktop-05-wangki-li.webp',
+        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li.svg',
         width: 927,
         height: 980,
       },
       mobile: {
-        raster: '../../mapas-raster/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.webp',
-        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li-Aubra-Tasbaya.svg',
+        raster: '../../mapas-raster/05-wangki-li/desktop-05-wangki-li.webp',
+        svg: '../../mapas-svg/05-wangki-li/desktop-05-Wangki-Li.svg',
         width: 927,
         height: 980,
       },
@@ -398,8 +398,8 @@ const TERRITORIOS = [
       hectareas_concesiones: '13,083.22',
     },
     concesiones: [
-      { nombre: 'Waspan', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ también en 04
-      { nombre: 'Matusalén', empresa: '—', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' }, // ⚠️ confirmar país
+      { nombre: 'Waspan', svg_id: 'waspan', empresa: 'Empresa sin identificar', pais: 'china', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Matusalén', svg_id: 'matusalen', empresa: 'Empresa sin identificar', pais: 'nacional', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',

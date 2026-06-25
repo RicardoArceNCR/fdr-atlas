@@ -365,17 +365,12 @@ function marcarPaisesSinConcesiones(concesiones) {
  * ─────────────────────────────────────────────────────────────────────────── */
 
 const ESCALAS_PAIS = {
-  //  4 tonos por país — variación de matiz + valor para máxima diferenciación perceptual
-  //  china:    granate → bermellón → naranja → dorado
-  //  canada:   verde oscuro → bosque → verde vivo → lima
-  //  colombia: índigo → violeta → fucsia → rosa-magenta
-  //  nacional: marino → azul rey → cerúleo → cian
-  //  reserva:  carbón → pizarra → acero → plata
-  china:    ['#6b0f0f', '#cc2200', '#ff4d1a', '#f28c00'],
-  canada:   ['#0a2e0a', '#1e6b1e', '#38a838', '#8dcc00'],
-  colombia: ['#1a0040', '#6600cc', '#cc00aa', '#e8006e'],
-  nacional: ['#060d24', '#0f2f7a', '#0047cc', '#00b8d9'],
-  reserva:  ['#111418', '#394150', '#6b7a8e', '#8ea8c0'],
+  //  4 tonos por país, oscuro→claro con matiz adyacente en el tono 4 — se rotan por índice
+  china: ['#7a1a08', '#c4300f', '#f05a2a', '#e8873a'],
+  canada: ['#0d3d0d', '#287a28', '#5ab85a', '#8dc44a'],
+  colombia: ['#1a0840', '#4a1d9e', '#8c52e8', '#5b9bd4'],
+  nacional: ['#0a1a38', '#1f4090', '#4d72d4', '#4da8d4'],
+  reserva: ['#111418', '#394150', '#6b7a8e', '#8ea8c0'],
   'sin-nombre': ['#4b5563', '#6b7280', '#9ca3af', '#d1d5db'],
 };
 
@@ -500,6 +495,7 @@ function initInteractividad(concesiones) {
   inyectarCSSConcesiones(concesiones);
   initTooltipPoblados();
   initHoverPaises(concesiones);
+  initSeleccionarTodas(concesiones);
   initAnimacionNarrativa(concesiones);
   marcarPaisesSinConcesiones(concesiones);
 
@@ -536,6 +532,7 @@ function initInteractividad(concesiones) {
 }
 
 function activar(svgEl, card, todosLosIds = [], svgIdAPais = {}) {
+  resetSeleccionarTodas();
   svgEl.classList.add("concesion--activa");
   card.classList.add("concesion-card--activa");
 
@@ -635,6 +632,7 @@ function initHoverPaises(concesiones) {
     paisEl.style.cursor = 'pointer';
 
     paisEl.addEventListener('mouseenter', () => {
+      resetSeleccionarTodas();
       activarPais(idsActivos, idsTodos);
       paisEl.classList.add('pais-btn--activo', 'pais--activo');
     });
@@ -695,6 +693,101 @@ const DURACION_SALIDA = 180;  // ms entre cada concesión al revertir
 // Estado interno del tour
 let _tourTimers = [];
 let _tourActivo = false;
+let _todasActivas = false;
+
+/* ─── Botón "Seleccionar todas" ───────────────────────────────────────────────
+ *
+ * Enciende simultáneamente todos los grupos SVG y cards del territorio.
+ * No activa banderas de países ni cambia el estado del tour.
+ * Cualquier interacción posterior (hover individual, bandera, tour)
+ * apaga el estado y devuelve el botón a su forma inactiva.
+ * ─────────────────────────────────────────────────────────────────────────── */
+function initSeleccionarTodas(concesiones) {
+  const idsConSvg = concesiones.filter(c => c.svg_id);
+  if (idsConSvg.length < 2) return;
+
+  const idsTodos = idsConSvg.map(c => c.svg_id);
+
+  const panel = document.querySelector('.diptico__concesiones--mapa');
+  if (!panel) return;
+
+  const btnExistente = document.getElementById('btn-seleccionar-todas');
+  if (btnExistente) btnExistente.remove();
+
+  const btn = document.createElement('button');
+  btn.id = 'btn-seleccionar-todas';
+  btn.type = 'button';
+  btn.className = 'btn-tour-narrativo';
+  btn.setAttribute('aria-label', 'Seleccionar todas las concesiones');
+  btn.innerHTML = `
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <rect x="1" y="1" width="5" height="5" rx="1" fill="currentColor"/>
+      <rect x="8" y="1" width="5" height="5" rx="1" fill="currentColor"/>
+      <rect x="1" y="8" width="5" height="5" rx="1" fill="currentColor"/>
+      <rect x="8" y="8" width="5" height="5" rx="1" fill="currentColor"/>
+    </svg>
+    <span>Seleccionar todas</span>
+  `;
+
+  // Insertar a la izquierda del btn-tour-narrativo dentro del toggle
+  const toggleBtn = panel.querySelector('.diptico__toggle-concesiones');
+  if (toggleBtn) {
+    toggleBtn.appendChild(btn);
+  } else {
+    panel.appendChild(btn);
+  }
+
+  btn.addEventListener('click', () => {
+    if (_todasActivas) {
+      apagarTodas(idsTodos, btn);
+    } else {
+      encenderTodas(idsTodos, btn);
+    }
+  });
+}
+
+function encenderTodas(idsTodos, btn) {
+  // Si hay tour activo, detenerlo primero
+  if (_tourActivo) {
+    const btnTour = document.getElementById('btn-tour-narrativo');
+    if (btnTour) detenerTour(idsTodos, btnTour);
+  }
+
+  _todasActivas = true;
+  btn.classList.add('btn-tour-narrativo--activo');
+  btn.querySelector('span').textContent = 'Deseleccionar';
+
+  idsTodos.forEach(id => {
+    const svgEl = document.getElementById(id);
+    const card = document.querySelector(`.concesion-card[data-svg-id="${id}"]`);
+    svgEl?.classList.add('concesion--activa');
+    svgEl?.classList.remove('concesion--atenuada');
+    card?.classList.add('concesion-card--activa');
+    card?.classList.remove('concesion-card--atenuada');
+  });
+}
+
+function apagarTodas(idsTodos, btn) {
+  _todasActivas = false;
+  btn.classList.remove('btn-tour-narrativo--activo');
+  btn.querySelector('span').textContent = 'Seleccionar todas';
+
+  idsTodos.forEach(id => {
+    const svgEl = document.getElementById(id);
+    const card = document.querySelector(`.concesion-card[data-svg-id="${id}"]`);
+    svgEl?.classList.remove('concesion--activa', 'concesion--atenuada');
+    card?.classList.remove('concesion-card--activa', 'concesion-card--atenuada');
+  });
+}
+
+function resetSeleccionarTodas() {
+  if (!_todasActivas) return;
+  const btn = document.getElementById('btn-seleccionar-todas');
+  const idsTodos = Array.from(
+    document.querySelectorAll('.concesion-card[data-svg-id]')
+  ).map(c => c.dataset.svgId);
+  if (btn) apagarTodas(idsTodos, btn);
+}
 
 function initAnimacionNarrativa(concesiones) {
   // Calcular qué países hay en este mapa (en orden narrativo)
@@ -879,6 +972,9 @@ function detenerTour(idsTodos, btn) {
   _tourTimers.forEach(clearTimeout);
   _tourTimers = [];
   _tourActivo = false;
+  // Si seleccionar-todas estaba activo, apagarlo también
+  const btnTodas = document.getElementById('btn-seleccionar-todas');
+  if (btnTodas && _todasActivas) apagarTodas(idsTodos, btnTodas);
 
   // Limpiar opacity inline de grupos y borders
   idsTodos.forEach(id => {

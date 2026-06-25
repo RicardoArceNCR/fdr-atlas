@@ -517,7 +517,7 @@ const TERRITORIOS = [
     concesiones: [
       { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', color_override: '#ea8e3b', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '15786.8', ano: '—', estado: '—', gaceta: '—' },
     ],
-    concesion_minera: 'Se ha otorgado 1 lote de concesiones mineras a 1 empresa china que cubre el 9.92% de su territorio. Dicha concesión minera afecta de forma directa 1 quebrada y 3 ríos, para un total de 20.88 kilómetros de longitud de la red hídrica superficial.',
+    concesion_minera: 'Se ha otorgado 1 lote de concesión minera a 1 empresa china que cubre el 9.92% de su territorio. Dicha concesión minera afecta de forma directa 1 quebrada y 3 ríos, para un total de 20.88 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 

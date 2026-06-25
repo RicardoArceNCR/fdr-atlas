@@ -416,6 +416,12 @@ function inyectarCSSConcesiones(concesiones) {
 #mapa-svg-inline #${c.svg_id}.concesion--activa [id^="border-"] {
   stroke: ${color} !important;
 }`);
+
+      // Bloque C — border-color de la concesion-card con el tono exacto de la escala
+      rules.push(`
+.concesion-card[data-svg-id="${c.svg_id}"].concesion-card--activa {
+  border-color: ${color};
+}`);
     });
 
   const style = document.createElement('style');

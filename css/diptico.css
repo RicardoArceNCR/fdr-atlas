@@ -87,10 +87,7 @@
   color: #5a5a58;
 }
 
-.diptico.diptico--tema-verde .concesion-card--activa .concesion-card__nombre,
-.diptico.diptico--tema-verde .concesion-card--activa .concesion-card__empresa {
-  color: #fff;
-}
+/* tema-verde: sin fondo en card activa → texto mantiene el color del tema */
 
 /* ─── Layouts ─────────────────────────────────────────────────────────────── */
 
@@ -977,63 +974,46 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 .concesion-card--activa {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  border-width: 1.5px;
+  /* border-color lo inyecta render-diptico.js con el tono exacto de la escala */
 }
 
-.concesion-card--activa .concesion-card__nombre,
-.concesion-card--activa .concesion-card__empresa {
-  color: #fff;
-}
+/* texto y badge mantienen su color en reposo — el borde cromático da el feedback */
 
-.concesion-card--activa .concesion-card__badge {
-  background: rgba(255, 255, 255, 0.20);
-  color: #fff;
-}
-
-/* ── Activo por país ───────────────────────────────────────────────────────
+/* ── Activo por país (sombra cromática) ─────────────────────────────────────
  *
- * Usa data-pais (no data-svg-id): el color de fondo de la card es el mismo
- * para todas las concesiones de un país, así que un solo selector por país
- * cubre cualquier concesión de cualquier territorio, sin listas que
- * mantener a mano. Para un territorio nuevo no hay que tocar este bloque —
- * basta con que cada concesión en data-territorios.js tenga su `pais`
- * correcto ('china' | 'canada' | 'colombia' | 'nacional' | 'reserva').
- * El matiz individual por concesión (naranja claro/oscuro, etc.) sigue
- * viviendo en el `border-*` del SVG vía data-territorios.js, no aquí.
+ * El border-color exacto (tono individual de la ESCALAS_PAIS) lo inyecta
+ * inyectarCSSConcesiones() en render-diptico.js — un selector por concesión
+ * usando data-svg-id. Cada concesión recibe el mismo tono que anima su
+ * border en el SVG.
+ *
+ * Aquí solo queda el box-shadow con el tono genérico del país, para que la
+ * sombra tenga coherencia cromática sin necesitar el color exacto.
  * ─────────────────────────────────────────────────────────────────────────── */
 
-/* China — rojo */
+/* China — sombra roja */
 .concesion-card--activa[data-pais="china"] {
-  background: #dd3519;
-  border-color: #dd3519;
-  box-shadow: 0 4px 10px rgba(221, 53, 25, 0.30);
+  box-shadow: 0 4px 12px rgba(221, 53, 25, 0.28);
 }
 
-/* Canadá — verde */
+/* Canadá — sombra verde */
 .concesion-card--activa[data-pais="canada"] {
-  background: #739b50;
-  border-color: #739b50;
-  box-shadow: 0 4px 10px rgba(115, 155, 80, 0.30);
+  box-shadow: 0 4px 12px rgba(40, 122, 40, 0.28);
 }
 
-/* Nicaragua / Nacional — magenta */
+/* Nacional — sombra azul */
 .concesion-card--activa[data-pais="nacional"] {
-  background: #263fa8;
-  border-color: #263fa8;
-  box-shadow: 0 4px 10px rgba(38, 63, 168, 0.30);
+  box-shadow: 0 4px 12px rgba(38, 63, 168, 0.28);
 }
 
-/* Reserva — gris */
+/* Reserva — sombra gris */
 .concesion-card--activa[data-pais="reserva"] {
-  background: #394150;
-  border-color: #394150;
-  box-shadow: 0 4px 10px rgba(57, 65, 80, 0.30);
+  box-shadow: 0 4px 12px rgba(57, 65, 80, 0.28);
 }
 
-/* Colombia — verde petróleo */
+/* Colombia — sombra violeta */
 .concesion-card--activa[data-pais="colombia"] {
-  background: #5b21b6;
-  border-color: #5b21b6;
-  box-shadow: 0 4px 10px rgba(91, 33, 182, 0.30);
+  box-shadow: 0 4px 12px rgba(91, 33, 182, 0.28);
 }
 
 /* ── Estado atenuado ──────────────────────────────────────────────────────── */

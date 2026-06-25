@@ -365,12 +365,12 @@ function marcarPaisesSinConcesiones(concesiones) {
  * ─────────────────────────────────────────────────────────────────────────── */
 
 const ESCALAS_PAIS = {
-  //  8 tonos por país, de más oscuro a más claro — se rotan por índice
-  china: ['#7a1a08', '#a82510', '#c4300f', '#dd3519', '#f05a2a', '#f47317', '#f98838', '#fbb96a'],
-  canada: ['#0d3d0d', '#1c621c', '#236e23', '#287a28', '#3d9e3d', '#5ab85a', '#6dbf6d', '#a8dfa8'],
-  colombia: ['#1a0840', '#2e0f6b', '#3d1490', '#4a1d9e', '#5b21b6', '#7c3fd4', '#a472e8', '#ccb0f5'],
-  nacional: ['#0a1a38', '#0f2347', '#193966', '#20458a', '#263fa8', '#3a5cc7', '#6b8de0', '#a4b8f0'],
-  reserva: ['#111418', '#1a1a1a', '#2e2e2e', '#394150', '#4a5568', '#555f6e', '#8a949f', '#c0c7ce'],
+  //  4 tonos por país, bien espaciados de más oscuro a más claro — se rotan por índice
+  china: ['#7a1a08', '#c4300f', '#f05a2a', '#fba96a'],
+  canada: ['#0d3d0d', '#287a28', '#5ab85a', '#a8dfa8'],
+  colombia: ['#1a0840', '#4a1d9e', '#8c52e8', '#ccb0f5'],
+  nacional: ['#0a1a38', '#1f4090', '#4d72d4', '#a4b8f0'],
+  reserva: ['#111418', '#394150', '#6b7a8e', '#c0c7ce'],
   'sin-nombre': ['#4b5563', '#6b7280', '#9ca3af', '#d1d5db'],
 };
 

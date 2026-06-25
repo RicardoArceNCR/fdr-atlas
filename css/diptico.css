@@ -363,8 +363,8 @@
   top: 1rem;
   right: 1rem;
   z-index: 10;
-  width: 72px;
-  height: 72px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
   display: none;
 }
@@ -432,7 +432,7 @@
 
 .stat__valor {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 20px;
+  font-size: 27px;
   font-weight: 600;
   color: var(--text-color-primary);
   line-height: 1;
@@ -440,7 +440,7 @@
 }
 
 .stat__label {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--text-color-secondary);
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
@@ -615,7 +615,7 @@
 
 .diptico__narrativa {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 13.5px;
+  font-size: 16px;
   line-height: 1.75;
   color: var(--text-color-primary);
   margin-bottom: 2rem;
@@ -645,7 +645,7 @@
 
 .concesion-minera-titulo {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 9px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.10em;
   text-transform: uppercase;
@@ -655,7 +655,7 @@
 
 .concesion-minera-body {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 13.5px;
+  font-size: 15px;
   line-height: 1.75;
   color: #2c2c2a;
 }
@@ -952,7 +952,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   }
 
   .stat__valor {
-    font-size: 16px;
+    font-size: 27px;
   }
 }
 

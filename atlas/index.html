@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atlas FDR — Concesiones Mineras · Nicaragua</title>
-    <link rel="stylesheet" href="../design-system/tokens/build/tokens.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..144,400;0,8..144,600;1,8..144,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="../design-system/tokens/build/tokens.css">
+
     <style>
         *,
         *::before,
@@ -20,26 +21,24 @@
             padding: 0;
         }
 
-        html,
         body {
-            height: 100%;
-            overflow: hidden;
-            background: var(--background-base);
-            color: var(--text-color-primary);
             font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
+            background: #f6f4ef;
+            color: #1f2521;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        .lobby-nav {
-            height: 53px;
-            background: var(--background-page);
-            border-bottom: 0.5px solid var(--border-subtle);
-            padding: 0 28px;
+        /* ── Nav ─────────────────────────────────────────────────────────── */
+        .nav {
+            background: #fff;
+            border-bottom: 0.5px solid #cfc9be;
+            padding: 12px 32px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            position: relative;
-            z-index: 10;
+            flex-shrink: 0;
         }
 
         .nav-brand {
@@ -47,803 +46,647 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
+            color: inherit;
         }
 
-        .nav-logo-mark {
-            width: 28px;
-            height: 28px;
-            background: var(--color-brand-green-800);
-            border-radius: 7px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+        .nav-logo {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
         }
 
-        .nav-logo-mark svg {
-            display: block;
-        }
-
-        .nav-name {
+        .nav-titulo {
             font-size: 13px;
             font-weight: 600;
-            color: var(--text-color-primary);
-            line-height: 1.2;
+            color: #1f2521;
+            letter-spacing: 0.01em;
         }
 
-        .nav-sub {
+        .nav-subtitulo {
             font-size: 11px;
-            color: var(--text-color-secondary);
+            color: #6b7280;
+            font-weight: 400;
         }
 
-        .nav-right {
-            font-size: 11px;
-            color: var(--text-color-tertiary);
-        }
-
+        /* ── Layout principal 50/50 ─────────────────────────────────────── */
         .lobby-main {
+            flex: 1;
             display: grid;
-            grid-template-columns: 320px 1fr;
-            height: calc(100vh - 53px);
+            grid-template-columns: 1fr 1fr;
+            min-height: 0;
+            height: calc(100vh - 57px);
         }
 
-        .lobby-left {
-            padding: 40px 28px 32px;
+        /* ── Panel izquierdo ─────────────────────────────────────────────── */
+        .lobby-izq {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            border-right: 0.5px solid var(--border-subtle);
-            background: var(--background-page);
+            padding: 40px 40px 32px;
+            gap: 28px;
+            border-right: 0.5px solid #cfc9be;
             overflow-y: auto;
         }
 
-        .kicker {
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--color-brand-green-700);
-            margin-bottom: 12px;
-        }
-
-        .titulo {
-            font-family: 'Source Serif 4', serif;
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--color-brand-green-950);
-            line-height: 1.12;
-            letter-spacing: -0.3px;
-            margin-bottom: 14px;
-        }
-
-        .desc {
-            font-size: 13px;
-            color: var(--text-color-secondary);
-            line-height: 1.65;
-        }
-
-        .left-stats {
+        .lobby-editorial {
             display: flex;
-            margin-top: 28px;
-            border: 0.5px solid var(--border-subtle);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .stat-item {
-            flex: 1;
-            padding: 12px 14px;
-            background: var(--background-base);
-            border-right: 0.5px solid var(--border-subtle);
-        }
-
-        .stat-item:last-child {
-            border-right: none;
-        }
-
-        .stat-val {
-            font-family: 'Source Serif 4', serif;
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--color-brand-green-700);
-            line-height: 1;
-        }
-
-        .stat-lab {
-            font-size: 10px;
-            color: var(--text-color-tertiary);
-            margin-top: 3px;
-        }
-
-        .left-paises {
-            margin-top: 18px;
-            display: flex;
+            flex-direction: column;
             gap: 12px;
-            flex-wrap: wrap;
         }
 
-        .pais-pill {
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        .lobby-kicker {
             font-size: 11px;
-            color: var(--text-color-secondary);
-        }
-
-        .pais-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            display: inline-block;
-            flex-shrink: 0;
-        }
-
-        .dot-china {
-            background: var(--concesion-pais-china);
-        }
-
-        .dot-canada {
-            background: var(--concesion-pais-canada);
-        }
-
-        .dot-colombia {
-            background: var(--concesion-pais-colombia);
-        }
-
-        .dot-nica {
-            background: var(--concesion-pais-nacional);
-        }
-
-        .left-footer {
-            margin-top: 28px;
-        }
-
-        .fdr-logo {
-            height: 24px;
-            width: auto;
-            opacity: 0.65;
-        }
-
-        .lobby-right {
-            padding: 18px 20px;
-            background: var(--background-base);
-            overflow-y: auto;
-        }
-
-        .right-label {
-            font-size: 10px;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: var(--text-color-tertiary);
-            margin-bottom: 12px;
+            color: #6b7280;
         }
 
-        .tc-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 9px;
+        .lobby-titulo {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 1.2;
+            color: #1f2521;
         }
 
-        .tc {
-            background: var(--background-page);
-            border: 0.5px solid var(--border-subtle);
-            border-radius: 9px;
+        .lobby-titulo em {
+            font-style: italic;
+            color: #205736;
+        }
+
+        .lobby-descripcion {
+            font-size: 13.5px;
+            line-height: 1.65;
+            color: #484e49;
+        }
+
+        /* Imagen cuadrada del mapa de Nicaragua */
+        .lobby-mapa-preview {
+            aspect-ratio: 1;
+            border-radius: 8px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-            color: inherit;
-            transition: border-color 140ms ease, transform 130ms ease, box-shadow 140ms ease;
-        }
-
-        .tc--activo:hover {
-            border-color: var(--color-brand-green-700);
-            transform: translateY(-2px);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
-        }
-
-        .tc--dim {
-            cursor: default;
-        }
-
-        .tc-thumb {
-            height: 68px;
+            background: #e8e4dc;
+            border: 0.5px solid #cfc9be;
             position: relative;
-            overflow: hidden;
-            background: var(--background-strong);
-            flex-shrink: 0;
+            max-width: 360px;
         }
 
-        .tc-thumb img {
+        .lobby-mapa-preview img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 200ms ease;
         }
 
-        .tc--activo:hover .tc-thumb img {
-            transform: scale(1.04);
-        }
-
-        .tc-thumb-overlay {
+        .lobby-mapa-caption {
             position: absolute;
-            inset: 0;
-            background: rgba(17, 26, 20, 0.15);
+            bottom: 10px;
+            left: 12px;
+            right: 12px;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            font-weight: 500;
         }
 
-        .tc--dim .tc-thumb-overlay {
-            background: rgba(240, 238, 234, 0.5);
+        /* Stats sumario */
+        .lobby-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
         }
 
-        .tc--dim .tc-thumb img {
-            filter: grayscale(50%);
-            opacity: 0.45;
+        .stat-item {
+            background: #fff;
+            border: 0.5px solid #cfc9be;
+            border-radius: 6px;
+            padding: 12px 14px;
         }
 
-        .tc-thumb-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tc-num-bg {
-            font-family: 'Source Serif 4', serif;
-            font-size: 28px;
-            font-weight: 600;
-            color: rgba(0, 0, 0, 0.07);
-            user-select: none;
-        }
-
-        .tc-badge {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            font-size: 9px;
+        .stat-valor {
+            font-size: 20px;
             font-weight: 700;
-            letter-spacing: 0.04em;
-            padding: 2px 6px;
-            border-radius: 999px;
+            color: #205736;
+            line-height: 1;
         }
 
-        .badge-live {
-            background: var(--color-brand-green-800);
-            color: #fff;
+        .stat-label {
+            font-size: 10px;
+            color: #6b7280;
+            margin-top: 3px;
+            line-height: 1.3;
         }
 
-        .badge-pronto {
-            background: var(--background-page);
-            color: var(--text-color-tertiary);
-            border: 0.5px solid var(--border-subtle);
-        }
-
-        .tc-body {
-            padding: 8px 10px 10px;
+        /* ── Panel derecho — lista de territorios ───────────────────────── */
+        .lobby-der {
+            overflow-y: auto;
+            padding: 28px 32px;
             display: flex;
             flex-direction: column;
-            flex: 1;
+            gap: 6px;
         }
 
-        .tc-num {
+        .lobby-der-header {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 8px;
+            flex-shrink: 0;
+        }
+
+        /* Grilla de territorios */
+        .tc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .tc {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: #fff;
+            border: 0.5px solid #cfc9be;
+            border-radius: 6px;
+            padding: 12px 14px;
+            text-decoration: none;
+            color: inherit;
+            transition: border-color 150ms, box-shadow 150ms, background 150ms;
+            position: relative;
+        }
+
+        .tc:hover {
+            border-color: #205736;
+            box-shadow: 0 2px 8px rgba(32, 87, 54, 0.10);
+            background: #f6faf8;
+        }
+
+        .tc--dim {
+            background: #faf9f7;
+            cursor: default;
+        }
+
+        .tc--dim:hover {
+            border-color: #cfc9be;
+            box-shadow: none;
+            background: #faf9f7;
+        }
+
+        .tc-numero {
             font-size: 9px;
             font-weight: 700;
             letter-spacing: 0.06em;
-            color: var(--text-color-tertiary);
-            margin-bottom: 2px;
+            color: #9ca3af;
+            text-transform: uppercase;
         }
 
         .tc-nombre {
-            font-family: 'Source Serif 4', serif;
             font-size: 12px;
             font-weight: 600;
-            color: var(--color-brand-green-950);
-            line-height: 1.25;
-            flex: 1;
+            color: #1f2521;
+            line-height: 1.3;
         }
 
         .tc-nombre--dim {
-            color: var(--border-default);
+            color: #9ca3af;
         }
 
-        .tc-footer {
-            margin-top: 7px;
+        .tc-meta {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-top: 2px;
         }
 
-        .tc-dots {
+        .tc-ha {
+            font-size: 10px;
+            color: #6b7280;
+        }
+
+        /* Banderas de países */
+        .tc-paises {
             display: flex;
-            gap: 4px;
+            gap: 3px;
         }
 
-        .tc-cta {
+        .tc-pais-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .dot-china {
+            background: #d7620e;
+        }
+
+        .dot-canada {
+            background: #2d7a2d;
+        }
+
+        .dot-colombia {
+            background: #5b21b6;
+        }
+
+        .dot-nacional {
+            background: #263fa8;
+        }
+
+        .dot-reserva {
+            background: #394150;
+        }
+
+        /* Badge "En preparación" */
+        .tc-badge {
             font-size: 9px;
             font-weight: 600;
-            color: var(--color-brand-green-700);
-            display: flex;
-            align-items: center;
-            gap: 2px;
+            color: #9ca3af;
+            background: #f3f4f6;
+            border-radius: 3px;
+            padding: 2px 5px;
+            letter-spacing: 0.02em;
         }
 
-        .tc-cta svg {
-            display: block;
-        }
-
-        .tc-cta-dim {
+        /* Badge concesiones count */
+        .tc-concesiones {
             font-size: 9px;
-            color: var(--border-subtle);
+            font-weight: 600;
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 3px;
+            padding: 2px 5px;
         }
 
-        @media (max-width: 768px) {
+        .tc-concesiones--alta {
+            background: #fee2e2;
+            color: #991b1b;
+        }
 
-            html,
-            body {
-                overflow: auto;
-            }
-
+        @media (max-width: 900px) {
             .lobby-main {
                 grid-template-columns: 1fr;
                 height: auto;
             }
 
-            .lobby-left {
+            .lobby-izq {
                 border-right: none;
-                border-bottom: 0.5px solid var(--border-subtle);
-                padding: 28px 20px;
-            }
-
-            .lobby-right {
-                padding: 16px;
-            }
-
-            .tc-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 420px) {
-            .tc-grid {
-                grid-template-columns: 1fr;
+                border-bottom: 0.5px solid #cfc9be;
             }
         }
     </style>
 </head>
 
 <body>
-
-    <nav class="lobby-nav" role="banner">
-        <a href="#" class="nav-brand" aria-label="Inicio Atlas FDR">
-            <div class="nav-logo-mark" aria-hidden="true">
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-                    <circle cx="7.5" cy="7.5" r="5" stroke="white" stroke-width="1.4" />
-                    <path d="M7.5 4.5v6M5 6.5l2.5 1.2 2.5-1.2" stroke="white" stroke-width="1.2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-            </div>
+    <nav class="nav">
+        <a href="#" class="nav-brand">
+            <img src="../img/Logo-fdr.webp" alt="FDR" class="nav-logo">
             <div>
-                <div class="nav-name">Atlas FDR</div>
-                <div class="nav-sub">Concesiones mineras · Nicaragua</div>
+                <div class="nav-titulo">Atlas de Concesiones Mineras</div>
+                <div class="nav-subtitulo">Territorios Indígenas y Afrodescendientes · Nicaragua</div>
             </div>
         </a>
-        <div class="nav-right">Fundación del Río · 2026</div>
     </nav>
 
-    <main class="lobby-main">
+    <div class="lobby-main">
 
-        <div class="lobby-left">
-            <div>
-                <div class="kicker">Atlas de territorios</div>
-                <h1 class="titulo">Concesiones mineras<br>en territorios indígenas<br>y afrodescendientes</h1>
-                <p class="desc">Mapas cartográficos interactivos sobre la presencia de capital extractivo chino,
-                    canadiense, colombiano y nacional en los territorios de la Costa Caribe de Nicaragua.</p>
+        <!-- Panel izquierdo: editorial + mapa preview -->
+        <aside class="lobby-izq">
+            <div class="lobby-editorial">
+                <div class="lobby-kicker">Fundación del Río · 2026</div>
+                <h1 class="lobby-titulo">Concesiones mineras en <em>territorios indígenas</em> de Nicaragua</h1>
+                <p class="lobby-descripcion">Este atlas documenta las concesiones mineras otorgadas por el Estado de
+                    Nicaragua dentro de territorios indígenas y afrodescendientes, identificando el origen del capital
+                    concesionado y el impacto sobre la red hídrica de cada territorio.</p>
+            </div>
 
-                <div class="left-stats">
-                    <div class="stat-item">
-                        <div class="stat-val">16</div>
-                        <div class="stat-lab">territorios</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-val">79</div>
-                        <div class="stat-lab">concesiones</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-val">4</div>
-                        <div class="stat-lab">países</div>
-                    </div>
+            <!-- Stats -->
+            <div class="lobby-stats">
+                <div class="stat-item">
+                    <div class="stat-valor">19</div>
+                    <div class="stat-label">Territorios documentados</div>
                 </div>
-
-                <div class="left-paises">
-                    <span class="pais-pill"><span class="pais-dot dot-china" aria-hidden="true"></span>China</span>
-                    <span class="pais-pill"><span class="pais-dot dot-canada" aria-hidden="true"></span>Canadá</span>
-                    <span class="pais-pill"><span class="pais-dot dot-colombia"
-                            aria-hidden="true"></span>Colombia</span>
-                    <span class="pais-pill"><span class="pais-dot dot-nica" aria-hidden="true"></span>Nicaragua</span>
+                <div class="stat-item">
+                    <div class="stat-valor">79</div>
+                    <div class="stat-label">Lotes de concesión</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-valor">4</div>
+                    <div class="stat-label">Países de capital</div>
                 </div>
             </div>
 
-            <div class="left-footer">
-                <img src="../img/Logo-fdr.webp" alt="Fundación del Río" class="fdr-logo"
-                    onerror="this.style.display='none'">
+            <!-- Mapa preview cuadrado -->
+            <div class="lobby-mapa-preview">
+                <img src="../img/01-Territorio Rama y Kriol.webp" alt="Mapa de territorios indígenas de Nicaragua">
+                <div class="lobby-mapa-caption">Costa Caribe · Nicaragua</div>
             </div>
-        </div>
+        </aside>
 
-        <div class="lobby-right">
-            <div class="right-label">16 territorios · Costa Caribe de Nicaragua</div>
+        <!-- Panel derecho: lista de territorios -->
+        <main class="lobby-der">
+            <div class="lobby-der-header">Selecciona un territorio</div>
+
             <div class="tc-grid" role="list">
 
-                <!-- 01 -->
-                <a href="01-rama-kriol/index.html" class="tc tc--activo" role="listitem">
-                    <div class="tc-thumb">
-                        <img src="../img/01-Territorio Rama y Kriol.webp" alt="">
-                        <div class="tc-thumb-overlay" aria-hidden="true"></div>
-                        <span class="tc-badge badge-live">● Disponible</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">01 · RACCS</div>
-                        <div class="tc-nombre">Rama y Kriol</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" title="China"></span>
-                                <span class="pais-dot dot-nica" title="Nicaragua"></span>
-                            </div>
-                            <div class="tc-cta">Ver <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
-                                    <path d="M1.5 4.5h6M5 2.5l2.5 2L5 6.5" stroke="currentColor" stroke-width="1.3"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg></div>
+                <!-- 01 — Rama y Kriol ✅ -->
+                <a href="01-rama-kriol/index.html" class="tc" role="listitem">
+                    <div class="tc-numero">01</div>
+                    <div class="tc-nombre">Rama y Kriol</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">406,849 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-china" title="China"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-concesiones">3 concesiones</span>
                     </div>
                 </a>
 
-                <!-- 02 -->
-                <a href="02-creole-bluefields/index.html" class="tc tc--activo" role="listitem">
-                    <div class="tc-thumb">
-                        <img src="../img/02_Territorio Creole de Bluefields.webp" alt="">
-                        <div class="tc-thumb-overlay" aria-hidden="true"></div>
-                        <span class="tc-badge badge-live">● Disponible</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">02 · RACCS</div>
-                        <div class="tc-nombre">Creole de Bluefields</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" title="China"></span>
-                            </div>
-                            <div class="tc-cta">Ver <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
-                                    <path d="M1.5 4.5h6M5 2.5l2.5 2L5 6.5" stroke="currentColor" stroke-width="1.3"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg></div>
+                <!-- 02 — Negro Creole de Bluefields ✅ -->
+                <a href="02-creole-bluefields/index.html" class="tc" role="listitem">
+                    <div class="tc-numero">02</div>
+                    <div class="tc-nombre">Negro Creole de Bluefields</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">94,050 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-china" title="China"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-concesiones">1 concesión</span>
                     </div>
                 </a>
 
-                <!-- 03 -->
-                <a href="03-waupasa-twi/index.html" class="tc tc--activo" role="listitem">
-                    <div class="tc-thumb">
-                        <img src="../img/03_Waupasa Twi.webp" alt="">
-                        <div class="tc-thumb-overlay" aria-hidden="true"></div>
-                        <span class="tc-badge badge-live">● Disponible</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">03 · RACCN</div>
-                        <div class="tc-nombre">Waupasa Twi</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" title="China"></span>
-                                <span class="pais-dot dot-canada" title="Canadá"></span>
-                                <span class="pais-dot dot-nica" title="Nicaragua"></span>
-                            </div>
-                            <div class="tc-cta">Ver <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
-                                    <path d="M1.5 4.5h6M5 2.5l2.5 2L5 6.5" stroke="currentColor" stroke-width="1.3"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg></div>
+                <!-- 03 — Twi Waupasa ✅ -->
+                <a href="03-waupasa-twi/index.html" class="tc" role="listitem">
+                    <div class="tc-numero">03</div>
+                    <div class="tc-nombre">Twi Waupasa</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">128,699 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-china" title="China"></span>
+                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                            <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-concesiones tc-concesiones--alta">8 concesiones</span>
                     </div>
                 </a>
 
-                <!-- 04 -->
-                <a href="04-wangki-twi-tasba-raya/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <img src="../img/04_Wangki Twi-Tasba Raya.jpeg" alt="" aria-hidden="true">
-                        <div class="tc-thumb-overlay" aria-hidden="true"></div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">04 · RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">Wangki Twi-Tasba Raya</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" style="opacity:.3"></span>
-                                <span class="pais-dot dot-nica" style="opacity:.3"></span>
-                            </div>
-                            <div class="tc-cta-dim">Próximamente</div>
+                <!-- 04 — Wangki Twi-Tasba Raya ✅ -->
+                <a href="04-wangki-twi-tasba-raya/index.html" class="tc" role="listitem">
+                    <div class="tc-numero">04</div>
+                    <div class="tc-nombre">Wangki Twi-Tasba Raya</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">162,181 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-china" title="China"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-concesiones">2 concesiones</span>
                     </div>
                 </a>
 
-                <!-- 05 -->
+                <!-- 05 — Wangki Li Aubra Tasbaya ⏳ sin assets -->
                 <a href="05-wangki-li/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">05</span></div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">05 · RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">Wangki Li Aubra Tasbaya</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" style="opacity:.3"></span>
-                                <span class="pais-dot dot-nica" style="opacity:.3"></span>
-                            </div>
-                            <div class="tc-cta-dim">Próximamente</div>
+                    <div class="tc-numero">05</div>
+                    <div class="tc-nombre tc-nombre--dim">Wangki Li Aubra Tasbaya</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">88,434 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-china" title="China"></span>
+                            <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-badge">En preparación</span>
+                        <span class="tc-concesiones">2 concesiones</span>
                     </div>
                 </a>
 
-                <!-- 06 -->
-                <a href="06-kipla-sait/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">06</span></div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">06 · RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">Kipla Sait Tasbaika</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots"></div>
-                            <div class="tc-cta-dim">Próximamente</div>
+                <!-- 06 — Twi Yahbra (Diez comunidades) ✅ raster + SVG -->
+                <a href="06-twi-ahbra-10-comunidades/index.html" class="tc" role="listitem">
+                    <div class="tc-numero">06</div>
+                    <div class="tc-nombre">Twi Yahbra</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">159,138 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-china" title="China"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-concesiones">1 concesión</span>
                     </div>
                 </a>
 
-                <!-- 07 -->
-                <a href="07-tuahka/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">07</span></div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">07 · RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">Tuahka</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" style="opacity:.3"></span>
-                                <span class="pais-dot dot-canada" style="opacity:.3"></span>
-                                <span class="pais-dot dot-nica" style="opacity:.3"></span>
-                            </div>
-                            <div class="tc-cta-dim">Próximamente</div>
+                <!-- 07 — Tuahka Takaln Balna ✅ raster + SVG parcial -->
+                <a href="07-tuahka/index.html" class="tc" role="listitem">
+                    <div class="tc-numero">07</div>
+                    <div class="tc-nombre">Tuahka Takaln Balna</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">54,556 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                            <span class="tc-pais-dot dot-colombia" title="Colombia"></span>
+                            <span class="tc-pais-dot dot-china" title="China"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-concesiones tc-concesiones--alta">13 concesiones</span>
                     </div>
                 </a>
 
-                <!-- 08 -->
-                <a href="08-tasba-pri/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">08</span></div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">08 · RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">Tasba Pri Matriz Indígena</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" style="opacity:.3"></span>
-                                <span class="pais-dot dot-canada" style="opacity:.3"></span>
-                            </div>
-                            <div class="tc-cta-dim">Próximamente</div>
+                <!-- 08 — Tasba Pri Matriz Indígena ✅ raster + SVG -->
+                <a href="08-tasba-pri/index.html" class="tc" role="listitem">
+                    <div class="tc-numero">08</div>
+                    <div class="tc-nombre">Tasba Pri Matriz Indígena</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">79,897 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-china" title="China"></span>
+                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-concesiones">7 concesiones</span>
                     </div>
                 </a>
 
-                <!-- 09 -->
-                <a href="09-prinzu-awala/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">09</span></div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">09 · RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">Prinzu Awala</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" style="opacity:.3"></span>
-                                <span class="pais-dot dot-canada" style="opacity:.3"></span>
-                            </div>
-                            <div class="tc-cta-dim">Próximamente</div>
+                <!-- 09 — Prinzu Awala ✅ raster + SVG -->
+                <a href="09-prinzu-awala/index.html" class="tc" role="listitem">
+                    <div class="tc-numero">09</div>
+                    <div class="tc-nombre">Prinzu Awala</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">414,955 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                            <span class="tc-pais-dot dot-china" title="China"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-concesiones tc-concesiones--alta">8 concesiones</span>
                     </div>
                 </a>
 
-                <!-- 10 -->
-                <a href="10-twi-yahbra/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">10</span></div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">10 · RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">Twi Yahbra</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" style="opacity:.3"></span>
-                            </div>
-                            <div class="tc-cta-dim">Próximamente</div>
+                <!-- 10 — Mayangna Sauni Bas "Sikilta" ✅ raster + SVG -->
+                <a href="10-mayangna-sauni-bas/index.html" class="tc" role="listitem">
+                    <div class="tc-numero">10</div>
+                    <div class="tc-nombre">Mayangna Sauni Bas "Sikilta"</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">43,241 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                            <span class="tc-pais-dot dot-china" title="China"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-concesiones">4 concesiones</span>
                     </div>
                 </a>
 
-                <!-- 11 -->
-                <a href="11-sikilta/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">11</span></div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">11 · RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">Sikilta</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots"></div>
-                            <div class="tc-cta-dim">Próximamente</div>
+                <!-- 11 — Mayangna Sauni As ⏳ sin assets -->
+                <a href="11-mayangna-sauni-as/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-numero">11</div>
+                    <div class="tc-nombre tc-nombre--dim">Mayangna Sauni As</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">163,810 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-colombia" title="Colombia"></span>
+                            <span class="tc-pais-dot dot-china" title="China"></span>
+                            <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-badge">En preparación</span>
+                        <span class="tc-concesiones">7 concesiones</span>
                     </div>
                 </a>
 
-                <!-- 12 -->
-                <a href="12-mayangna-sauni-arungka/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">12</span></div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">12 · RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">Mayangna Sauni Arungka</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" style="opacity:.3"></span>
-                                <span class="pais-dot dot-nica" style="opacity:.3"></span>
-                            </div>
-                            <div class="tc-cta-dim">Próximamente</div>
+                <!-- 12 — Mayangna Sauni Arungka "Matunbak" ✅ raster + SVG -->
+                <a href="12-mayangna-arungka-matungbak/index.html" class="tc" role="listitem">
+                    <div class="tc-numero">12</div>
+                    <div class="tc-nombre">Mayangna Sauni Arungka "Matunbak"</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">48,723 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-colombia" title="Colombia"></span>
+                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                            <span class="tc-pais-dot dot-china" title="China"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-concesiones tc-concesiones--alta">11 concesiones</span>
                     </div>
                 </a>
 
-                <!-- 13 -->
-                <a href="13-mayangna-sauni-bu/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">13</span></div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">13 · RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">Mayangna Sauni Bu</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-nica" style="opacity:.3"></span>
-                            </div>
-                            <div class="tc-cta-dim">Próximamente</div>
+                <!-- 13 — AMASAU ⏳ sin assets -->
+                <a href="13-amasau/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-numero">13</div>
+                    <div class="tc-nombre tc-nombre--dim">Mayangna Awas Tingni (AMASAU)</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">73,394 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-china" title="China"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-badge">En preparación</span>
+                        <span class="tc-concesiones">1 concesión</span>
                     </div>
                 </a>
 
-                <!-- 14 -->
-                <a href="14-mayangna-sauni-bas/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">14</span></div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">14 · RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">Mayangna Sauni Bas</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" style="opacity:.3"></span>
-                                <span class="pais-dot dot-canada" style="opacity:.3"></span>
-                            </div>
-                            <div class="tc-cta-dim">Próximamente</div>
+                <!-- 14 — Chorotega - Norte ⏳ sin assets -->
+                <a href="14-chorotega-norte/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-numero">14</div>
+                    <div class="tc-nombre tc-nombre--dim">Chorotega - Norte</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">138,080 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-china" title="China"></span>
+                            <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
+                            <span class="tc-pais-dot dot-reserva" title="Reserva Minera"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-badge">En preparación</span>
+                        <span class="tc-concesiones tc-concesiones--alta">10 concesiones</span>
                     </div>
                 </a>
 
-                <!-- 15 -->
-                <a href="15-prinzu-auhya-uh/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">15</span></div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">15 · RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">Prinzu Auhya Uh</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-canada" style="opacity:.3"></span>
-                            </div>
-                            <div class="tc-cta-dim">Próximamente</div>
+                <!-- 15 — Matagalpa ⏳ sin assets -->
+                <a href="15-matagalpa/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-numero">15</div>
+                    <div class="tc-nombre tc-nombre--dim">Matagalpa</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">153,899 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-china" title="China"></span>
+                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-badge">En preparación</span>
+                        <span class="tc-concesiones">4 concesiones</span>
                     </div>
                 </a>
 
-                <!-- 16 -->
-                <a href="16-miskitu-indian/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg">16</span></div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">16 · RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">Miskitu Indian Tasbaika Kum</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots"></div>
-                            <div class="tc-cta-dim">Próximamente</div>
+                <!-- 16 — Prinzu Auhya Un ⏳ sin assets -->
+                <a href="16-prinzu-auhya-un/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-numero">16</div>
+                    <div class="tc-nombre tc-nombre--dim">Prinzu Auhya Un</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">378,058 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
                         </div>
+                    </div>
+                    <div class="tc-meta">
+                        <span class="tc-badge">En preparación</span>
+                        <span class="tc-concesiones">3 concesiones</span>
                     </div>
                 </a>
 
-                <!-- AMASAU -->
-                <a href="amasau/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg" style="font-size:18px;">AS</span>
+                <!-- 17 — Muy Muy ⏳ sin assets -->
+                <a href="17-muy-muy/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-numero">17</div>
+                    <div class="tc-nombre tc-nombre--dim">Muy Muy</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">53,587 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-china" title="China"></span>
+                            <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
                         </div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
                     </div>
-                    <div class="tc-body">
-                        <div class="tc-num">RACCN</div>
-                        <div class="tc-nombre tc-nombre--dim">AMASAU</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" style="opacity:.3"></span>
-                            </div>
-                            <div class="tc-cta-dim">Próximamente</div>
-                        </div>
+                    <div class="tc-meta">
+                        <span class="tc-badge">En preparación</span>
+                        <span class="tc-concesiones">2 concesiones</span>
                     </div>
                 </a>
 
-                <!-- Chorotega -->
-                <a href="chorotega/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg" style="font-size:16px;">CH</span>
+                <!-- 18 — Sébaco ⏳ sin assets -->
+                <a href="18-sebaco/index.html" class="tc tc--dim" role="listitem">
+                    <div class="tc-numero">18</div>
+                    <div class="tc-nombre tc-nombre--dim">Sébaco</div>
+                    <div class="tc-meta">
+                        <span class="tc-ha">25,152 ha</span>
+                        <div class="tc-paises">
+                            <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
                         </div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
                     </div>
-                    <div class="tc-body">
-                        <div class="tc-num">Chorotega</div>
-                        <div class="tc-nombre tc-nombre--dim">Chorotega</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" style="opacity:.3"></span>
-                                <span class="pais-dot dot-nica" style="opacity:.3"></span>
-                            </div>
-                            <div class="tc-cta-dim">Próximamente</div>
-                        </div>
+                    <div class="tc-meta">
+                        <span class="tc-badge">En preparación</span>
+                        <span class="tc-concesiones">1 concesión</span>
                     </div>
                 </a>
 
-                <!-- Matagalpa -->
-                <a href="matagalpa/index.html" class="tc tc--dim" role="listitem">
-                    <div class="tc-thumb">
-                        <div class="tc-thumb-placeholder"><span class="tc-num-bg" style="font-size:16px;">MT</span>
-                        </div>
-                        <span class="tc-badge badge-pronto">En preparación</span>
-                    </div>
-                    <div class="tc-body">
-                        <div class="tc-num">Matagalpa</div>
-                        <div class="tc-nombre tc-nombre--dim">Matagalpa</div>
-                        <div class="tc-footer">
-                            <div class="tc-dots">
-                                <span class="pais-dot dot-china" style="opacity:.3"></span>
-                                <span class="pais-dot dot-canada" style="opacity:.3"></span>
-                            </div>
-                            <div class="tc-cta-dim">Próximamente</div>
-                        </div>
-                    </div>
-                </a>
+            </div><!-- /tc-grid -->
+        </main>
+    </div><!-- /lobby-main -->
 
-            </div>
-        </div>
-
-    </main>
 </body>
 
 </html>

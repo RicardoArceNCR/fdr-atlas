@@ -15,12 +15,12 @@
         isolation: isolate;
       }
 
-      .st15, .st17, .st19, .st20 {
-        font-weight: 700;
+      .st15, .st17, .st19 {
+        font-family: Helvetica-Bold, Helvetica;
       }
 
-      .st15, .st17, .st20 {
-        font-family: Helvetica-Bold, Helvetica;
+      .st15, .st17, .st19, .st20 {
+        font-weight: 700;
       }
 
       .st1 {
@@ -196,6 +196,11 @@
         fill: #c90d0d;
       }
 
+      .st19 {
+        fill: #223f2c;
+        font-size: 27.4px;
+      }
+
       .st43 {
         fill: #f7d34b;
       }
@@ -214,14 +219,9 @@
         fill: #2b65bf;
       }
 
-      .st19 {
+      .st20 {
         font-family: Arial-BoldMT, Arial;
         font-size: 15.9px;
-      }
-
-      .st20 {
-        fill: #223f2c;
-        font-size: 29.3px;
       }
 
       .st13 {
@@ -793,7 +793,7 @@
       <g id="label">
         <g class="st18">
           <g class="st18">
-            <text class="st19" transform="translate(763.5 495)"><tspan x="0" y="0">Reserva</tspan><tspan x="10.6" y="19.1">Minera</tspan></text>
+            <text class="st20" transform="translate(763.5 495)"><tspan x="0" y="0">Reserva</tspan><tspan x="10.6" y="19.1">Minera</tspan></text>
           </g>
         </g>
       </g>
@@ -814,7 +814,7 @@
       <g id="label1">
         <g class="st18">
           <g class="st18">
-            <text class="st19" transform="translate(752 563.6)"><tspan x="0" y="0">Colombia</tspan></text>
+            <text class="st20" transform="translate(752 563.6)"><tspan x="0" y="0">Colombia</tspan></text>
           </g>
         </g>
       </g>
@@ -823,7 +823,7 @@
       <g id="label2">
         <g class="st18">
           <g class="st18">
-            <text class="st19" transform="translate(747.8 448.8)"><tspan x="0" y="0">Nicaragua</tspan></text>
+            <text class="st20" transform="translate(747.8 448.8)"><tspan x="0" y="0">Nicaragua</tspan></text>
           </g>
         </g>
       </g>
@@ -862,7 +862,7 @@
       <g id="label3">
         <g class="st18">
           <g class="st18">
-            <text class="st19" transform="translate(766.3 395.3)"><tspan x="0" y="0">Canada</tspan></text>
+            <text class="st20" transform="translate(766.3 395.3)"><tspan x="0" y="0">Canada</tspan></text>
           </g>
         </g>
       </g>
@@ -879,7 +879,7 @@
       <g id="label4">
         <g class="st18">
           <g class="st18">
-            <text class="st19" transform="translate(779.3 331.9)"><tspan x="0" y="0">China</tspan></text>
+            <text class="st20" transform="translate(779.3 331.9)"><tspan x="0" y="0">China</tspan></text>
           </g>
         </g>
       </g>
@@ -901,19 +901,19 @@
     <g class="st18">
       <g class="st18">
         <g class="st18">
-          <text class="st20" transform="translate(42.2 42.9)"><tspan x="0" y="0">Concesiones mineras en territorio </tspan></text>
+          <text class="st19" transform="translate(42.2 43.6)"><tspan x="0" y="0" xml:space="preserve">Concesiones mineras en territorio Mayangna  </tspan></text>
         </g>
       </g>
       <g class="st18">
         <g class="st18">
-          <text class="st20" transform="translate(42.2 74.1)"><tspan x="0" y="0">Mayangna Awas Tingni Mayangnina Sauni Umani (AMASAU)</tspan></text>
+          <text class="st19" transform="translate(42.2 72.8)"><tspan x="0" y="0">Awas Tingni Mayangnina Sauni Umani (AMASAU)</tspan></text>
         </g>
       </g>
     </g>
     <g class="st30">
-      <line class="st14" x1="281.9" y1="172.4" x2="171.1" y2="172.4"/>
+      <line class="st14" x1="281.8" y1="175.3" x2="171.3" y2="167.9"/>
     </g>
-    <polygon class="st16" points="282.7 163.7 305.6 172.9 305.7 172.9 305.6 172.9 305.7 172.9 305.6 172.9 282.7 182.2 282.7 163.7"/>
+    <polygon class="st16" points="283.2 166.7 305.5 177.4 305.6 177.4 305.5 177.4 305.6 177.4 305.5 177.4 282 185.2 283.2 166.7"/>
     <g class="st18">
       <g class="st18">
         <text class="st17" transform="translate(74.5 303.7)"><tspan x="0" y="0">Nicaragua</tspan></text>
@@ -997,8 +997,8 @@
         <circle class="st24" cx="156.5" cy="252.9" r="3.9"/>
         <circle class="st24" cx="155.6" cy="260.8" r="3.9"/>
       </g>
-      <circle class="st5" cx="163.6" cy="171.6" r="19.1"/>
-      <circle class="st39" cx="163.6" cy="171.6" r="9.2"/>
+      <circle class="st5" cx="152" cy="165.9" r="19.1"/>
+      <circle class="st39" cx="152" cy="165.9" r="9.2"/>
     </g>
   </g>
 </svg>

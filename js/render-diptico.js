@@ -70,6 +70,7 @@ async function init() {
     renderFuente(territorio);
     renderInsets(territorio);
     initToggleConcesiones();
+    initNavegacion();
   } catch (err) {
     console.error(err);
   }
@@ -1130,7 +1131,7 @@ function initNavegacion() {
   const lblPrev = document.getElementById('nav-prev-label');
   if (btnPrev) {
     if (prevTerr) {
-      btnPrev.href = `../${prevTerr.id}/index.html`;
+      btnPrev.href = `../../atlas/${prevTerr.id}/index.html`;
       btnPrev.title = prevTerr.nombre;
       if (lblPrev) lblPrev.textContent = prevTerr.nombre;
     } else {
@@ -1144,7 +1145,7 @@ function initNavegacion() {
   const lblNext = document.getElementById('nav-next-label');
   if (btnNext) {
     if (nextTerr) {
-      btnNext.href = `../${nextTerr.id}/index.html`;
+      btnNext.href = `../../atlas/${nextTerr.id}/index.html`;
       btnNext.title = nextTerr.nombre;
       if (lblNext) lblNext.textContent = nextTerr.nombre;
     } else {
@@ -1165,4 +1166,4 @@ function initNavegacion() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', initNavegacion);
+// initNavegacion() se llama desde init() después de insertar el template.

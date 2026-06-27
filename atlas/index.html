@@ -25,66 +25,69 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             background: #f6f4ef;
             color: #1f2521;
-            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
             display: flex;
-            flex-direction: column;
         }
 
-        /* ── Nav ─────────────────────────────────────────────────────────── */
-        .nav {
-            background: #fff;
-            border-bottom: 0.5px solid #cfc9be;
-            padding: 12px 32px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-shrink: 0;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .nav-logo {
-            width: 72px;
-            height: 72px;
-            object-fit: contain;
-        }
-
-        .nav-titulo {
-            font-size: 13px;
-            font-weight: 600;
-            color: #1f2521;
-            letter-spacing: 0.01em;
-        }
-
-        .nav-subtitulo {
-            font-size: 11px;
-            color: #6b7280;
-            font-weight: 400;
-        }
-
-        /* ── Layout principal 50/50 ─────────────────────────────────────── */
+        /* ── Layout principal 50/50 — ocupa toda la ventana ──────────────── */
         .lobby-main {
-            flex: 1;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            min-height: 0;
-            height: calc(100vh - 57px);
+            width: 100%;
+            height: 100vh;
         }
 
         /* ── Panel izquierdo ─────────────────────────────────────────────── */
         .lobby-izq {
             display: flex;
             flex-direction: column;
-            padding: 40px 40px 32px;
-            gap: 28px;
+            padding: 36px 40px 32px;
+            gap: 24px;
             border-right: 0.5px solid #cfc9be;
             overflow-y: auto;
+            background: #fff;
+        }
+
+        /* Logo integrado arriba del panel izquierdo */
+        .lobby-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .lobby-logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .lobby-brand-texto {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .lobby-brand-titulo {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1f2521;
+            letter-spacing: 0.01em;
+        }
+
+        .lobby-brand-subtitulo {
+            font-size: 10.5px;
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        /* Divisor sutil entre logo y contenido editorial */
+        .lobby-divider {
+            height: 0.5px;
+            background: #e8e4dc;
+            flex-shrink: 0;
         }
 
         .lobby-editorial {
@@ -103,7 +106,7 @@
 
         .lobby-titulo {
             font-family: 'Source Serif 4', Georgia, serif;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 600;
             line-height: 1.2;
             color: #1f2521;
@@ -115,21 +118,49 @@
         }
 
         .lobby-descripcion {
-            font-size: 13.5px;
+            font-size: 13px;
             line-height: 1.65;
             color: #484e49;
         }
 
-        /* Imagen cuadrada del mapa de Nicaragua */
+        /* Stats sumario */
+        .lobby-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .stat-item {
+            background: #f6f4ef;
+            border: 0.5px solid #cfc9be;
+            border-radius: 6px;
+            padding: 11px 13px;
+        }
+
+        .stat-valor {
+            font-size: 20px;
+            font-weight: 700;
+            color: #205736;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #6b7280;
+            margin-top: 3px;
+            line-height: 1.3;
+        }
+
+        /* Mapa preview — crece para llenar el espacio sobrante */
         .lobby-mapa-preview {
-            aspect-ratio: 1;
+            flex: 1;
+            min-height: 0;
             border-radius: 8px;
             overflow: hidden;
             background: #e8e4dc;
             border: 0.5px solid #cfc9be;
             position: relative;
-            max-width: 100%;
-            max-height: 430px;
         }
 
         .lobby-mapa-preview img {
@@ -150,54 +181,37 @@
             font-weight: 500;
         }
 
-        /* Stats sumario */
-        .lobby-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
-
-        .stat-item {
-            background: #fff;
-            border: 0.5px solid #cfc9be;
-            border-radius: 6px;
-            padding: 12px 14px;
-        }
-
-        .stat-valor {
-            font-size: 20px;
-            font-weight: 700;
-            color: #205736;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 10px;
-            color: #6b7280;
-            margin-top: 3px;
-            line-height: 1.3;
-        }
-
         /* ── Panel derecho — lista de territorios ───────────────────────── */
         .lobby-der {
-            overflow-y: auto;
-            padding: 16px 20px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            overflow: hidden;
+            /* el scroll lo maneja tc-grid-wrap */
+            background: #f6f4ef;
         }
 
+        /* Header sticky dentro del panel derecho */
         .lobby-der-header {
+            flex-shrink: 0;
+            padding: 14px 20px 10px;
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 0.06em;
             text-transform: uppercase;
             color: #6b7280;
-            margin-bottom: 4px;
-            flex-shrink: 0;
+            background: #f6f4ef;
+            border-bottom: 0.5px solid #e8e4dc;
+            /* Sticky real: el scroll ocurre en tc-grid-wrap, no aquí */
         }
 
-        /* Grilla de territorios */
+        /* Contenedor scrollable que NO incluye el header */
+        .tc-grid-wrap {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px 16px 16px;
+        }
+
+        /* Grilla de territorios — 2 columnas, 8 filas = 16 items */
         .tc-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -266,7 +280,6 @@
             color: #6b7280;
         }
 
-        /* Banderas de países */
         .tc-paises {
             display: flex;
             gap: 3px;
@@ -298,7 +311,6 @@
             background: #394150;
         }
 
-        /* Badge "En preparación" */
         .tc-badge {
             font-size: 9px;
             font-weight: 600;
@@ -309,7 +321,6 @@
             letter-spacing: 0.02em;
         }
 
-        /* Badge concesiones count */
         .tc-concesiones {
             font-size: 9px;
             font-weight: 600;
@@ -324,7 +335,13 @@
             color: #991b1b;
         }
 
+        /* ── Responsive ─────────────────────────────────────────────────── */
         @media (max-width: 900px) {
+            body {
+                height: auto;
+                overflow: auto;
+            }
+
             .lobby-main {
                 grid-template-columns: 1fr;
                 height: auto;
@@ -333,26 +350,43 @@
             .lobby-izq {
                 border-right: none;
                 border-bottom: 0.5px solid #cfc9be;
+                overflow-y: visible;
+            }
+
+            .lobby-mapa-preview {
+                flex: none;
+                aspect-ratio: 1;
+                max-height: 380px;
+            }
+
+            .lobby-der {
+                overflow: visible;
+            }
+
+            .tc-grid-wrap {
+                overflow-y: visible;
             }
         }
     </style>
 </head>
 
 <body>
-    <nav class="nav">
-        <a href="#" class="nav-brand">
-            <img src="../img/Logo-fdr.webp" alt="FDR" class="nav-logo">
-            <div>
-                <div class="nav-titulo">Atlas de Concesiones Mineras</div>
-                <div class="nav-subtitulo">Territorios Indígenas y Afrodescendientes · Nicaragua</div>
-            </div>
-        </a>
-    </nav>
-
     <div class="lobby-main">
 
-        <!-- Panel izquierdo: editorial + mapa preview -->
+        <!-- Panel izquierdo: logo + editorial + stats + mapa preview -->
         <aside class="lobby-izq">
+
+            <!-- Logo integrado (reemplaza el nav) -->
+            <div class="lobby-brand">
+                <img src="../img/Logo-fdr.webp" alt="Fundación del Río" class="lobby-logo">
+                <div class="lobby-brand-texto">
+                    <div class="lobby-brand-titulo">Atlas de Concesiones Mineras</div>
+                    <div class="lobby-brand-subtitulo">Territorios Indígenas y Afrodescendientes · Nicaragua</div>
+                </div>
+            </div>
+
+            <div class="lobby-divider"></div>
+
             <div class="lobby-editorial">
                 <div class="lobby-kicker">Fundación del Río · 2026</div>
                 <h1 class="lobby-titulo">Concesiones mineras en <em>territorios indígenas</em> de Nicaragua</h1>
@@ -361,10 +395,9 @@
                     concesionado y el impacto sobre la red hídrica de cada territorio.</p>
             </div>
 
-            <!-- Stats -->
             <div class="lobby-stats">
                 <div class="stat-item">
-                    <div class="stat-valor">18</div>
+                    <div class="stat-valor">16</div>
                     <div class="stat-label">Territorios documentados</div>
                 </div>
                 <div class="stat-item">
@@ -377,306 +410,279 @@
                 </div>
             </div>
 
-            <!-- Mapa preview cuadrado -->
             <div class="lobby-mapa-preview">
                 <img src="../img/banner-04.webp" alt="Mapa de territorios indígenas de Nicaragua">
-                <div class="lobby-mapa-caption">.</div>
+                <div class="lobby-mapa-caption"></div>
             </div>
+
         </aside>
 
         <!-- Panel derecho: lista de territorios -->
         <main class="lobby-der">
+
             <div class="lobby-der-header">Selecciona un territorio</div>
 
-            <div class="tc-grid" role="list">
+            <div class="tc-grid-wrap">
+                <div class="tc-grid" role="list">
 
-                <!-- 01 — Rama y Kriol ✅ -->
-                <a href="01-rama-kriol/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">01</div>
-                    <div class="tc-nombre">Rama y Kriol</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">406,849 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-china" title="China"></span>
+                    <!-- 01 — Rama y Kriol -->
+                    <a href="01-rama-kriol/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">01</div>
+                        <div class="tc-nombre">Rama y Kriol</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">406,849 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones">3 concesiones</span>
-                    </div>
-                </a>
-
-                <!-- 02 — Negro Creole de Bluefields ✅ -->
-                <a href="02-creole-bluefields/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">02</div>
-                    <div class="tc-nombre">Negro Creole de Bluefields</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">94,050 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-china" title="China"></span>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones">3 concesiones</span>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones">1 concesión</span>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- 03 — Twi Waupasa ✅ -->
-                <a href="03-waupasa-twi/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">03</div>
-                    <div class="tc-nombre">Twi Waupasa</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">128,699 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-china" title="China"></span>
-                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
-                            <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
+                    <!-- 02 — Negro Creole de Bluefields -->
+                    <a href="02-creole-bluefields/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">02</div>
+                        <div class="tc-nombre">Negro Creole de Bluefields</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">94,050 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones tc-concesiones--alta">8 concesiones</span>
-                    </div>
-                </a>
-
-                <!-- 04 — Wangki Twi-Tasba Raya ✅ -->
-                <a href="04-wangki-twi-tasba-raya/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">04</div>
-                    <div class="tc-nombre">Wangki Twi-Tasba Raya</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">162,181 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-china" title="China"></span>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones">1 concesión</span>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones">2 concesiones</span>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- 05 — Wangki Li Aubra Tasbaya ⏳ sin assets -->
-                <a href="05-wangki-li/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">05</div>
-                    <div class="tc-nombre">Wangki Li Aubra Tasbaya</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">88,434 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-china" title="China"></span>
-                            <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
+                    <!-- 03 — Twi Waupasa -->
+                    <a href="03-waupasa-twi/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">03</div>
+                        <div class="tc-nombre">Twi Waupasa</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">128,699 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                                <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                                <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones">2 concesiones</span>
-                    </div>
-                </a>
-
-                <!-- 06 — Twi Yahbra (Diez comunidades) ✅ raster + SVG -->
-                <a href="06-twi-ahbra-10-comunidades/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">06</div>
-                    <div class="tc-nombre">Twi Yahbra</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">159,138 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-china" title="China"></span>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones tc-concesiones--alta">8 concesiones</span>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones">1 concesión</span>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- 07 — Tuahka Takaln Balna ✅ raster + SVG parcial -->
-                <a href="07-tuahka/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">07</div>
-                    <div class="tc-nombre">Tuahka Takaln Balna</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">54,556 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
-                            <span class="tc-pais-dot dot-colombia" title="Colombia"></span>
-                            <span class="tc-pais-dot dot-china" title="China"></span>
+                    <!-- 04 — Wangki Twi-Tasba Raya -->
+                    <a href="04-wangki-twi-tasba-raya/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">04</div>
+                        <div class="tc-nombre">Wangki Twi-Tasba Raya</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">162,181 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones tc-concesiones--alta">13 concesiones</span>
-                    </div>
-                </a>
-
-                <!-- 08 — Tasba Pri Matriz Indígena ✅ raster + SVG -->
-                <a href="08-tasba-pri/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">08</div>
-                    <div class="tc-nombre">Tasba Pri Matriz Indígena</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">79,897 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-china" title="China"></span>
-                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones">2 concesiones</span>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones">7 concesiones</span>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- 09 — Prinzu Awala ✅ raster + SVG -->
-                <a href="09-prinzu-awala/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">09</div>
-                    <div class="tc-nombre">Prinzu Awala</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">414,955 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
-                            <span class="tc-pais-dot dot-china" title="China"></span>
+                    <!-- 05 — Wangki Li Aubra Tasbaya -->
+                    <a href="05-wangki-li/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">05</div>
+                        <div class="tc-nombre">Wangki Li Aubra Tasbaya</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">88,434 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                                <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones tc-concesiones--alta">8 concesiones</span>
-                    </div>
-                </a>
-
-                <!-- 10 — Mayangna Sauni Bas "Sikilta" ✅ raster + SVG -->
-                <a href="10-mayangna-sauni-bas/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">10</div>
-                    <div class="tc-nombre">Mayangna Sauni Bas "Sikilta"</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">43,241 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
-                            <span class="tc-pais-dot dot-china" title="China"></span>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones">2 concesiones</span>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones">4 concesiones</span>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- 11 — Mayangna Sauni As ⏳ sin assets -->
-                <a href="11-mayangna-sauni-as/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">11</div>
-                    <div class="tc-nombre">Mayangna Sauni As</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">163,810 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-colombia" title="Colombia"></span>
-                            <span class="tc-pais-dot dot-china" title="China"></span>
-                            <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
+                    <!-- 06 — Twi Yahbra -->
+                    <a href="06-twi-ahbra-10-comunidades/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">06</div>
+                        <div class="tc-nombre">Twi Yahbra</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">159,138 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones">7 concesiones</span>
-                    </div>
-                </a>
-
-                <!-- 12 — Mayangna Sauni Arungka "Matunbak" ✅ raster + SVG -->
-                <a href="12-mayangna-arungka-matungbak/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">12</div>
-                    <div class="tc-nombre">Mayangna Sauni Arungka "Matunbak"</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">48,723 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-colombia" title="Colombia"></span>
-                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
-                            <span class="tc-pais-dot dot-china" title="China"></span>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones">1 concesión</span>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones tc-concesiones--alta">11 concesiones</span>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- 13 — AMASAU ⏳ sin assets -->
-                <a href="13-amasau/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">13</div>
-                    <div class="tc-nombre">Mayangna Awas Tingni (AMASAU)</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">73,394 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-china" title="China"></span>
+                    <!-- 07 — Tuahka Takaln Balna -->
+                    <a href="07-tuahka/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">07</div>
+                        <div class="tc-nombre">Tuahka Takaln Balna</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">54,556 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                                <span class="tc-pais-dot dot-colombia" title="Colombia"></span>
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones">1 concesión</span>
-                    </div>
-                </a>
-
-                <!-- 14 — Chorotega - Norte ⏳ sin assets -->
-                <a href="14-chorotega-norte/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">14</div>
-                    <div class="tc-nombre">Chorotega - Norte</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">138,080 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-china" title="China"></span>
-                            <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
-                            <span class="tc-pais-dot dot-reserva" title="Reserva Minera"></span>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones tc-concesiones--alta">13 concesiones</span>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones tc-concesiones--alta">10 concesiones</span>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- 15 — Matagalpa ⏳ sin assets -->
-                <a href="15-matagalpa/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">15</div>
-                    <div class="tc-nombre">Matagalpa</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">153,899 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-china" title="China"></span>
-                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                    <!-- 08 — Tasba Pri Matriz Indígena -->
+                    <a href="08-tasba-pri/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">08</div>
+                        <div class="tc-nombre">Tasba Pri Matriz Indígena</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">79,897 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                                <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones">4 concesiones</span>
-                    </div>
-                </a>
-
-                <!-- 16 — Prinzu Auhya Un ⏳ sin assets -->
-                <a href="16-prinzu-auhya-un/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">16</div>
-                    <div class="tc-nombre">Prinzu Auhya Un</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">378,058 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones">7 concesiones</span>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones">3 concesiones</span>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- 17 — Muy Muy ⏳ sin assets -->
-                <a href="17-muy-muy/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">17</div>
-                    <div class="tc-nombre">Muy Muy</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">53,587 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-china" title="China"></span>
-                            <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
+                    <!-- 09 — Prinzu Awala -->
+                    <a href="09-prinzu-awala/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">09</div>
+                        <div class="tc-nombre">Prinzu Awala</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">414,955 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones">2 concesiones</span>
-                    </div>
-                </a>
-
-                <!-- 18 — Sébaco ⏳ sin assets -->
-                <a href="18-sebaco/index.html" class="tc" role="listitem">
-                    <div class="tc-numero">18</div>
-                    <div class="tc-nombre">Sébaco</div>
-                    <div class="tc-meta">
-                        <span class="tc-ha">25,152 ha</span>
-                        <div class="tc-paises">
-                            <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones tc-concesiones--alta">8 concesiones</span>
                         </div>
-                    </div>
-                    <div class="tc-meta">
-                        <span class="tc-concesiones">1 concesión</span>
-                    </div>
-                </a>
+                    </a>
 
-            </div><!-- /tc-grid -->
+                    <!-- 10 — Mayangna Sauni Bas "Sikilta" -->
+                    <a href="10-mayangna-sauni-bas/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">10</div>
+                        <div class="tc-nombre">Mayangna Sauni Bas "Sikilta"</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">43,241 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                            </div>
+                        </div>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones">4 concesiones</span>
+                        </div>
+                    </a>
+
+                    <!-- 11 — Mayangna Sauni As -->
+                    <a href="11-mayangna-sauni-as/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">11</div>
+                        <div class="tc-nombre">Mayangna Sauni As</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">163,810 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-colombia" title="Colombia"></span>
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                                <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
+                            </div>
+                        </div>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones">7 concesiones</span>
+                        </div>
+                    </a>
+
+                    <!-- 12 — Mayangna Sauni Arungka "Matunbak" -->
+                    <a href="12-mayangna-arungka-matungbak/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">12</div>
+                        <div class="tc-nombre">Mayangna Sauni Arungka "Matunbak"</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">48,723 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-colombia" title="Colombia"></span>
+                                <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                            </div>
+                        </div>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones tc-concesiones--alta">11 concesiones</span>
+                        </div>
+                    </a>
+
+                    <!-- 13 — AMASAU -->
+                    <a href="13-amasau/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">13</div>
+                        <div class="tc-nombre">Mayangna Awas Tingni (AMASAU)</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">73,394 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                            </div>
+                        </div>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones">1 concesión</span>
+                        </div>
+                    </a>
+
+                    <!-- 14 — Chorotega - Norte -->
+                    <a href="14-chorotega-norte/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">14</div>
+                        <div class="tc-nombre">Chorotega - Norte</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">138,080 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                                <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
+                                <span class="tc-pais-dot dot-reserva" title="Reserva Minera"></span>
+                            </div>
+                        </div>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones tc-concesiones--alta">10 concesiones</span>
+                        </div>
+                    </a>
+
+                    <!-- 15 — Matagalpa -->
+                    <a href="15-matagalpa/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">15</div>
+                        <div class="tc-nombre">Matagalpa</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">153,899 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-china" title="China"></span>
+                                <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                            </div>
+                        </div>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones">4 concesiones</span>
+                        </div>
+                    </a>
+
+                    <!-- 16 — Prinzu Auhya Un -->
+                    <a href="16-prinzu-auhya-un/index.html" class="tc" role="listitem">
+                        <div class="tc-numero">16</div>
+                        <div class="tc-nombre">Prinzu Auhya Un</div>
+                        <div class="tc-meta">
+                            <span class="tc-ha">378,058 ha</span>
+                            <div class="tc-paises">
+                                <span class="tc-pais-dot dot-canada" title="Canadá"></span>
+                            </div>
+                        </div>
+                        <div class="tc-meta">
+                            <span class="tc-concesiones">3 concesiones</span>
+                        </div>
+                    </a>
+
+                </div><!-- /tc-grid -->
+            </div><!-- /tc-grid-wrap -->
+
         </main>
     </div><!-- /lobby-main -->
 

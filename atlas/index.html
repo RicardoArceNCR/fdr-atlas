@@ -7,19 +7,11 @@
     <title>Atlas FDR — Concesiones Mineras · Nicaragua</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../design-system/tokens/build/tokens.css">
 
     <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -30,7 +22,7 @@
             display: flex;
         }
 
-        /* ── Layout principal 50/50 — ocupa toda la ventana ──────────────── */
+        /* ── Layout 50/50 full-viewport ──────────────────────────────── */
         .lobby-main {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -38,18 +30,17 @@
             height: 100vh;
         }
 
-        /* ── Panel izquierdo ─────────────────────────────────────────────── */
+        /* ── Panel izquierdo — blanco ─────────────────────────────────── */
         .lobby-izq {
             display: flex;
             flex-direction: column;
             padding: 36px 40px 32px;
             gap: 24px;
+            background: #fff;
             border-right: 0.5px solid #cfc9be;
             overflow-y: auto;
-            background: #fff;
         }
 
-        /* Logo integrado arriba del panel izquierdo */
         .lobby-brand {
             display: flex;
             align-items: center;
@@ -58,16 +49,10 @@
         }
 
         .lobby-logo {
-            width: 100px;
-            height: 100px;
+            width: 52px;
+            height: 52px;
             object-fit: contain;
             flex-shrink: 0;
-        }
-
-        .lobby-brand-texto {
-            display: flex;
-            flex-direction: column;
-            gap: 1px;
         }
 
         .lobby-brand-titulo {
@@ -75,15 +60,16 @@
             font-weight: 600;
             color: #1f2521;
             letter-spacing: 0.01em;
+            line-height: 1.3;
         }
 
         .lobby-brand-subtitulo {
             font-size: 10.5px;
             color: #6b7280;
             font-weight: 400;
+            line-height: 1.4;
         }
 
-        /* Divisor sutil entre logo y contenido editorial */
         .lobby-divider {
             height: 0.5px;
             background: #e8e4dc;
@@ -123,7 +109,6 @@
             color: #484e49;
         }
 
-        /* Stats sumario */
         .lobby-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -152,15 +137,14 @@
             line-height: 1.3;
         }
 
-        /* Mapa preview — crece para llenar el espacio sobrante */
+        /* Imagen — ocupa el espacio sobrante */
         .lobby-mapa-preview {
             flex: 1;
             min-height: 0;
             border-radius: 8px;
             overflow: hidden;
-            background: #e8e4dc;
+            background: #1a3028;
             border: 0.5px solid #cfc9be;
-            position: relative;
         }
 
         .lobby-mapa-preview img {
@@ -170,120 +154,94 @@
             display: block;
         }
 
-        .lobby-mapa-caption {
-            position: absolute;
-            bottom: 10px;
-            left: 12px;
-            right: 12px;
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.85);
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-            font-weight: 500;
-        }
-
-        /* ── Panel derecho — lista de territorios ───────────────────────── */
+        /* ── Panel derecho — verde oscuro ────────────────────────────── */
         .lobby-der {
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            /* el scroll lo maneja tc-grid-wrap */
-            background: #f6f4ef;
+            background: #1a3028;
         }
 
-        /* Header sticky dentro del panel derecho */
+        /* Header sticky — no scrollea */
         .lobby-der-header {
             flex-shrink: 0;
             padding: 14px 20px 10px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: #6b7280;
-            background: #f6f4ef;
-            border-bottom: 0.5px solid #e8e4dc;
-            /* Sticky real: el scroll ocurre en tc-grid-wrap, no aquí */
+            color: rgba(190, 225, 205, 0.45);
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.07);
         }
 
-        /* Contenedor scrollable que NO incluye el header */
+        /* Zona scrollable */
         .tc-grid-wrap {
             flex: 1;
             overflow-y: auto;
-            padding: 12px 16px 16px;
+            padding: 10px 14px 14px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.10) transparent;
         }
 
-        /* Grilla de territorios — 2 columnas, 8 filas = 16 items */
+        .tc-grid-wrap::-webkit-scrollbar { width: 4px; }
+        .tc-grid-wrap::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.10);
+            border-radius: 2px;
+        }
+
+        /* Grilla 2 columnas — 16 items = 8 filas */
         .tc-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4px;
         }
 
+        /* Tarjeta */
         .tc {
             display: flex;
             flex-direction: column;
             gap: 3px;
-            background: #fff;
-            border: 0.5px solid #cfc9be;
+            background: rgba(255, 255, 255, 0.04);
+            border: 0.5px solid rgba(255, 255, 255, 0.08);
             border-radius: 6px;
-            padding: 8px 10px;
+            padding: 9px 11px;
             text-decoration: none;
             color: inherit;
-            transition: border-color 150ms, box-shadow 150ms, background 150ms;
-            position: relative;
+            transition: background 130ms ease, border-color 130ms ease;
         }
 
         .tc:hover {
-            border-color: #205736;
-            box-shadow: 0 2px 8px rgba(32, 87, 54, 0.10);
-            background: #f6faf8;
-        }
-
-        .tc--dim {
-            background: #faf9f7;
-            cursor: default;
-        }
-
-        .tc--dim:hover {
-            border-color: #cfc9be;
-            box-shadow: none;
-            background: #faf9f7;
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.20);
         }
 
         .tc-numero {
             font-size: 9px;
             font-weight: 700;
             letter-spacing: 0.06em;
-            color: #9ca3af;
+            color: rgba(190, 225, 205, 0.32);
             text-transform: uppercase;
         }
 
         .tc-nombre {
             font-size: 11px;
             font-weight: 600;
-            color: #1f2521;
+            color: rgba(220, 242, 230, 0.88);
             line-height: 1.3;
-        }
-
-        .tc-nombre--dim {
-            color: #9ca3af;
         }
 
         .tc-meta {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 0;
         }
 
         .tc-ha {
             font-size: 10px;
-            color: #6b7280;
+            color: rgba(190, 225, 205, 0.42);
         }
 
-        .tc-paises {
-            display: flex;
-            gap: 3px;
-        }
+        .tc-paises { display: flex; gap: 3px; }
 
         .tc-pais-dot {
             width: 6px;
@@ -291,81 +249,34 @@
             border-radius: 50%;
         }
 
-        .dot-china {
-            background: #d7620e;
-        }
-
-        .dot-canada {
-            background: #2d7a2d;
-        }
-
-        .dot-colombia {
-            background: #5b21b6;
-        }
-
-        .dot-nacional {
-            background: #263fa8;
-        }
-
-        .dot-reserva {
-            background: #394150;
-        }
-
-        .tc-badge {
-            font-size: 9px;
-            font-weight: 600;
-            color: #9ca3af;
-            background: #f3f4f6;
-            border-radius: 3px;
-            padding: 2px 5px;
-            letter-spacing: 0.02em;
-        }
+        .dot-china    { background: #d7620e; }
+        .dot-canada   { background: #4a9e4a; }
+        .dot-colombia { background: #7c3aed; }
+        .dot-nacional { background: #4060c8; }
+        .dot-reserva  { background: #5a6070; }
 
         .tc-concesiones {
             font-size: 9px;
             font-weight: 600;
-            background: #fef3c7;
-            color: #92400e;
+            background: rgba(244, 163, 61, 0.14);
+            color: #f4a33d;
             border-radius: 3px;
             padding: 2px 5px;
         }
 
         .tc-concesiones--alta {
-            background: #fee2e2;
-            color: #991b1b;
+            background: rgba(215, 98, 14, 0.16);
+            color: #f4734a;
         }
 
-        /* ── Responsive ─────────────────────────────────────────────────── */
+        /* ── Responsive ─────────────────────────────────────────────── */
         @media (max-width: 900px) {
-            body {
-                height: auto;
-                overflow: auto;
-            }
-
-            .lobby-main {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-
-            .lobby-izq {
-                border-right: none;
-                border-bottom: 0.5px solid #cfc9be;
-                overflow-y: visible;
-            }
-
-            .lobby-mapa-preview {
-                flex: none;
-                aspect-ratio: 1;
-                max-height: 380px;
-            }
-
-            .lobby-der {
-                overflow: visible;
-            }
-
-            .tc-grid-wrap {
-                overflow-y: visible;
-            }
+            body { height: auto; overflow: auto; }
+            .lobby-main { grid-template-columns: 1fr; height: auto; }
+            .lobby-izq { border-right: none; border-bottom: 0.5px solid #cfc9be; overflow-y: visible; }
+            .lobby-mapa-preview { flex: none; aspect-ratio: 4/3; }
+            .lobby-der { overflow: visible; height: auto; }
+            .tc-grid-wrap { overflow-y: visible; padding-bottom: 24px; }
         }
     </style>
 </head>
@@ -373,13 +284,12 @@
 <body>
     <div class="lobby-main">
 
-        <!-- Panel izquierdo: logo + editorial + stats + mapa preview -->
+        <!-- Panel izquierdo -->
         <aside class="lobby-izq">
 
-            <!-- Logo integrado (reemplaza el nav) -->
             <div class="lobby-brand">
                 <img src="../img/Logo-fdr.webp" alt="Fundación del Río" class="lobby-logo">
-                <div class="lobby-brand-texto">
+                <div>
                     <div class="lobby-brand-titulo">Atlas de Concesiones Mineras</div>
                     <div class="lobby-brand-subtitulo">Territorios Indígenas y Afrodescendientes · Nicaragua</div>
                 </div>
@@ -390,9 +300,7 @@
             <div class="lobby-editorial">
                 <div class="lobby-kicker">Fundación del Río · 2026</div>
                 <h1 class="lobby-titulo">Concesiones mineras en <em>territorios indígenas</em> de Nicaragua</h1>
-                <p class="lobby-descripcion">Este atlas documenta las concesiones mineras otorgadas por el Estado de
-                    Nicaragua dentro de territorios indígenas y afrodescendientes, identificando el origen del capital
-                    concesionado y el impacto sobre la red hídrica de cada territorio.</p>
+                <p class="lobby-descripcion">Este atlas documenta las concesiones mineras otorgadas por el Estado de Nicaragua dentro de territorios indígenas y afrodescendientes, identificando el origen del capital concesionado y el impacto sobre la red hídrica de cada territorio.</p>
             </div>
 
             <div class="lobby-stats">
@@ -412,12 +320,11 @@
 
             <div class="lobby-mapa-preview">
                 <img src="../img/banner-04.webp" alt="Mapa de territorios indígenas de Nicaragua">
-                <div class="lobby-mapa-caption"></div>
             </div>
 
         </aside>
 
-        <!-- Panel derecho: lista de territorios -->
+        <!-- Panel derecho — verde oscuro -->
         <main class="lobby-der">
 
             <div class="lobby-der-header">Selecciona un territorio</div>
@@ -425,37 +332,26 @@
             <div class="tc-grid-wrap">
                 <div class="tc-grid" role="list">
 
-                    <!-- 01 — Rama y Kriol -->
                     <a href="01-rama-kriol/index.html" class="tc" role="listitem">
                         <div class="tc-numero">01</div>
                         <div class="tc-nombre">Rama y Kriol</div>
                         <div class="tc-meta">
                             <span class="tc-ha">406,849 ha</span>
-                            <div class="tc-paises">
-                                <span class="tc-pais-dot dot-china" title="China"></span>
-                            </div>
+                            <div class="tc-paises"><span class="tc-pais-dot dot-china" title="China"></span></div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones">3 concesiones</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones">3 concesiones</span></div>
                     </a>
 
-                    <!-- 02 — Negro Creole de Bluefields -->
                     <a href="02-creole-bluefields/index.html" class="tc" role="listitem">
                         <div class="tc-numero">02</div>
                         <div class="tc-nombre">Negro Creole de Bluefields</div>
                         <div class="tc-meta">
                             <span class="tc-ha">94,050 ha</span>
-                            <div class="tc-paises">
-                                <span class="tc-pais-dot dot-china" title="China"></span>
-                            </div>
+                            <div class="tc-paises"><span class="tc-pais-dot dot-china" title="China"></span></div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones">1 concesión</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones">1 concesión</span></div>
                     </a>
 
-                    <!-- 03 — Twi Waupasa -->
                     <a href="03-waupasa-twi/index.html" class="tc" role="listitem">
                         <div class="tc-numero">03</div>
                         <div class="tc-nombre">Twi Waupasa</div>
@@ -467,27 +363,19 @@
                                 <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
                             </div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones tc-concesiones--alta">8 concesiones</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones tc-concesiones--alta">8 concesiones</span></div>
                     </a>
 
-                    <!-- 04 — Wangki Twi-Tasba Raya -->
                     <a href="04-wangki-twi-tasba-raya/index.html" class="tc" role="listitem">
                         <div class="tc-numero">04</div>
                         <div class="tc-nombre">Wangki Twi-Tasba Raya</div>
                         <div class="tc-meta">
                             <span class="tc-ha">162,181 ha</span>
-                            <div class="tc-paises">
-                                <span class="tc-pais-dot dot-china" title="China"></span>
-                            </div>
+                            <div class="tc-paises"><span class="tc-pais-dot dot-china" title="China"></span></div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones">2 concesiones</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones">2 concesiones</span></div>
                     </a>
 
-                    <!-- 05 — Wangki Li Aubra Tasbaya -->
                     <a href="05-wangki-li/index.html" class="tc" role="listitem">
                         <div class="tc-numero">05</div>
                         <div class="tc-nombre">Wangki Li Aubra Tasbaya</div>
@@ -498,27 +386,19 @@
                                 <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
                             </div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones">2 concesiones</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones">2 concesiones</span></div>
                     </a>
 
-                    <!-- 06 — Twi Yahbra -->
                     <a href="06-twi-ahbra-10-comunidades/index.html" class="tc" role="listitem">
                         <div class="tc-numero">06</div>
                         <div class="tc-nombre">Twi Yahbra</div>
                         <div class="tc-meta">
                             <span class="tc-ha">159,138 ha</span>
-                            <div class="tc-paises">
-                                <span class="tc-pais-dot dot-china" title="China"></span>
-                            </div>
+                            <div class="tc-paises"><span class="tc-pais-dot dot-china" title="China"></span></div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones">1 concesión</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones">1 concesión</span></div>
                     </a>
 
-                    <!-- 07 — Tuahka Takaln Balna -->
                     <a href="07-tuahka/index.html" class="tc" role="listitem">
                         <div class="tc-numero">07</div>
                         <div class="tc-nombre">Tuahka Takaln Balna</div>
@@ -530,12 +410,9 @@
                                 <span class="tc-pais-dot dot-china" title="China"></span>
                             </div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones tc-concesiones--alta">13 concesiones</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones tc-concesiones--alta">13 concesiones</span></div>
                     </a>
 
-                    <!-- 08 — Tasba Pri Matriz Indígena -->
                     <a href="08-tasba-pri/index.html" class="tc" role="listitem">
                         <div class="tc-numero">08</div>
                         <div class="tc-nombre">Tasba Pri Matriz Indígena</div>
@@ -546,12 +423,9 @@
                                 <span class="tc-pais-dot dot-canada" title="Canadá"></span>
                             </div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones">7 concesiones</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones">7 concesiones</span></div>
                     </a>
 
-                    <!-- 09 — Prinzu Awala -->
                     <a href="09-prinzu-awala/index.html" class="tc" role="listitem">
                         <div class="tc-numero">09</div>
                         <div class="tc-nombre">Prinzu Awala</div>
@@ -562,12 +436,9 @@
                                 <span class="tc-pais-dot dot-china" title="China"></span>
                             </div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones tc-concesiones--alta">8 concesiones</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones tc-concesiones--alta">8 concesiones</span></div>
                     </a>
 
-                    <!-- 10 — Mayangna Sauni Bas "Sikilta" -->
                     <a href="10-mayangna-sauni-bas/index.html" class="tc" role="listitem">
                         <div class="tc-numero">10</div>
                         <div class="tc-nombre">Mayangna Sauni Bas "Sikilta"</div>
@@ -578,12 +449,9 @@
                                 <span class="tc-pais-dot dot-china" title="China"></span>
                             </div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones">4 concesiones</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones">4 concesiones</span></div>
                     </a>
 
-                    <!-- 11 — Mayangna Sauni As -->
                     <a href="11-mayangna-sauni-as/index.html" class="tc" role="listitem">
                         <div class="tc-numero">11</div>
                         <div class="tc-nombre">Mayangna Sauni As</div>
@@ -595,12 +463,9 @@
                                 <span class="tc-pais-dot dot-nacional" title="Nicaragua"></span>
                             </div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones">7 concesiones</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones">7 concesiones</span></div>
                     </a>
 
-                    <!-- 12 — Mayangna Sauni Arungka "Matunbak" -->
                     <a href="12-mayangna-arungka-matungbak/index.html" class="tc" role="listitem">
                         <div class="tc-numero">12</div>
                         <div class="tc-nombre">Mayangna Sauni Arungka "Matunbak"</div>
@@ -612,27 +477,19 @@
                                 <span class="tc-pais-dot dot-china" title="China"></span>
                             </div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones tc-concesiones--alta">11 concesiones</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones tc-concesiones--alta">11 concesiones</span></div>
                     </a>
 
-                    <!-- 13 — AMASAU -->
                     <a href="13-amasau/index.html" class="tc" role="listitem">
                         <div class="tc-numero">13</div>
                         <div class="tc-nombre">Mayangna Awas Tingni (AMASAU)</div>
                         <div class="tc-meta">
                             <span class="tc-ha">73,394 ha</span>
-                            <div class="tc-paises">
-                                <span class="tc-pais-dot dot-china" title="China"></span>
-                            </div>
+                            <div class="tc-paises"><span class="tc-pais-dot dot-china" title="China"></span></div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones">1 concesión</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones">1 concesión</span></div>
                     </a>
 
-                    <!-- 14 — Chorotega - Norte -->
                     <a href="14-chorotega-norte/index.html" class="tc" role="listitem">
                         <div class="tc-numero">14</div>
                         <div class="tc-nombre">Chorotega - Norte</div>
@@ -644,12 +501,9 @@
                                 <span class="tc-pais-dot dot-reserva" title="Reserva Minera"></span>
                             </div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones tc-concesiones--alta">10 concesiones</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones tc-concesiones--alta">10 concesiones</span></div>
                     </a>
 
-                    <!-- 15 — Matagalpa -->
                     <a href="15-matagalpa/index.html" class="tc" role="listitem">
                         <div class="tc-numero">15</div>
                         <div class="tc-nombre">Matagalpa</div>
@@ -660,32 +514,25 @@
                                 <span class="tc-pais-dot dot-canada" title="Canadá"></span>
                             </div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones">4 concesiones</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones">4 concesiones</span></div>
                     </a>
 
-                    <!-- 16 — Prinzu Auhya Un -->
                     <a href="16-prinzu-auhya-un/index.html" class="tc" role="listitem">
                         <div class="tc-numero">16</div>
                         <div class="tc-nombre">Prinzu Auhya Un</div>
                         <div class="tc-meta">
                             <span class="tc-ha">378,058 ha</span>
-                            <div class="tc-paises">
-                                <span class="tc-pais-dot dot-canada" title="Canadá"></span>
-                            </div>
+                            <div class="tc-paises"><span class="tc-pais-dot dot-canada" title="Canadá"></span></div>
                         </div>
-                        <div class="tc-meta">
-                            <span class="tc-concesiones">3 concesiones</span>
-                        </div>
+                        <div class="tc-meta"><span class="tc-concesiones">3 concesiones</span></div>
                     </a>
 
                 </div><!-- /tc-grid -->
             </div><!-- /tc-grid-wrap -->
 
         </main>
-    </div><!-- /lobby-main -->
 
+    </div><!-- /lobby-main -->
 </body>
 
 </html>

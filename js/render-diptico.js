@@ -1,4 +1,5 @@
 import {
+  TERRITORIOS,
   getTerritorio,
   getBadgeClass,
   getLabelPais,
@@ -1086,3 +1087,82 @@ function detenerTour(idsTodos, btn) {
   btn.querySelector('span').textContent = 'Recorrer por país';
   btn.classList.remove('btn-tour-narrativo--activo');
 }
+
+/* ─── Navegación entre territorios ──────────────────────────────────────────
+ *
+ * Lee data-territorio del body, calcula posición en TERRITORIOS,
+ * inyecta href en #nav-prev / #nav-next y contador en #nav-contador.
+ *
+ * Solo navega entre territorios con assets definidos (los que tienen SVG real).
+ * El href se resuelve relativo al index.html de cada territorio:
+ *   ../../atlas/NN-territorio/index.html
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+function initNavegacion() {
+  const nav = document.getElementById('atlas-nav');
+  if (!nav) return;
+
+  const id = document.body.dataset.territorio;
+  if (!id) return;
+
+  // Solo territorios con assets reales — excluye pendientes sin SVG
+  const conAssets = TERRITORIOS.filter(
+    t => t.assets?.desktop?.svg && t.assets.desktop.svg !== ''
+  );
+
+  const idx = conAssets.findIndex(t => t.id === id);
+  if (idx === -1) return;
+
+  const total    = conAssets.length;
+  const prevTerr = idx > 0         ? conAssets[idx - 1] : null;
+  const nextTerr = idx < total - 1 ? conAssets[idx + 1] : null;
+
+  // Contador "03 / 12"
+  const contador = document.getElementById('nav-contador');
+  if (contador) {
+    const num = String(idx + 1).padStart(2, '0');
+    const tot = String(total).padStart(2, '0');
+    contador.textContent = `${num} / ${tot}`;
+  }
+
+  // Botón anterior
+  const btnPrev = document.getElementById('nav-prev');
+  const lblPrev = document.getElementById('nav-prev-label');
+  if (btnPrev) {
+    if (prevTerr) {
+      btnPrev.href = `../${prevTerr.id}/index.html`;
+      btnPrev.title = prevTerr.nombre;
+      if (lblPrev) lblPrev.textContent = prevTerr.nombre;
+    } else {
+      btnPrev.classList.add('atlas-nav__btn--disabled');
+      btnPrev.removeAttribute('href');
+    }
+  }
+
+  // Botón siguiente
+  const btnNext = document.getElementById('nav-next');
+  const lblNext = document.getElementById('nav-next-label');
+  if (btnNext) {
+    if (nextTerr) {
+      btnNext.href = `../${nextTerr.id}/index.html`;
+      btnNext.title = nextTerr.nombre;
+      if (lblNext) lblNext.textContent = nextTerr.nombre;
+    } else {
+      btnNext.classList.add('atlas-nav__btn--disabled');
+      btnNext.removeAttribute('href');
+    }
+  }
+
+  // Teclado: ← → navega, Escape vuelve al índice
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'ArrowLeft'  && prevTerr) window.location.href = btnPrev.href;
+    if (e.key === 'ArrowRight' && nextTerr) window.location.href = btnNext.href;
+    if (e.key === 'Escape') {
+      const inicio = document.getElementById('nav-inicio');
+      if (inicio) window.location.href = inicio.href;
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initNavegacion);

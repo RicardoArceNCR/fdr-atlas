@@ -1541,3 +1541,95 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   stroke-linejoin: round;
   paint-order: stroke fill;
 }
+
+/* ─── Barra de navegación entre territorios ─────────────────────────────────
+ *
+ * position: fixed bottom — siempre visible sobre el contenido.
+ * Tres zonas: inicio (izq) · prev+contador+next (centro) · placeholder (der)
+ * El placeholder espeja el ancho del botón inicio para centrar el bloque central.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── Navegación entre territorios ────────────────────────────────────────────
+ *
+ * Vive dentro de diptico__info (flex column), justo después de diptico__fuente.
+ * No es fixed — se mantiene al fondo del panel derecho como parte del flujo.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+.atlas-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0 2px;
+  margin-top: 12px;
+  border-top: 0.5px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.atlas-nav__central {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ── Botones base ─────────────────────────────────────────────────────────── */
+
+.atlas-nav__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 9px;
+  border-radius: 6px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-color-secondary);
+  text-decoration: none;
+  transition: background 120ms ease, color 120ms ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.atlas-nav__btn:hover {
+  background: var(--background-subtle);
+  color: var(--text-color-primary);
+}
+
+/* Primer/último territorio */
+.atlas-nav__btn--disabled {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* ── Contador "01 / 12" ───────────────────────────────────────────────────── */
+
+.atlas-nav__contador {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-color-secondary);
+  opacity: 0.5;
+  letter-spacing: 0.05em;
+  padding: 0 8px;
+  min-width: 48px;
+  text-align: center;
+}
+
+/* ── Placeholder derecho (futuro hamburguesa) ────────────────────────────── */
+
+.atlas-nav__placeholder {
+  min-width: 64px;
+}
+
+/* ── Labels ocultos en viewports estrechos ───────────────────────────────── */
+
+@media (max-width: 600px) {
+  .atlas-nav__label {
+    display: none;
+  }
+  .atlas-nav__btn {
+    padding: 5px 7px;
+  }
+  .atlas-nav__placeholder {
+    min-width: 32px;
+  }
+}

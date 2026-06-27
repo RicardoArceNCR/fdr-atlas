@@ -922,9 +922,9 @@
       </g>
     </g>
     <g class="st43">
-      <line class="st22" x1="281.9" y1="172.4" x2="171.1" y2="172.4"/>
+      <line class="st22" x1="269.9" y1="166.4" x2="159.1" y2="166.4"/>
     </g>
-    <polygon class="st24" points="282.7 163.7 305.6 172.9 305.7 172.9 305.6 172.9 305.7 172.9 305.6 172.9 282.7 182.2 282.7 163.7"/>
+    <polygon class="st24" points="270.7 157.7 293.6 166.9 293.7 166.9 293.6 166.9 293.7 166.9 293.6 166.9 270.7 176.2 270.7 157.7"/>
     <g class="st27">
       <g class="st27">
         <text class="st26" transform="translate(74.5 303.7)"><tspan x="0" y="0">Nicaragua</tspan></text>
@@ -1008,8 +1008,8 @@
         <circle class="st32" cx="156.5" cy="252.9" r="3.9"/>
         <circle class="st32" cx="155.6" cy="260.8" r="3.9"/>
       </g>
-      <circle class="st6" cx="163.6" cy="171.6" r="19.1"/>
-      <circle class="st62" cx="163.6" cy="171.6" r="9.2"/>
+      <circle class="st6" cx="145.4" cy="165.7" r="19.1"/>
+      <circle class="st62" cx="145.4" cy="165.7" r="9.2"/>
     </g>
   </g>
 </svg>

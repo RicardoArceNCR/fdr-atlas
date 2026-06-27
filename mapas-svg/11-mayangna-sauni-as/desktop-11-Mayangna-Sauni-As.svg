@@ -425,14 +425,14 @@
               <path class="st15" d="M681.4,292.5l72.4,72.4" vector-effect="none"/>
               <path class="st15" d="M676.6,297.3l72.4,72.4" vector-effect="none"/>
               <path class="st15" d="M671.9,302l72.4,72.4" vector-effect="none"/>
-              <path class="st15" d="M667.1,306.8l72.4,72.4" vector-effect="none"/>
-              <path class="st15" d="M662.3,311.6l72.4,72.4" vector-effect="none"/>
-              <path class="st15" d="M657.6,316.3l72.4,72.4" vector-effect="none"/>
-              <path class="st15" d="M652.8,321.1l72.4,72.4" vector-effect="none"/>
-              <path class="st15" d="M648.1,325.8l72.4,72.4" vector-effect="none"/>
-              <path class="st15" d="M643.3,330.6l72.4,72.4" vector-effect="none"/>
-              <path class="st15" d="M638.6,335.4l72.4,72.4" vector-effect="none"/>
-              <path class="st15" d="M633.8,340.1l72.4,72.4" vector-effect="none"/>
+              <path class="st15" d="M667.1,306.8l98,98" vector-effect="none"/>
+              <path class="st15" d="M662.3,311.6l98,98" vector-effect="none"/>
+              <path class="st15" d="M635.9,294.6l119.7,119.7" vector-effect="none"/>
+              <path class="st15" d="M631.2,299.4l119.7,119.7" vector-effect="none"/>
+              <path class="st15" d="M626.4,304.2l119.7,119.7" vector-effect="none"/>
+              <path class="st15" d="M621.6,308.9l119.7,119.7" vector-effect="none"/>
+              <path class="st15" d="M616.9,313.7l119.7,119.7" vector-effect="none"/>
+              <path class="st15" d="M612.1,318.4l94.1,94.1" vector-effect="none"/>
               <path class="st15" d="M629,344.9l72.4,72.4" vector-effect="none"/>
               <path class="st15" d="M624.3,349.6l72.4,72.4" vector-effect="none"/>
               <path class="st15" d="M619.5,354.4l72.4,72.4" vector-effect="none"/>
@@ -578,11 +578,11 @@
               <path class="st17" d="M615.5,218.9l60.8,60.8" vector-effect="none"/>
               <path class="st17" d="M610.7,223.6l60.8,60.8" vector-effect="none"/>
               <path class="st17" d="M606,228.4l60.8,60.8" vector-effect="none"/>
-              <path class="st17" d="M601.2,233.2l60.8,60.8" vector-effect="none"/>
-              <path class="st17" d="M596.4,237.9l60.8,60.8" vector-effect="none"/>
-              <path class="st17" d="M591.7,242.7l60.8,60.8" vector-effect="none"/>
-              <path class="st17" d="M586.9,247.4l60.8,60.8" vector-effect="none"/>
-              <path class="st17" d="M582.2,252.2l60.8,60.8" vector-effect="none"/>
+              <path class="st17" d="M601.2,233.2l78.9,78.9" vector-effect="none"/>
+              <path class="st17" d="M581,222.5l94.4,94.4" vector-effect="none"/>
+              <path class="st17" d="M576.2,227.2l94.4,94.4" vector-effect="none"/>
+              <path class="st17" d="M571.5,232l94.4,94.4" vector-effect="none"/>
+              <path class="st17" d="M566.7,236.7l94.4,94.4" vector-effect="none"/>
               <path class="st17" d="M577.4,257l60.8,60.8" vector-effect="none"/>
               <path class="st17" d="M572.7,261.7l60.8,60.8" vector-effect="none"/>
               <path class="st17" d="M567.9,266.5l60.8,60.8" vector-effect="none"/>

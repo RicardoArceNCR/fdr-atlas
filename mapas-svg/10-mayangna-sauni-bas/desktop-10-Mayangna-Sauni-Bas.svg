@@ -337,8 +337,9 @@
         <g id="area-main">
           <g class="st61">
             <g>
-              <path class="st18" d="M537.2,707.7l58.5-58.5" vector-effect="none"/>
-              <path class="st18" d="M543,713.5l58.5-58.5" vector-effect="none"/>
+              <path class="st18" d="M537.2,707.7l75.4-75.4" vector-effect="none"/>
+              <path class="st18" d="M532,702.6l75.4-75.4" vector-effect="none"/>
+              <path class="st18" d="M543,713.5l75.4-75.4" vector-effect="none"/>
               <path class="st18" d="M548.8,719.3l58.5-58.5" vector-effect="none"/>
               <path class="st18" d="M554.6,725.1l58.5-58.5" vector-effect="none"/>
               <path class="st18" d="M560.4,730.9l58.5-58.5" vector-effect="none"/>
@@ -352,7 +353,9 @@
         <g id="area-main-hover">
           <g class="st43">
             <g>
-              <path class="st18" d="M583.5,649.2l58.5,58.5" vector-effect="none"/>
+              <path class="st18" d="M567.2,632.9l74.8,74.8" vector-effect="none"/>
+              <path class="st18" d="M572.8,627.3l74.8,74.8" vector-effect="none"/>
+              <path class="st18" d="M578.5,621.7l74.8,74.8" vector-effect="none"/>
               <path class="st18" d="M577.7,655l58.5,58.5" vector-effect="none"/>
               <path class="st18" d="M572,660.8l58.5,58.5" vector-effect="none"/>
               <path class="st18" d="M566.2,666.6l58.5,58.5" vector-effect="none"/>
@@ -429,6 +432,14 @@
           <g class="st48">
             <g>
               <path class="st19" d="M533.5,515.7l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M545.2,515.7l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M556.9,515.7l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M568.5,515.7l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M580.2,515.7l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M591.9,515.7l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M603.6,515.7l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M615.3,515.7l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M627,515.7l201.3,201.3" vector-effect="none"/>
               <path class="st19" d="M527.7,521.5l201.3,201.3" vector-effect="none"/>
               <path class="st19" d="M521.9,527.3l201.3,201.3" vector-effect="none"/>
               <path class="st19" d="M516.1,533.1l201.3,201.3" vector-effect="none"/>
@@ -446,6 +457,14 @@
               <path class="st19" d="M446.5,602.6l201.3,201.3" vector-effect="none"/>
               <path class="st19" d="M440.7,608.4l201.3,201.3" vector-effect="none"/>
               <path class="st19" d="M434.9,614.2l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M429.1,620.1l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M423.2,625.9l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M417.4,631.8l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M411.5,637.6l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M405.7,643.5l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M399.8,649.3l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M394,655.1l201.3,201.3" vector-effect="none"/>
+              <path class="st19" d="M388.2,661l201.3,201.3" vector-effect="none"/>
             </g>
           </g>
         </g>
@@ -484,15 +503,15 @@
               <path class="st15" d="M525.7,714.4l73.4,73.4" vector-effect="none"/>
               <path class="st15" d="M519.9,720.2l73.4,73.4" vector-effect="none"/>
               <path class="st15" d="M514.1,726l73.4,73.4" vector-effect="none"/>
-              <path class="st15" d="M508.3,731.8l73.4,73.4" vector-effect="none"/>
-              <path class="st15" d="M502.5,737.6l73.4,73.4" vector-effect="none"/>
-              <path class="st15" d="M496.7,743.4l73.4,73.4" vector-effect="none"/>
-              <path class="st15" d="M490.9,749.2l73.4,73.4" vector-effect="none"/>
+              <path class="st15" d="M508.3,731.8l85.8,85.8" vector-effect="none"/>
+              <path class="st15" d="M502.5,737.6l85.8,85.8" vector-effect="none"/>
+              <path class="st15" d="M496.7,743.4l85.8,85.8" vector-effect="none"/>
+              <path class="st15" d="M490.9,749.2l85.8,85.8" vector-effect="none"/>
               <path class="st15" d="M485.1,755l73.4,73.4" vector-effect="none"/>
               <path class="st15" d="M479.3,760.8l73.4,73.4" vector-effect="none"/>
               <path class="st15" d="M473.5,766.6l73.4,73.4" vector-effect="none"/>
-              <path class="st15" d="M467.7,772.4l73.4,73.4" vector-effect="none"/>
-              <path class="st15" d="M461.9,778.2l73.4,73.4" vector-effect="none"/>
+              <path class="st15" d="M456.8,761.5l84.3,84.3" vector-effect="none"/>
+              <path class="st15" d="M451,767.3l84.3,84.3" vector-effect="none"/>
               <path class="st15" d="M456.1,784l73.4,73.4" vector-effect="none"/>
               <path class="st15" d="M450.3,789.8l73.4,73.4" vector-effect="none"/>
               <path class="st15" d="M444.5,795.6l73.4,73.4" vector-effect="none"/>
@@ -732,7 +751,7 @@
       </g>
     </g>
     <g class="st38">
-      <line class="st20" x1="281.9" y1="172.4" x2="171.1" y2="172.4"/>
+      <line class="st20" x1="281.9" y1="172.4" x2="139" y2="172.4"/>
     </g>
     <polygon class="st24" points="282.7 163.7 305.6 172.9 305.7 172.9 305.6 172.9 305.7 172.9 305.6 172.9 282.7 182.2 282.7 163.7"/>
     <g class="st27">
@@ -818,8 +837,8 @@
         <circle class="st32" cx="156.5" cy="252.9" r="3.9"/>
         <circle class="st32" cx="155.6" cy="260.8" r="3.9"/>
       </g>
-      <circle class="st6" cx="163.6" cy="171.6" r="19.1"/>
-      <circle class="st54" cx="163.6" cy="171.6" r="9.2"/>
+      <circle class="st6" cx="133.6" cy="173.4" r="19.1"/>
+      <circle class="st54" cx="133.6" cy="173.4" r="9.2"/>
     </g>
   </g>
 </svg>

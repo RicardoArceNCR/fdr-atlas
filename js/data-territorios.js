@@ -383,6 +383,66 @@ const TERRITORIOS = [
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
+  /* ── 06 ── Twi Yahbra (Diez comunidades) ───────────────────────────────── */
+  /*
+   * ⚠️ Solo desktop por ahora — tablet y mobile usan el mismo raster/SVG como fallback.
+   * Reemplazar con assets específicos cuando existan.
+   */
+  {
+    id: '06-twi-ahbra-10-comunidades',
+    numero: '06',
+    nombre: 'Twi Yahbra (Diez comunidades)', // nombre anterior en el proyecto: 'Twi Ahbra 10 comunidades'
+    assets: {
+      desktop: {
+        raster: '../../mapas-raster/06-twi-ahbra-10-comunidades/desktop-06-Twi-Ahbra-10-Comunidades.webp',
+        svg: '../../mapas-svg/06-twi-ahbra-10-comunidades/desktop-06-Twi-Ahbra-10-Comunidades.svg',
+        width: 927,
+        height: 980,
+      },
+      tablet: {
+        raster: '../../mapas-raster/06-twi-ahbra-10-comunidades/desktop-06-Twi-Ahbra-10-Comunidades.webp',
+        svg: '../../mapas-svg/06-twi-ahbra-10-comunidades/desktop-06-Twi-Ahbra-10-Comunidades.svg',
+        width: 927,
+        height: 980,
+      },
+      mobile: {
+        raster: '../../mapas-raster/06-twi-ahbra-10-comunidades/desktop-06-Twi-Ahbra-10-Comunidades.webp',
+        svg: '../../mapas-svg/06-twi-ahbra-10-comunidades/desktop-06-Twi-Ahbra-10-Comunidades.svg',
+        width: 927,
+        height: 980,
+      },
+    },
+    layout: 'B',
+    pueblos: ['Pueblo Miskitu'],
+    region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
+    tema: 'verde',
+    banner: '../../img/banners/banner-03.webp',
+    logo: '../../img/Logo-fdr.webp',
+    logo_alt: 'Fundación del Río',
+    logo_fuente: '',
+    logo_fuente_alt: '',
+    descripcion: 'Se ubica en el noreste de Nicaragua, en la Región Autónoma de la Costa Caribe Norte. Comprende 21 comunidades, todas indígenas de la etnia Miskitu. Cuenta con una población estimada de 9,736 habitantes.',
+    escala: '—',
+    proyeccion: 'UTM',
+    datum: 'NAD 27',
+    zona: '16 N',
+    elementos_cartograficos: {
+      poblados: true,
+      rios: true,
+      ubicacion_referencia: true
+    },
+    stats: {
+      hectareas_territorio: '159,138.58',
+      concesiones: 1,
+      hectareas_concesiones: '15,786.81',
+    },
+    concesiones: [
+      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', color_override: '#ea8e3b', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '15786.8', ano: '—', estado: '—', gaceta: '—' },
+    ],
+    concesion_minera: 'Se ha otorgado 1 lote de concesión minera a 1 empresa china que cubre el 9.92% de su territorio. Dicha concesión minera afecta de forma directa 1 quebrada y 3 ríos, para un total de 20.88 kilómetros de longitud de la red hídrica superficial.',
+    fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
+  },
+
   /* ── 07 ── Tuahka Takaln Balna ──────────────────────────────────────────── */
   /*
    * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
@@ -457,66 +517,6 @@ const TERRITORIOS = [
     ],
     concesion_minera: 'Se han otorgado 13 lotes de concesiones mineras: 6 lotes a una empresa minera canadiense, 4 lotes a una empresa colombiana y 3 lotes a una empresa china, que en total cubren el 88.64% de su territorio. Estas concesiones mineras afectan de forma directa 1 quebrada y 12 ríos, para un total de 142.94 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Shaded Relief · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
-  },
-
-  /* ── 06 ── Twi Yahbra (Diez comunidades) ───────────────────────────────── */
-  /*
-   * ⚠️ Solo desktop por ahora — tablet y mobile usan el mismo raster/SVG como fallback.
-   * Reemplazar con assets específicos cuando existan.
-   */
-  {
-    id: '06-twi-ahbra-10-comunidades',
-    numero: '06',
-    nombre: 'Twi Yahbra (Diez comunidades)', // nombre anterior en el proyecto: 'Twi Ahbra 10 comunidades'
-    assets: {
-      desktop: {
-        raster: '../../mapas-raster/06-twi-ahbra-10-comunidades/desktop-06-Twi-Ahbra-10-Comunidades.webp',
-        svg: '../../mapas-svg/06-twi-ahbra-10-comunidades/desktop-06-Twi-Ahbra-10-Comunidades.svg',
-        width: 927,
-        height: 980,
-      },
-      tablet: {
-        raster: '../../mapas-raster/06-twi-ahbra-10-comunidades/desktop-06-Twi-Ahbra-10-Comunidades.webp',
-        svg: '../../mapas-svg/06-twi-ahbra-10-comunidades/desktop-06-Twi-Ahbra-10-Comunidades.svg',
-        width: 927,
-        height: 980,
-      },
-      mobile: {
-        raster: '../../mapas-raster/06-twi-ahbra-10-comunidades/desktop-06-Twi-Ahbra-10-Comunidades.webp',
-        svg: '../../mapas-svg/06-twi-ahbra-10-comunidades/desktop-06-Twi-Ahbra-10-Comunidades.svg',
-        width: 927,
-        height: 980,
-      },
-    },
-    layout: 'B',
-    pueblos: ['Pueblo Miskitu'],
-    region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
-    tema: 'verde',
-    banner: '../../img/banners/banner-03.webp',
-    logo: '../../img/Logo-fdr.webp',
-    logo_alt: 'Fundación del Río',
-    logo_fuente: '',
-    logo_fuente_alt: '',
-    descripcion: 'Se ubica en el noreste de Nicaragua, en la Región Autónoma de la Costa Caribe Norte. Comprende 21 comunidades, todas indígenas de la etnia Miskitu. Cuenta con una población estimada de 9,736 habitantes.',
-    escala: '—',
-    proyeccion: 'UTM',
-    datum: 'NAD 27',
-    zona: '16 N',
-    elementos_cartograficos: {
-      poblados: true,
-      rios: true,
-      ubicacion_referencia: true
-    },
-    stats: {
-      hectareas_territorio: '159,138.58',
-      concesiones: 1,
-      hectareas_concesiones: '15,786.81',
-    },
-    concesiones: [
-      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', color_override: '#ea8e3b', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '15786.8', ano: '—', estado: '—', gaceta: '—' },
-    ],
-    concesion_minera: 'Se ha otorgado 1 lote de concesión minera a 1 empresa china que cubre el 9.92% de su territorio. Dicha concesión minera afecta de forma directa 1 quebrada y 3 ríos, para un total de 20.88 kilómetros de longitud de la red hídrica superficial.',
-    fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
   /* ── 08 ── Tasba Pri Matriz Indígena ───────────────────────────────────── */

@@ -348,6 +348,24 @@
                 padding-bottom: 24px;
             }
         }
+
+        /* ── Cards a 1 columna — se activa cuando el panel der es estrecho ── */
+        @media (max-width: 480px) {
+            .tc-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .tc {
+                grid-template-columns: 1fr auto;
+            }
+
+            .tc-der {
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 4px;
+            }
+        }
     </style>
 </head>
 

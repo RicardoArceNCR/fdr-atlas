@@ -248,7 +248,7 @@ function renderConcesiones(t) {
       const info = document.createElement("div");
       info.innerHTML = `
         <div class="concesion-card__nombre">${c.nombre || "Sin nombre"}</div>
-        <div class="concesion-card__empresa">${c.empresa && c.empresa !== "—" ? c.empresa : "Empresa sin identificar"}</div>
+        ${c.pais !== 'reserva' ? `<div class="concesion-card__empresa">${c.empresa && c.empresa !== "—" ? c.empresa : "Empresa sin identificar"}</div>` : ''}
       `;
 
       const badge = document.createElement("div");
@@ -1114,8 +1114,8 @@ function initNavegacion() {
   const idx = conAssets.findIndex(t => t.id === id);
   if (idx === -1) return;
 
-  const total    = conAssets.length;
-  const prevTerr = idx > 0         ? conAssets[idx - 1] : null;
+  const total = conAssets.length;
+  const prevTerr = idx > 0 ? conAssets[idx - 1] : null;
   const nextTerr = idx < total - 1 ? conAssets[idx + 1] : null;
 
   // Contador "03 / 12"
@@ -1157,7 +1157,7 @@ function initNavegacion() {
   // Teclado: ← → navega, Escape vuelve al índice
   document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-    if (e.key === 'ArrowLeft'  && prevTerr) window.location.href = btnPrev.href;
+    if (e.key === 'ArrowLeft' && prevTerr) window.location.href = btnPrev.href;
     if (e.key === 'ArrowRight' && nextTerr) window.location.href = btnNext.href;
     if (e.key === 'Escape') {
       const inicio = document.getElementById('nav-inicio');

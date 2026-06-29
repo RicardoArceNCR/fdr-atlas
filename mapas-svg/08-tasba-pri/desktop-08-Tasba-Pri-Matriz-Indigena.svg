@@ -1589,9 +1589,9 @@
       </g>
     </g>
     <g class="st46">
-      <line class="st23" x1="281.9" y1="172.4" x2="171.1" y2="172.4"/>
+      <line class="st23" x1="242.6" y1="290.2" x2="164.1" y2="169.9"/>
     </g>
-    <polygon class="st35" points="282.7 163.7 305.6 172.9 305.7 172.9 305.6 172.9 305.7 172.9 305.6 172.9 282.7 182.2 282.7 163.7"/>
+    <polygon class="st35" points="244.5 276.1 250.3 300.1 250.4 300.2 250.3 300.1 250.4 300.2 250.3 300.1 229.4 286.8 244.5 276.1"/>
     <g class="st38">
       <g class="st38">
         <text class="st37" transform="translate(74.5 303.7)"><tspan x="0" y="0">Nicaragua</tspan></text>
@@ -1599,7 +1599,7 @@
     </g>
     <g class="st35">
       <g class="st38">
-        <text class="st34" transform="translate(788.3 266.3)"><tspan x="0" y="0">Paises y zonas</tspan></text>
+        <text class="st34" transform="translate(788.3 266.3)"><tspan x="0" y="0">Países y zonas</tspan></text>
       </g>
       <g class="st38">
         <text class="st34" transform="translate(801.9 283.6)"><tspan x="0" y="0">involucradas</tspan></text>

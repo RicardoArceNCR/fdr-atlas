@@ -1454,9 +1454,9 @@
       </g>
     </g>
     <g class="st58">
-      <line class="st32" x1="281.9" y1="172.4" x2="171.1" y2="172.4"/>
+      <path class="st32" d="M321.8,236.8l-34.5-30.6c-26.1-23.1-59.1-37.1-93.9-39.7l-45.9-3.5"/>
     </g>
-    <polygon class="st47" points="282.7 163.7 305.6 172.9 305.7 172.9 305.6 172.9 305.7 172.9 305.6 172.9 282.7 182.2 282.7 163.7"/>
+    <polygon class="st47" points="322.3 225.4 332.6 247.8 332.7 247.9 332.6 247.8 332.7 247.9 332.6 247.8 309.6 238.9 322.3 225.4"/>
     <g class="st49">
       <g class="st49">
         <text class="st48" transform="translate(74.5 303.7)"><tspan x="0" y="0">Nicaragua</tspan></text>
@@ -1464,7 +1464,7 @@
     </g>
     <g class="st47">
       <g class="st49">
-        <text class="st46" transform="translate(788.3 266.3)"><tspan x="0" y="0">Paises y zonas</tspan></text>
+        <text class="st46" transform="translate(788.3 266.3)"><tspan x="0" y="0">Países y zonas</tspan></text>
       </g>
       <g class="st49">
         <text class="st46" transform="translate(801.9 283.6)"><tspan x="0" y="0">involucradas</tspan></text>
@@ -1540,8 +1540,8 @@
         <circle class="st55" cx="156.5" cy="252.9" r="3.9"/>
         <circle class="st55" cx="155.6" cy="260.8" r="3.9"/>
       </g>
-      <circle class="st12" cx="163.6" cy="171.6" r="19.1"/>
-      <circle class="st91" cx="163.6" cy="171.6" r="9.2"/>
+      <circle class="st12" cx="146.6" cy="163.6" r="19.1"/>
+      <circle class="st91" cx="146.6" cy="163.6" r="9.2"/>
     </g>
   </g>
 </svg>

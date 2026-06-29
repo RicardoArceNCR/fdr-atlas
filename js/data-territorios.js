@@ -19,17 +19,12 @@ const TERRITORIOS = [
    *
    * Grupos con ID propio:
    *   ✅ victoria       → border-victoria + area-hover-target ← OK
-   *   ⚠️ el-castillo   → sin grupo propio aún (geometría sin ID)
-   *   ⚠️ la-guinea     → sin grupo propio aún (geometría sin ID)
+   *   ✅ el-castillo   → border-el-castillo + area-hover-target ← verificado Jun 2026
+   *   ✅ la-guinea     → border-la-guinea + area-hover-target ← verificado Jun 2026
    *
    * Poblados con ID: poblado-el-lanchon, poblado-sukapin, poblado-cuarenta-y-tres,
    *   poblado-mani-watla, poblado-kligna, poblado-lapan, poblado-yulu
    *   (cada uno tiene variantes: -1, -2 para clusters — el tooltip usa el primero)
-   *
-   * Pendiente en Illustrator:
-   *   → Crear grupos <g id="el-castillo"> y <g id="la-guinea"> con
-   *     area-main, area-main-hover, border-el-castillo / border-la-guinea
-   *     y area-hover-target (fill ≠ none, opacity 0)
    */
   {
     id: '01-rama-kriol',
@@ -79,7 +74,7 @@ const TERRITORIOS = [
         nombre: 'Victoria',
         svg_id: 'victoria',          // ✅ grupo existe en SVG
         color_override: '#d7620e',
-        empresa: '—',                 // ⚠️ pendiente
+        empresa: 'Nicaragua XinXin Linze Minería Group, S. A.',
         pais: 'china',
         patron_img: '../../img/patrones/patron-china.webp',
         hectareas: '—',
@@ -89,9 +84,9 @@ const TERRITORIOS = [
       },
       {
         nombre: 'El Castillo',
-        svg_id: 'el-castillo',       // ⚠️ pendiente — agregar grupo en Illustrator
+        svg_id: 'el-castillo',
         color_override: '#f47317',
-        empresa: '—',
+        empresa: 'Thomas Metal, S. A.',
         pais: 'china',
         patron_img: '../../img/patrones/patron-china.webp',
         hectareas: '—',
@@ -101,9 +96,9 @@ const TERRITORIOS = [
       },
       {
         nombre: 'La Guinea',
-        svg_id: 'la-guinea',         // ⚠️ pendiente — agregar grupo en Illustrator
+        svg_id: 'la-guinea',
         color_override: '#f98838',
-        empresa: '—',
+        empresa: 'Thomas Metal, S. A.',
         pais: 'china',
         patron_img: '../../img/patrones/patron-china.webp',
         hectareas: '—',
@@ -179,7 +174,7 @@ const TERRITORIOS = [
         nombre: 'Victoria',
         svg_id: 'victoria',
         color_override: '#d7620e',
-        empresa: '—',
+        empresa: 'Nicaragua XinXin Linze Minería Group, S. A.',
         pais: 'china',
         hectareas: '—',
         año: '—',
@@ -237,18 +232,18 @@ const TERRITORIOS = [
     },
     stats: {
       hectareas_territorio: '128,699.8',
-      concesiones: 8, // ⚠️ array `concesiones` tiene 9 items — falta depurar antes de que el número sea consistente
+      concesiones: 8,
       hectareas_concesiones: '55,154.07',
     },
     concesiones: [
-      { nombre: 'Caribe', svg_id: 'caribe', color_override: '#d7620e', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Columbus I', svg_id: 'columbus', color_override: '#d7620e', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Encanto I', svg_id: 'el-encanto-i', color_override: '#e56d55', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', color_override: '#ea8e3b', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Yulu Awaskira', svg_id: 'yulu-awaskira', color_override: '#f4a13d', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Puerto Cabezas', svg_id: 'puerto-cabezas', color_override: '#d7620e', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Vanessa', svg_id: 'vanessa', color_override: '#263fa8', empresa: '—', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Walpa Tara', svg_id: 'walpa-tara', color_override: '#739b50', empresa: '—', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      // Columbus I eliminado — no pertenece a este territorio (verificado FDR Jun 2026)
+      { nombre: 'Caribe', svg_id: 'caribe', color_override: '#d7620e', empresa: 'Nicaragua XinXin Linze Minería Group, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto I', svg_id: 'el-encanto-i', color_override: '#e56d55', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', color_override: '#ea8e3b', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Yulu Awaskira', svg_id: 'yulu-awaskira', color_override: '#f4a13d', empresa: 'Nicaragua XinXin Linze Minería Group, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Puerto Cabezas', svg_id: 'puerto-cabezas', color_override: '#d7620e', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Walpa Tara', svg_id: 'walpa-tara', color_override: '#739b50', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Vanessa', svg_id: 'vanessa', color_override: '#263fa8', empresa: 'Osymar, Compañía limitada', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
       { nombre: 'Reserva Minera', svg_id: 'reserva-minera', color_override: '#394150', empresa: '—', pais: 'reserva', patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Se han otorgado 8 lotes de concesiones mineras: 5 lotes a empresas mineras chinas, 1 lote a una empresa de origen canadiense, 1 lote a una empresa nicaragüense y 1 lote de Área de Reserva Minera, que en total cubren el 42.86% de su territorio. Dichas concesiones mineras afectan de forma directa 8 quebradas y 9 ríos, para un total de 125.83 kilómetros de longitud de la red hídrica superficial.',
@@ -319,8 +314,8 @@ const TERRITORIOS = [
       hectareas_concesiones: '489.40',
     },
     concesiones: [
-      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Waspan', svg_id: 'waspan', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Waspán', svg_id: 'waspan', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Se han otorgado 2 lotes de concesión minera a 1 empresa china, que en conjunto abarcan el 0.30% del territorio. Estas concesiones afectan directamente a 3 ríos, para un total de 7 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
@@ -381,8 +376,8 @@ const TERRITORIOS = [
       hectareas_concesiones: '13,083.22',
     },
     concesiones: [
-      { nombre: 'Waspan', svg_id: 'waspan', empresa: '—', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Matusalén', svg_id: 'matusalen', empresa: '—', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Waspán', svg_id: 'waspan', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Matusalén', svg_id: 'matusalen', empresa: 'Global Group, S. A.', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', año: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Se han otorgado 2 lotes de concesiones mineras: 1 a una empresa minera china y el otro a una empresa minera nicaragüense, que en total cubren el 14.79% de su territorio. Dichas concesiones afectan de forma directa 1 quebrada y 3 ríos, para un total de 12.61 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
@@ -443,19 +438,22 @@ const TERRITORIOS = [
       hectareas_concesiones: '48,362.78',
     },
     concesiones: [
-      // ── Lista completa según PDF Tuahka (Abril 2026) ────────────────────────
-      // ⏳ = aún sin grupo en SVG. Al crearlo con el svg_id exacto, se activa solo.
-      { nombre: 'Rosita D', svg_id: 'rosita-d', pais: 'china', empresa: 'Empresa sin identificar', hectareas: '—' },
-      { nombre: 'San Leonardo', svg_id: 'san-leonardo', pais: 'china', empresa: 'Thomas Metal', hectareas: '1711.6' },
-      { nombre: 'El Salto', svg_id: 'el-salto', pais: 'china', empresa: 'Empresa sin identificar', hectareas: '—' },
-      { nombre: 'Begonia', svg_id: 'begonia', pais: 'canada', empresa: 'Empresa sin identificar', hectareas: '—' }, // ⏳
-      { nombre: 'Marsella', svg_id: 'marsella', pais: 'canada', empresa: 'Empresa sin identificar', hectareas: '—' },
-      { nombre: 'HEMCO - RB II', svg_id: 'hemco-rb-ii', pais: 'colombia', empresa: 'HEMCO', hectareas: '—' },
-      { nombre: 'HEMCO - Rosita V', svg_id: 'hemco-rosita-v', pais: 'colombia', empresa: 'HEMCO', hectareas: '—' },
-      { nombre: 'HEMCO - Rosita IV', svg_id: 'hemco-rosita-iv', pais: 'colombia', empresa: 'HEMCO', hectareas: '—' }, // ⏳
-      { nombre: 'HEMCO - Rosita VI', svg_id: 'hemco-rosita-vi', pais: 'colombia', empresa: 'HEMCO', hectareas: '—' }, // ⏳
-      { nombre: 'Nueva América H-I', svg_id: 'nueva-america-hi', pais: 'nacional', empresa: 'Empresa sin identificar', hectareas: '—' }, // ⏳
-      { nombre: 'Rosita H-2', svg_id: 'rosita-h-2', pais: 'nacional', empresa: 'Empresa sin identificar', hectareas: '—' },
+      // ── Lista completa verificada contra SVG (Jun 2026) ────────────────────
+      // ⏳ = sin grupo en SVG — datos listos, hover activo cuando Illustrator cree el grupo
+      // ⚠️ pais de concesiones HEMCO: pendiente confirmación FDR (colombia vs nacional)
+      { nombre: 'Rosita D', svg_id: 'rosita-d', pais: 'china', empresa: 'Santa Rita Mining Company, S. A.', hectareas: '—' },
+      { nombre: 'San Leonardo', svg_id: 'san-leonardo', pais: 'china', empresa: 'Thomas Metal, S. A.', hectareas: '1711.6' },
+      { nombre: 'El Salto', svg_id: 'el-salto', pais: 'china', empresa: 'Thomas Metal, S. A.', hectareas: '—' },
+      { nombre: 'Begonia', svg_id: 'begonia', pais: 'canada', empresa: 'Calibre Mining Nicaragua, S. A.', hectareas: '—' }, // ⏳ sin grupo SVG
+      { nombre: 'Casiopea', svg_id: 'casiopea', pais: 'canada', empresa: 'Calibre Mining Nicaragua, S. A.', hectareas: '—' }, // ⏳ sin grupo SVG
+      { nombre: 'Marsella', svg_id: 'marsella', pais: 'canada', empresa: 'Calibre Mining Nicaragua, S. A.', hectareas: '—' },
+      { nombre: 'Minerva', svg_id: 'minerva', pais: 'canada', empresa: 'Calibre Mining Nicaragua, S. A.', hectareas: '—' }, // ⏳ sin grupo SVG
+      { nombre: 'HEMCO - RB II', svg_id: 'hemco-rb-ii', pais: 'colombia', empresa: 'HEMCO - Nicaragua, S. A.', hectareas: '—' }, // ⚠️ pais pendiente FDR
+      { nombre: 'HEMCO - Rosita IV', svg_id: 'hemco-rosita-iv', pais: 'colombia', empresa: 'HEMCO - Nicaragua, S. A.', hectareas: '—' }, // ⚠️ pais pendiente FDR
+      { nombre: 'HEMCO - Rosita V', svg_id: 'hemco-rosita-v', pais: 'colombia', empresa: 'HEMCO - Nicaragua, S. A.', hectareas: '—' }, // ⚠️ pais pendiente FDR
+      { nombre: 'HEMCO - Rosita VI', svg_id: 'hemco-rosita-vi', pais: 'colombia', empresa: 'HEMCO - Nicaragua, S. A.', hectareas: '—' }, // ⏳ sin grupo SVG · ⚠️ pais pendiente FDR
+      { nombre: 'Nueva América H-I', svg_id: 'nueva-america-hi', pais: 'nacional', empresa: 'Desarrollo Minero de Nicaragua, S. A. (Desminic)', hectareas: '—' },
+      { nombre: 'Rosita H-2', svg_id: 'rosita-h-2', pais: 'nacional', empresa: 'Desarrollo Minero de Nicaragua, S. A. (Desminic)', hectareas: '—' },
     ],
     concesion_minera: 'Se han otorgado 13 lotes de concesiones mineras: 6 lotes a una empresa minera canadiense, 4 lotes a una empresa colombiana y 3 lotes a una empresa china, que en total cubren el 88.64% de su territorio. Estas concesiones mineras afectan de forma directa 1 quebrada y 12 ríos, para un total de 142.94 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Shaded Relief · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
@@ -515,7 +513,7 @@ const TERRITORIOS = [
       hectareas_concesiones: '15,786.81',
     },
     concesiones: [
-      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', color_override: '#ea8e3b', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '15786.8', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', color_override: '#ea8e3b', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '15786.8', ano: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Se ha otorgado 1 lote de concesión minera a 1 empresa china que cubre el 9.92% de su territorio. Dicha concesión minera afecta de forma directa 1 quebrada y 3 ríos, para un total de 20.88 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
@@ -577,12 +575,12 @@ const TERRITORIOS = [
     },
     concesiones: [
       { nombre: 'Camelia', svg_id: 'camelia', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '248.0', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Columbus I', svg_id: 'columbus-i', empresa: 'Zhong Fu Devolopment SA', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '13567.3', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Bongo de Hidalgo', svg_id: 'el-bongo-de-hidalgo', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '11467.9', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Encanto I', svg_id: 'el-encanto-i', color_override: '#e56d55', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '11423.9', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', color_override: '#ea8e3b', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '8451.4', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Walpa Tara', svg_id: 'walpa-tara', color_override: '#739b50', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '13124.6', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Reserva Minera', svg_id: 'reserva-minera', color_override: '#394150', empresa: '—', pais: 'reserva', patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Columbus I', svg_id: 'columbus-i', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '13567.3', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Bongo de Hidalgo', svg_id: 'el-bongo-de-hidalgo', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '11467.9', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto I', svg_id: 'el-encanto-i', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '11423.9', color_override: '#e56d55', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Encanto II', svg_id: 'el-encanto-ii', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '8451.4', color_override: '#ea8e3b', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Walpa Tara', svg_id: 'walpa-tara', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '13124.6', color_override: '#739b50', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Reserva Minera', svg_id: 'reserva-minera', empresa: '—', pais: 'reserva', patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', color_override: '#394150', ano: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Se han otorgado 7 lotes de concesiones mineras: 4 lotes a dos empresas mineras chinas, 2 a una empresa minera canadiense y 1 lote de Área de Reserva Minera, que en total cubren el 83.77% de su territorio. Dichas concesiones mineras afectan de forma directa 7 quebradas y 11 ríos, para un total de 188.99 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
@@ -643,14 +641,14 @@ const TERRITORIOS = [
       hectareas_concesiones: '164,206.94',
     },
     concesiones: [
-      { nombre: 'Atlas', svg_id: 'atlas', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '8515.2', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Begonia', svg_id: 'begonia', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '47156.1', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Casiopea', svg_id: 'casiopea', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '26684.8', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Centauro', svg_id: 'centauro', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '2394.1', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Minerva', svg_id: 'minerva', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '2159.5', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Pegaso', svg_id: 'pegaso', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '12334.6', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Polaris', svg_id: 'polaris', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '16575.2', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'San Leonardo', svg_id: 'san-leonardo', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '1711.6', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Atlas', svg_id: 'atlas', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '8515.2', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Begonia', svg_id: 'begonia', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '47156.1', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Casiopea', svg_id: 'casiopea', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '26684.8', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Centauro', svg_id: 'centauro', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '2394.1', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Minerva', svg_id: 'minerva', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '2159.5', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Pegaso', svg_id: 'pegaso', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '12334.6', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Polaris', svg_id: 'polaris', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '16575.2', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'San Leonardo', svg_id: 'san-leonardo', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '1711.6', ano: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Se han otorgado 8 lotes de concesiones mineras: 7 lotes a una empresa minera canadiense y 1 lote a una empresa minera china, que en total cubren el 39.57% de su territorio. Dichas concesiones mineras afectan de forma directa 4 quebradas y 22 ríos, para un total de 431.83 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
@@ -712,8 +710,8 @@ const TERRITORIOS = [
     },
     concesiones: [
       { nombre: 'ASA', svg_id: 'asa', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '374.9', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Deseo', svg_id: 'el-deseo', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '2242.1', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Hormiguero', svg_id: 'el-hormiguero', empresa: 'Brother Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '1502.0', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Deseo', svg_id: 'el-deseo', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '2242.1', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'El Hormiguero', svg_id: 'el-hormiguero', empresa: 'Brother Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '1502.0', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'Veracruz', svg_id: 'veracruz', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '7.0', ano: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Se han otorgado 4 lotes de concesiones mineras, 2 de estos lotes a una empresa canadiense y 2 lotes a dos empresas chinas, que en total cubren el 9.76% de su territorio. Dichas concesiones mineras afectan de forma directa 2 ríos, para un total de 5.77 kilómetros de longitud de la red hídrica superficial.',
@@ -775,13 +773,13 @@ const TERRITORIOS = [
       hectareas_concesiones: '13,609.22',
     },
     concesiones: [
-      { nombre: 'Bonanza H-I', svg_id: 'bonanza-h-i', empresa: 'HEMCO Nicaragua, S. A.', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '1.1', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HB - V', svg_id: 'hb-v', empresa: 'HEMCO Nicaragua, S. A. (HEMCONIC)', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '894.0', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO - Bonanza IV', svg_id: 'hemco-bonanza-iv', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '460.7', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO - Bonanza V', svg_id: 'hemco-bonanza-v', empresa: 'HEMCO Nicaragua, S. A. (HEMCONIC)', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '1327.8', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Kukalaya', svg_id: 'kukalaya', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '84.7', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Matusalén', svg_id: 'matusalén', empresa: 'GLOBAL GROUP, SOCIEDAD ANONIMA', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '4192.4', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Waspan', svg_id: 'waspan', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '6648.5', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Bonanza H-I', svg_id: 'bonanza-h-i', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '1.1', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'HB - V', svg_id: 'hb-v', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '894.0', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
+      { nombre: 'HEMCO - Bonanza IV', svg_id: 'hemco-bonanza-iv', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '460.7', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
+      { nombre: 'HEMCO - Bonanza V', svg_id: 'hemco-bonanza-v', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '1327.8', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
+      { nombre: 'Kukalaya', svg_id: 'kukalaya', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '84.7', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Matusalén', svg_id: 'matusalén', empresa: 'Global Group, S. A.', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '4192.4', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Waspán', svg_id: 'waspan', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '6648.5', ano: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Se han otorgado 7 lotes de concesiones mineras: 4 lotes a una empresa colombiana, 2 lotes a dos empresas chinas y 1 lote a una empresa nicaragüense, que en total cubren el 8.31% de su territorio. Dichas concesiones mineras afectan de forma directa a 1 quebrada y 5 ríos, para un total de 17.74 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
@@ -838,21 +836,24 @@ const TERRITORIOS = [
     },
     stats: {
       hectareas_territorio: '48,723.14',
-      concesiones: 11, // ⚠️ array `concesiones` tiene 10 items — falta 1 concesión
+      concesiones: 11,
       hectareas_concesiones: '31,085.23',
     },
     concesiones: [
-      { nombre: 'Bonanza H-I', svg_id: 'bonanza-h-i', empresa: 'HEMCO Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '1614.7', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'El Salto', svg_id: 'el-salto', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '727.4', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO - Bonanza II', svg_id: 'hemco-bonanza-ii', empresa: 'HEMCO Nicaragua, S. A. (HEMCONIC)', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '1399.2', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO - Bonanza IV', svg_id: 'hemco-bonanza-iv', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '4934.5', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO - RB I', svg_id: 'hemco-rb-i', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '7554.2', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO - RB II', svg_id: 'hemco-rb-ii', empresa: 'HEMCO Nicaragua, S. A. (HEMCONIC)', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '2211.8', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO - Rosita I', svg_id: 'hemco-rosita-i', empresa: 'Desarrollo Minero de Nicaragua, S. A. (DESMINIC)', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '602.7', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO II', svg_id: 'hemco-ii', empresa: 'HEMCO Nicaragua, S. A.', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'HEMCO - Rosita V', svg_id: 'hemco-rosita-v', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '357.1', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Kukalaya', svg_id: 'kukalaya', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '5386.1', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Rosita H-2', svg_id: 'rosita-h-2', empresa: 'Desarrollo Minero de Nicaragua, S. A. (DESMINIC)', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '993.1', ano: '—', estado: '—', gaceta: '—' },
+      // ⚠️ pais de concesiones HEMCO: pendiente confirmación FDR (colombia vs nacional)
+      // ⚠️ HEMCO - Rosita I y HEMCO II: conflicto de empresa entre JS y documento FDR — no cambiar sin FDR
+      // rosita-h-2: sin grupo SVG — hover pendiente Illustrator
+      { nombre: 'Bonanza H-I', svg_id: 'bonanza-h-i', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '1614.7', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
+      { nombre: 'El Salto', svg_id: 'el-salto', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '727.4', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'HEMCO - Bonanza II', svg_id: 'hemco-bonanza-ii', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '1399.2', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
+      { nombre: 'HEMCO - Bonanza IV', svg_id: 'hemco-bonanza-iv', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '4934.5', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
+      { nombre: 'HEMCO - RB I', svg_id: 'hemco-rb-i', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '7554.2', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
+      { nombre: 'HEMCO - RB II', svg_id: 'hemco-rb-ii', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '2211.8', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
+      { nombre: 'HEMCO - Rosita I', svg_id: 'hemco-rosita-i', empresa: 'Desarrollo Minero de Nicaragua, S. A. (Desminic)', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '602.7', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ empresa en conflicto con FDR
+      { nombre: 'HEMCO - Rosita V', svg_id: 'hemco-rosita-v', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '357.1', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
+      { nombre: 'HEMCO II', svg_id: 'hemco-ii', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ empresa en conflicto con FDR
+      { nombre: 'Kukalaya', svg_id: 'kukalaya', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '5386.1', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Rosita H-2', svg_id: 'rosita-h-2', empresa: 'Desarrollo Minero de Nicaragua, S. A. (Desminic)', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '993.1', ano: '—', estado: '—', gaceta: '—' }, // ⏳ sin grupo SVG
     ],
     concesion_minera: 'Dentro de este territorio se han otorgado 11 lotes de concesiones mineras: 7 lotes a una empresa colombiana, 2 lotes a una empresa canadiense y 2 lotes a una empresa china, que en total cubren el 63.79% de su territorio. Dichas concesiones mineras afectan de forma directa a 8 quebradas y 12 ríos, para un total de 109.10 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
@@ -913,7 +914,7 @@ const TERRITORIOS = [
       hectareas_concesiones: '3,280.22',
     },
     concesiones: [
-      { nombre: 'Waspan', svg_id: 'waspan', empresa: 'Zhong Fu Development', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '3280.2', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Waspán', svg_id: 'waspan', empresa: 'Zhong Fu Development, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '3280.2', ano: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Dentro de este territorio se ha otorgado 1 lote de concesión minera a 1 empresa china, que en total cubre el 4.46% de su territorio. Esta concesión afecta de forma directa a 2 ríos, para un total de 6.92 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
@@ -974,13 +975,13 @@ const TERRITORIOS = [
       hectareas_concesiones: '77,849.68',
     },
     concesiones: [
-      { nombre: 'Yalagüina',      svg_id: 'yalaguina',       empresa: 'Brother Metal',                  pais: 'china',    patron_img: '../../img/patrones/patron-china.webp',          hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Yalagüina II',   svg_id: 'yalaguina-ii',    empresa: 'Brother Metal',                  pais: 'china',    patron_img: '../../img/patrones/patron-china.webp',          hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Limay',          svg_id: 'limay',            empresa: 'Little Stone Mine',              pais: 'china',    patron_img: '../../img/patrones/patron-china.webp',          hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Segovia Mining 1', svg_id: 'segovia-mining-1', empresa: 'Global Group, Sociedad Anónima', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp',  hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Segovia Mining 3', svg_id: 'segovia-minig-3',  empresa: 'Global Group, Sociedad Anónima', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp',  hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Segovia Mining 6', svg_id: 'segovia-mining-6', empresa: 'Global Group, Sociedad Anónima', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp',  hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Reserva Minera', svg_id: 'reserva-minera',  empresa: '—',                              pais: 'reserva',  patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Yalagüina', svg_id: 'yalaguina', empresa: 'Brother Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Yalagüina II', svg_id: 'yalaguina-ii', empresa: 'Brother Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Limay', svg_id: 'limay', empresa: 'Little Stone Mine', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Segovia Mining 1', svg_id: 'segovia-mining-1', empresa: 'Global Group, Sociedad Anónima', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Segovia Mining 3', svg_id: 'segovia-minig-3', empresa: 'Global Group, Sociedad Anónima', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Segovia Mining 6', svg_id: 'segovia-mining-6', empresa: 'Global Group, Sociedad Anónima', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Reserva Minera', svg_id: 'reserva-minera', empresa: '—', pais: 'reserva', patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Dentro de este territorio se han otorgado 10 lotes de concesiones mineras: 4 lotes de Áreas de Reserva Minera, 3 lotes a dos empresas mineras chinas y 3 lotes a una empresa minera nicaragüense, que en total cubren el 56.37% de su territorio. Dichas concesiones mineras afectan de forma directa a 10 quebradas y 19 ríos, para un total de 190.00 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
@@ -1042,9 +1043,9 @@ const TERRITORIOS = [
     },
     concesiones: [
       { nombre: 'Aurora', svg_id: 'aurora', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'La Perla', svg_id: 'la-perla', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'La Reyna II', svg_id: 'la-reyna-ii', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Santa Emilia', svg_id: 'santa-emilia', empresa: 'Thomas Metal', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'La Perla', svg_id: 'la-perla', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'La Reyna II', svg_id: 'la-reyna-ii', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Santa Emilia', svg_id: 'santa-emilia', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Dentro de este territorio se han otorgado 4 lotes de concesiones mineras: 3 lotes a una empresa minera china y 1 lote a una empresa minera canadiense, que en total cubren el 50.05% de su territorio. Dichas concesiones mineras afectan de forma directa a 24 quebradas y 30 ríos, para un total de 289.18 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
@@ -1105,9 +1106,9 @@ const TERRITORIOS = [
       hectareas_concesiones: '52,156.71',
     },
     concesiones: [
-      { nombre: 'Camelia',    svg_id: 'camelia',    empresa: '—', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Minerva',    svg_id: 'minerva',    empresa: '—', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Walpa Tara', svg_id: 'walpa-tara', empresa: '—', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Camelia', svg_id: 'camelia', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Minerva', svg_id: 'minerva', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Walpa Tara', svg_id: 'walpa-tara', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Se han otorgado 3 lotes de concesiones mineras a una empresa minera canadiense, que en total cubren el 13.79% de su territorio. Dichas concesiones mineras afectan de forma directa 4 quebradas y 8 ríos, para un total de 112.62 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 927 980">
-  <!-- Generator: Adobe Illustrator 30.5.1, SVG Export Plug-In . SVG Version: 2.1.4 Build 3)  -->
+  <!-- Generator: Adobe Illustrator 30.6.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 109)  -->
   <defs>
     <style>
       .st0, .st1, .st2, .st3, .st4, .st5, .st6, .st7, .st8, .st9, .st10, .st11, .st12, .st13, .st14, .st15, .st16, .st17, .st18, .st19, .st20, .st21, .st22, .st23, .st24, .st25, .st26, .st27, .st28, .st29, .st30, .st31, .st32 {
@@ -40,7 +40,7 @@
         isolation: isolate;
       }
 
-      .st46, .st48, .st50 {
+      .st46, .st48 {
         font-family: Helvetica-Bold, Helvetica;
       }
 
@@ -336,11 +336,6 @@
         fill: #db3335;
       }
 
-      .st50 {
-        fill: #223f2c;
-        font-size: 30.1px;
-      }
-
       .st23 {
         stroke: #73afc9;
       }
@@ -379,13 +374,19 @@
         fill: #2b65bf;
       }
 
-      .st51 {
+      .st50 {
         font-family: Arial-BoldMT, Arial;
         font-size: 15.9px;
       }
 
       .st43 {
         fill: #2a7bed;
+      }
+
+      .st51 {
+        fill: #223f2c;
+        font-family: Montserrat-Bold, Montserrat;
+        font-size: 25.7px;
       }
 
       .st44 {
@@ -1328,7 +1329,7 @@
       <g id="label">
         <g class="st49">
           <g class="st49">
-            <text class="st51" transform="translate(763.5 495)"><tspan x="0" y="0">Reserva</tspan><tspan x="10.6" y="19.1">Minera</tspan></text>
+            <text class="st50" transform="translate(763.5 495)"><tspan x="0" y="0">Reserva</tspan><tspan x="10.6" y="19.1">Minera</tspan></text>
           </g>
         </g>
       </g>
@@ -1349,7 +1350,7 @@
       <g id="label1">
         <g class="st49">
           <g class="st49">
-            <text class="st51" transform="translate(752 563.6)"><tspan x="0" y="0">Colombia</tspan></text>
+            <text class="st50" transform="translate(752 563.6)"><tspan x="0" y="0">Colombia</tspan></text>
           </g>
         </g>
       </g>
@@ -1358,7 +1359,7 @@
       <g id="label2">
         <g class="st49">
           <g class="st49">
-            <text class="st51" transform="translate(747.8 448.8)"><tspan x="0" y="0">Nicaragua</tspan></text>
+            <text class="st50" transform="translate(747.8 448.8)"><tspan x="0" y="0">Nicaragua</tspan></text>
           </g>
         </g>
       </g>
@@ -1397,7 +1398,7 @@
       <g id="label3">
         <g class="st49">
           <g class="st49">
-            <text class="st51" transform="translate(766.3 395.3)"><tspan x="0" y="0">Canada</tspan></text>
+            <text class="st50" transform="translate(766.3 395.3)"><tspan x="0" y="0">Canada</tspan></text>
           </g>
         </g>
       </g>
@@ -1414,7 +1415,7 @@
       <g id="label4">
         <g class="st49">
           <g class="st49">
-            <text class="st51" transform="translate(779.3 331.9)"><tspan x="0" y="0">China</tspan></text>
+            <text class="st50" transform="translate(779.3 331.9)"><tspan x="0" y="0">China</tspan></text>
           </g>
         </g>
       </g>
@@ -1444,12 +1445,7 @@
     <g class="st49">
       <g class="st49">
         <g class="st49">
-          <text class="st50" transform="translate(42.2 42.7)"><tspan x="0" y="0">Concesiones mineras en</tspan></text>
-        </g>
-      </g>
-      <g class="st49">
-        <g class="st49">
-          <text class="st50" transform="translate(42.2 74.7)"><tspan x="0" y="0">territorio Mayangna Sauni Arungka “Matunbak” </tspan></text>
+          <text class="st51" transform="translate(42.2 44.5)"><tspan x="0" y="0">Concesiones mineras en el Territorio</tspan><tspan x="0" y="30.9">indígena Mayangna Sauni Arungka “Matunbak”</tspan></text>
         </g>
       </g>
     </g>

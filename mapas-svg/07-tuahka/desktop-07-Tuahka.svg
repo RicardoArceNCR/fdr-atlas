@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 927 980">
-  <!-- Generator: Adobe Illustrator 30.5.1, SVG Export Plug-In . SVG Version: 2.1.4 Build 3)  -->
+  <!-- Generator: Adobe Illustrator 30.6.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 109)  -->
   <defs>
     <style>
       .st0, .st1, .st2, .st3, .st4, .st5, .st6, .st7, .st8, .st9, .st10, .st11, .st12, .st13, .st14, .st15, .st16, .st17, .st18, .st19, .st20, .st21, .st22, .st23, .st24, .st25 {
@@ -44,16 +44,16 @@
         font-size: 14.4px;
       }
 
-      .st38, .st39, .st40, .st7, .st9, .st41, .st42, .st43 {
+      .st38, .st39, .st7, .st9, .st40, .st41, .st42, .st43 {
         isolation: isolate;
       }
 
-      .st38, .st40, .st42 {
-        font-family: Helvetica-Bold, Helvetica;
+      .st38, .st41, .st42, .st43 {
+        font-weight: 700;
       }
 
-      .st38, .st40, .st42, .st43 {
-        font-weight: 700;
+      .st38, .st42 {
+        font-family: Helvetica-Bold, Helvetica;
       }
 
       .st3 {
@@ -90,11 +90,6 @@
 
       .st48 {
         fill: #e8a93b;
-      }
-
-      .st40 {
-        fill: #223f2c;
-        font-size: 32px;
       }
 
       .st49 {
@@ -321,6 +316,12 @@
 
       .st36 {
         fill: #213863;
+      }
+
+      .st41 {
+        fill: #223f2c;
+        font-family: Montserrat-Bold, Montserrat;
+        font-size: 32px;
       }
 
       .st21, .st29 {
@@ -1691,9 +1692,9 @@
         </g>
       </g>
       <g id="label">
-        <g class="st41">
-          <g class="st41">
-            <g class="st41">
+        <g class="st40">
+          <g class="st40">
+            <g class="st40">
               <text class="st43" transform="translate(105.2 618.5)"><tspan x="0" y="0">Reserva Minera</tspan></text>
             </g>
           </g>
@@ -1714,9 +1715,9 @@
         </g>
       </g>
       <g id="label1">
-        <g class="st41">
-          <g class="st41">
-            <g class="st41">
+        <g class="st40">
+          <g class="st40">
+            <g class="st40">
               <text class="st43" transform="translate(105.8 679.9)"><tspan x="0" y="0">Colombia</tspan></text>
             </g>
           </g>
@@ -1725,9 +1726,9 @@
     </g>
     <g id="pais-nicaragua">
       <g id="label2">
-        <g class="st41">
-          <g class="st41">
-            <g class="st41">
+        <g class="st40">
+          <g class="st40">
+            <g class="st40">
               <text class="st43" transform="translate(106.6 560.7)"><tspan x="0" y="0">Nicaragua</tspan></text>
             </g>
           </g>
@@ -1766,9 +1767,9 @@
         </g>
       </g>
       <g id="label3">
-        <g class="st41">
-          <g class="st41">
-            <g class="st41">
+        <g class="st40">
+          <g class="st40">
+            <g class="st40">
               <text class="st43" transform="translate(107.5 507.2)"><tspan x="0" y="0">Canada</tspan></text>
             </g>
           </g>
@@ -1785,9 +1786,9 @@
         <polygon class="st81" points="71.6 434.7 70.7 436.2 70.4 434.5 68.8 434.2 70.2 433.4 70.2 431.8 71.3 432.8 72.8 432.2 72.1 433.7 73.3 434.9 71.6 434.7"/>
       </g>
       <g id="label4">
-        <g class="st41">
-          <g class="st41">
-            <g class="st41">
+        <g class="st40">
+          <g class="st40">
+            <g class="st40">
               <text class="st43" transform="translate(107.1 443.8)"><tspan x="0" y="0">China</tspan></text>
             </g>
           </g>
@@ -1808,18 +1809,11 @@
   </g>
   <g id="referencia">
     <rect class="st48" width="927.1" height="99.1"/>
-    <g class="st41">
-      <g class="st41">
-        <g class="st41">
-          <g class="st41">
-            <text class="st40" transform="translate(42.2 42)"><tspan x="0" y="0">Concesiones mineras en</tspan></text>
-          </g>
-        </g>
-      </g>
-      <g class="st41">
-        <g class="st41">
-          <g class="st41">
-            <text class="st40" transform="translate(42.2 76.1)"><tspan x="0" y="0">territorio Tuahka Takaln Balna</tspan></text>
+    <g class="st40">
+      <g class="st40">
+        <g class="st40">
+          <g class="st40">
+            <text class="st41" transform="translate(42.2 42)"><tspan x="0" y="0">Concesiones mineras en el Territorio</tspan><tspan x="0" y="38.4">indígena Tuahka Takaln Balna</tspan></text>
           </g>
         </g>
       </g>
@@ -1832,33 +1826,33 @@
     </g>
     <polygon class="st39" points="473.8 475.6 494.3 467.4 494.4 467.4 494.3 467.4 494.4 467.4 494.3 467.4 485.2 487.6 473.8 475.6"/>
     <polygon class="st39" points="326 356.3 330.8 334.8 330.8 334.7 330.8 334.8 330.8 334.7 330.8 334.8 342.3 353.7 326 356.3"/>
-    <g class="st41">
-      <g class="st41">
-        <g class="st41">
+    <g class="st40">
+      <g class="st40">
+        <g class="st40">
           <text class="st42" transform="translate(312.6 684)"><tspan x="0" y="0">Nicaragua</tspan></text>
         </g>
       </g>
     </g>
     <g class="st39">
-      <g class="st41">
-        <g class="st41">
+      <g class="st40">
+        <g class="st40">
           <text class="st38" transform="translate(35.4 375.5)"><tspan x="0" y="0">Países y zonas</tspan></text>
         </g>
       </g>
-      <g class="st41">
-        <g class="st41">
+      <g class="st40">
+        <g class="st40">
           <text class="st38" transform="translate(36 392.8) scale(.9 1)"><tspan x="0" y="0">involucradas</tspan></text>
         </g>
       </g>
     </g>
     <g class="st39">
-      <g class="st41">
-        <g class="st41">
+      <g class="st40">
+        <g class="st40">
           <text class="st38" transform="translate(809.6 684.3)"><tspan x="0" y="0">Símbolo de</tspan></text>
         </g>
       </g>
-      <g class="st41">
-        <g class="st41">
+      <g class="st40">
+        <g class="st40">
           <text class="st38" transform="translate(810.4 701.6)"><tspan x="0" y="0">comunidad</tspan></text>
         </g>
       </g>

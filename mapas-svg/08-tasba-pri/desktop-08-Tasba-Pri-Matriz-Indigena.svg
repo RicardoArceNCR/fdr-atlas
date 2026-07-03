@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 927 980">
-  <!-- Generator: Adobe Illustrator 30.5.1, SVG Export Plug-In . SVG Version: 2.1.4 Build 3)  -->
+  <!-- Generator: Adobe Illustrator 30.6.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 109)  -->
   <defs>
     <style>
       .st0, .st1, .st2, .st3, .st4, .st5, .st6, .st7, .st8, .st9, .st10, .st11, .st12, .st13, .st14, .st15, .st16, .st17, .st18, .st19, .st20, .st21, .st22, .st23, .st24 {
@@ -23,15 +23,15 @@
         font-size: 14.4px;
       }
 
-      .st34, .st35, .st36, .st37, .st4, .st5, .st38, .st39 {
+      .st34, .st35, .st36, .st4, .st5, .st37, .st38, .st39 {
         isolation: isolate;
       }
 
-      .st34, .st36, .st37 {
+      .st34, .st36 {
         font-family: Helvetica-Bold, Helvetica;
       }
 
-      .st34, .st36, .st37, .st39 {
+      .st34, .st36, .st38, .st39 {
         font-weight: 700;
       }
 
@@ -65,11 +65,6 @@
 
       .st44 {
         fill: #e8a93b;
-      }
-
-      .st36 {
-        fill: #223f2c;
-        font-size: 32px;
       }
 
       .st27 {
@@ -109,7 +104,7 @@
         stroke-width: 3px;
       }
 
-      .st37 {
+      .st36 {
         font-size: 20.9px;
       }
 
@@ -263,6 +258,12 @@
 
       .st16 {
         stroke-width: 2.5px;
+      }
+
+      .st38 {
+        fill: #223f2c;
+        font-family: Montserrat-Bold, Montserrat;
+        font-size: 32px;
       }
 
       .st31 {
@@ -1441,8 +1442,8 @@
         </g>
       </g>
       <g id="label">
-        <g class="st38">
-          <g class="st38">
+        <g class="st37">
+          <g class="st37">
             <text class="st39" transform="translate(763.5 495)"><tspan x="0" y="0">Reserva</tspan><tspan x="10.6" y="19.1">Minera</tspan></text>
           </g>
         </g>
@@ -1462,8 +1463,8 @@
         </g>
       </g>
       <g id="label1">
-        <g class="st38">
-          <g class="st38">
+        <g class="st37">
+          <g class="st37">
             <text class="st39" transform="translate(752 563.6)"><tspan x="0" y="0">Colombia</tspan></text>
           </g>
         </g>
@@ -1471,8 +1472,8 @@
     </g>
     <g id="pais-nicaragua">
       <g id="label2">
-        <g class="st38">
-          <g class="st38">
+        <g class="st37">
+          <g class="st37">
             <text class="st39" transform="translate(747.8 448.8)"><tspan x="0" y="0">Nicaragua</tspan></text>
           </g>
         </g>
@@ -1510,8 +1511,8 @@
         </g>
       </g>
       <g id="label3">
-        <g class="st38">
-          <g class="st38">
+        <g class="st37">
+          <g class="st37">
             <text class="st39" transform="translate(766.3 395.3)"><tspan x="0" y="0">Canada</tspan></text>
           </g>
         </g>
@@ -1527,8 +1528,8 @@
         <polygon class="st64" points="877 322.8 876.1 324.3 875.8 322.6 874.2 322.3 875.6 321.5 875.6 319.9 876.7 320.9 878.2 320.3 877.5 321.8 878.7 323 877 322.8"/>
       </g>
       <g id="label4">
-        <g class="st38">
-          <g class="st38">
+        <g class="st37">
+          <g class="st37">
             <text class="st39" transform="translate(779.3 331.9)"><tspan x="0" y="0">China</tspan></text>
           </g>
         </g>
@@ -1576,15 +1577,10 @@
   </g>
   <g id="referencia">
     <rect class="st44" width="927.1" height="99.1"/>
-    <g class="st38">
-      <g class="st38">
-        <g class="st38">
-          <text class="st36" transform="translate(42.2 42)"><tspan x="0" y="0">Concesiones mineras en</tspan></text>
-        </g>
-      </g>
-      <g class="st38">
-        <g class="st38">
-          <text class="st36" transform="translate(42.2 76.1)"><tspan x="0" y="0">territorio Tasba Pri Matriz Indígena</tspan></text>
+    <g class="st37">
+      <g class="st37">
+        <g class="st37">
+          <text class="st38" transform="translate(42.2 42)"><tspan x="0" y="0">Concesiones mineras en el Territorio</tspan><tspan x="0" y="38.4">indígena Tasba Pri Matriz Indígena</tspan></text>
         </g>
       </g>
     </g>
@@ -1592,24 +1588,24 @@
       <line class="st23" x1="242.6" y1="290.2" x2="164.1" y2="169.9"/>
     </g>
     <polygon class="st35" points="244.5 276.1 250.3 300.1 250.4 300.2 250.3 300.1 250.4 300.2 250.3 300.1 229.4 286.8 244.5 276.1"/>
-    <g class="st38">
-      <g class="st38">
-        <text class="st37" transform="translate(74.5 303.7)"><tspan x="0" y="0">Nicaragua</tspan></text>
+    <g class="st37">
+      <g class="st37">
+        <text class="st36" transform="translate(74.5 303.7)"><tspan x="0" y="0">Nicaragua</tspan></text>
       </g>
     </g>
     <g class="st35">
-      <g class="st38">
+      <g class="st37">
         <text class="st34" transform="translate(788.3 266.3)"><tspan x="0" y="0">Países y zonas</tspan></text>
       </g>
-      <g class="st38">
+      <g class="st37">
         <text class="st34" transform="translate(801.9 283.6)"><tspan x="0" y="0">involucradas</tspan></text>
       </g>
     </g>
     <g class="st35">
-      <g class="st38">
+      <g class="st37">
         <text class="st34" transform="translate(820.6 684.3)"><tspan x="0" y="0">Símbolo de</tspan></text>
       </g>
-      <g class="st38">
+      <g class="st37">
         <text class="st34" transform="translate(821.4 701.6)"><tspan x="0" y="0">comunidad</tspan></text>
       </g>
     </g>

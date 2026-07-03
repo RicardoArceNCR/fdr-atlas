@@ -1,6 +1,6 @@
 /**
  * data-territorios.js
- * Datos estructurados de los 15 territorios del atlas.
+ * Datos estructurados de los 18 territorios del atlas.
  * Centraliza toda la información editorial — el HTML solo renderiza.
  *
  * Estado de los datos:
@@ -654,7 +654,70 @@ const TERRITORIOS = [
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
-  /* ── 10 ── Mayangna Sauni Bas "Sikilta" ────────────────────────────────── */
+  /* ── 10 ── Prinzu Auhya Un ──────────────────────────────────────────────── */
+  /*
+   * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
+   * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
+   * PNG/webp, y assets.desktop.svg cuando Illustrator exporte el SVG real.
+   */
+  {
+    id: '16-prinzu-auhya-un',
+    numero: '10',
+    nombre: 'Prinzu Auhya Un', // nombre anterior en el proyecto: 'Prinzu Auhya Uh'
+    assets: {
+      desktop: {
+        raster: '../../mapas-raster/16-prinzu-auhya-un/desktop-16-Prinzu-Auhya-Un.webp',
+        svg: '../../mapas-svg/16-prinzu-auhya-un/desktop-16-Prinzu-Auhya-Un.svg',
+        width: 927,
+        height: 980,
+      },
+      tablet: {
+        raster: '../../mapas-raster/16-prinzu-auhya-un/desktop-16-Prinzu-Auhya-Un.webp',
+        svg: '../../mapas-svg/16-prinzu-auhya-un/desktop-16-Prinzu-Auhya-Un.svg',
+        width: 927,
+        height: 980,
+      },
+      mobile: {
+        raster: '../../mapas-raster/16-prinzu-auhya-un/desktop-16-Prinzu-Auhya-Un.webp',
+        svg: '../../mapas-svg/16-prinzu-auhya-un/desktop-16-Prinzu-Auhya-Un.svg',
+        width: 927,
+        height: 980,
+      },
+    },
+    layout: 'B',
+    pueblos: ['Pueblo Miskitu'],
+    region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
+    tema: 'verde',
+    banner: '../../img/banners/banner-03.webp',
+    logo: '../../img/Logo-fdr.webp',
+    logo_alt: 'Fundación del Río',
+    logo_fuente: '',
+    logo_fuente_alt: '',
+    descripcion: 'Este territorio se ubica en el noreste de Nicaragua, en la Región Autónoma de la Costa Caribe Norte. Comprende 16 comunidades indígenas de la etnia Miskitu. Cuenta con una población estimada de 1,401 familias que son aproximadamente entre 7,000 y 9,000 habitantes.',
+    escala: '—',
+    proyeccion: 'UTM',
+    datum: 'NAD 27',
+    zona: '16 N',
+    elementos_cartograficos: {
+      poblados: true,
+      rios: true,
+      ubicacion_referencia: true
+    },
+    stats: {
+      hectareas_territorio: '378,058.74',
+      concesiones: 3,
+      hectareas_concesiones: '52,156.71',
+    },
+    concesiones: [
+      { nombre: 'Camelia', svg_id: 'camelia', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Minerva', svg_id: 'minerva', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Walpa Tara', svg_id: 'walpa-tara', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+    ],
+    concesion_minera: 'Se han otorgado 3 lotes de concesiones mineras a una empresa minera canadiense, que en total cubren el 13.79% de su territorio. Dichas concesiones mineras afectan de forma directa 4 quebradas y 8 ríos, para un total de 112.62 kilómetros de longitud de la red hídrica superficial.',
+    fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
+  },
+
+  /* ── 11 ── Mayangna Sauni Bas "Sikilta" ────────────────────────────────── */
   /*
    * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
    * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
@@ -662,7 +725,7 @@ const TERRITORIOS = [
    */
   {
     id: '10-mayangna-sauni-bas',
-    numero: '10',
+    numero: '11',
     nombre: 'Mayangna Sauni Bas "Sikilta"', // nombre anterior en el proyecto: 'Mayangna Sauni Bas'
     assets: {
       desktop: {
@@ -718,7 +781,7 @@ const TERRITORIOS = [
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
-  /* ── 11 ── Mayangna Sauni As ───────────────────────────────────────────── */
+  /* ── 12 ── Mayangna Sauni As ───────────────────────────────────────────── */
   /*
    * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
    * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
@@ -726,7 +789,7 @@ const TERRITORIOS = [
    */
   {
     id: '11-mayangna-sauni-as',
-    numero: '11',
+    numero: '12',
     nombre: 'Mayangna Sauni As',
     assets: {
       desktop: {
@@ -785,7 +848,7 @@ const TERRITORIOS = [
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
-  /* ── 12 ── Mayangna Sauni Arungka "Matunbak" ──────────────────────────── */
+  /* ── 13 ── Mayangna Sauni Arungka "Matunbak" ──────────────────────────── */
   /*
    * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
    * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
@@ -793,7 +856,7 @@ const TERRITORIOS = [
    */
   {
     id: '12-mayangna-arungka-matungbak',
-    numero: '12',
+    numero: '13',
     nombre: 'Mayangna Sauni Arungka "Matunbak"', // nombre anterior en el proyecto: 'Masauni Arumatun'
     assets: {
       desktop: {
@@ -859,7 +922,7 @@ const TERRITORIOS = [
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
-  /* ── 13 ── AMASAU ──────────────────────────────────────────────────────── */
+  /* ── 14 ── AMASAU ──────────────────────────────────────────────────────── */
   /*
    * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
    * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
@@ -867,7 +930,7 @@ const TERRITORIOS = [
    */
   {
     id: '13-amasau',
-    numero: '13',
+    numero: '14',
     nombre: 'Mayangna Awas Tingni Mayangnina Sauni Umani (AMASAU)',
     assets: {
       desktop: {
@@ -920,7 +983,7 @@ const TERRITORIOS = [
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
-  /* ── 14 ── Chorotega - Norte ───────────────────────────────────────────── */
+  /* ── 15 ── Chorotega - Norte ───────────────────────────────────────────── */
   /*
    * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
    * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
@@ -928,7 +991,7 @@ const TERRITORIOS = [
    */
   {
     id: '14-chorotega-norte',
-    numero: '14',
+    numero: '15',
     nombre: 'Chorotega - Norte', // nombre anterior en el proyecto: 'Chorotega II'
     assets: {
       desktop: {
@@ -987,7 +1050,125 @@ const TERRITORIOS = [
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 
-  /* ── 15 ── Matagalpa ───────────────────────────────────────────────────── */
+  /* ── 16 ── Muy Muy ──────────────────────────────────────────────────────── */
+  /*
+   * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
+   * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
+   * PNG/webp, y assets.desktop.svg cuando Illustrator exporte el SVG real.
+   */
+  {
+    id: '17-muy-muy',
+    numero: '16',
+    nombre: 'Muy Muy',
+    assets: {
+      desktop: {
+        raster: '../../mapas-raster/17-muy-muy/desktop-17-Muy-Muy.webp',
+        svg: '../../mapas-svg/17-muy-muy/desktop-17-Muy-Muy.svg',
+        width: 927,
+        height: 980,
+      },
+      tablet: {
+        raster: '../../mapas-raster/17-muy-muy/desktop-17-Muy-Muy.webp',
+        svg: '../../mapas-svg/17-muy-muy/desktop-17-Muy-Muy.svg',
+        width: 927,
+        height: 980,
+      },
+      mobile: {
+        raster: '../../mapas-raster/17-muy-muy/desktop-17-Muy-Muy.webp',
+        svg: '../../mapas-svg/17-muy-muy/desktop-17-Muy-Muy.svg',
+        width: 927,
+        height: 980,
+      },
+    },
+    layout: 'B',
+    pueblos: ['Pueblo Matagalpa'],
+    region: 'Departamento de Matagalpa',
+    tema: 'verde',
+    banner: '../../img/banners/banner-03.webp',
+    logo: '../../img/Logo-fdr.webp',
+    logo_alt: 'Fundación del Río',
+    logo_fuente: '',
+    logo_fuente_alt: '',
+    descripcion: 'Se ubica en el centro de Nicaragua, en el departamento de Matagalpa. Comprende 4 comunidades: Muy Muy, Matiguás, San Ramón y Uluse, todas indígenas de la etnia Matagalpa. Cuenta con una población estimada de 12,000 habitantes.',
+    escala: '—',
+    proyeccion: 'UTM',
+    datum: 'NAD 27',
+    zona: '16 N',
+    elementos_cartograficos: {
+      poblados: true,
+      rios: true,
+      ubicacion_referencia: true
+    },
+    stats: {
+      hectareas_territorio: '53,587.22',
+      concesiones: 2,
+      hectareas_concesiones: '4,081.76',
+    },
+    concesiones: [],
+    concesion_minera: 'Se han otorgado 2 lotes de concesiones mineras: 1 lote a una empresa minera china y 1 lote a una empresa nicaragüense, que en total cubren el 7.61% de su territorio. Dichas concesiones mineras afectarían de forma directa a 2 quebradas y 5 ríos, para un total de 19.75 kilómetros de longitud de la red hídrica superficial.',
+    fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
+  },
+
+  /* ── 17 ── Sébaco ──────────────────────────────────────────────────────── */
+  /*
+   * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
+   * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
+   * PNG/webp, y assets.desktop.svg cuando Illustrator exporte el SVG real.
+   */
+  {
+    id: '18-sebaco',
+    numero: '17',
+    nombre: 'Sébaco',
+    assets: {
+      desktop: {
+        raster: '../../mapas-raster/18-sebaco/desktop-18-Sebaco.webp',
+        svg: '../../mapas-svg/18-sebaco/desktop-18-Sebaco.svg',
+        width: 927,
+        height: 980,
+      },
+      tablet: {
+        raster: '../../mapas-raster/18-sebaco/desktop-18-Sebaco.webp',
+        svg: '../../mapas-svg/18-sebaco/desktop-18-Sebaco.svg',
+        width: 927,
+        height: 980,
+      },
+      mobile: {
+        raster: '../../mapas-raster/18-sebaco/desktop-18-Sebaco.webp',
+        svg: '../../mapas-svg/18-sebaco/desktop-18-Sebaco.svg',
+        width: 927,
+        height: 980,
+      },
+    },
+    layout: 'B',
+    pueblos: ['Pueblo Matagalpa'],
+    region: 'Departamentos de Matagalpa y Estelí',
+    tema: 'verde',
+    banner: '../../img/banners/banner-03.webp',
+    logo: '../../img/Logo-fdr.webp',
+    logo_alt: 'Fundación del Río',
+    logo_fuente: '',
+    logo_fuente_alt: '',
+    descripcion: 'Este territorio se ubica en el centro de Nicaragua, entre el departamento de Matagalpa y Estelí. Comprende 3 comunidades, todas indígenas de la etnia Matagalpa. Cuenta con una población estimada de 8,000 habitantes.',
+    escala: '—',
+    proyeccion: 'UTM',
+    datum: 'NAD 27',
+    zona: '16 N',
+    elementos_cartograficos: {
+      poblados: true,
+      rios: true,
+      ubicacion_referencia: true
+    },
+    stats: {
+      hectareas_territorio: '25,152.54',
+      concesiones: 1,
+      hectareas_concesiones: '256.60',
+    },
+    concesiones: [],
+    concesion_minera: 'Se ha otorgado 1 lote de concesión minera a una empresa nicaragüense, el cual cubre el 1.02% de su territorio. Dichas concesiones mineras afectan de forma directa 1 río, para un total de 0.14 kilómetros de longitud de la red hídrica superficial.',
+    fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
+  },
+
+  /* ── 18 ── Matagalpa ───────────────────────────────────────────────────── */
   /*
    * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
    * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
@@ -995,7 +1176,7 @@ const TERRITORIOS = [
    */
   {
     id: '15-matagalpa',
-    numero: '15',
+    numero: '18',
     nombre: 'Matagalpa',
     assets: {
       desktop: {
@@ -1048,187 +1229,6 @@ const TERRITORIOS = [
       { nombre: 'Santa Emilia', svg_id: 'santa-emilia', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Dentro de este territorio se han otorgado 4 lotes de concesiones mineras: 3 lotes a una empresa minera china y 1 lote a una empresa minera canadiense, que en total cubren el 50.05% de su territorio. Dichas concesiones mineras afectan de forma directa a 24 quebradas y 30 ríos, para un total de 289.18 kilómetros de longitud de la red hídrica superficial.',
-    fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
-  },
-
-  /* ── 16 ── Prinzu Auhya Un ──────────────────────────────────────────────── */
-  /*
-   * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
-   * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
-   * PNG/webp, y assets.desktop.svg cuando Illustrator exporte el SVG real.
-   */
-  {
-    id: '16-prinzu-auhya-un',
-    numero: '16',
-    nombre: 'Prinzu Auhya Un', // nombre anterior en el proyecto: 'Prinzu Auhya Uh'
-    assets: {
-      desktop: {
-        raster: '../../mapas-raster/16-prinzu-auhya-un/desktop-16-Prinzu-Auhya-Un.webp',
-        svg: '../../mapas-svg/16-prinzu-auhya-un/desktop-16-Prinzu-Auhya-Un.svg',
-        width: 927,
-        height: 980,
-      },
-      tablet: {
-        raster: '../../mapas-raster/16-prinzu-auhya-un/desktop-16-Prinzu-Auhya-Un.webp',
-        svg: '../../mapas-svg/16-prinzu-auhya-un/desktop-16-Prinzu-Auhya-Un.svg',
-        width: 927,
-        height: 980,
-      },
-      mobile: {
-        raster: '../../mapas-raster/16-prinzu-auhya-un/desktop-16-Prinzu-Auhya-Un.webp',
-        svg: '../../mapas-svg/16-prinzu-auhya-un/desktop-16-Prinzu-Auhya-Un.svg',
-        width: 927,
-        height: 980,
-      },
-    },
-    layout: 'B',
-    pueblos: ['Pueblo Miskitu'],
-    region: 'Región Autónoma de la Costa Caribe Norte (RACCN)',
-    tema: 'verde',
-    banner: '../../img/banners/banner-03.webp',
-    logo: '../../img/Logo-fdr.webp',
-    logo_alt: 'Fundación del Río',
-    logo_fuente: '',
-    logo_fuente_alt: '',
-    descripcion: 'Este territorio se ubica en el noreste de Nicaragua, en la Región Autónoma de la Costa Caribe Norte. Comprende 16 comunidades indígenas de la etnia Miskitu. Cuenta con una población estimada de 1,401 familias que son aproximadamente entre 7,000 y 9,000 habitantes.',
-    escala: '—',
-    proyeccion: 'UTM',
-    datum: 'NAD 27',
-    zona: '16 N',
-    elementos_cartograficos: {
-      poblados: true,
-      rios: true,
-      ubicacion_referencia: true
-    },
-    stats: {
-      hectareas_territorio: '378,058.74',
-      concesiones: 3,
-      hectareas_concesiones: '52,156.71',
-    },
-    concesiones: [
-      { nombre: 'Camelia', svg_id: 'camelia', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Minerva', svg_id: 'minerva', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Walpa Tara', svg_id: 'walpa-tara', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
-    ],
-    concesion_minera: 'Se han otorgado 3 lotes de concesiones mineras a una empresa minera canadiense, que en total cubren el 13.79% de su territorio. Dichas concesiones mineras afectan de forma directa 4 quebradas y 8 ríos, para un total de 112.62 kilómetros de longitud de la red hídrica superficial.',
-    fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
-  },
-
-  /* ── 17 ── Muy Muy ──────────────────────────────────────────────────────── */
-  /*
-   * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
-   * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
-   * PNG/webp, y assets.desktop.svg cuando Illustrator exporte el SVG real.
-   */
-  {
-    id: '17-muy-muy',
-    numero: '17',
-    nombre: 'Muy Muy',
-    assets: {
-      desktop: {
-        raster: '../../mapas-raster/17-muy-muy/desktop-17-Muy-Muy.webp',
-        svg: '../../mapas-svg/17-muy-muy/desktop-17-Muy-Muy.svg',
-        width: 927,
-        height: 980,
-      },
-      tablet: {
-        raster: '../../mapas-raster/17-muy-muy/desktop-17-Muy-Muy.webp',
-        svg: '../../mapas-svg/17-muy-muy/desktop-17-Muy-Muy.svg',
-        width: 927,
-        height: 980,
-      },
-      mobile: {
-        raster: '../../mapas-raster/17-muy-muy/desktop-17-Muy-Muy.webp',
-        svg: '../../mapas-svg/17-muy-muy/desktop-17-Muy-Muy.svg',
-        width: 927,
-        height: 980,
-      },
-    },
-    layout: 'B',
-    pueblos: ['Pueblo Matagalpa'],
-    region: 'Departamento de Matagalpa',
-    tema: 'verde',
-    banner: '../../img/banners/banner-03.webp',
-    logo: '../../img/Logo-fdr.webp',
-    logo_alt: 'Fundación del Río',
-    logo_fuente: '',
-    logo_fuente_alt: '',
-    descripcion: 'Se ubica en el centro de Nicaragua, en el departamento de Matagalpa. Comprende 4 comunidades: Muy Muy, Matiguás, San Ramón y Uluse, todas indígenas de la etnia Matagalpa. Cuenta con una población estimada de 12,000 habitantes.',
-    escala: '—',
-    proyeccion: 'UTM',
-    datum: 'NAD 27',
-    zona: '16 N',
-    elementos_cartograficos: {
-      poblados: true,
-      rios: true,
-      ubicacion_referencia: true
-    },
-    stats: {
-      hectareas_territorio: '53,587.22',
-      concesiones: 2,
-      hectareas_concesiones: '4,081.76',
-    },
-    concesiones: [],
-    concesion_minera: 'Se han otorgado 2 lotes de concesiones mineras: 1 lote a una empresa minera china y 1 lote a una empresa nicaragüense, que en total cubren el 7.61% de su territorio. Dichas concesiones mineras afectarían de forma directa a 2 quebradas y 5 ríos, para un total de 19.75 kilómetros de longitud de la red hídrica superficial.',
-    fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
-  },
-
-  /* ── 18 ── Sébaco ──────────────────────────────────────────────────────── */
-  /*
-   * ⚠️ Pendiente: sin raster ni SVG todavía. assets vacío intencionalmente —
-   * el mapa no se renderiza. Agregar assets.desktop.raster cuando exista el
-   * PNG/webp, y assets.desktop.svg cuando Illustrator exporte el SVG real.
-   */
-  {
-    id: '18-sebaco',
-    numero: '18',
-    nombre: 'Sébaco',
-    assets: {
-      desktop: {
-        raster: '../../mapas-raster/18-sebaco/desktop-18-Sebaco.webp',
-        svg: '../../mapas-svg/18-sebaco/desktop-18-Sebaco.svg',
-        width: 927,
-        height: 980,
-      },
-      tablet: {
-        raster: '../../mapas-raster/18-sebaco/desktop-18-Sebaco.webp',
-        svg: '../../mapas-svg/18-sebaco/desktop-18-Sebaco.svg',
-        width: 927,
-        height: 980,
-      },
-      mobile: {
-        raster: '../../mapas-raster/18-sebaco/desktop-18-Sebaco.webp',
-        svg: '../../mapas-svg/18-sebaco/desktop-18-Sebaco.svg',
-        width: 927,
-        height: 980,
-      },
-    },
-    layout: 'B',
-    pueblos: ['Pueblo Matagalpa'],
-    region: 'Departamentos de Matagalpa y Estelí',
-    tema: 'verde',
-    banner: '../../img/banners/banner-03.webp',
-    logo: '../../img/Logo-fdr.webp',
-    logo_alt: 'Fundación del Río',
-    logo_fuente: '',
-    logo_fuente_alt: '',
-    descripcion: 'Este territorio se ubica en el centro de Nicaragua, entre el departamento de Matagalpa y Estelí. Comprende 3 comunidades, todas indígenas de la etnia Matagalpa. Cuenta con una población estimada de 8,000 habitantes.',
-    escala: '—',
-    proyeccion: 'UTM',
-    datum: 'NAD 27',
-    zona: '16 N',
-    elementos_cartograficos: {
-      poblados: true,
-      rios: true,
-      ubicacion_referencia: true
-    },
-    stats: {
-      hectareas_territorio: '25,152.54',
-      concesiones: 1,
-      hectareas_concesiones: '256.60',
-    },
-    concesiones: [],
-    concesion_minera: 'Se ha otorgado 1 lote de concesión minera a una empresa nicaragüense, el cual cubre el 1.02% de su territorio. Dichas concesiones mineras afectan de forma directa 1 río, para un total de 0.14 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 

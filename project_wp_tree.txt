@@ -61,6 +61,7 @@
 │       │   │   └── semanticos.json
 │       │   └── semanticos.json
 │       └── style-dictionary.config.js
+├── EMPRESAS_POR_CONCESION.md
 ├── GUIA_EXPORT_WEB_POR_TERRITORIO.md
 ├── img
 │   ├── 01-Territorio Rama y Kriol.jpeg
@@ -74,13 +75,18 @@
 │   ├── 03_Waupasa Twi.webp
 │   ├── 04_Wangki Twi-Tasba Raya.jpeg
 │   ├── banner-03.png
+│   ├── banner-03.psd
+│   ├── banner-03.webp
 │   ├── banner-04.webp
 │   ├── banners
+│   │   ├── banner-03 copy.webp
 │   │   ├── banner-03.webp
 │   │   └── banner-04.webp
 │   ├── Logo-fdr.webp
 │   └── patrones
 │       ├── patron-canada.webp
+│       ├── patron-china.ai
+│       ├── patron-china.svg
 │       ├── patron-china.webp
 │       ├── patron-colombia.webp
 │       ├── patron-nicaragua.webp
@@ -90,11 +96,6 @@
 │   ├── auditar-colores.mjs
 │   ├── data-territorios.js
 │   └── render-diptico.js
-├── mapas
-│   ├── 01_Territorio_Rama_y_Kriol.json
-│   ├── 02_Territorio_Creole_de_Bluefields.json
-│   ├── 03_Waupasa_Twi.json
-│   └── 04_Wangki_Twi-Tasba_Raya.json
 ├── mapas-raster
 │   ├── 01-rama-kriol
 │   │   ├── desktop-01-Rama-Kriol.png
@@ -113,8 +114,8 @@
 │   │   ├── desktop-04-wangki-twi-tasba-raya.png
 │   │   └── desktop-04-wangki-twi-tasba-raya.webp
 │   ├── 05-wangki-li
-│   │   ├── desktop-05-wangki-li.png
-│   │   └── desktop-05-wangki-li.webp
+│   │   ├── desktop-05-Wangki-Li.png
+│   │   └── desktop-05-Wangki-Li.webp
 │   ├── 06-twi-ahbra-10-comunidades
 │   │   ├── desktop-06-Twi-Ahbra-10-Comunidades.png
 │   │   └── desktop-06-Twi-Ahbra-10-Comunidades.webp
@@ -146,8 +147,14 @@
 │   │   ├── desktop-13-Amasau.png
 │   │   └── desktop-13-Amasau.webp
 │   ├── 14-chorotega-norte
+│   │   ├── desktop-14-Chorotega-Norte.png
+│   │   └── desktop-14-Chorotega-Norte.webp
 │   ├── 15-matagalpa
+│   │   ├── desktop-15-Matagalpa.png
+│   │   └── desktop-15-Matagalpa.webp
 │   └── 16-prinzu-auhya-un
+│       ├── desktop-16-Prinzu-Auhya-Uh.png
+│       └── desktop-16-Prinzu-Auhya-Un.webp
 ├── mapas-svg
 │   ├── 01-rama-kriol
 │   │   └── desktop-01-Rama-Kriol.svg
@@ -155,15 +162,11 @@
 │   │   ├── desktop-02-Creole-Bluefields.svg
 │   │   └── desktop-02-Creole-de-Bluefields.svg
 │   ├── 03-waupasa-twi
-│   │   ├── desktop-03-Waupasa-Twi-4.ai
-│   │   ├── desktop-03-Waupasa-Twi.svg
-│   │   ├── desktop-04-Wangki-Twi-Tasba-Raya.svg
-│   │   ├── mobile-03-Waupasa-Twi.ai
-│   │   ├── mobile-03-Waupasa-Twi.svg
-│   │   └── tablet-03-Waupasa-Twi.svg
+│   │   └── desktop-03-Waupasa-Twi.svg
 │   ├── 04-wangki-twi-tasba-raya
 │   │   └── desktop-04-Wangki-Twi-Tasba-Raya.svg
 │   ├── 05-wangki-li
+│   │   ├── desktop-05-Wangki-Li copy.svg
 │   │   └── desktop-05-Wangki-Li.svg
 │   ├── 06-twi-ahbra-10-comunidades
 │   │   └── desktop-06-Twi-Ahbra-10-Comunidades.svg
@@ -174,20 +177,21 @@
 │   │   └── desktop-08-Tasba-Pri-Matriz-Indigena.svg
 │   ├── 09-prinzu-awala
 │   │   └── desktop-09-Prinzu-Awala.svg
-│   ├── 10-mayagna-sauni-bas
-│   │   └── desktop-10-Mayangna-Sauni-Bas.svg
 │   ├── 10-mayangna-sauni-bas
+│   │   ├── desktop-10-Mayagna-Sauni-Bas.svg
 │   │   └── desktop-10-Mayangna-Sauni-Bas.svg
 │   ├── 11-mayangna-sauni-as
-│   │   ├── desktop-11-Mayagna-Sauni-As.svg
 │   │   └── desktop-11-Mayangna-Sauni-As.svg
 │   ├── 12-mayangna-arungka-matungbak
 │   │   └── desktop-12-Mayangna-Arungka-Matungbak.svg
 │   ├── 13-amasau
 │   │   └── desktop-13-Amasau.svg
 │   ├── 14-chorotega-norte
+│   │   └── desktop-14-Chorotega-Norte.svg
 │   ├── 15-matagalpa
+│   │   └── desktop-15-Matagalpa.svg
 │   └── 16-prinzu-auhya-un
+│       └── desktop-16-Prinzu-Auhya-Un.svg
 ├── project_wp_tree.txt
 ├── README.md
 ├── reference
@@ -199,4 +203,4 @@
 └── templates
     └── diptico-base.html
 
-70 directories, 130 files
+68 directories, 136 files

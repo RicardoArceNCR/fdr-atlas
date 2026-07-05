@@ -1,0 +1,34 @@
+/**
+ * export.css
+ * Se inyecta SOLO durante la generación de PDF (scripts/exportar-pdfs.mjs).
+ * No se linkea nunca desde index.html — vive aparte para no tocar diptico.css.
+ *
+ * Filosofía: un único selector de entrada (body.exportando) controla todo
+ * lo que hay que ocultar/congelar. Si agregas un botón o overlay nuevo en
+ * el futuro, solo se agrega una línea aquí — el script no se toca.
+ */
+
+body.exportando {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* Congelar toda animación/transición */
+body.exportando * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Ocultar UI interactiva que no debe aparecer en el export */
+body.exportando .atlas-nav,
+body.exportando .diptico__toggle-concesiones,
+body.exportando .btn-tour-narrativo,
+body.exportando [data-tooltip],
+body.exportando .tooltip {
+  display: none !important;
+}
+
+/* Defensa contra .is-collapsed — la lista debe estar visible en el PDF */
+body.exportando .concesiones-lista {
+  display: grid !important;
+}

@@ -180,6 +180,8 @@ atlas/NN-territorio/index.html     ← un HTML por territorio
 mapas-raster/NN-territorio/        ← webp por breakpoint
 mapas-svg/NN-territorio/           ← SVG por breakpoint
 CLAUDE.md                          ← decisiones técnicas y diagnóstico
+scripts/exportar-pdfs.mjs          ← export a PDF vectorial vía Playwright
+scripts/export.css                 ← CSS inyectado solo durante el export
 ```
 
 ---
@@ -206,6 +208,9 @@ md5sum mapas-raster/NN-territorio/desktop-NN.webp mapas-raster/NN-anterior/deskt
 
 # Verificar data-territorio en todos los index.html
 grep "data-territorio" atlas/*/index.html
+
+# Exportar PDFs vectoriales (texto + SVG editables) de los 18 territorios
+node scripts/exportar-pdfs.mjs
 ```
 
 ---

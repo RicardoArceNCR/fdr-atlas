@@ -248,7 +248,7 @@ function renderConcesiones(t) {
       const info = document.createElement("div");
       info.innerHTML = `
         <div class="concesion-card__nombre">${c.nombre || "Sin nombre"}</div>
-        ${c.pais !== 'reserva' ? `<div class="concesion-card__empresa">${c.empresa && c.empresa !== "—" ? c.empresa : "Empresa sin identificar"}</div>` : ''}
+        <div class="concesion-card__empresa">${c.empresa && c.empresa !== "—" ? c.empresa : "Empresa sin identificar"}</div>
       `;
 
       const badge = document.createElement("div");

@@ -581,8 +581,8 @@
 }
 
 .badge-reserva {
-  background: var(--background-subtle);
-  color: var(--text-color-secondary);
+  background: color-mix(in srgb, var(--concesion-tipo-reserva) 15%, white);
+  color: var(--concesion-tipo-reserva);
 }
 
 /* ─── Patrones visuales por país (leyenda + concesion-card) ──────────────────
@@ -631,9 +631,9 @@
   background-color: color-mix(in srgb, var(--concesion-pais-nacional) 12%, transparent);
 }
 
-/* Reserva — sin líneas; mantiene sólido semitransparente */
+/* Reserva — sin líneas; sólido, color café (--concesion-tipo-reserva) */
 .patron-reserva {
-  background: color-mix(in srgb, var(--concesion-tipo-reserva) 25%, transparent);
+  background: var(--concesion-tipo-reserva);
 }
 
 /* ─── Narrativa / contexto ─────────────────────────────────────────────────── */
@@ -1052,9 +1052,9 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   box-shadow: 0 4px 12px rgba(38, 63, 168, 0.28);
 }
 
-/* Reserva — sombra gris */
+/* Reserva — sombra café */
 .concesion-card--activa[data-pais="reserva"] {
-  box-shadow: 0 4px 12px rgba(57, 65, 80, 0.28);
+  box-shadow: 0 4px 12px rgba(107, 58, 42, 0.28);
 }
 
 /* Colombia — sombra violeta */
@@ -1196,7 +1196,7 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 }
 
 #reserva-minera .concesion--activa {
-  filter: drop-shadow(0 0 7px rgba(57, 65, 80, 0.45));
+  filter: drop-shadow(0 0 7px rgba(107, 58, 42, 0.45));
 }
 
 

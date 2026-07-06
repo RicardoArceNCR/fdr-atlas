@@ -367,7 +367,7 @@ const ESCALAS_PAIS = {
   canada: ['#0d3d0d', '#287a28', '#5ab85a', '#8dc44a'],
   colombia: ['#1a0840', '#4a1d9e', '#8c52e8', '#5b9bd4'],
   nacional: ['#0a1a38', '#1f4090', '#4d72d4', '#4da8d4'],
-  reserva: ['#111418', '#394150', '#6b7a8e', '#8ea8c0'],
+  reserva: ['#2e1712', '#6b3a2a', '#a1684f', '#c99b81'],
   'sin-nombre': ['#4b5563', '#6b7280', '#9ca3af', '#d1d5db'],
 };
 
@@ -438,12 +438,20 @@ function inyectarCSSConcesiones(concesiones) {
       // El CSS base (.patron-{pais}) usa el color genérico del país; este bloque
       // lo pisa con el tono individual calculado por ESCALAS_PAIS o color_override.
       // Opera sobre el DOM (las cards ya existen cuando se llama esta función).
+      // ⚠️ Reserva NO lleva líneas — se excluye para no pisar el sólido de
+      // .patron-reserva con el patrón de líneas diagonales.
       const patronEl = document.querySelector(
         `.concesion-card[data-svg-id="${c.svg_id}"] .concesion-card__patron`
       );
-      if (patronEl) {
+      if (patronEl && c.pais !== 'reserva') {
         patronEl.style.backgroundImage = svgPatronDataUri(color);
         patronEl.style.backgroundColor = `color-mix(in srgb, ${color} 12%, transparent)`;
+      } else if (patronEl) {
+        // Reserva: sólido café, sin líneas. Se limpia cualquier inline previo
+        // (por si venía de un re-render de breakpoint) y se deja que
+        // .patron-reserva controle el color vía var(--concesion-tipo-reserva).
+        patronEl.style.backgroundImage = '';
+        patronEl.style.backgroundColor = '';
       }
     });
 

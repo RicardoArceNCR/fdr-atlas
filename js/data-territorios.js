@@ -1104,7 +1104,10 @@ const TERRITORIOS = [
       concesiones: 2,
       hectareas_concesiones: '4,081.76',
     },
-    concesiones: [],
+    concesiones: [
+      { nombre: 'La Perla', svg_id: 'la-perla', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Muy Muy', svg_id: 'muy-muy', empresa: 'Global Group, S. A.', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+    ],
     concesion_minera: 'Se han otorgado 2 lotes de concesiones mineras: 1 lote a una empresa minera china y 1 lote a una empresa nicaragüense, que en total cubren el 7.61% de su territorio. Dichas concesiones mineras afectarían de forma directa a 2 quebradas y 5 ríos, para un total de 19.75 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
@@ -1163,7 +1166,9 @@ const TERRITORIOS = [
       concesiones: 1,
       hectareas_concesiones: '256.60',
     },
-    concesiones: [],
+    concesiones: [
+      { nombre: 'HEMCO - SID', svg_id: 'hemco-sid', empresa: 'Minera San Cristóbal, S. A.', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+    ],
     concesion_minera: 'Se ha otorgado 1 lote de concesión minera a una empresa nicaragüense, el cual cubre el 1.02% de su territorio. Dichas concesiones mineras afectan de forma directa 1 río, para un total de 0.14 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },

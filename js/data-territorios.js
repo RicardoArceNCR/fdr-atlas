@@ -512,10 +512,10 @@ const TERRITORIOS = [
       { nombre: 'HEMCO - Rosita IV', svg_id: 'hemco-rosita-iv', pais: 'colombia', empresa: 'HEMCO - Nicaragua, S. A.', hectareas: '—' }, // ⚠️ pais pendiente FDR
       { nombre: 'HEMCO - Rosita V', svg_id: 'hemco-rosita-v', pais: 'colombia', empresa: 'HEMCO - Nicaragua, S. A.', hectareas: '—' }, // ⚠️ pais pendiente FDR
       { nombre: 'HEMCO - Rosita VI', svg_id: 'hemco-rosita-vi', pais: 'colombia', empresa: 'HEMCO - Nicaragua, S. A.', hectareas: '—' }, // ⏳ sin grupo SVG · ⚠️ pais pendiente FDR
-      { nombre: 'Nueva América H-I', svg_id: 'nueva-america-hi', pais: 'nacional', empresa: 'Desarrollo Minero de Nicaragua, S. A. (Desminic)', hectareas: '—' },
-      { nombre: 'Rosita H-2', svg_id: 'rosita-h-2', pais: 'nacional', empresa: 'Desarrollo Minero de Nicaragua, S. A. (Desminic)', hectareas: '—' },
+      { nombre: 'Nueva América H-I', svg_id: 'nueva-america-h-i', pais: 'colombia', empresa: 'Desarrollo Minero de Nicaragua, S. A. (Desminic)', hectareas: '—' },
+      { nombre: 'Rosita H-2', svg_id: 'rosita-h-2', pais: 'colombia', empresa: 'Desarrollo Minero de Nicaragua, S. A. (Desminic)', hectareas: '—' },
     ],
-    concesion_minera: 'Se han otorgado 13 lotes de concesiones mineras: 6 lotes a una empresa minera canadiense, 4 lotes a una empresa colombiana y 3 lotes a una empresa china, que en total cubren el 88.64% de su territorio. Estas concesiones mineras afectan de forma directa 1 quebrada y 12 ríos, para un total de 142.94 kilómetros de longitud de la red hídrica superficial.',
+    concesion_minera: 'Se han otorgado 13 lotes de concesiones mineras: 4 lotes a una empresa minera canadiense, 6 lotes a una empresa colombiana y 3 lotes a una empresa china, que en total cubren el 88.64% de su territorio. Estas concesiones mineras afectan de forma directa 1 quebrada y 12 ríos, para un total de 142.94 kilómetros de longitud de la red hídrica superficial.', // ⚠️ cifra recalculada tras mover Nueva América H-I y Rosita H-2 a colombia — confirmar con FDR
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Shaded Relief · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 

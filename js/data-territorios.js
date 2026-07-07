@@ -1045,7 +1045,7 @@ const TERRITORIOS = [
       { nombre: 'Segovia Mining 6', svg_id: 'segovia-mining-6', empresa: 'Global Group, Sociedad Anónima', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'Reserva Minera', svg_id: 'reserva-minera', empresa: 'Eniminas | DGM', pais: 'reserva', patron_img: '../../img/patrones/patron-reserva-minera.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
     ],
-    concesion_minera: 'Dentro de este territorio se han otorgado 10 lotes de concesiones mineras: 4 lotes de Áreas de Reserva Minera, 3 lotes a dos empresas mineras chinas y 3 lotes a una empresa minera nicaragüense, que en total cubren el 56.37% de su territorio. Dichas concesiones mineras afectan de forma directa a 10 quebradas y 19 ríos, para un total de 190.00 kilómetros de longitud de la red hídrica superficial.',
+    concesion_minera: 'Dentro de este territorio se han otorgado 10 lotes de concesiones mineras: 4 lotes de Áreas de Reserva Minera, 3 lotes a dos empresas mineras chinas y 3 lotes a una empresa minera nicaragüense, que en total cubren el 56.37% de su territorio. Dichas concesiones mineras afectan de forma directa a 10 quebradas y 19 ríos, para un total de 190 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 

@@ -322,18 +322,6 @@
       .st45 {
         fill: #193966;
       }
-
-      /* ─── Fix de contraste — Bonanza H-I (1.1 ha, concesión diminuta) ────────
-       * .st15 y .st23 se usan EXCLUSIVAMENTE dentro de #bonanza-h-i en este
-       * archivo, así que engrosarlas aquí no afecta a ninguna otra concesión.
-       * Mismo criterio aplicado antes a Veracruz (territorio 10).
-       * ────────────────────────────────────────────────────────────────────── */
-      #bonanza-h-i .st15 {
-        stroke-width: 3px;
-      }
-      #border-bonanza-h-i2 {
-        stroke-width: 5px;
-      }
     </style>
     <clipPath id="clippath">
       <path class="st14" d="M623.1,550.6l-4.9,7-10.2,3.4v-10.5h15.1" vector-effect="none"/>

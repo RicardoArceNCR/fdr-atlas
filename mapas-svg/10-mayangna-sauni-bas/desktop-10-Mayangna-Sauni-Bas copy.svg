@@ -292,19 +292,6 @@
       .st62 {
         clip-path: url(#clippath);
       }
-
-      /* ─── Fix de contraste — Veracruz (7 ha, concesión más pequeña del mapa) ──
-       * .st1 y .st2 se usan EXCLUSIVAMENTE dentro de #veracruz en este archivo,
-       * así que engrosarlas aquí no afecta a ninguna otra concesión.
-       * Ver también color_override en data-territorios.js para el tono exacto
-       * usado en borde activo / tarjeta.
-       * ────────────────────────────────────────────────────────────────────── */
-      #veracruz .st1 {
-        stroke-width: 3px;
-      }
-      #border-veracruz {
-        stroke-width: 6px;
-      }
     </style>
     <clipPath id="clippath">
       <polygon class="st13" points="603 736 605.7 697.6 607.3 674.9 588.4 674.9 588.4 694.9 588.4 792.6 610.9 762.3 603 736"/>

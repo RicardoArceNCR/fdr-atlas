@@ -904,19 +904,18 @@ const TERRITORIOS = [
     },
     concesiones: [
       // ⚠️ pais de concesiones HEMCO: pendiente confirmación FDR (colombia vs nacional)
-      // ⚠️ HEMCO - Rosita I y HEMCO II: conflicto de empresa entre JS y documento FDR — no cambiar sin FDR
-      // rosita-h-2: sin grupo SVG — hover pendiente Illustrator
+      // ✅ HEMCO - Rosita I y HEMCO II: conflicto resuelto con documento FDR (empresas intercambiadas)
       { nombre: 'Bonanza H-I', svg_id: 'bonanza-h-i', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '1614.7', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
       { nombre: 'El Salto', svg_id: 'el-salto', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '727.4', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'HEMCO - Bonanza II', svg_id: 'hemco-bonanza-ii', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '1399.2', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
       { nombre: 'HEMCO - Bonanza IV', svg_id: 'hemco-bonanza-iv', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '4934.5', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
       { nombre: 'HEMCO - RB I', svg_id: 'hemco-rb-i', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '7554.2', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
       { nombre: 'HEMCO - RB II', svg_id: 'hemco-rb-ii', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '2211.8', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
-      { nombre: 'HEMCO - Rosita I', svg_id: 'hemco-rosita-i', empresa: 'Desarrollo Minero de Nicaragua, S. A. (Desminic)', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '602.7', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ empresa en conflicto con FDR
+      { nombre: 'HEMCO - Rosita I', svg_id: 'hemco-rosita-i', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '602.7', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'HEMCO - Rosita V', svg_id: 'hemco-rosita-v', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '357.1', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
-      { nombre: 'HEMCO II', svg_id: 'hemco-ii', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ empresa en conflicto con FDR
+      { nombre: 'HEMCO II', svg_id: 'hemco-ii', empresa: 'Desarrollo Minero de Nicaragua, S. A. (Desminic)', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'Kukalaya', svg_id: 'kukalaya', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '5386.1', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Rosita H-2', svg_id: 'rosita-h-2', empresa: 'Desarrollo Minero de Nicaragua, S. A. (Desminic)', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '993.1', ano: '—', estado: '—', gaceta: '—' }, // ⏳ sin grupo SVG
+      { nombre: 'Rosita H-2', svg_id: 'rosita-h-2', empresa: 'Desarrollo Minero de Nicaragua, S. A. (Desminic)', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '993.1', ano: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Dentro de este territorio se han otorgado 11 lotes de concesiones mineras: 7 lotes a una empresa colombiana, 2 lotes a una empresa canadiense y 2 lotes a una empresa china, que en total cubren el 63.79% de su territorio. Dichas concesiones mineras afectan de forma directa a 8 quebradas y 12 ríos, para un total de 109.10 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',

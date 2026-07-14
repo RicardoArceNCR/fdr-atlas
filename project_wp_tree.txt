@@ -36,7 +36,6 @@
 │   │   └── index.html
 │   ├── 18-sebaco
 │   │   └── index.html
-│   ├── index-2.html
 │   └── index.html
 ├── CLAUDE.md
 ├── css
@@ -83,16 +82,19 @@
 │   │   ├── banner-03 copy.webp
 │   │   ├── banner-03.webp
 │   │   └── banner-04.webp
+│   ├── esquina.png
 │   ├── Logo-fdr.webp
-│   └── patrones
-│       ├── patron-canada.webp
-│       ├── patron-china.ai
-│       ├── patron-china.svg
-│       ├── patron-china.webp
-│       ├── patron-colombia.webp
-│       ├── patron-nicaragua.webp
-│       ├── patron-reserva-minera.webp
-│       └── reserva-sm.webp
+│   ├── mapa-portada.jpg
+│   ├── patrones
+│   │   ├── patron-canada.webp
+│   │   ├── patron-china.ai
+│   │   ├── patron-china.svg
+│   │   ├── patron-china.webp
+│   │   ├── patron-colombia.webp
+│   │   ├── patron-nicaragua.webp
+│   │   ├── patron-reserva-minera.webp
+│   │   └── reserva-sm.webp
+│   └── qrcode-url.png
 ├── js
 │   ├── auditar-colores.mjs
 │   ├── data-territorios.js
@@ -214,10 +216,12 @@
 ├── PDFs
 │   ├── 00-portada-indice.pdf
 │   ├── 01-rama-kriol 2.png_1
+│   ├── 01-rama-kriol 3.png_1
 │   ├── 01-rama-kriol.ai
 │   ├── 01-rama-kriol.pdf
 │   ├── 01-rama-kriol.png
 │   ├── 02-creole-bluefields 2.png_1
+│   ├── 02-creole-bluefields 3.png_1
 │   ├── 02-creole-bluefields.ai
 │   ├── 02-creole-bluefields.pdf
 │   ├── 02-creole-bluefields.png
@@ -230,6 +234,7 @@
 │   ├── 04-wangki-twi-tasba-raya.pdf
 │   ├── 04-wangki-twi-tasba-raya.png
 │   ├── 05-wangki-li 2.png_1
+│   ├── 05-wangki-li 3.png_1
 │   ├── 05-wangki-li.ai
 │   ├── 05-wangki-li.pdf
 │   ├── 05-wangki-li.png
@@ -242,6 +247,7 @@
 │   ├── 08-tasba-pri.pdf
 │   ├── 08-tasba-pri.png
 │   ├── 09-prinzu-awala 2.png_1
+│   ├── 09-prinzu-awala 3.png_1
 │   ├── 09-prinzu-awala.ai
 │   ├── 09-prinzu-awala.pdf
 │   ├── 09-prinzu-awala.png
@@ -249,6 +255,7 @@
 │   ├── 10-mayangna-sauni-bas.pdf
 │   ├── 10-mayangna-sauni-bas.png
 │   ├── 11-mayangna-sauni-as 2.png_1
+│   ├── 11-mayangna-sauni-as 3.png_1
 │   ├── 11-mayangna-sauni-as.ai
 │   ├── 11-mayangna-sauni-as.pdf
 │   ├── 11-mayangna-sauni-as.png
@@ -258,12 +265,14 @@
 │   ├── 13-amasau.png
 │   ├── 14-chorotega-norte.pdf
 │   ├── 14-chorotega-norte.png
+│   ├── 15-matagalpa 2.png_1
 │   ├── 15-matagalpa.pdf
 │   ├── 15-matagalpa.png
 │   ├── 16-prinzu-auhya-un.pdf
 │   ├── 16-prinzu-auhya-un.png
 │   ├── 17-muy-muy.pdf
 │   ├── 17-muy-muy.png
+│   ├── 18-sebaco 2.png_1
 │   ├── 18-sebaco.pdf
 │   └── 18-sebaco.png
 ├── project_wp_tree.txt
@@ -280,4 +289,4 @@
 └── templates
     └── diptico-base.html
 
-72 directories, 209 files
+72 directories, 218 files

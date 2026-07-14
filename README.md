@@ -4,9 +4,43 @@ Atlas web editorial sobre concesiones mineras en territorios indígenas y afrode
 
 ---
 
-## Estado actual — Junio 2026
+## Estado actual — Julio 2026
 
 **Rama activa:** `feat/waupasa-twi-editorial`
+
+### Novedades de esta sesión (Jul 2026)
+
+- **`atlas/index.html` — portada e índice interactivo.** Reemplaza el
+  índice estático de PDF (`atlas/index-2.html`, que queda solo para
+  export) por una experiencia de 2 pantallas tipo "libro": portada (título,
+  stats, QR, mapa) → botón "Siguiente" → índice de 18 territorios +
+  presentación. En mobile es una sola página con scroll normal, sin el
+  mecanismo de pantallas.
+- **Barra de navegación entre territorios (`atlas-nav`) rediseñada** en
+  `css/diptico.css` / `templates/diptico-base.html` / `js/render-diptico.js`:
+  - "Siguiente" ahora es un pill sólido (mismo acento de marca que el
+    botón de la portada), "Inicio"/"Anterior" son pills fantasma.
+  - El contador "01/18" dejó de ser texto suelto y pasó a ser un
+    `<select>` nativo real que **vive junto al título** (no en la barra
+    de abajo) — salto directo a cualquier territorio. Está ahí y no
+    abajo porque el picker nativo del navegador se ancla a donde está
+    físicamente el `<select>`, no a quién lo disparó.
+  - En mobile, la barra pasa a `position: fixed` en el fondo del
+    viewport (como un tab-bar de app) — antes había que scrollear toda
+    la página para cambiar de territorio.
+- **`js/data-territorios.js` — dos inconsistencias de datos corregidas**
+  (auditoría completa de los 18 territorios, cruzando cada `raster:`/`svg:`
+  declarado contra el árbol real de archivos):
+  - `03-waupasa-twi` declaraba SVG de tablet/mobile que nunca se
+    exportaron → ahora reutiliza el SVG/raster de desktop en los 3
+    breakpoints, igual que el resto de territorios.
+  - `04-wangki-twi-tasba-raya` reutilizaba correctamente el raster/svg
+    de desktop pero con `width`/`height` de otro territorio pegados por
+    error (`780×1306`/`504×634` en vez de `927×980`) — corregido.
+- **Limpieza de assets pendiente** — ver `scripts/limpieza-assets.sh`
+  (typos de nombre, "copy" duplicados, exports genéricos sin renombrar,
+  fotos de portada obsoletas en `img/`). Correr en dry-run antes de
+  `--force`.
 
 ### Territorios con mapa web
 
@@ -52,6 +86,13 @@ Atlas web editorial sobre concesiones mineras en territorios indígenas y afrode
 - ✅ webp renombrado sin re-exportar → verificar md5sum
 - ✅ Carpeta `atlas/NN/` inexistente → 404
 - ✅ Tour no arranca con 1 sola concesión → corregido en `render-diptico.js:548`
+- ✅ **`min-height: auto` en cadena de flex/grid anidados** rompía el
+  scroll interno de la portada (el contenido empujaba la altura más allá
+  de `100vh` en vez de scrollear adentro) → `min-height: 0` en cada
+  eslabón de la cadena, no solo en el contenedor scrolleable final.
+- ✅ **`03-waupasa-twi` y `04-wangki-twi-tasba-raya`** con datos de
+  assets inconsistentes en `data-territorios.js` → ver sección de
+  novedades arriba.
 
 ---
 
@@ -172,8 +213,10 @@ No cambiar hasta confirmar con FDR.
 ## Archivos clave
 
 ```txt
-css/diptico.css                    ← layout, bordes base, layouts D y E, botón ojo
-js/render-diptico.js               ← renderer + interactividad + ESCALAS_PAIS + Bloque C
+atlas/index.html                   ← portada + índice interactivo (2 pantallas, desktop; scroll simple, mobile)
+atlas/index-2.html                 ← versión estática para export a PDF (no tocar la interactiva de arriba)
+css/diptico.css                    ← layout, bordes base, layouts D y E, botón ojo, atlas-nav
+js/render-diptico.js               ← renderer + interactividad + ESCALAS_PAIS + Bloque C + nav entre territorios
 js/data-territorios.js             ← datos + svg_id + color_override + concesion_minera
 templates/diptico-base.html        ← template compartido
 atlas/NN-territorio/index.html     ← un HTML por territorio
@@ -182,6 +225,7 @@ mapas-svg/NN-territorio/           ← SVG por breakpoint
 CLAUDE.md                          ← decisiones técnicas y diagnóstico
 scripts/exportar-pdfs.mjs          ← export a PDF vectorial vía Playwright
 scripts/export.css                 ← CSS inyectado solo durante el export
+scripts/limpieza-assets.sh         ← borra assets huérfanos/duplicados confirmados por auditoría (dry-run por default)
 ```
 
 ---
@@ -211,6 +255,11 @@ grep "data-territorio" atlas/*/index.html
 
 # Exportar PDFs vectoriales (texto + SVG editables) de los 18 territorios
 node scripts/exportar-pdfs.mjs
+
+# Limpiar assets huérfanos/duplicados (dry-run primero, --force para borrar de verdad)
+chmod +x scripts/limpieza-assets.sh
+./scripts/limpieza-assets.sh
+./scripts/limpieza-assets.sh --force
 ```
 
 ---

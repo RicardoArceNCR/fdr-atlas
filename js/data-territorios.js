@@ -199,16 +199,16 @@ const TERRITORIOS = [
         height: 980,
       },
       tablet: {
-        raster: "../../mapas-raster/03-waupasa-twi/tablet-03-Waupasa-Twi.webp",
-        svg: "../../mapas-svg/03-waupasa-twi/tablet-03-Waupasa-Twi.svg",
-        width: 780,
-        height: 1306,
+        raster: "../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp",
+        svg: "../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg",
+        width: 927,
+        height: 980,
       },
       mobile: {
-        raster: "../../mapas-raster/03-waupasa-twi/mobile-03-Waupasa-Twi.webp",
-        svg: "../../mapas-svg/03-waupasa-twi/mobile-03-Waupasa-Twi.svg",
-        width: 504,
-        height: 634,
+        raster: "../../mapas-raster/03-waupasa-twi/desktop-03-Waupasa-Twi.webp",
+        svg: "../../mapas-svg/03-waupasa-twi/desktop-03-Waupasa-Twi.svg",
+        width: 927,
+        height: 980,
       },
     },
     layout: 'A',
@@ -641,13 +641,13 @@ const TERRITORIOS = [
       hectareas_concesiones: '164,206.94',
     },
     concesiones: [
-      { nombre: 'Atlas', svg_id: 'atlas', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '8515.2', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Begonia', svg_id: 'begonia', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '47156.1', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Casiopea', svg_id: 'casiopea', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '26684.8', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Centauro', svg_id: 'centauro', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '2394.1', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Minerva', svg_id: 'minerva', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '2159.5', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Pegaso', svg_id: 'pegaso', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '12334.6', ano: '—', estado: '—', gaceta: '—' },
-      { nombre: 'Polaris', svg_id: 'polaris', empresa: 'Calibre Mining Nicaragua, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '16575.2', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Atlas', svg_id: 'atlas', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '8515.2', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Begonia', svg_id: 'begonia', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '47156.1', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Casiopea', svg_id: 'casiopea', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '26684.8', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Centauro', svg_id: 'centauro', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '2394.1', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Minerva', svg_id: 'minerva', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '2159.5', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Pegaso', svg_id: 'pegaso', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '12334.6', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Polaris', svg_id: 'polaris', empresa: 'Santa Rita Mining Company, S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '16575.2', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'San Leonardo', svg_id: 'san-leonardo', empresa: 'Thomas Metal, S. A.', pais: 'china', patron_img: '../../img/patrones/patron-china.webp', hectareas: '1711.6', ano: '—', estado: '—', gaceta: '—' },
     ],
     concesion_minera: 'Se han otorgado 8 lotes de concesiones mineras: 7 lotes a una empresa minera canadiense y 1 lote a una empresa minera china, que en total cubren el 39.57% de su territorio. Dichas concesiones mineras afectan de forma directa 4 quebradas y 22 ríos, para un total de 431.83 kilómetros de longitud de la red hídrica superficial.',
@@ -836,7 +836,7 @@ const TERRITORIOS = [
       hectareas_concesiones: '13,609.22',
     },
     concesiones: [
-      { nombre: 'Bonanza H-I', svg_id: 'bonanza-h-i', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '1.1', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'Bonanza H-I', svg_id: 'bonanza-h-i', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '1.1', ano: '—', estado: '—', gaceta: '—' },
       { nombre: 'HB - V', svg_id: 'hb-v', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '894.0', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
       { nombre: 'HEMCO - Bonanza IV', svg_id: 'hemco-bonanza-iv', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '460.7', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
       { nombre: 'HEMCO - Bonanza V', svg_id: 'hemco-bonanza-v', empresa: 'HEMCO - Nicaragua, S. A.', pais: 'colombia', patron_img: '../../img/patrones/patron-colombia.webp', hectareas: '1327.8', ano: '—', estado: '—', gaceta: '—' }, // ⚠️ pais pendiente FDR
@@ -1166,9 +1166,9 @@ const TERRITORIOS = [
       hectareas_concesiones: '256.60',
     },
     concesiones: [
-      { nombre: 'HEMCO - SID', svg_id: 'hemco-sid', empresa: 'La India Gold S. A.', pais: 'canada', patron_img: '../../img/patrones/patron-canada.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
+      { nombre: 'HEMCO - SID', svg_id: 'hemco-sid', empresa: 'Minera San Cristóbal, S. A.', pais: 'nacional', patron_img: '../../img/patrones/patron-nicaragua.webp', hectareas: '—', ano: '—', estado: '—', gaceta: '—' },
     ],
-    concesion_minera: 'Se ha otorgado 1 lote de concesión minera a una empresa canadiense, el cual cubre el 1.02% de su territorio. Dichas concesiones mineras afectan de forma directa 1 río, para un total de 0.14 kilómetros de longitud de la red hídrica superficial.',
+    concesion_minera: 'Se ha otorgado 1 lote de concesión minera a una empresa nicaragüense, el cual cubre el 1.02% de su territorio. Dichas concesiones mineras afectan de forma directa 1 río, para un total de 0.14 kilómetros de longitud de la red hídrica superficial.',
     fuente: 'La Gaceta · Fundación del Río · URACCAN · OpenStreetMap · ESRI Standard · Proyección UTM Datum NAD 27 Zona 16 N · Abril 2026',
   },
 

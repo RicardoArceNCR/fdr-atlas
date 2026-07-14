@@ -1406,7 +1406,7 @@
     <g class="st49">
       <line class="st20" x1="281.9" y1="172.4" x2="171.1" y2="172.4"/>
     </g>
-    <path id="area-reserva" class="st31" d="M389.4,437h40.3v37h26.9v16.8h-.1v-14.1h-26.9v-4.2h-11v-3.2h-13.6v-4h-15.6v-28.3" vector-effect="none"/>
+    <path id="area-hover-target8" data-name="area-hover-target" class="st31" d="M389.4,437h40.3v37h26.9v16.8h-.1v-14.1h-26.9v-4.2h-11v-3.2h-13.6v-4h-15.6v-28.3" vector-effect="none"/>
     <polygon class="st36" points="282.7 163.7 305.6 172.9 305.7 172.9 305.6 172.9 305.7 172.9 305.6 172.9 282.7 182.2 282.7 163.7"/>
     <g class="st38">
       <g class="st38">

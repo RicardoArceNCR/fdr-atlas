@@ -144,30 +144,43 @@ async function renderMapa(t) {
   const raster = document.getElementById("mapa-raster");
   if (raster && assets.raster) raster.src = assets.raster;
 
-  if (svgContainer && assets.svg) {
-    try {
-      if (!SVG_CACHE[assets.svg]) {
-        const res = await fetch(assets.svg);
-        if (!res.ok) throw new Error(`SVG no encontrado: ${assets.svg}`);
-        SVG_CACHE[assets.svg] = await res.text();
+  if (svgContainer) {
+    if (assets.svg) {
+      try {
+        if (!SVG_CACHE[assets.svg]) {
+          const res = await fetch(assets.svg);
+          if (!res.ok) throw new Error(`SVG no encontrado: ${assets.svg}`);
+          SVG_CACHE[assets.svg] = await res.text();
+        }
+        const svgText = SVG_CACHE[assets.svg];
+
+        const svgBase = assets.svg.substring(0, assets.svg.lastIndexOf('/') + 1);
+        const svgResolved = svgText.replace(
+          /(href|xlink:href)="((?!data:|http|\/)[^"]+)"/g,
+          (match, attr, path) => `${attr}="${svgBase}${path}"`
+        );
+
+        svgContainer.innerHTML = svgResolved;
+
+        const obj = document.getElementById("mapa-editorial-obj");
+        if (obj) obj.style.display = "none";
+
+        if (t.concesiones) initInteractividad(t.concesiones);
+      } catch (err) {
+        console.warn(`No se pudo cargar el SVG del mapa (${assets.svg}):`, err);
+        // Mensaje calmo para la persona que ve la página — sin exponer rutas
+        // internas ni jerga técnica. El detalle real queda en la consola
+        // (console.warn de arriba) para quien esté debugueando.
+        svgContainer.innerHTML = '<div style="padding:2rem;text-align:center;color:#888;font-family:sans-serif;font-size:14px">Mapa detallado en preparación para este tamaño de pantalla</div>';
       }
-      const svgText = SVG_CACHE[assets.svg];
-
-      const svgBase = assets.svg.substring(0, assets.svg.lastIndexOf('/') + 1);
-      const svgResolved = svgText.replace(
-        /(href|xlink:href)="((?!data:|http|\/)[^"]+)"/g,
-        (match, attr, path) => `${attr}="${svgBase}${path}"`
-      );
-
-      svgContainer.innerHTML = svgResolved;
-
-      const obj = document.getElementById("mapa-editorial-obj");
-      if (obj) obj.style.display = "none";
-
-      if (t.concesiones) initInteractividad(t.concesiones);
-    } catch (err) {
-      console.warn("No se pudo cargar SVG inline:", err);
-      svgContainer.innerHTML = `<div style="padding:2rem;text-align:center;color:#c55;font-family:sans-serif;font-size:14px">⚠️ Error al cargar el mapa: ${err.message}</div>`;
+    } else {
+      // Este breakpoint no tiene SVG todavía (ver nota en data-territorios.js
+      // para 03-waupasa-twi). Antes esto se saltaba en silencio — el mapa
+      // quedaba con el contorno pelado, sin las áreas de concesión
+      // coloreadas, y sin ningún aviso de que faltaba algo. Mismo mensaje
+      // que el catch de arriba, para que la persona sepa que no es que
+      // "no hay nada", sino que ese detalle no está listo para este tamaño.
+      svgContainer.innerHTML = '<div style="padding:2rem;text-align:center;color:#888;font-family:sans-serif;font-size:14px">Mapa detallado en preparación para este tamaño de pantalla</div>';
     }
   }
 

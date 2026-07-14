@@ -265,14 +265,14 @@ const TERRITORIOS = [
       tablet: {
         raster: '../../mapas-raster/04-wangki-twi-tasba-raya/desktop-04-wangki-twi-tasba-raya.webp',
         svg: '../../mapas-svg/04-wangki-twi-tasba-raya/desktop-04-Wangki-Twi-Tasba-Raya.svg',
-        width: 780,
-        height: 1306,
+        width: 927,
+        height: 980,
       },
       mobile: {
         raster: '../../mapas-raster/04-wangki-twi-tasba-raya/desktop-04-wangki-twi-tasba-raya.webp',
         svg: '../../mapas-svg/04-wangki-twi-tasba-raya/desktop-04-Wangki-Twi-Tasba-Raya.svg',
-        width: 504,
-        height: 634,
+        width: 927,
+        height: 980,
       },
     },
     layout: 'C',

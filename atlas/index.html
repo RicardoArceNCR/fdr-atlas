@@ -262,6 +262,7 @@
     font-size: 11.5px;
     color: var(--amarillo-portada-texto);
     opacity: 0.7;
+    font-weight: 800;
     margin-top: 2px;
   }
 
@@ -269,6 +270,7 @@
     font-size: 15px;
     line-height: 1.7;
     color: var(--texto-700);
+    text-align: justify;
     margin-bottom: 30px;
   }
 
@@ -371,6 +373,13 @@
   }
 
   .btn-nav svg { flex-shrink: 0; }
+
+  /* Clon de "Ver el primer mapa" solo para mobile — en desktop ya existe
+     el flotante de arriba (.btn-nav a secas); este se muestra únicamente
+     dentro del @media mobile, ver más abajo. */
+  .btn-nav--mobile-mapa {
+    display: none;
+  }
 
   /* ═══════════════════ PANTALLA 2 — ÍNDICE ═════════════════════════════ */
 
@@ -632,9 +641,9 @@
     .portada-info__marca { margin: 0 -24px 24px; padding: 14px 24px; }
 
     .portada-visual__header { padding: 32px 24px 26px; }
-    .portada-visual__titulo { font-size: 34px; }
-    .portada-visual__logo { width: 60px; height: 60px; }
-    .portada-visual__imagen { height: 320px; flex: none; }
+    .portada-visual__titulo { font-size: 53px; }
+    .portada-visual__logo { width: 100px; height: 100px; }
+    .portada-visual__imagen { height: 450px; flex: none; }
 
     .indice__lista { overflow-y: visible; padding-bottom: 0; }
 
@@ -644,10 +653,21 @@
       position: static;
       background: none;
       margin-top: 20px;
+      padding: 0px 28px;
     }
 
     .btn-nav,
     .volver-portada { display: none; }
+
+    /* Excepción: este "Ver el primer mapa" sí se muestra en mobile,
+       pero como bloque normal al final de la presentación, no flotando
+       arriba a la derecha (ese es el comportamiento solo-desktop). */
+    .btn-nav.btn-nav--mobile-mapa {
+      display: inline-flex;
+      position: static;
+      align-self: center;
+      margin: 28px 0 0;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1025,6 +1045,13 @@
               proceso de saqueo en los territorios indígenas y afrodescendientes.
             </p>
           </div>
+
+          <a class="btn-nav btn-nav--mobile-mapa" href="01-rama-kriol/index.html">
+            Ver el primer mapa
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
 
           <div class="presentacion__pie">
             <span>Fundación del Río. Edición 2026</span>

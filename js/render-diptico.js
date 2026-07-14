@@ -1100,7 +1100,9 @@ function detenerTour(idsTodos, btn) {
 /* ─── Navegación entre territorios ──────────────────────────────────────────
  *
  * Lee data-territorio del body, calcula posición en TERRITORIOS,
- * inyecta href en #nav-prev / #nav-next y contador en #nav-contador.
+ * inyecta href en #nav-prev / #nav-next, llena el <select> #nav-contador
+ * (junto al título — salto directo a cualquier territorio) y muestra el
+ * contador de texto plano #nav-contador-display en la barra de abajo.
  *
  * Solo navega entre territorios con assets definidos (los que tienen SVG real).
  * El href se resuelve relativo al index.html de cada territorio:
@@ -1126,12 +1128,32 @@ function initNavegacion() {
   const prevTerr = idx > 0 ? conAssets[idx - 1] : null;
   const nextTerr = idx < total - 1 ? conAssets[idx + 1] : null;
 
-  // Contador "03 / 12"
-  const contador = document.getElementById('nav-contador');
-  if (contador) {
+  // Contador de texto plano "03 / 18" — barra de abajo, no interactivo
+  const contadorDisplay = document.getElementById('nav-contador-display');
+  if (contadorDisplay) {
     const num = String(idx + 1).padStart(2, '0');
     const tot = String(total).padStart(2, '0');
-    contador.textContent = `${num} / ${tot}`;
+    contadorDisplay.textContent = `${num} / ${tot}`;
+  }
+
+  // Selector real (junto al título) — salto directo a cualquier territorio.
+  // Vive ahí y no abajo porque el picker nativo se ancla a donde está el
+  // <select> en el layout; si estuviera abajo, siempre se abriría abajo
+  // sin importar desde dónde lo dispares.
+  const selector = document.getElementById('nav-contador');
+  if (selector && selector.tagName === 'SELECT') {
+    selector.innerHTML = conAssets
+      .map((t, i) => {
+        const num = String(i + 1).padStart(2, '0');
+        const href = `../../atlas/${t.id}/index.html`;
+        const selected = i === idx ? ' selected' : '';
+        return `<option value="${href}"${selected}>${num} · ${t.nombre}</option>`;
+      })
+      .join('');
+
+    selector.addEventListener('change', () => {
+      if (selector.value) window.location.href = selector.value;
+    });
   }
 
   // Botón anterior
@@ -1164,7 +1186,7 @@ function initNavegacion() {
 
   // Teclado: ← → navega, Escape vuelve al índice
   document.addEventListener('keydown', (e) => {
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
     if (e.key === 'ArrowLeft' && prevTerr) window.location.href = btnPrev.href;
     if (e.key === 'ArrowRight' && nextTerr) window.location.href = btnNext.href;
     if (e.key === 'Escape') {

@@ -29,7 +29,11 @@
       <div class="diptico__header" id="diptico-header">
         <div class="diptico__header-texto">
           <div class="diptico__kicker" id="region-text"></div>
-          <h1 class="diptico__titulo" id="titulo-text"></h1>
+          <div class="diptico__titulo-fila">
+            <h1 class="diptico__titulo" id="titulo-text"></h1>
+            <select class="diptico__titulo-selector" id="nav-contador" aria-label="Ir a otro territorio"
+              title="Elegir otro territorio"></select>
+          </div>
           <p class="diptico__subtitulo" id="pueblos-text"></p>
         </div>
       </div>
@@ -83,7 +87,7 @@
             <span class="atlas-nav__label" id="nav-prev-label">Anterior</span>
           </a>
 
-          <div class="atlas-nav__contador" id="nav-contador" aria-live="polite"></div>
+          <div class="atlas-nav__contador" id="nav-contador-display" aria-live="polite"></div>
 
           <a href="#" class="atlas-nav__btn atlas-nav__btn--next" id="nav-next" title="Territorio siguiente">
             <span class="atlas-nav__label" id="nav-next-label">Siguiente</span>

@@ -409,9 +409,87 @@
   font-weight: 600;
   line-height: 1.2;
   color: var(--text-color-primary);
-  margin-bottom: 0.75rem;
   letter-spacing: -0.02em;
 }
+
+/* ── Fila título + selector de territorio ─────────────────────────────────
+ *
+ * #nav-contador (el <select> real, con todas las opciones de territorio)
+ * vive ACÁ, no en la barra de abajo — el picker nativo del navegador
+ * siempre se ancla a donde está físicamente el <select>, así que si
+ * queremos que se abra "desde el título", el <select> tiene que estar acá.
+ * La barra de abajo se queda con un contador de solo texto (.atlas-nav__contador).
+ *
+ * Es un <select> nativo de verdad (teclado, screen readers, todo gratis),
+ * solo que appearance:none + un tamaño de 26px lo hacen ver como un
+ * botón-ícono circular en vez de un dropdown con texto.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+.diptico__titulo-fila {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.75rem;
+}
+
+.diptico__titulo-selector {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1.5px solid var(--border-default, var(--border-subtle));
+  background-color: var(--background-subtle);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235d5d57' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  color: transparent; /* solo queremos ver el ícono, no el texto de la opción elegida */
+  overflow: hidden;
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+}
+
+.diptico__titulo-selector option {
+  color: #1f2521; /* las opciones de la lista sí deben verse — color:transparent
+                      de arriba solo es para ocultar el texto del control cerrado */
+  background: #ffffff;
+}
+
+.diptico__titulo-selector:hover {
+  background-color: var(--background-page);
+  border-color: var(--brand-main, #205736);
+  transform: translateY(1px);
+}
+
+.diptico__titulo-selector:focus-visible {
+  outline: 2px solid var(--brand-main, #205736);
+  outline-offset: 2px;
+}
+
+/* Con banner: título sobre foto — el control necesita su propio tratamiento
+   translúcido (mismo criterio que kicker/subtítulo, que ya pasan a blanco
+   con sombra en este contexto), más una flecha clara en vez de oscura. */
+.diptico__header--con-banner .diptico__titulo-selector {
+  border-color: rgba(255, 255, 255, 0.55);
+  background-color: rgba(0, 0, 0, 0.18);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(255,255,255,0.92)' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.diptico__header--con-banner .diptico__titulo-selector:hover {
+  background-color: rgba(0, 0, 0, 0.32);
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
+/* Tema oscuro sin banner: flecha oscura invisible sobre fondo verde —
+   mismo patrón de override que el resto de .diptico--tema-verde.
+   (Si además hay banner, la regla de banner ya puso una flecha clara
+   también — no hay conflicto visual aunque gane una u otra). */
+.diptico.diptico--tema-verde .diptico__titulo-selector {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(190,225,205,0.65)' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
 
 .diptico__subtitulo {
   font-size: 15px;
@@ -1559,8 +1637,9 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0 2px;
-  margin-top: 12px;
+  gap: 12px;
+  padding: 16px 0 2px;
+  margin-top: 16px;
   border-top: 0.5px solid var(--border-subtle);
   flex-shrink: 0;
 }
@@ -1568,51 +1647,108 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
 .atlas-nav__central {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 8px;
 }
 
-/* ── Botones base ─────────────────────────────────────────────────────────── */
+/* ── Botones base — pill sutil, mismo patrón que .btn-tour-narrativo
+   más abajo en este archivo: variables theme-aware (funcionan igual
+   en tema claro y en .diptico--tema-verde), no tokens de botón sueltos. */
 
 .atlas-nav__btn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 5px 9px;
-  border-radius: 6px;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 0.5px solid transparent;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 12.5px;
+  font-weight: 600;
   color: var(--text-color-secondary);
   text-decoration: none;
-  transition: background 120ms ease, color 120ms ease;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
   white-space: nowrap;
   user-select: none;
 }
 
 .atlas-nav__btn:hover {
   background: var(--background-subtle);
+  border-color: var(--border-subtle);
   color: var(--text-color-primary);
 }
 
 /* Primer/último territorio */
 .atlas-nav__btn--disabled {
-  opacity: 0.25;
+  opacity: 0.35;
   pointer-events: none;
 }
 
-/* ── Contador "01 / 12" ───────────────────────────────────────────────────── */
+/* ── "Siguiente" — acción primaria. A propósito NO usa las variables
+   de tema (no debe "mezclarse" con la página): es un acento de marca
+   fijo, igual que el fondo de .stat más arriba en este mismo archivo,
+   con el mismo peso visual que el botón "Siguiente" de la portada. */
+
+.atlas-nav__btn--next {
+  background: #205736;
+  color: #ffffff;
+  padding: 10px 18px 10px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.atlas-nav__btn--next:hover {
+  background: #287e45;
+  border-color: transparent;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.atlas-nav__btn--next:active {
+  background: #17402a;
+  transform: none;
+}
+
+.atlas-nav__btn--next.atlas-nav__btn--disabled {
+  background: var(--background-subtle);
+  color: var(--text-color-secondary);
+  box-shadow: none;
+}
+
+/* ── Contador "01 / 12" — pill, mismo tratamiento que .btn-tour-narrativo ─── */
+
+/* Los labels de prev/next son nombres de territorio y pueden ser largos
+   ("Mayangna Sauni Arungka 'Matunbak'") — se truncan con ellipsis en vez
+   de forzar scroll horizontal en pantallas angostas. `ch` aproxima el
+   ancho de un carácter (no es una cuenta exacta de letras, pero es el
+   equivalente correcto en CSS ya que el ancho real depende de la fuente). */
+.atlas-nav__label {
+  display: inline-block;
+  max-width: 19ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Contador "01/18" — vuelve a ser texto plano, no interactivo.
+   El selector real ahora vive junto al título (ver .diptico__titulo-selector
+   más abajo) porque el picker nativo del navegador siempre se ancla a
+   donde está el <select> en el layout — tenerlo acá abajo hacía que el
+   picker se abriera lejos del ícono que lo disparaba. ─────────────────── */
 
 .atlas-nav__contador {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   color: var(--text-color-secondary);
-  opacity: 0.5;
-  letter-spacing: 0.05em;
-  padding: 0 8px;
-  min-width: 48px;
+  background: var(--background-subtle);
+  border: 0.5px solid var(--border-subtle);
+  letter-spacing: 0.04em;
+  padding: 5px 10px;
+  border-radius: 999px;
+  min-width: 52px;
   text-align: center;
 }
+
+
 
 /* ── Placeholder derecho (futuro hamburguesa) ────────────────────────────── */
 
@@ -1627,9 +1763,43 @@ body[data-territorio="03-waupasa-twi"] .diptico__leyenda-mapa {
     display: none;
   }
   .atlas-nav__btn {
-    padding: 5px 7px;
+    padding: 8px 10px;
+  }
+  .atlas-nav__btn--next {
+    padding: 10px 12px;
   }
   .atlas-nav__placeholder {
     min-width: 32px;
+  }
+}
+
+/* ── Barra flotante en mobile ─────────────────────────────────────────────
+ *
+ * En mobile el layout es una sola columna larga (mapa → stats → narrativa
+ * → concesión → fuente → nav), y el nav quedaba al final del todo: había
+ * que scrollear la página entera para pasar de territorio. Se fija abajo
+ * como un tab-bar de app, siempre alcanzable.
+ *
+ * Mismo breakpoint (767px) donde el layout ya colapsa a una columna —
+ * ver .diptico__info más arriba en este archivo.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .atlas-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    background: var(--background-page); /* theme-aware: se adapta sola en .diptico--tema-verde */
+    margin-top: 0;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.16);
+  }
+
+  /* Reserva el espacio que el nav dejó de ocupar en el flujo normal al
+     volverse fixed — si no, tapa la fuente/última concesión. */
+  .diptico__info {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
   }
 }

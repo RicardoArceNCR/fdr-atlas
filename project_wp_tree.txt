@@ -36,6 +36,7 @@
 │   │   └── index.html
 │   ├── 18-sebaco
 │   │   └── index.html
+│   ├── index-2.html
 │   └── index.html
 ├── CLAUDE.md
 ├── css
@@ -211,44 +212,60 @@
 ├── package-lock.json
 ├── package.json
 ├── PDFs
+│   ├── 00-portada-indice.pdf
+│   ├── 01-rama-kriol 2.png_1
 │   ├── 01-rama-kriol.ai
 │   ├── 01-rama-kriol.pdf
 │   ├── 01-rama-kriol.png
+│   ├── 02-creole-bluefields 2.png_1
 │   ├── 02-creole-bluefields.ai
 │   ├── 02-creole-bluefields.pdf
 │   ├── 02-creole-bluefields.png
+│   ├── 03-waupasa-twi 2.png_1
 │   ├── 03-waupasa-twi.ai
 │   ├── 03-waupasa-twi.pdf
 │   ├── 03-waupasa-twi.png
+│   ├── 04-wangki-twi-tasba-raya 2.pn
 │   ├── 04-wangki-twi-tasba-raya.ai
 │   ├── 04-wangki-twi-tasba-raya.pdf
 │   ├── 04-wangki-twi-tasba-raya.png
+│   ├── 05-wangki-li 2.png_1
 │   ├── 05-wangki-li.ai
 │   ├── 05-wangki-li.pdf
 │   ├── 05-wangki-li.png
 │   ├── 06-twi-ahbra-10-comunidades.pdf
 │   ├── 06-twi-ahbra-10-comunidades.png
+│   ├── 07-tuahka 2.png_1
 │   ├── 07-tuahka.ai
 │   ├── 07-tuahka.pdf
 │   ├── 07-tuahka.png
 │   ├── 08-tasba-pri.pdf
 │   ├── 08-tasba-pri.png
+│   ├── 09-prinzu-awala 2.png_1
 │   ├── 09-prinzu-awala.ai
 │   ├── 09-prinzu-awala.pdf
 │   ├── 09-prinzu-awala.png
 │   ├── 10-mayangna-sauni-bas.ai
 │   ├── 10-mayangna-sauni-bas.pdf
 │   ├── 10-mayangna-sauni-bas.png
+│   ├── 11-mayangna-sauni-as 2.png_1
 │   ├── 11-mayangna-sauni-as.ai
 │   ├── 11-mayangna-sauni-as.pdf
 │   ├── 11-mayangna-sauni-as.png
 │   ├── 12-mayangna-arungka-matungbak.pdf
+│   ├── 12-mayangna-arungka-matungbak.png
 │   ├── 13-amasau.pdf
+│   ├── 13-amasau.png
 │   ├── 14-chorotega-norte.pdf
+│   ├── 14-chorotega-norte.png
 │   ├── 15-matagalpa.pdf
+│   ├── 15-matagalpa.png
 │   ├── 16-prinzu-auhya-un.pdf
+│   ├── 16-prinzu-auhya-un.png
 │   ├── 17-muy-muy.pdf
-│   └── 18-sebaco.pdf
+│   ├── 17-muy-muy.png
+│   ├── 18-sebaco.pdf
+│   └── 18-sebaco.png
 ├── project_wp_tree.txt
 ├── README.md
 ├── reference
@@ -258,8 +275,9 @@
 ├── scripts
 │   ├── auditar-territorios.mjs
 │   ├── export.css
-│   └── exportar-pdfs.mjs
+│   ├── exportar-pdfs.mjs
+│   └── exportar-portada.mjs
 └── templates
     └── diptico-base.html
 
-72 directories, 191 files
+72 directories, 209 files

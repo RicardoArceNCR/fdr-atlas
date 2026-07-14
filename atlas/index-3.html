@@ -91,7 +91,10 @@
   .visor {
     width: 100%;
     height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: visible; /* el flip solo necesita clip horizontal — dejar
+                             clip vertical acá era lo que se comía el pie
+                             y la fecha cuando el contenido no entraba */
     position: relative;
   }
 
@@ -112,7 +115,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     flex-shrink: 0;
-    min-height: 0;
     position: relative;
   }
 
@@ -121,7 +123,6 @@
   .portada-visual {
     display: flex;
     flex-direction: column;
-    min-height: 0;
   }
 
   /* ── Banda amarilla — título ATLAS + logo ──────────────────────────── */
@@ -156,8 +157,8 @@
   }
 
   .portada-visual__logo {
-    width: clamp(90px, 10vw, 180px);
-    height: clamp(90px, 10vw, 180px);
+    width: clamp(90px, 9vw, 180px);
+    height: clamp(90px, 9vw, 180px);
     object-fit: contain;
     flex-shrink: 0;
     border-radius: 50%;
@@ -217,7 +218,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    min-height: 0;
   }
 
   /* Todo lo de arriba del pie va en un solo grupo flexible con scroll
@@ -295,7 +295,7 @@
   }
 
   .stat-label {
-    font-size: 13px;
+    font-size: 10px;
     color: var(--texto-500);
     margin-top: 7px;
     line-height: 1.3;
@@ -303,17 +303,15 @@
 
   .portada-info__qr {
     margin: 26px 0 auto;
-    display: flex;
-    justify-content: center;
   }
 
   .portada-info__qr img {
-    width: clamp(96px, 15vw, 448px);
-    height: clamp(96px, 15vw, 448px);
+    width: 96px;
+    height: 96px;
     display: block;
     border: 0.5px solid var(--linea);
-    border-radius: 8px;
-    padding: 8px;
+    border-radius: 6px;
+    padding: 6px;
     background: var(--blanco);
   }
 
@@ -337,7 +335,7 @@
 
   .btn-nav {
     position: absolute;
-    top: 16px;
+    top: 24px;
     right: 24px;
     z-index: 5;
     display: inline-flex;
@@ -377,7 +375,7 @@
   .indice {
     background: var(--verde-oscuro);
     color: rgba(220, 242, 230, 0.92);
-    padding: 72px var(--gutter-info) 0;
+    padding: 44px var(--gutter-info) 0;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -499,34 +497,10 @@
 
   .presentacion {
     background: var(--blanco);
-    padding: 0;
-    position: relative;
+    padding: 48px var(--gutter-info) 32px;
     display: flex;
     flex-direction: column;
-    min-height: 0;
-  }
-
-  .presentacion__contenido {
-    flex: 1;
-    min-height: 0;
     overflow-y: auto;
-    padding: 48px var(--gutter-info) 64px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .presentacion__pie {
-    position: absolute;
-    bottom: 0px;
-    background: var(--blanco);
-    padding: 20px;
-    border-top: 0.5px solid var(--linea-suave);
-    font-size: 11px;
-    color: var(--texto-500);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
   }
 
   .presentacion__marca {
@@ -611,17 +585,9 @@
       padding: 0 0 32px;
     }
 
-    .indice {
-      padding: 32px 24px;
-    }
-
+    .indice,
     .presentacion {
-      padding: 0;
-    }
-
-    .presentacion__contenido {
-      padding: 32px 24px 0;
-      overflow-y: visible;
+      padding: 32px 24px;
     }
 
     .portada-info__contenido {
@@ -637,10 +603,10 @@
     .portada-visual__imagen { height: 320px; flex: none; }
 
     .indice__lista { overflow-y: visible; padding-bottom: 0; }
+    .presentacion { overflow-y: visible; }
 
     .portada-info__pie,
-    .indice__pie,
-    .presentacion__pie {
+    .indice__pie {
       position: static;
       background: none;
       margin-top: 20px;
@@ -950,86 +916,47 @@
         </div>
 
         <div class="presentacion">
-          <div class="presentacion__contenido">
-            <div class="presentacion__marca">
-              <img src="../img/Logo-fdr.webp" alt="">
-              <div>
-                <div class="presentacion__marca-titulo">Atlas de Concesiones Mineras</div>
-                <div class="presentacion__marca-subtitulo">Territorios Indígenas y Afrodescendientes · Nicaragua</div>
-              </div>
+          <div class="presentacion__marca">
+            <img src="../img/Logo-fdr.webp" alt="">
+            <div>
+              <div class="presentacion__marca-titulo">Atlas de Concesiones Mineras</div>
+              <div class="presentacion__marca-subtitulo">Territorios Indígenas y Afrodescendientes · Nicaragua</div>
             </div>
-
-            <h2 class="presentacion__titulo">Presentación</h2>
-
-            <p>
-              El presente Atlas es un esfuerzo de Fundación del Río para ayudar a
-              comprender gráficamente la dimensión de la expansión minera promovida
-              por el régimen de Daniel Ortega y Rosario Murillo sobre los territorios
-              indígenas y afrodescendientes de Nicaragua. Los mapas que integran esta
-              publicación no son únicamente instrumentos técnicos de ubicación
-              geográfica; son también una herramienta de memoria, denuncia y defensa
-              de los territorios indígenas y afrodescendientes que hoy enfrentan una
-              presión creciente derivada del otorgamiento de concesiones mineras sin
-              respeto a sus derechos colectivos, a sus formas de vida, a sus sistemas
-              de gobernanza comunitaria y al principio de Consulta Libre, Previa e
-              Informada.
-            </p>
-
-            <p>
-              El análisis contenido en el Atlas identifica <strong>18 territorios</strong>
-              afectados por concesiones mineras, con una superficie total concesionada
-              de <strong>681,574.73 hectáreas</strong> dentro de sus límites
-              territoriales. Esta situación adquiere mayor gravedad cuando se observa
-              el nivel de presión sobre territorios específicos. En Tuahka Takaln
-              Balna, el área concesionada representa el <strong>88.64%</strong> del
-              territorio; en Tasba Pri Matriz Indígena, el <strong>83.77%</strong> y
-              en Mayangna Sauni Arungka "Matunbak", el <strong>63.79%</strong>.
-            </p>
-
-            <p>
-              La situación no es distinta en la zona central del país, donde el
-              <strong>56.37%</strong> del territorio Chorotega–Norte y el
-              <strong>50.05%</strong> del territorio Matagalpa están comprendidos
-              dentro de concesiones mineras.
-            </p>
-
-            <p>
-              Estos porcentajes no solo reflejan una ocupación administrativa del
-              territorio sino también expresan una amenaza estructural contra la
-              continuidad territorial, cultural y ambiental de los pueblos. La
-              dimensión hídrica de esta afectación es igualmente alarmante, las
-              concesiones mineras identificadas dentro de los territorios indígenas
-              y afrodescendientes comprometen 163 ríos, 80 quebradas y 1,894.38
-              kilómetros de la red hídrica.
-            </p>
-
-            <p>
-              El extractivismo minero no solo amenaza la superficie terrestre, sino
-              también las fuentes de agua que sostienen los ecosistemas, la
-              producción comunitaria, la pesca, la agricultura, la movilidad, la
-              alimentación y la salud de las comunidades. En territorios donde el
-              agua es parte central de la vida colectiva, la afectación de ríos y
-              quebradas implica riesgos ambientales acumulativos y potencialmente
-              irreversibles, a la vez que compromete considerablemente la salud de
-              las personas expuestas a contaminantes.
-            </p>
-
-            <p>
-              Este atlas es un documento vivo que continuará actualizándose para
-              documentar la expansión del modelo extractivo impuesto por el régimen
-              Ortega-Murillo. Mientras se elaboraba esta edición, en marzo de 2026,
-              el régimen seguía otorgando nuevas concesiones mineras. Los liderazgos
-              indígenas mencionan que, incluso desconocen algunos lotes mineros
-              otorgados en sus propios territorios, mostrando la necesidad de
-              seguir informando e incidiendo para evidenciar la dimensión de este
-              proceso de saqueo en los territorios indígenas y afrodescendientes.
-            </p>
           </div>
 
-          <div class="presentacion__pie">
-            <span>Fundación del Río. Edición 2026</span>
-            <span>Pág. 02</span>
-          </div>
+          <h2 class="presentacion__titulo">Presentación</h2>
+
+          <p>
+            El presente Atlas es un esfuerzo de Fundación del Río para ayudar a
+            comprender gráficamente la dimensión de la expansión minera promovida
+            por el régimen de Daniel Ortega y Rosario Murillo sobre los territorios
+            indígenas y afrodescendientes de Nicaragua. Los mapas que integran esta
+            publicación no son únicamente instrumentos técnicos de ubicación
+            geográfica; son también una herramienta de memoria, denuncia y defensa
+            de los territorios indígenas y afrodescendientes que hoy enfrentan una
+            presión creciente derivada del otorgamiento de concesiones mineras sin
+            respeto a sus derechos colectivos, a sus formas de vida, a sus sistemas
+            de gobernanza comunitaria y al principio de Consulta Libre, Previa e
+            Informada.
+          </p>
+
+          <p>
+            El análisis contenido en el Atlas identifica <strong>18 territorios</strong>
+            afectados por concesiones mineras, con una superficie total concesionada
+            de <strong>681,574.73 hectáreas</strong> dentro de sus límites
+            territoriales. Esta situación adquiere mayor gravedad cuando se observa
+            el nivel de presión sobre territorios específicos. En Tuahka Takaln
+            Balna, el área concesionada representa el <strong>88.64%</strong> del
+            territorio; en Tasba Pri Matriz Indígena, el <strong>83.77%</strong> y
+            en Mayangna Sauni Arungka "Matunbak", el <strong>63.79%</strong>.
+          </p>
+
+          <p>
+            La situación no es distinta en la zona central del país, donde el
+            <strong>56.37%</strong> del territorio Chorotega–Norte y el
+            <strong>50.05%</strong> del territorio Matagalpa están comprendidos
+            dentro de concesiones mineras.
+          </p>
         </div>
       </section>
 

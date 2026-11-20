@@ -7,3 +7,6 @@ dist/
 # AI / editorial internal docs
 CLAUDE.md
 ATLAS_PATTERN_SYSTEM.md
+# Trabajo local: no subir
+.tmp-import/
+img/temp/

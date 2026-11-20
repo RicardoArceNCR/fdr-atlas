@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas de Concesiones Mineras — Fundación del Río</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&display=swap"
+  rel="stylesheet">
+
+<!--
+  Lobby del atlas. Solo enlaza a las dos partes:
+    · atlas/index.html             → Parte I (cerrada, no se toca)
+    · areas-protegidas/index.html  → Parte II
+  Mismos colores de marca que las portadas (#1a3028, #205736, #f6f4ef).
+-->
+<style>
+  :root {
+    --verde-oscuro: #1a3028;
+    --verde-800: #205736;
+    --crema: #f6f4ef;
+    --acento-1: #e9a93b;  /* amarillo de la portada de la Parte I */
+    --acento-2: #8fd0a6;  /* verde claro de la Parte II */
+  }
+
+  * { box-sizing: border-box; margin: 0; }
+
+  body {
+    min-height: 100vh;
+    background: var(--verde-oscuro);
+    color: var(--crema);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lobby {
+    flex: 1;
+    width: min(1180px, 100%);
+    margin: 0 auto;
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .lobby__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .lobby__kicker {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(246, 244, 239, 0.6);
+    margin-bottom: 0.75rem;
+  }
+
+  .lobby__titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .lobby__subtitulo {
+    margin-top: 0.75rem;
+    font-family: 'Source Serif 4', serif;
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    color: rgba(246, 244, 239, 0.8);
+    max-width: 36ch;
+  }
+
+  .lobby__logo { width: clamp(90px, 12vw, 140px); height: auto; }
+
+  .partes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
+    align-content: center;
+  }
+
+  .parte {
+    --acento: var(--acento-1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 420px;
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background: #163025;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  }
+
+  .parte--2 { --acento: var(--acento-2); }
+
+  .parte:hover,
+  .parte:focus-visible {
+    transform: translateY(-4px);
+    border-color: var(--acento);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    outline: none;
+  }
+
+  .parte__imagen {
+    flex: 1;
+    min-height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  .parte__imagen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, #163025);
+  }
+
+  .parte__numero {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 1;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--acento);
+    color: var(--verde-oscuro);
+  }
+
+  .parte__nuevo {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 1;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--acento);
+    color: var(--acento);
+    background: rgba(22, 48, 37, 0.85);
+  }
+
+  .parte__cuerpo { padding: 1.25rem 1.5rem 1.5rem; }
+
+  .parte__titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    line-height: 1.15;
+  }
+
+  .parte__desc {
+    margin-top: 0.5rem;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(246, 244, 239, 0.75);
+  }
+
+  .parte__datos {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .parte__dato strong {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    color: var(--acento);
+  }
+
+  .parte__dato span {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(246, 244, 239, 0.6);
+  }
+
+  .parte__cta {
+    margin-top: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--acento);
+  }
+
+  .lobby__pie {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 12px;
+    color: rgba(246, 244, 239, 0.5);
+    border-top: 0.5px solid rgba(255, 255, 255, 0.12);
+    padding-top: 1rem;
+  }
+
+  @media (max-width: 760px) {
+    .partes { grid-template-columns: 1fr; }
+    .parte { min-height: 360px; }
+    .lobby__pie { flex-direction: column; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .parte { transition: none; }
+  }
+</style>
+</head>
+
+<body>
+  <main class="lobby">
+    <header class="lobby__header">
+      <div>
+        <div class="lobby__kicker">Fundación del Río · Edición 2026</div>
+        <h1 class="lobby__titulo">Atlas de Concesiones Mineras</h1>
+        <p class="lobby__subtitulo">Nicaragua, en dos partes: territorios de los pueblos y áreas protegidas.</p>
+      </div>
+      <img class="lobby__logo" src="img/Logo-fdr.webp" alt="Fundación del Río">
+    </header>
+
+    <section class="partes" aria-label="Partes del atlas">
+      <a class="parte parte--1" href="atlas/index.html">
+        <div class="parte__imagen" style="background-image:url('img/mapa-portada.jpg')">
+          <span class="parte__numero">Parte I</span>
+        </div>
+        <div class="parte__cuerpo">
+          <h2 class="parte__titulo">Territorios indígenas y afrodescendientes</h2>
+          <p class="parte__desc">Concesiones otorgadas dentro de territorios titulados, el origen del capital y su impacto sobre la red hídrica.</p>
+          <div class="parte__datos">
+            <div class="parte__dato"><strong>18</strong><span>Territorios</span></div>
+            <div class="parte__dato"><strong>62</strong><span>Lotes</span></div>
+          </div>
+          <span class="parte__cta">Entrar <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+
+      <a class="parte parte--2" href="areas-protegidas/index.html">
+        <!-- ⚠️ Imagen provisional: reemplazar por la portada de la Parte II -->
+        <div class="parte__imagen" style="background-image:url('mapas-raster/ap-05-bosawas/desktop-ap-05-Bosawas.webp');background-color:#e9ece8">
+          <span class="parte__numero">Parte II</span>
+          <span class="parte__nuevo">Nuevo</span>
+        </div>
+        <div class="parte__cuerpo">
+          <h2 class="parte__titulo">Áreas protegidas</h2>
+          <p class="parte__desc">Concesiones dentro de reservas naturales, biológicas, refugios de vida silvestre y humedales, y los ecosistemas que ponen en riesgo.</p>
+          <div class="parte__datos">
+            <div class="parte__dato"><strong id="lobby-areas">18</strong><span>Áreas protegidas</span></div>
+            <div class="parte__dato"><strong id="lobby-lotes">20</strong><span>Lotes</span></div>
+          </div>
+          <span class="parte__cta">Entrar <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+    </section>
+
+    <footer class="lobby__pie">
+      <span>Algunas concesiones están dentro de un territorio y de un área protegida a la vez: los totales de las dos partes no se suman.</span>
+      <span>Fundación del Río · 2026</span>
+    </footer>
+  </main>
+
+  <script type="module">
+    // Cifras de la Parte II calculadas desde sus datos (la Parte I queda fija).
+    import { getTotales } from './js/ap/data-areas-protegidas.js';
+    const t = getTotales();
+    document.getElementById('lobby-areas').textContent = t.areas;
+    document.getElementById('lobby-lotes').textContent = t.lotes;
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas FDR — Parte II · Áreas protegidas</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet" href="../design-system/tokens/build/tokens.css">
+
+<!--
+  DESIGN SYSTEM — estado actual (ver respuesta en el chat):
+  · Verde marca / crema / grises: SÍ tienen token exacto en tokens.css,
+    pero acá se mantiene el hex hardcodeado (#1a3028, #205736, #f6f4ef...)
+    porque es el mismo que usan index.html / index-2.html / diptico.css.
+    Migrar a var(--color-brand-green-*) cambiaría el tono y rompería la
+    consistencia visual con el resto del sitio — pendiente de decisión.
+  · Amarillo de portada (#e9a93b): NO existe en tokens.css. El más cercano
+    es --color-brand-orange-400 (#ffb02e), pero es más vívido/naranja.
+    Se usa el hex exacto muestreado de la referencia como variable local
+    --amarillo-portada hasta que exista un token de marca real.
+  · Botones sí usan tokens (--button-primary-bg, --radius-full, etc).
+-->
+
+<!--
+  ───────────────────────────────────────────────────────────────────────
+  INDEX-3.HTML — Portada + Índice interactivo, versión web (no export).
+
+  Arquitectura:
+  · .libro contiene 2 .pantalla de 100vw cada una, en fila (width: 200%).
+    Cambiar de pantalla = animar translateX del .libro completo.
+  · Una sola fuente de verdad de estado: .libro[data-pagina="1|2"].
+    El JS solo escribe ese atributo (+ --progreso durante el drag).
+    Toda la transición visual vive en CSS — mismo patrón que
+    render-diptico.js / diptico.css (JS decide estado, CSS decide estilo).
+  · Navegación entre pantallas vía botón "Siguiente" (data-pagina + CSS
+    transition, JS solo cambia el atributo — ver bloque <script> al final).
+  · < 900px: se desarma el modo libro. Sin overflow:hidden, ambas
+    pantallas en flujo normal con scroll del documento; los botones de
+    navegación interna se ocultan (en mobile todo es un solo scroll).
+  ───────────────────────────────────────────────────────────────────────
+-->
+
+<style>
+  :root {
+    --verde-800: #205736;
+    --verde-oscuro: #1a3028;
+    --crema: #f6f4ef;
+    --blanco: #ffffff;
+    --linea: #cfc9be;
+    --linea-suave: #e8e4dc;
+    --texto-900: #1f2521;
+    --texto-700: #484e49;
+    --texto-500: #6b7280;
+
+    --dot-china: #d7620e;
+    --dot-canada: #4a9e4a;
+    --dot-colombia: #7c3aed;
+    --dot-nacional: #4060c8;
+    --dot-reserva: #5a6070;
+
+    /* sin token equivalente en tokens.css — ver comentario arriba */
+    --amarillo-portada: #8fd0a6; /* Parte II: acento verde claro en lugar del amarillo de la Parte I */
+    --amarillo-portada-texto: #1a3028;
+
+    /* Gutters fluidos — escalan con el ancho real de columna (~50vw)
+       en vez de quedar fijos en px. Sin esto, en monitores muy anchos
+       el padding fijo se ve perdido/desproporcionado; en pantallas
+       chicas se ve apretado. clamp(piso, preferido, techo). */
+    --gutter-visual: clamp(20px, 3vw, 40px);
+    --gutter-info: clamp(20px, 3vw, 46px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--texto-900);
+    background: var(--verde-oscuro);
+  }
+
+  /* ═══════════════════ MODO LIBRO (desktop) ═══════════════════════════
+     .visor recorta; .libro es el doble de ancho y se desplaza. */
+
+  .visor {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .libro {
+    width: 200%;
+    height: 100%;
+    display: flex;
+    transform: translateX(calc(-1 * var(--desplazo, 0%)));
+    transition: transform 480ms cubic-bezier(.22, .68, .3, 1);
+  }
+
+  .libro[data-pagina="1"] { --desplazo: 0%; }
+  .libro[data-pagina="2"] { --desplazo: 50%; }
+
+  .pantalla {
+    width: 50%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex-shrink: 0;
+    min-height: 0;
+    position: relative;
+  }
+
+  /* ═══════════════════ PANTALLA 1 — PORTADA ════════════════════════════ */
+
+  .portada-visual {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  /* ── Banda amarilla — título ATLAS + logo ──────────────────────────── */
+
+  .portada-visual__header {
+    background: var(--amarillo-portada);
+    color: var(--amarillo-portada-texto);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 14px var(--gutter-visual);
+    flex-shrink: 0;
+  }
+
+  .portada-visual__titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.25rem, 5vw, 4.5625rem); /* ~36px → 73px */
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .portada-visual__subtitulo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500 !important;
+    font-size: clamp(1rem, 1.6vw, 1.5625rem); /* ~16px → 25px */
+    line-height: 1.35;
+    max-width: 30ch;
+  }
+
+  .portada-visual__logo {
+    width: clamp(90px, 10vw, 180px);
+    height: clamp(90px, 10vw, 180px);
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+
+  /* ── Mapa — ocupa el resto de la columna ───────────────────────────── */
+
+  .portada-visual__imagen {
+    flex: 1;
+    min-height: 160px; /* piso — evita que el header (título/logo grandes)
+                           se coma todo el alto y colapse esta zona a 0,
+                           que es lo que se llevaba la fecha con ella */
+    position: relative;
+    overflow: hidden;
+    background: var(--verde-oscuro);
+  }
+
+  .portada-visual__imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Scrim fijo — garantiza contraste para la fecha sin importar qué zona
+     del mapa (clara u oscura) quede detrás según el recorte object-fit. */
+  .portada-visual__imagen::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 40%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
+    pointer-events: none;
+  }
+
+  .portada-visual__fecha {
+    position: absolute;
+    left: 50%;
+    bottom: 26px;
+    transform: translateX(-50%);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--amarillo-portada);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+    z-index: 1; /* por encima del scrim */
+  }
+
+  /* ── Columna derecha — descripción + stats ─────────────────────────── */
+
+  .portada-info {
+    background: var(--crema);
+    padding: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  /* Todo lo de arriba del pie va en un solo grupo flexible con scroll
+     interno como red de seguridad. El gutter horizontal vive ACÁ (no en
+     .portada-info) para que .portada-info__marca pueda ser full-bleed
+     cancelándolo con un margen negativo que sí coincide siempre. */
+  .portada-info__contenido {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0 var(--gutter-info) 64px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Banda amarilla — full-bleed, misma altura que .portada-visual__header
+     (padding vertical 14px) para que el corte quede alineado entre columnas. */
+  .portada-info__marca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--amarillo-portada);
+    color: var(--amarillo-portada-texto);
+    margin: 0 calc(-1 * var(--gutter-info)) 28px;
+    padding: 14px var(--gutter-info);
+  }
+
+  .portada-info__marca img {
+    width: clamp(28px, 3vw, 40px);
+    height: clamp(28px, 3vw, 40px);
+    object-fit: contain;
+  }
+
+  .portada-info__marca-titulo {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--amarillo-portada-texto);
+  }
+
+  .portada-info__marca-subtitulo {
+    font-size: 11.5px;
+    color: var(--amarillo-portada-texto);
+    opacity: 0.7;
+    font-weight: 800;
+    margin-top: 2px;
+  }
+
+  .portada-info__descripcion {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--texto-700);
+    text-align: justify;
+    margin-bottom: 30px;
+  }
+
+  .portada-info__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .stat-item {
+    background: var(--blanco);
+    border: 0.5px solid var(--linea);
+    border-radius: 8px;
+    padding: 16px 10px 14px;
+    text-align: center;
+  }
+
+  .stat-valor {
+    font-family: 'Source Serif 4', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--verde-800);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--texto-500);
+    margin-top: 7px;
+    line-height: 1.3;
+  }
+
+  .portada-info__qr {
+    margin: 26px 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .portada-info__qr img {
+    width: clamp(96px, 15vw, 448px);
+    height: clamp(96px, 15vw, 448px);
+    display: none;
+    border: 0.5px solid var(--linea);
+    border-radius: 8px;
+    padding: 8px;
+    background: var(--blanco);
+  }
+
+  .portada-info__pie {
+    position: absolute;
+    left: var(--gutter-info);
+    right: var(--gutter-info);
+    bottom: 20px;
+    background: var(--crema); /* opaco: tapa el contenido que scrollea debajo */
+    padding-top: 16px;
+    border-top: 0.5px solid var(--linea-suave);
+    font-size: 11px;
+    color: var(--texto-500);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* ── Botón "siguiente" — reemplaza la esquina, solo desktop ─────────── */
+  /* Usa tokens de botón (tokens.css): bg/hover/text/radius. */
+
+  .btn-nav {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    background: var(--button-primary-bg);
+    color: var(--button-primary-text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: var(--button-base-font-weight, 600);
+    letter-spacing: 0.01em;
+    padding: 10px 18px 10px 20px;
+    border-radius: calc(var(--radius-full, 9999) * 1px);
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    transition: background 150ms ease, transform 150ms ease;
+  }
+
+  .btn-nav:hover {
+    background: var(--button-primary-bg-hover);
+    transform: translateY(-1px);
+  }
+
+  .btn-nav:active { background: var(--button-primary-bg-active); }
+
+  .btn-nav:focus-visible {
+    outline: 2px solid var(--focus-ring-color, #205736);
+    outline-offset: 2px;
+  }
+
+  .btn-nav svg { flex-shrink: 0; }
+
+  /* Clon de "Ver el primer mapa" solo para mobile — en desktop ya existe
+     el flotante de arriba (.btn-nav a secas); este se muestra únicamente
+     dentro del @media mobile, ver más abajo. */
+  .btn-nav--mobile-mapa {
+    display: none;
+  }
+
+  /* ═══════════════════ PANTALLA 2 — ÍNDICE ═════════════════════════════ */
+
+  .indice {
+    background: var(--verde-oscuro);
+    color: rgba(220, 242, 230, 0.92);
+    padding: 72px var(--gutter-info) 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .indice__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.14);
+    margin-bottom: 4px;
+    flex-shrink: 0;
+  }
+
+  .indice__titulo {
+    font-family: 'Source Serif 4', serif;
+    font-size: 21px;
+    font-weight: 600;
+  }
+
+  .indice__titulo-nota {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(190, 225, 205, 0.5);
+  }
+
+  .indice__lista {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding-bottom: 72px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  }
+
+  .idx-fila {
+    display: grid;
+    grid-template-columns: 26px 1fr auto;
+    align-items: baseline;
+    column-gap: 12px;
+    padding: 9px 4px;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+    color: inherit;
+    border-radius: 4px;
+    transition: background 150ms ease, padding-left 150ms ease;
+  }
+
+  .idx-fila:hover,
+  .idx-fila:focus-visible {
+    background: rgba(255, 255, 255, 0.06);
+    padding-left: 8px;
+  }
+
+  .idx-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(190, 225, 205, 0.55);
+  }
+
+  .idx-nombre {
+    font-size: 13.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .idx-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    color: rgba(220, 242, 230, 0.6);
+    white-space: nowrap;
+  }
+
+  .idx-tag {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 7px;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+
+  .idx-tag--alta { background: rgba(215, 98, 14, 0.28); color: #ffb37a; }
+
+  .idx-paises { display: flex; gap: 3px; }
+
+  .idx-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+  .dot-china { background: var(--dot-china); }
+  .dot-canada { background: var(--dot-canada); }
+  .dot-colombia { background: var(--dot-colombia); }
+  .dot-nacional { background: var(--dot-nacional); }
+  .dot-reserva { background: var(--dot-reserva); }
+
+  .indice__pie {
+    position: absolute;
+    left: var(--gutter-info);
+    right: var(--gutter-info);
+    bottom: 20px;
+    background: var(--verde-oscuro); /* opaco: tapa el contenido que scrollea debajo */
+    padding-top: 12px;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+    font-size: 10.5px;
+    color: rgba(220, 242, 230, 0.45);
+  }
+
+  .indice__leyenda { display: flex; gap: 12px; }
+  .indice__leyenda span { display: inline-flex; align-items: center; gap: 4px; }
+
+  /* ── Columna derecha — presentación ────────────────────────────────── */
+
+  .presentacion {
+    background: var(--blanco);
+    padding: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .presentacion__contenido {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 48px var(--gutter-info) 64px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .presentacion__pie {
+    position: absolute;
+    bottom: 0px;
+    background: var(--blanco);
+    padding: 20px;
+    border-top: 0.5px solid var(--linea-suave);
+    font-size: 11px;
+    color: var(--texto-500);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .presentacion__marca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 22px;
+    border-bottom: 0.5px solid var(--linea);
+    margin-bottom: 26px;
+  }
+
+  .presentacion__marca img { width: 40px; height: 40px; object-fit: contain; }
+  .presentacion__marca-titulo { font-size: 13px; font-weight: 700; }
+  .presentacion__marca-subtitulo { font-size: 11.5px; color: var(--texto-500); margin-top: 2px; }
+
+  .presentacion__titulo {
+    font-family: 'Source Serif 4', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .presentacion p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--texto-700);
+    margin-bottom: 16px;
+  }
+
+  .presentacion strong { color: var(--texto-900); }
+
+  /* ── Botón volver a portada, dentro de pantalla 2 ──────────────────── */
+
+  .volver-portada {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(220, 242, 230, 0.85);
+    border: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: calc(var(--radius-full, 9999) * 1px);
+    cursor: pointer;
+    transition: background 150ms ease;
+  }
+
+  .volver-portada:hover { background: rgba(255, 255, 255, 0.16); }
+
+  .pantalla--dos { position: relative; }
+
+  /* ═══════════════════ MOBILE (< 900px) ════════════════════════════════
+     Se desarma el modo libro por completo: sin recorte, sin drag,
+     scroll normal del documento con las 2 pantallas apiladas. */
+
+  @media (max-width: 899px) {
+    html, body { height: auto; }
+
+    .visor { height: auto; overflow: visible; }
+
+    .libro {
+      width: 100%;
+      height: auto;
+      display: block;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .pantalla {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .portada-info {
+      padding: 0 0 32px;
+    }
+
+    .indice {
+      padding: 32px 24px;
+    }
+
+    .presentacion {
+      padding: 0;
+    }
+
+    .presentacion__contenido {
+      padding: 32px 24px 0;
+      overflow-y: visible;
+    }
+
+    .portada-info__contenido {
+      padding: 0 24px;
+      overflow-y: visible;
+    }
+
+    .portada-info__marca { margin: 0 -24px 24px; padding: 14px 24px; }
+
+    .portada-visual__header { padding: 32px 24px 26px; }
+    .portada-visual__titulo { font-size: 53px; }
+    .portada-visual__logo { width: 100px; height: 100px; }
+    .portada-visual__imagen { height: 450px; flex: none; }
+
+    .indice__lista { overflow-y: visible; padding-bottom: 0; }
+
+    .portada-info__pie,
+    .indice__pie,
+    .presentacion__pie {
+      position: static;
+      background: none;
+      margin-top: 20px;
+      padding: 0px 28px;
+    }
+
+    .btn-nav,
+    .volver-portada { display: none; }
+
+    /* Excepción: este "Ver el primer mapa" sí se muestra en mobile,
+       pero como bloque normal al final de la presentación, no flotando
+       arriba a la derecha (ese es el comportamiento solo-desktop). */
+    .btn-nav.btn-nav--mobile-mapa {
+      display: inline-flex;
+      position: static;
+      align-self: center;
+      margin: 28px 0 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .libro { transition: none; }
+  }
+
+  /* ── Parte II: añadidos ─────────────────────────────────────────────── */
+  :root { --dot-reino-unido: #2aa39a; }
+  .dot-reino-unido { background: var(--dot-reino-unido); }
+  .portada-visual__parte {
+    display: inline-block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amarillo-portada);
+    margin-bottom: 6px;
+  }
+  .idx-seccion {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amarillo-portada);
+    padding: 14px 0 6px;
+    border-bottom: 0.5px solid rgba(255,255,255,0.12);
+  }
+  .idx-fila--pendiente { opacity: 0.55; }
+  .idx-fila--pendiente .idx-nombre::after {
+    content: "mapa en preparación";
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  .idx-cat { opacity: 0.7; }
+  .volver-lobby {
+    position: absolute; top: 16px; left: 16px; z-index: 5;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 600;
+    color: #fff; text-decoration: none; opacity: 0.8;
+  }
+  .volver-lobby:hover { opacity: 1; }
+  .borrador {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #d7620e; margin-bottom: 8px;
+  }
+
+</style>
+</head>
+
+<body>
+
+  <div class="visor">
+    <div class="libro" id="libro" data-pagina="1">
+
+      <!-- ═══════════════ PANTALLA 1 — PORTADA ═══════════════ -->
+      <section class="pantalla pantalla--uno" id="pantalla-1" aria-label="Portada">
+
+        <div class="portada-visual">
+          <a class="volver-lobby" href="../index.html">← Inicio del atlas</a>
+          <div class="portada-visual__header">
+            <div>
+              <span class="portada-visual__parte">Parte II</span>
+              <h1 class="portada-visual__titulo">Atlas</h1>
+              <p class="portada-visual__subtitulo">
+                Concesiones mineras en áreas protegidas de Nicaragua
+              </p>
+            </div>
+            <img class="portada-visual__logo" src="../img/Logo-fdr.webp" alt="Fundación del Río">
+          </div>
+
+          <div class="portada-visual__imagen">
+            <!-- ⚠️ Imagen provisional (la de la Parte I) hasta tener el mapa de áreas protegidas -->
+            <img src="../img/mapa-portada.jpg" alt="Mapa de Nicaragua con concesiones mineras">
+            <div class="portada-visual__fecha">Noviembre, 2026</div>
+          </div>
+        </div>
+
+        <div class="portada-info">
+          <div class="portada-info__contenido">
+            <div class="portada-info__marca">
+              <img src="../img/Logo-fdr.webp" alt="">
+              <div>
+                <div class="portada-info__marca-titulo">Atlas de Concesiones Mineras · Parte II</div>
+                <div class="portada-info__marca-subtitulo">Áreas Protegidas · Nicaragua</div>
+              </div>
+            </div>
+
+            <p class="portada-info__descripcion">
+              Esta segunda parte documenta las concesiones mineras otorgadas dentro de
+              áreas protegidas de Nicaragua: reservas naturales, reservas biológicas,
+              refugios de vida silvestre y humedales de importancia internacional,
+              con la superficie concesionada, el origen del capital y los ecosistemas
+              en riesgo en cada una.
+            </p>
+
+            <div class="portada-info__stats" id="portada-stats">
+              <div class="stat-item"><div class="stat-valor" id="tot-areas">—</div><div class="stat-label">Áreas protegidas</div></div>
+              <div class="stat-item"><div class="stat-valor" id="tot-lotes">—</div><div class="stat-label">Lotes concesionados</div></div>
+              <div class="stat-item"><div class="stat-valor" id="tot-paises">—</div><div class="stat-label">Capitales de origen</div></div>
+            </div>
+
+            <div class="portada-info__qr">
+              <img src="../img/qrcode-url.png" alt="Código QR — enlace al atlas digital">
+            </div>
+          </div>
+
+          <div class="portada-info__pie">
+            <span>Fundación del Río. Edición 2026</span>
+            <span>Pág. 01</span>
+          </div>
+        </div>
+
+        <button class="btn-nav" id="btn-siguiente" type="button">
+          Siguiente
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </section>
+
+      <!-- ═══════════════ PANTALLA 2 — ÍNDICE ═══════════════ -->
+      <section class="pantalla pantalla--dos" id="pantalla-2" aria-label="Índice de áreas protegidas">
+
+        <button class="volver-portada" id="volver-portada" type="button">
+          ← Portada
+        </button>
+
+        <a class="btn-nav" id="btn-primer-mapa" href="#">
+          Ver el primer mapa
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+
+        <div class="indice">
+          <div class="indice__header">
+            <div class="indice__titulo">Índice de áreas protegidas</div>
+            <div class="indice__titulo-nota" id="indice-nota"></div>
+          </div>
+
+          <!-- Se genera desde js/ap/data-areas-protegidas.js -->
+          <div class="indice__lista" role="list" id="indice-lista"></div>
+
+          <div class="indice__pie">
+            <div class="indice__leyenda">
+              <span><span class="idx-dot dot-china"></span> China</span>
+              <span><span class="idx-dot dot-colombia"></span> Colombia</span>
+              <span><span class="idx-dot dot-reino-unido"></span> Reino Unido</span>
+            </div>
+            <div>Fundación del Río · 2026</div>
+          </div>
+        </div>
+
+        <div class="presentacion">
+          <div class="presentacion__contenido">
+            <div class="presentacion__marca">
+              <img src="../img/Logo-fdr.webp" alt="">
+              <div>
+                <div class="presentacion__marca-titulo">Atlas de Concesiones Mineras · Parte II</div>
+                <div class="presentacion__marca-subtitulo">Áreas Protegidas · Nicaragua</div>
+              </div>
+            </div>
+
+            <h2 class="presentacion__titulo">Presentación</h2>
+            <div class="borrador">Borrador — texto pendiente de FDR</div>
+
+            <p>
+              Esta segunda parte del Atlas identifica <strong><span class="js-areas">18</span> áreas protegidas</strong>
+              con concesiones mineras otorgadas dentro de sus límites, con una superficie
+              concesionada de <strong><span class="js-ha">154,634.42</span> hectáreas</strong>.
+            </p>
+
+            <p>
+              En tres de ellas la concesión cubre más del 90% del área:
+              la Reserva de Recursos Genéticos Yucul y la Reserva Natural Salto Río Yasika
+              están concesionadas en su <strong>totalidad</strong>, y Cerro Apante en un
+              <strong>94.73%</strong>. Le siguen Cerro Guabule (<strong>71.14%</strong>)
+              y Yulu (<strong>66.64%</strong>).
+            </p>
+
+            <p>
+              Varias de estas áreas se superponen con los territorios indígenas y
+              afrodescendientes documentados en la Parte I. Por eso algunas concesiones
+              aparecen en ambas partes y sus totales no deben sumarse.
+            </p>
+          </div>
+
+          <a class="btn-nav btn-nav--mobile-mapa" id="btn-primer-mapa-mobile" href="#">
+            Ver el primer mapa
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+
+          <div class="presentacion__pie">
+            <span>Fundación del Río. Edición 2026</span>
+            <span>Pág. 02</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+    var libro = document.getElementById('libro');
+    document.getElementById('btn-siguiente').addEventListener('click', function () { libro.dataset.pagina = '2'; });
+    document.getElementById('volver-portada').addEventListener('click', function () { libro.dataset.pagina = '1'; });
+  })();
+  </script>
+
+  <script type="module">
+    import { AREAS_PROTEGIDAS, SECCIONES, getTotales } from '../js/ap/data-areas-protegidas.js';
+
+    const fmt = n => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const tot = getTotales();
+    document.getElementById('tot-areas').textContent = tot.areas;
+    document.getElementById('tot-lotes').textContent = tot.lotes;
+    document.getElementById('tot-paises').textContent = tot.paises;
+    document.querySelectorAll('.js-areas').forEach(e => e.textContent = tot.areas);
+    document.querySelectorAll('.js-ha').forEach(e => e.textContent = fmt(tot.hectareas));
+
+    const conMapa = a => a.assets && a.assets.desktop && a.assets.desktop.svg;
+    document.getElementById('indice-nota').textContent =
+      `${tot.areas} áreas · ${AREAS_PROTEGIDAS.filter(conMapa).length} con mapa`;
+
+    const lista = document.getElementById('indice-lista');
+    let seccionActual = null;
+    for (const a of AREAS_PROTEGIDAS) {
+      if (a.seccion !== seccionActual) {
+        seccionActual = a.seccion;
+        const h = document.createElement('div');
+        h.className = 'idx-seccion';
+        h.textContent = SECCIONES[a.seccion] || '';
+        lista.appendChild(h);
+      }
+      const listo = conMapa(a);
+      const fila = document.createElement(listo ? 'a' : 'div');
+      fila.className = 'idx-fila' + (listo ? '' : ' idx-fila--pendiente');
+      fila.setAttribute('role', 'listitem');
+      if (listo) fila.href = `${a.id}/index.html`;
+      const n = a.stats.concesiones;
+      const alta = parseFloat(a.stats.porcentaje) >= 50;
+      fila.innerHTML = `
+        <div class="idx-num">${a.numero}</div>
+        <div class="idx-nombre">${a.nombre}</div>
+        <div class="idx-meta">
+          <span class="idx-cat">${a.categoria}</span>
+          <span>${a.stats.hectareas_area} ha</span>
+          <span class="idx-tag${alta ? ' idx-tag--alta' : ''}">${a.stats.porcentaje}% concesionado</span>
+          <span class="idx-paises">${(a.paises || []).map(p => `<span class="idx-dot dot-${p}"></span>`).join('')}</span>
+        </div>`;
+      lista.appendChild(fila);
+    }
+
+    const primero = AREAS_PROTEGIDAS.find(conMapa);
+    for (const id of ['btn-primer-mapa', 'btn-primer-mapa-mobile']) {
+      const b = document.getElementById(id);
+      if (primero) b.href = `${primero.id}/index.html`; else b.style.display = 'none';
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,615 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@500;600;700&display=swap');
+
+/* ap.css — Atlas Parte II (áreas protegidas)
+ *
+ * Fuentes: Poppins y Anton vienen del SVG de Illustrator; se cargan aquí para
+ * que el texto del mapa se vea igual en equipos que no las tienen instaladas.
+ *
+ * Se carga DESPUÉS de css/diptico.css. Solo agrega o ajusta; no se tocó
+ * diptico.css para no alterar la Parte I.
+ */
+
+:root {
+  --ap-acento: #8fd0a6;               /* verde claro: acento de la Parte II */
+  --concesion-pais-reino-unido: #13706f;
+}
+
+/* ─── 4 indicadores ─────────────────────────────────────────────────────── */
+
+.diptico__stats.diptico__stats--ap {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 767px) {
+  .diptico__stats.diptico__stats--ap {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat--porcentaje .stat__valor {
+  color: var(--ap-acento-stat, var(--ap-acento)) !important;
+}
+
+.stat__barra {
+  height: 4px;
+  margin-top: 0.5rem;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.stat__barra span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--ap-acento-stat, var(--ap-acento));
+  transition: width 600ms ease;
+}
+
+/* ─── 4 datos flotando sobre el banner ─────────────────────────────────────
+ * Escritorio: grilla 2×2 en posición ABSOLUTA arriba a la derecha del banner;
+ * el banner conserva su altura de siempre. Cifras compactas (18 px) con
+ * etiquetas cortas en una línea (.stat__label-corta); la etiqueta larga queda
+ * para lectores de pantalla y para móvil.
+ * El kicker y el título se limitan en ancho para no pasar bajo la grilla.
+ * Respaldo: si la columna derecha es muy angosta (<432 px de contenido), la
+ * grilla deja de flotar y va en el flujo, debajo del título.
+ * Móvil (≤767px): render-ap.js la saca debajo del banner, como antes.
+ * Medidas acordadas con especialistas (arte, UX, frontend), 20 nov 2026.
+ * ─────────────────────────────────────────────────────────────────────────── */
+.diptico__header--ap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.82) 0%,
+      rgba(0, 0, 0, 0.45) 38%,
+      rgba(0, 0, 0, 0) 75%);
+}
+
+.stat__label-corta { display: none; }
+
+@media (min-width: 768px) {
+  .diptico__info {
+    container-type: inline-size;
+    container-name: info;
+  }
+
+  .diptico__header--ap {
+    --stats-w: clamp(256px, 40cqi, 284px);
+  }
+
+  .diptico__header--ap .diptico__stats.diptico__stats--ap {
+    position: absolute;
+    z-index: 2;
+    top: calc(2.5rem + 12px);         /* el header está subido 2.5rem (diptico.css) */
+    right: 2rem;
+    width: var(--stats-w);
+    margin: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  /* El título no pasa por debajo de la grilla */
+  .diptico__header--ap .diptico__kicker,
+  .diptico__header--ap .diptico__titulo-fila {
+    max-width: calc(100% - var(--stats-w) - 1rem);
+  }
+
+  .diptico__header--ap .diptico__titulo {
+    text-wrap: balance;
+  }
+
+  .diptico .diptico__header--ap .stat {
+    padding: 6px 9px;
+    background: rgba(10, 18, 14, 0.6);
+    -webkit-backdrop-filter: blur(10px) brightness(0.8);
+    backdrop-filter: blur(10px) brightness(0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .diptico .diptico__header--ap .stat { background: rgba(10, 18, 14, 0.8); }
+  }
+
+  .diptico .diptico__header--ap .stat__valor {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 3px;
+    font-variant-numeric: tabular-nums;
+    color: #fff;
+  }
+
+  .diptico .diptico__header--ap .stat__label {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .diptico__header--ap .stat__label-corta { display: inline; }
+
+  .diptico__header--ap .stat__label-larga {          /* solo lectores de pantalla */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .diptico__header--ap .stat__barra {
+    height: 3px;
+    margin-top: 4px;
+    background: rgba(255, 255, 255, 0.22);
+  }
+}
+
+/* Respaldo: columna muy angosta → la grilla va en el flujo, debajo del título */
+@container info (max-width: 432px) {
+  .diptico__header--ap .diptico__stats.diptico__stats--ap {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+  }
+
+  .diptico__header.diptico__header--ap {
+    flex-wrap: wrap;
+  }
+
+  .diptico__header--ap .diptico__kicker,
+  .diptico__header--ap .diptico__titulo-fila {
+    max-width: none;
+  }
+}
+
+/* ─── Ficha del área ────────────────────────────────────────────────────── */
+
+.ficha {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  margin: 0 0 0.75rem;                     /* antes 2rem: menos aire antes de la fuente */
+  display: grid;
+  gap: 1.25rem;
+}
+
+.ficha [hidden] { display: none !important; }
+
+/* Datos legales en una fila de 3 (flex); si hay un 4.º (RAMSAR) o la
+ * columna es angosta, pasan a la línea siguiente. */
+.ficha__datos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin: 0;
+  padding: 0.5rem 0;                       /* antes 1rem */
+  border-top: 0.5px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.15);
+}
+
+.ficha__datos > div {
+  flex: 1 1 150px;
+  min-width: 0;
+}
+
+.ficha__datos dt {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(190, 225, 205, 0.65);
+  margin-bottom: 0.2rem;
+}
+
+.ficha__datos dd {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(235, 250, 240, 0.95);
+}
+
+.ficha__titulo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ap-acento);
+  margin-bottom: 0.5rem;
+}
+
+.ficha__chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ficha__chips li {
+  font-size: 12px;
+  line-height: 1.3;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(143, 208, 166, 0.14);
+  color: rgba(235, 250, 240, 0.95);
+}
+
+.ficha__chips--impacto li {
+  background: rgba(215, 98, 14, 0.18);
+}
+
+.ficha__enlaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ficha__enlace {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ap-acento);
+  text-decoration: none;
+  border: 1px solid rgba(143, 208, 166, 0.45);
+  border-radius: 999px;
+  padding: 5px 12px;
+  transition: background-color 150ms ease;
+}
+
+.ficha__enlace:hover,
+.ficha__enlace:focus-visible {
+  background: rgba(143, 208, 166, 0.15);
+}
+
+/* ─── Ecosistemas e impactos en el panel del mapa ──────────────────────────
+ * Van dentro de .diptico__concesiones--mapa, encima de "Detalle de
+ * concesiones" (templates/diptico-ap.html), SIN fondo ni título: quedan
+ * directamente sobre el mapa, como una leyenda. El fondo blanco del panel
+ * pasa a .ap-concesiones-card, que envuelve solo el detalle de concesiones.
+ * Una sola copia en la página (ya no están en la columna derecha).
+ * Al plegar la lista de concesiones, esta sección sigue visible.
+ * ─────────────────────────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  .diptico__concesiones--mapa {
+    background: transparent;
+    backdrop-filter: none;
+    border: 0;
+    padding: 0;
+  }
+
+  /* Tarjeta "Detalle de concesiones": vidrio blanco esmerilado */
+  .ap-concesiones-card {
+    background: rgba(255, 255, 255, 0.55);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(20, 45, 30, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    padding: 12px 14px;
+  }
+}
+
+.ap-riesgos[hidden] { display: none !important; }
+
+.ap-riesgos {
+  margin: 0 0 10px;
+}
+
+/* halo blanco solo en los títulos (no tienen fondo y pasan sobre las ilustraciones) */
+.ap-riesgos .ficha__titulo {
+  text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff;
+}
+
+.ap-riesgos__columnas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+}
+
+/* Si solo hay uno de los dos bloques, ocupa todo el ancho */
+.ap-riesgos__columnas:has(> .ficha__bloque[hidden]) {
+  grid-template-columns: 1fr;
+}
+
+.ap-riesgos .ficha__bloque[hidden] { display: none; }
+
+.ap-riesgos .ficha__titulo {
+  font-size: 9.5px;
+  margin-bottom: 4px;
+  color: #2e6b3e;                          /* verde oscuro: 6.3:1 sobre blanco */
+}
+
+.ap-riesgos .ficha__bloque:has(.ficha__chips--impacto) .ficha__titulo {
+  color: #9a4a00;                          /* naranja oscuro: 6.1:1 sobre blanco */
+}
+
+.ap-riesgos .ficha__chips {
+  gap: 4px;
+}
+
+.ap-riesgos .ficha__chips li {
+  font-size: 11px;
+  line-height: 1.25;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.8);   /* pastillas: blanco al 80 % */
+  color: #1f3d2a;
+  border: 1px solid rgba(46, 107, 62, 0.55);
+}
+
+.ap-riesgos .ficha__chips--impacto li {
+  background: rgba(255, 255, 255, 0.8);
+  color: #6e3500;
+  border-color: rgba(154, 74, 0, 0.55);
+}
+
+/* Pantallas bajas: más compacto para no tapar el mapa */
+@media (min-width: 768px) and (max-height: 760px) {
+  .ap-riesgos { margin-bottom: 8px; }
+  .ap-riesgos .ficha__chips li { font-size: 10.5px; padding: 1px 7px; }
+}
+
+/* Móvil: el panel ya va debajo del mapa; una columna y un filete de separación */
+@media (max-width: 767px) {
+  .ap-riesgos__columnas { grid-template-columns: 1fr; }
+  .ap-riesgos {
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid rgba(31, 61, 42, 0.25);
+  }
+}
+
+@media print {
+  .ap-concesiones-card { background: #fff; backdrop-filter: none; }
+  .ap-riesgos { break-inside: avoid; }
+}
+
+/* ─── Ajustes de la columna derecha (solo Parte II) ─────────────────────── */
+.diptico__info .diptico__fuente {
+  padding-top: 0.75rem;                    /* diptico.css: 1.5rem */
+}
+
+.diptico__info .concesion-minera-titulo {
+  font-size: 12px;                         /* diptico.css: 13px */
+}
+
+.diptico__info .concesion-minera-body {
+  font-size: 14px;                         /* diptico.css: 15px */
+  line-height: 1.7;
+}
+
+/* ─── País nuevo: Reino Unido ───────────────────────────────────────────── */
+
+.badge-reino-unido {
+  background: #e8f5f3;
+  color: #13706f;
+}
+
+.patron-reino-unido {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 75 76'%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Crect x='2.5' y='2.7' width='70.1' height='70.7' rx='7.2' ry='7.2'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23c)'%3E%3Cline stroke='%2313706f' stroke-width='5' stroke-miterlimit='10' x1='-78.3' y1='95.9' x2='48.6' y2='-40.6'/%3E%3Cline stroke='%2313706f' stroke-width='5' stroke-miterlimit='10' x1='-47.5' y1='95.9' x2='79.4' y2='-40.6'/%3E%3Cline stroke='%2313706f' stroke-width='5' stroke-miterlimit='10' x1='-16.8' y1='95.9' x2='110.1' y2='-40.6'/%3E%3Cline stroke='%2313706f' stroke-width='5' stroke-miterlimit='10' x1='14' y1='95.9' x2='140.9' y2='-40.6'/%3E%3Cline stroke='%2313706f' stroke-width='5' stroke-miterlimit='10' x1='44.7' y1='95.9' x2='171.7' y2='-40.6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  background-color: color-mix(in srgb, var(--concesion-pais-reino-unido) 12%, transparent);
+}
+
+/* Móvil: misma sangría lateral que stats / narrativa / fuente en diptico.css */
+@media (max-width: 767px) {
+  .ficha {
+    padding-inline: clamp(1rem, 5vw, 1.5rem);
+  }
+}
+
+/* ─── Brillo que recorre los ríos ────────────────────────────────────────────
+ * Ver aplicarBrilloRios() en js/ap/render-ap.js. Bucle continuo, sin apagarse.
+ *
+ * Los ríos se reparten en 3 vetas con ritmo propio, para que el flujo no vaya
+ * todo al mismo compás:
+ *   veta  destello · hueco   vuelta   duración   velocidad   respira cada
+ *   a     22 · 198           220      10 s       22 u/s      7 s
+ *   b     14 · 246           260      13 s       20 u/s      9 s
+ *   c     30 · 280           310      12 s       26 u/s      11 s
+ * (antes: 40 u/s, dos vueltas y se apagaba). Para ir más lento, subir las
+ * duraciones; el desplazamiento final de cada @keyframes debe ser igual a
+ * -(destello + hueco) para que el bucle no dé saltos.
+ * Solo se animan stroke-dashoffset y opacidad, por veta (3 elementos).
+ * Tono: aguamarina luminoso sobre el azul #1f78b4 y el relieve verde.
+ * ─────────────────────────────────────────────────────────────────────────── */
+#rios-brillo {
+  fill: none;
+  stroke: #7fe6ff;
+  stroke-width: 1.7px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  animation: ap-brillo-entrada 2s ease-out 1 forwards;
+}
+
+#rios-brillo * {
+  fill: none !important;
+}
+
+.rios-brillo__veta--a {
+  stroke-dasharray: 22 198;
+  animation: ap-brillo-flujo-a 10s linear infinite, ap-brillo-respira 7s ease-in-out infinite;
+}
+
+.rios-brillo__veta--b {
+  stroke-dasharray: 14 246;
+  animation: ap-brillo-flujo-b 13s linear infinite, ap-brillo-respira 9s ease-in-out -3s infinite;
+}
+
+.rios-brillo__veta--c {
+  stroke-dasharray: 30 280;
+  animation: ap-brillo-flujo-c 12s linear infinite, ap-brillo-respira 11s ease-in-out -6s infinite;
+}
+
+#rios-brillo.rios-brillo--pausa,
+#rios-brillo.rios-brillo--pausa .rios-brillo__veta {
+  animation-play-state: paused;
+}
+
+@keyframes ap-brillo-entrada {
+  to { opacity: 1; }
+}
+
+@keyframes ap-brillo-flujo-a { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -220; } }
+@keyframes ap-brillo-flujo-b { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -260; } }
+@keyframes ap-brillo-flujo-c { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -310; } }
+
+@keyframes ap-brillo-respira {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #rios-brillo { display: none; }
+}
+
+@media print {
+  #rios-brillo { display: none; }
+}
+
+/* ─── Fondo claro de la columna derecha ─────────────────────────────────────
+ * Se activa con `fondo_info` en los datos (COMUNES en data-areas-protegidas.js);
+ * render-ap.js añade .diptico--info-claro y la variable --ap-fondo-info.
+ * Quitar ese campo devuelve la columna al verde oscuro.
+ *
+ * Propuesta acordada con especialistas (arte, accesibilidad, frontend):
+ *  · La imagen de ramas va en un ::before anclado abajo a la derecha, a
+ *    todo el ancho de la columna, sin repetir (sin costuras).
+ *  · Velo blanco más denso a la izquierda (donde está el
+ *    texto) y más suave a la derecha, donde la imagen es más densa.
+ *    Con el velo, el peor punto del dibujo queda claro y todo pasa AA.
+ *  · Texto #1c2b24 (≈13:1) · secundario #3d4d45 · acento #205736 ·
+ *    naranja de texto #a54a08 (el #d7620e solo para el borde: como texto
+ *    no llega a 4.5:1).
+ *  · El banner y las cifras sobre la foto no cambian.
+ * ─────────────────────────────────────────────────────────────────────────── */
+.diptico.diptico--tema-verde.diptico--info-claro .diptico__info {
+  --background-page: #f2f4f2;
+  --background-subtle: rgba(255, 255, 255, 0.72);
+  --text-color-primary: #1c2b24;
+  --text-color-secondary: #3d4d45;
+  --border-subtle: rgba(32, 87, 54, 0.18);
+  --ap-acento: #205736;
+  --ap-filete: rgba(32, 87, 54, 0.18);
+  --ap-naranja-texto: #a54a08;
+
+  position: relative;
+  isolation: isolate;
+  background-color: #f2f4f2;
+  color: #1c2b24;
+}
+
+/* Imagen detrás del texto: anclada abajo a la derecha (donde las ramas son
+ * más densas), a todo el ancho de la columna; arriba la cubre el banner y el
+ * resto es el color base, que es el mismo blanco de la imagen. */
+.diptico--info-claro .diptico__info::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg,
+      rgba(246, 248, 246, 0.72) 0%,
+      rgba(246, 248, 246, 0.6) 60%,
+      rgba(246, 248, 246, 0.38) 100%),
+    var(--ap-fondo-info) right bottom / 100% auto no-repeat,
+    #f2f4f2;
+}
+
+/* Las cifras sobre el banner (vidrio oscuro) conservan el verde claro */
+.diptico--info-claro .diptico__header--ap .diptico__stats--ap {
+  --ap-acento-stat: #8fd0a6;
+}
+
+/* Textos con color fijo del tema verde → oscuros (especificidad 0,4,0) */
+.diptico.diptico--tema-verde.diptico--info-claro .diptico__narrativa {
+  color: #1c2b24;
+}
+
+.diptico.diptico--tema-verde.diptico--info-claro .diptico__concesion-minera {
+  background: rgba(215, 98, 14, 0.07);
+  border-color: rgba(215, 98, 14, 0.25);
+  border-left-color: #d7620e;
+}
+
+.diptico.diptico--tema-verde.diptico--info-claro .concesion-minera-titulo {
+  color: var(--ap-naranja-texto);
+}
+
+.diptico.diptico--tema-verde.diptico--info-claro .concesion-minera-body {
+  color: #1c2b24;
+}
+
+/* Ficha legal */
+.diptico--info-claro .ficha__datos {
+  border-top-color: var(--ap-filete);
+  border-bottom-color: var(--ap-filete);
+}
+
+.diptico--info-claro .ficha__datos dt {
+  color: #3d4d45;
+}
+
+.diptico--info-claro .ficha__datos dd {
+  color: #1c2b24;
+}
+
+.diptico--info-claro .ficha__titulo {
+  color: #205736;
+}
+
+.diptico--info-claro .ficha__enlace {
+  color: #205736;
+  background: rgba(255, 255, 255, 0.7);
+  border-color: #205736;
+}
+
+.diptico--info-claro .ficha__enlace:hover,
+.diptico--info-claro .ficha__enlace:focus-visible {
+  background: #205736;
+  color: #fff;
+}
+
+/* Créditos de 10 px: color oscuro (no gris claro) */
+.diptico--info-claro .diptico__fuente {
+  color: #2f3d36;
+}
+
+/* Navegación: foco visible */
+.diptico--info-claro .atlas-nav a:focus-visible,
+.diptico--info-claro .atlas-nav select:focus-visible {
+  outline: 2px solid #205736;
+  outline-offset: 2px;
+}
+
+/* Móvil: las 4 cifras van debajo del banner → tarjetas blancas */
+@media (max-width: 767px) {
+  .diptico.diptico--tema-verde.diptico--info-claro .stat {
+    background: #fff;
+    border: 1px solid rgba(32, 87, 54, 0.15);
+  }
+
+  .diptico.diptico--tema-verde.diptico--info-claro .stat__valor {
+    color: #17402a;
+  }
+
+  .diptico.diptico--tema-verde.diptico--info-claro .stat__label {
+    color: #3d4d45;
+  }
+
+  .diptico--info-claro .diptico__stats--ap {
+    --ap-acento-stat: #2f7a4c;
+  }
+
+  .diptico--info-claro .stat__barra {
+    background: rgba(32, 87, 54, 0.15);
+  }
+
+}

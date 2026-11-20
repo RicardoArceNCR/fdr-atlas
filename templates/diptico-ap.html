@@ -1,0 +1,136 @@
+<div class="atlas-page">
+  <div class="diptico" id="diptico-container">
+    <div class="diptico__mapa">
+      <div class="mapa-editorial">
+        <div class="mapa-stack">
+          <img id="mapa-raster" class="mapa-raster" alt="Mapa base del territorio" />
+          <div id="mapa-svg-inline" class="mapa-svg-inline"></div>
+        </div>
+      </div>
+
+      <div class="diptico__concesiones diptico__concesiones--mapa">
+        <!-- Parte II: ecosistemas e impactos del área, junto al mapa (una sola copia en la página) -->
+        <section class="ap-riesgos" id="ap-riesgos" aria-label="Ecosistemas e impactos del área">
+          <div class="ap-riesgos__columnas">
+            <div class="ficha__bloque">
+              <div class="ficha__titulo">Ecosistemas en riesgo</div>
+              <ul class="ficha__chips" id="ficha-ecosistemas"></ul>
+            </div>
+            <div class="ficha__bloque">
+              <div class="ficha__titulo">Impactos señalados</div>
+              <ul class="ficha__chips ficha__chips--impacto" id="ficha-impactos"></ul>
+            </div>
+          </div>
+        </section>
+        <div class="ap-concesiones-card">
+          <button class="diptico__seccion-titulo diptico__toggle-concesiones" type="button">
+            Detalle de concesiones
+            <span>Mostrar / ocultar</span>
+          </button>
+          <div class="concesiones-lista" id="concesiones-lista"></div>
+        </div>
+      </div>
+
+      <div id="insets-container"></div>
+      <div id="escala-text" class="diptico__escala"></div>
+
+      <div class="diptico__leyenda-mapa">
+        <div class="diptico__leyenda-mapa-titulo">Concesiones Mineras</div>
+        <div id="leyenda-lista"></div>
+      </div>
+    </div>
+    <div class="diptico__info">
+      <div class="diptico__header diptico__header--ap" id="diptico-header">
+        <div class="diptico__header-texto">
+          <div class="diptico__kicker" id="region-text"></div>
+          <div class="diptico__titulo-fila">
+            <h1 class="diptico__titulo" id="titulo-text"></h1>
+            <select class="diptico__titulo-selector" id="nav-contador" aria-label="Ir a otra área protegida"
+              title="Elegir otra área protegida"></select>
+          </div>
+          <p class="diptico__subtitulo" id="pueblos-text"></p>
+        </div>
+        <!-- Cifras: van DESPUÉS del título en el DOM (orden de lectura). En escritorio
+             flotan arriba a la derecha del banner (position absolute, css/ap.css);
+             en móvil render-ap.js las mueve debajo del banner (initStatsEnBanner). -->
+        <div class="diptico__stats diptico__stats--ap" role="group" aria-label="Cifras del área">
+          <div class="stat">
+            <div class="stat__valor" id="stat-ha-area"></div>
+            <div class="stat__label"><span class="stat__label-larga">Ha. del área protegida</span><span class="stat__label-corta" aria-hidden="true">Ha protegidas</span></div>
+          </div>
+          <div class="stat">
+            <div class="stat__valor" id="stat-concesiones"></div>
+            <div class="stat__label"><span class="stat__label-larga">Concesiones</span><span class="stat__label-corta" aria-hidden="true">Concesiones</span></div>
+          </div>
+          <div class="stat">
+            <div class="stat__valor" id="stat-ha-concesiones"></div>
+            <div class="stat__label"><span class="stat__label-larga">Concesionadas (ha)</span><span class="stat__label-corta" aria-hidden="true">Ha concesionadas</span></div>
+          </div>
+          <div class="stat stat--porcentaje">
+            <div class="stat__valor" id="stat-porcentaje"></div>
+            <div class="stat__label"><span class="stat__label-larga">De su superficie concesionada</span><span class="stat__label-corta" aria-hidden="true">% concesionado</span></div>
+            <div class="stat__barra" aria-hidden="true"><span id="stat-porcentaje-barra"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="diptico__narrativa" id="descripcion-text"></div>
+
+      <div class="diptico__concesion-minera" id="concesion-minera-text" hidden>
+        <div class="concesion-minera-titulo">Concesión Minera</div>
+        <div class="concesion-minera-body"></div>
+      </div>
+
+      <section class="ficha" id="ficha-area" aria-label="Ficha del área protegida">
+        <dl class="ficha__datos" id="ficha-datos"></dl>
+        <div class="ficha__bloque">
+          <div class="ficha__titulo">Ver también en la Parte I</div>
+          <div class="ficha__enlaces" id="ficha-relacionados"></div>
+        </div>
+      </section>
+
+      <div class="diptico__fuente" id="fuente-text-wrapper">
+        <img class="diptico__fuente-logo" id="fuente-logo" src="" alt="" aria-hidden="true">
+        <div id="fuente-text"></div>
+      </div>
+
+      <!-- ── Barra de navegación entre territorios ──────────────────────── -->
+      <nav class="atlas-nav" id="atlas-nav" aria-label="Navegación entre áreas protegidas">
+
+        <!-- Inicio -->
+        <a href="../index.html" class="atlas-nav__btn atlas-nav__btn--inicio" id="nav-inicio" title="Volver al índice">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 2L1.5 7.5V14h4v-4h5v4h4V7.5L8 2Z" stroke="currentColor" stroke-width="1.4"
+              stroke-linejoin="round" fill="none" />
+          </svg>
+          <span class="atlas-nav__label">Inicio</span>
+        </a>
+
+        <!-- Anterior / Contador / Siguiente -->
+        <div class="atlas-nav__central">
+          <a href="#" class="atlas-nav__btn atlas-nav__btn--prev" id="nav-prev" title="Área anterior">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <span class="atlas-nav__label" id="nav-prev-label">Anterior</span>
+          </a>
+
+          <div class="atlas-nav__contador" id="nav-contador-display" aria-live="polite"></div>
+
+          <a href="#" class="atlas-nav__btn atlas-nav__btn--next" id="nav-next" title="Área siguiente">
+            <span class="atlas-nav__label" id="nav-next-label">Siguiente</span>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Placeholder derecho — reservado para hamburguesa -->
+        <div class="atlas-nav__placeholder"></div>
+
+      </nav>
+    </div>
+  </div>
+</div>
